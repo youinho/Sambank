@@ -8,10 +8,7 @@
 </head>
 <body>
 <<<<<<< HEAD
-<h3>3반 qa</h3>
-=======
-<h3>3반asdf </h3>
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
+<h3>3반 qa 33333333333</h3>
 <h4><a href="/board/register">게시글 작성</a></h4>
 <h4><a href="/board/list">게시글 보기</a></h4>
 <h4><a href="/board/list">게시글 보기</a></h4>
