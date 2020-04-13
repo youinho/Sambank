@@ -18,10 +18,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Home");
+		logger.info("main페이지");
 		
 	
-		return "home";
+		return "main(index)";
 	}
 	
 }
