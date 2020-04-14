@@ -25,8 +25,13 @@ public class HomeController {
 	
 		return "main(index)";
 	}
-	
-	@GetMapping("/Header")
+	@GetMapping("/header")
+	public String GuideHeader() {
+		
+		
+		return "header";
+	}
+	@GetMapping("/mainheader")
 	public String getHeader() {
 		
 		

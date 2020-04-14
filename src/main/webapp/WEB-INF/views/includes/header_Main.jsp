@@ -21,33 +21,35 @@
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-			    <ul class="navbar-nav">
-			      <li class="nav-item dropdown">
-			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          로그인 관련창
-			        </a>
-			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-			          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-			          <a class="dropdown-item" href="#">개인정보수정</a>
-			          <a class="dropdown-item" href="#">로그아웃</a>
-			        </div>
-			      </li>
-			      <li class="nav-item active">
-			        <a class="nav-link" href="#">개인 <span class="sr-only">(current)</span></a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">기업</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">금융 상품</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">은행 소개</a>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">고객 센터</a>
-			      </li>
-			    </ul>
+			  <!-- nav bar 오른쪽 정렬 -->
+		      	<ul class="navbar-nav ml-auto">
+				     <li class="nav-item dropdown">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          로그인 관련창
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
+				          <a class="dropdown-item" href="#">프로필 관리</a>
+				          <a class="dropdown-item" href="#">개인정보수정</a>
+				          <a class="dropdown-item" href="#">로그아웃</a>
+				        </div>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">개인 <span class="sr-only">(current)</span></a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">기업</a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">금융 상품</a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">은행 소개</a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">고객 센터</a>
+				      </li>
+			  	</ul>
 			  </div>
 			</nav>
 		</div>
