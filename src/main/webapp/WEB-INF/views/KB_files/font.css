@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@font-face {
+	font-family:'KBText';font-style:normal;
+	src:url('KBFGTextL.eot');src:url('KBFGTextL.eot?#iefix') format('embedded-opentype'), url('KBFGTextL.woff') format('woff');
+}
+<!--
+@font-face {
+	font-family:'KBText';font-style:normal;font-weight:700;
+	src:url('KBFGTextB.eot');src:url('KBFGTextB.eot?#iefix') format('embedded-opentype'), url('KBFGTextB.woff') format('woff');
+}
+
+@font-face {
+	font-family:'KBDisplay';font-style:normal;
+	src:url('KBFGDisplayM.eot');src:url('KBFGDisplayM.eot?#iefix') format('embedded-opentype'), url('KBFGDisplayM.woff') format('woff');
+}-->
