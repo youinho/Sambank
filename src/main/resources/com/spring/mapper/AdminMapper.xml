@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.AdminMapper">
+
+	<!-- 계정 확인 -->
+	<select id="selectOne" resultType="com.spring.domain.AdminVO">
+		select * from admin_account
+		where id=#{id} and password=#{password}
+	</select>
+
+	<!-- 테이블 생성 -->
+	<select id="register_account">
+		create table ACC_${num}(bal1 number(20), bal2 number(10), bal3 number(22))
+	</select>
+
+	<!-- 등록 -->
+	<insert id="insert_account">
+		insert into savings_accounttbl(sno, cno, ano, balance) values(#{sno}, #{cno}, #{ano}, 0) 
+	</insert>
+
+
+	<insert id="test1">
+		insert into test1 values(#{value})
+	</insert>
+	<insert id="test2">
+		insert into test2 values(#{value})
+	</insert>
+
+</mapper>
