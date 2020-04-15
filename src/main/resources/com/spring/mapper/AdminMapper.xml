@@ -19,6 +19,28 @@
 	</insert>
 
 
+	<insert id="register_customer">
+		insert into customertbl(cno, name, gender, mobile, id, password, passhint) values(seq_customer.nextVal,#{name}, #{gender}, #{mobile}, #{id}, #{password}, #{passhint}) 
+	
+	</insert>
+
+
+	<insert id="create_deposit">
+		insert into deposittbl(dno, cno, ano, balance) values(seq_deposit.nextVal, #{cno}, #{ano}, 0)
+	</insert>
+	
+	
+	<select id="get_deposit_list" resultType="com.spring.domain.DepositVO">
+		select * from deposittbl where dno > 0 order by dno desc
+		
+		
+	</select>
+	
+	
+	
+	
+	
+
 	<insert id="test1">
 		insert into test1 values(#{value})
 	</insert>
