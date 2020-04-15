@@ -32,8 +32,8 @@
 					<!-- 컨텐츠하나 오픈뱅킹 ---------------------- // -->
 					<li class="section section11 on">
 						<div>
-							<strong><img src="../KB_files/visual_section16_tit01.png" alt="KB오픈뱅킹 서비스"></strong>
-							<span><img src="./KB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 KB스타뱅킹 한 곳에서!"></span>
+							<strong><img src="/resources/KB_files/visual_section16_tit01.png" alt="KB오픈뱅킹 서비스"></strong>
+							<span><img src="/resources/KB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 KB스타뱅킹 한 곳에서!"></span>
 							<a href="https://obank.kbstar.com/quics?page=C066016" class="link">바로가기</a>
 						</div>
 					</li>
@@ -41,8 +41,8 @@
 					<!-- 컨텐츠하나 LiivM  4/1 오픈 ---------------------- // -->
 					<li class="section section12">
 						<div>
-							<strong><img src="./KB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong>
-							<span><img src="./KB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"></span>
+							<strong><img src="/resources/KB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong>
+							<span><img src="/resources/KB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"></span>
 							<a href="https://omoney.kbstar.com/quics?page=C016559&amp;cc=b033091:b032977&amp;%EC%9D%B4%EB%B2%A4%ED%8A%B8%EC%9D%BC%EB%A0%A8%EB%B2%88%ED%98%B8=311956&amp;QSL=F" class="link">바로가기</a>
 						</div>
 					</li>
@@ -50,8 +50,8 @@
 					<!-- 컨텐츠하나 환전  ---------------------- // -->
 					<li class="section section10">
 						<div>
-							<strong><img src="./KB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 KB!"></strong>
-							<span><img src="./KB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span>
+							<strong><img src="/resources/KB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 KB!"></strong>
+							<span><img src="/resources/KB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span>
 							<a href="https://okbfex.kbstar.com/quics?page=C015719" class="link">바로가기</a>
 						</div>
 					</li>
@@ -59,8 +59,8 @@
 					<!-- 컨텐츠하나 KB모바일인증서 ---------------------- // -->
 					<li class="section section5">
 						<div>
-							<strong><img src="../KB_files/visual_section5_tit01.png" alt="KB모바일인증서"></strong>
-							<span><img src="../KB_files/visual_section5_tit02.png" alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"></span>
+							<strong><img src="/resources/KB_files/visual_section5_tit01.png" alt="KB모바일인증서"></strong>
+							<span><img src="/resources/KB_files/visual_section5_tit02.png" alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"></span>
 							<a href="https://otalk.kbstar.com/quics?page=C063974&amp;QSL=F" class="link">바로가기</a>
 						</div>
 					</li>
@@ -68,8 +68,8 @@
 					<!-- 컨텐츠하나 2020 봄 ---------------------- // -->
 					<li class="section section6">
 						<div>
-							<strong><img src="../KB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 KB국민은행"></strong>
-							<span><img src="../KB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, KB국민은행과 함께 하세요."></span>
+							<strong><img src="/resources/KB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 KB국민은행"></strong>
+							<span><img src="/resources/KB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, KB국민은행과 함께 하세요."></span>
 						</div>
 					</li>
 					<!-- ------------------------------------// -->
