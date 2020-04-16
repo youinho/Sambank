@@ -109,4 +109,9 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("/header")
+	public void header() {
+		log.info("header 요청");
+	}
+	
 }

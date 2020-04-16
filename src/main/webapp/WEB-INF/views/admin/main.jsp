@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,10 @@
 <body>
 	<div class="background">
 		<ul>
-			<li><a href="/admin/register">╟Хаб ╩Щ╪╨ test</a></li>
-			<li><a href="/admin/register_customer">╟М╟╢ ╣Н╥о</a></li>
-			<li><a href="/admin/create_account">╟Хаб╟Ё╪Ё</a></li>
-			<li><a href="/admin/deposit_list">©╧╠щ╟Хаб ╦Я╥о</a></li>
+			<li><a href="/admin/register">ЙЁ└Л╒▄ Л┐²Л└╠ test</a></li>
+			<li><a href="/admin/register_customer">ЙЁ═Й╟² К⌠╠К║²</a></li>
+			<li><a href="/admin/create_account">ЙЁ└Л╒▄Й╟°Л└╓</a></li>
+			<li><a href="/admin/deposit_list">Л≤┬Й╦┬ЙЁ└Л╒▄ К╙╘К║²</a></li>
 			<li></li>
 		</ul>
 	</div>
