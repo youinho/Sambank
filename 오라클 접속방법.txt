@@ -1,0 +1,8 @@
+Name 에는 아무거나 임력(예: SamBanK)
+사용자 이름에는 sambank 입력
+비밀번호는 123123123
+호스트 이름에는 db-sambank.cgejprs8uexx.ap-northeast-2.rds.amazonaws.com 입력
+포트는 1521
+SID 는 orcl
+
+오라클 접속.png 그림참조
