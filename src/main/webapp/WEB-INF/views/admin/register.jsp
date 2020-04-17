@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,12 @@
 </head>
 <body>
 	<form action="" method="post" id="registerForm">
-		<label for="num">¹øÈ£</label>
+		<label for="num">ë²ˆí˜¸</label>
 		<input type="text" name="num"/>
 		<button>submit</button>
 	</form>
 	<div id="result">
-		<label for="resulttxt">°á°ú</label>
+		<label for="resulttxt">ê²°ê³¼</label>
 		<input type="text" name="resulttxt" readonly/>
 	</div>
 	
@@ -31,7 +32,7 @@ $(function(){
 			contentType : "application/json;charset=utf-8",
 			data : JSON.stringify(num),
 			success : function(result){
-				$("#result").find("input[name='resulttxt']").val("°³¼³ ¼º°ø");
+				$("#result").find("input[name='resulttxt']").val("ê°œì„¤ ì„±ê³µ");
 			}
 		})
 		

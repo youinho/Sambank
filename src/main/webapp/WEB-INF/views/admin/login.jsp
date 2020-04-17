@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +31,13 @@
 	                <legend style="text-align: center">Sambank Admin Login Page</legend><br>
 	                <div class="form-group">
 	                  <label for="id"><strong>ID</strong></label>
-	                  <input type="text" class="form-control" name="id" placeholder="¾ÆÀÌµð" required>
+	                  <input type="text" class="form-control" name="id" placeholder="ì•„ì´ë””" required>
 	                </div>
 	                <div class="form-group">
 	                  <label for="password"><strong>PASSWORD</strong></label>
-	                  <input type="password" class="form-control" name="password" placeholder="ºñ¹Ð¹øÈ£" required>
+	                  <input type="password" class="form-control" name="password" placeholder="ë¹„ë°€ë²ˆí˜¸" required>
 	                </div>
-	                <input type="submit" class="btn btn-primary btn-block" value="·Î±×ÀÎ" />
+	                <input type="submit" class="btn btn-primary btn-block" value="ë¡œê·¸ì¸" />
 	            </fieldset>
 	        </form>
 	    </div>
