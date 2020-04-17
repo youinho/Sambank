@@ -17,9 +17,9 @@
 			<!-- HikariCP 설정 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
-		<property name="username" value="javaDB"/>
-		<property name="password" value="12345"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@db-sambank.cgejprs8uexx.ap-northeast-2.rds.amazonaws.com:1521:orcl"/>
+		<property name="username" value="sambank"/>
+		<property name="password" value="123123123"/>
 	</bean>
 	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
 		<constructor-arg ref="hikariConfig"></constructor-arg>
