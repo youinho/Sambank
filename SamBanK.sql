@@ -82,6 +82,8 @@ create table loanTBL(
     updatedate date DEFAULT sysdate); -- 계좌 수정 날짜
     
 -- 입출금 계좌 내역 --
+-- pk
+-- ano, 입금명+계좌, 입금액, 출금명+계좌, 출금액, 날짜:시간
 create table account_history(
     ano NVARCHAR2(20) constraint pk_ano primary key, -- 계좌 번호
     deposit number(38) not null, -- 입금

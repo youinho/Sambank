@@ -4,7 +4,7 @@
 
 	<!-- 계정 확인 -->
 	<select id="selectOne" resultType="com.spring.domain.AdminVO">
-		select * from admin_account
+		select * from admintbl
 		where id=#{id} and password=#{password}
 	</select>
 
@@ -20,7 +20,8 @@
 
 
 	<insert id="register_customer">
-		insert into customertbl(cno, name, gender, mobile, id, password, passhint) values(seq_customer.nextVal,#{name}, #{gender}, #{mobile}, #{id}, #{password}, #{passhint}) 
+		insert into customertbl(cno, rating, name, gender, birth, resident_registration_no, address, mobile, id, password, passhint, email, withdrawal_limits, check_card) 
+		values(seq_customer.nextVal, #{rating}, #{name}, #{gender}, #{birth}, #{resident_registration_no},#{address}, #{mobile}, #{id}, #{password}, #{passhint}, #{email}, #{withdrawal_limits}, #{check_card}) 
 	
 	</insert>
 
