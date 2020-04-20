@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sambank Header</title>
 <!-- bootstrap css link -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/font.css" />
@@ -18,13 +17,12 @@
 <header>
 	<!-- Header function var -->
 		<div id="Header">
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #66cc33;">
 			
 			<div id="Logo">  
 			  <strong><img src="/resources/KB_files/SamBank Image Logo.png" alt="로고 이미지"></strong>
 			  <a class="navbar-brand" src="/resources/KB_files/SamBank Image Logo.png" href="#"></a>
 			</div>
-			  
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>

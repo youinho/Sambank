@@ -46,73 +46,20 @@
 .main-con2 > .section:first-child .list-board a > span:first-child {max-width:70%;}
 
 /*--------------------------------------------------------------------------------
-	# 컨텐츠 : 인사이트
+	# 컨텐츠 : 공지사항,추가예정
 ---------------------------------------------------------------------------------*/
-.main-con3 {margin:14px auto;}
-.main-con3 .section {padding:0;width:1000px;}
-.main-con3 .area-con {overflow:hidden;position:relative;margin:0 0 0 10px;padding-right:10px;height:265px;*height:140px;}
-.main-con3 .area-con ul {position:absolute;left:0;top:0;width:300%;height:246px;*height:121px;}
-.main-con3 .area-con ul:after {content:'';display:block;clear:both;}
-.main-con3 .area-con ul > li {float:left;position:relative;width:308px;height:100%;background:#fff;border:1px solid #ddd;}
-.main-con3 .area-con ul > li + li {margin:0 0 0 25px;}
-.main-con3 .area-con ul > li.disabled {visibility:hidden;}
-.main-con3 .area-con ul > li a {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;padding:0 29px;box-shadow:0 0 0 0 rgba(0,0,0,1);-webkit-transition:all 0.2s;transition:all 0.2s;}
-.main-con3 .area-con ul > li a > span:first-child {overflow:hidden;display:block;position:relative;margin:-1px -30px;height:125px;box-shadow:inset 0 -5px 10px 0 rgba(0,0,0,0.02);}
-.main-con3 .area-con ul > li a > span:first-child:before, .main-con3 .area-con ul > li a > span:first-child:after {content:'';display:block;position:absolute;bottom:0;left:50%;margin:0 -75px;width:150px;height:125px;background:url('../img/icon_set6.png') no-repeat 0 0;}/* 2019-10-23 수정 */
-.main-con3 .area-con ul > li a > span:first-child:after {bottom:-10px;background-position:0 -125px;-webkit-transition:all 0.3s;transition:all 0.3s;}
-.main-con3 .area-con ul > li a > span {display:block;color:#929292;line-height:1.4;letter-spacing:-1px;}
-.main-con3 .area-con ul > li a em {position:absolute;right:0;bottom:0;padding:8px 10px 0;min-width:50px;height:22px;line-height:1;color:#fff;text-align:center;*top:0;z-index:1;}/* 2019-10-11 */
-.main-con3 .area-con ul > li a .tit {margin:28px 0 5px;font-size:17px;color:#333;font-weight:normal;}
-.main-con3 .area-con ul > li a .tit span {font-weight:bold;}
-.main-con3 .area-con ul > li a:hover, .main-con3 .area-con ul > li a:focus {box-shadow:5px 5px 12px 1px rgba(0,0,0,0.1)}
-.main-con3 .area-con ul > li a:hover > span:first-child:after, .main-con3 .area-con ul > li a:focus > span:first-child:after {bottom:0;}
-.main-con3 .area-con ul > li a:before, .main-con3 .area-con ul > li a:after {content:'';display:block;position:absolute;background-color:#000}
-.main-con3 .area-con ul > li a:before {bottom:30px;right:19px;width:21px;height:1px;}
-.main-con3 .area-con ul > li a:after {bottom:20px;right:29px;width:1px;height:21px;}
+.main-con3 {overflow:hidden;width:980px;margin:20px auto 0;}
+.main-con3 > .section {float:left;width:335px;padding-left:125px;}
+.main-con3 > .section:first-child {width:317px;margin-right:7px;}
+.main-con3 > .section + .section:before {display:none;}
 
-.main-con3 .area-con ul > li.full-obj a > span:first-child:before, 
-.main-con3 .area-con ul > li.full-obj a > span:first-child:after {left:0;margin:0;width:100%;background:url('../img/icon_set4_obj_full.png') no-repeat 0 0;} /* 2019-10-11 */
-
-.main-con3 .area-control .ui-btn.stop:before {border-color:#bdb8b8;}
-.main-con3 .area-control .ui-btn.play:before {border:4px solid transparent;border-left:6px solid #bdb8b8;}
-.main-con3 .area-control .ui-btn.before:before {border:7px solid transparent;border-right-color:#91908c;}
-.main-con3 .area-control .ui-btn.next:before {border:7px solid transparent;border-left-color:#91908c;}
-
-.main-con3 .wrap-slider.on-slider .area-con ul > li {float:none;position:absolute;margin:0;}
-
-.main-con3 .area-con ul > li.ico1 a .tit span {overflow:hidden;margin-top:-4px;padding-left:69px;width:0;height:24px;background:url('../img/img_bi1.png') no-repeat 0 0;white-space:nowrap;vertical-align:top;}
-
-.main-con3 .area-con ul > li.ico1 a > span:first-child {background-color:#dcd3c8;}
-.main-con3 .area-con ul > li.ico2 a > span:first-child {background-color:#c3dee7;}
-.main-con3 .area-con ul > li.ico3 a > span:first-child {background-color:#c7d4e4;}
-.main-con3 .area-con ul > li.ico4 a > span:first-child {background-color:#e4cf9c;}
-.main-con3 .area-con ul > li.ico5 a > span:first-child {background-color:#d7c9dd;}/* 2019-10-11 */
-.main-con3 .area-con ul > li.ico6 a > span:first-child {background-color:#c3c9e7;}/* 2019-10-23 */
-.main-con3 .area-con ul > li.ico7 a > span:first-child {background-color:#8fdeec;}/* Liiv M */
-
-.main-con3 .area-con ul > li.ico2 a > span:before {background-position:-150px 0;}
-.main-con3 .area-con ul > li.ico3 a > span:before {background-position:-300px 0;}
-.main-con3 .area-con ul > li.ico4 a > span:before {background-position:-450px 0;}
-.main-con3 .area-con ul > li.ico5 a > span:before {background-position:   0px 0 !important;}/* 2019-10-11 */
-.main-con3 .area-con ul > li.ico6 a > span:before {background-position:0 -250px;}/* 2019-10-23 */
-.main-con3 .area-con ul > li.ico7 a > span:before {background-position:-141px -260px;}/* Liiv M */
-
-.main-con3 .area-con ul > li.ico2 a > span:after {background-position:-150px -125px;}
-.main-con3 .area-con ul > li.ico3 a > span:after {background-position:-300px -125px;}
-.main-con3 .area-con ul > li.ico4 a > span:after {background-position:-450px -125px;}
-.main-con3 .area-con ul > li.ico5 a > span:after {background-position:   0px -125px !important;}/* 2019-10-11 */
-.main-con3 .area-con ul > li.ico6 a > span:after {background-position:   0 -375px}/* 2019-10-23 */
-.main-con3 .area-con ul > li.ico7 a > span:after {background-position:-150px -375px}/* Liiv M */
-
-.main-con3 .area-con ul > li.ico1 a em {background-color:#8a7963;}
-.main-con3 .area-con ul > li.ico2 a em {background-color:#558493;}
-.main-con3 .area-con ul > li.ico3 a em {background-color:#677e9c;}
-.main-con3 .area-con ul > li.ico4 a em {background-color:#ba8e41;}
-.main-con3 .area-con ul > li.ico5 a em {background-color:#70638a;padding-left:7px;padding-right:7px;}/* 2019-10-11 */
-.main-con3 .area-con ul > li.ico6 a em {background-color:#7879b9;}/* 2019-10-23 */
-.main-con3 .area-con ul > li.ico7 a em {background-color:#31aae6;}/* Liiv M */
-
-.main-con3 .area-control {text-align:center;}
+.list-board {margin-top:-6px;}
+.list-board a {display:block;overflow:hidden;padding:7px 1px 7px 0;}
+.list-board a > span, .list-board a > em {display:inline-block;float:left;letter-spacing:-1px;}
+.list-board a > span:first-child {overflow:hidden;max-width:66%;color:#666;text-overflow:ellipsis;white-space:nowrap;}
+.list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;color:#929292;}
+.list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 url('../img/icon_set1.png') no-repeat -30px -160px;vertical-align:top;}
+.main-con3 > .section:first-child .list-board a > span:first-child {max-width:70%;}
 
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 금융상품
