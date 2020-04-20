@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.AdminMapper">
 
+
+	<!-- cno로 고객정보 -->
+	<select id="select_by_cno" resultType="com.spring.domain.CustomerVO">
+		select * from customertbl
+		where cno=#{cno}
+	</select>
+
+
+	<!-- search (name, birth, mobile) -->
+	<select id="search_customer" resultType="com.spring.domain.CustomerVO">
+		select cno, name, birth, mobile 
+		from customertbl
+		where name like '%'||#{name}||'%' and birth like '%'||#{birth}||'%' and mobile like '%'||#{mobile}||'%'
+		 
+	</select>
+
 	<!-- 계정 확인 -->
 	<select id="selectOne" resultType="com.spring.domain.AdminVO">
 		select * from admintbl

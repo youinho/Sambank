@@ -13,8 +13,8 @@ public interface AdminService {
 	public boolean create_deposit(int cno, String ano);
 	public boolean register_customer(CustomerVO vo);
 	public List<DepositVO> get_deposit_list();
-	
-	
+	public CustomerVO select_by_cno(int cno);
+	public List<CustomerVO> search_customer(String name, String birth, String mobile);
 	
 	public int test(int value);
 	

@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_registerVO;
@@ -88,8 +91,15 @@ public class AdminController {
 	}
 	
 	@PostMapping("/create_account")
-	public void create_account_post(int cno, String ano) {
+	public void create_account_post(int cat, int cno, String ano) {
 		log.info("create_account_post 요청, cno, ano : "+cno+" "+ano);
+		
+		CustomerVO vo = service.select_by_cno(cno);
+		log.info("select by cno : "+vo);
+		
+		
+		
+		
 		service.create_deposit(cno, ano);
 	}
 	
@@ -113,5 +123,66 @@ public class AdminController {
 	public void header() {
 		log.info("header 요청");
 	}
+	
+	
+	
+	
+	
+	@PostMapping("/admin/search")
+	@ResponseBody
+	public ResponseEntity<List<CustomerVO>> search(String name, String birth, String mobile) {
+		log.info("search"+name+birth+mobile);
+		
+		List<CustomerVO> list = service.search_customer(name, birth, mobile);
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<CustomerVO>>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<CustomerVO>>(list, HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	@PostMapping("/admin/call_ano")
+	@ResponseBody
+	private ResponseEntity<String> create_ano(int cat, int cno) {
+		log.info("call_ano 요청");
+		CustomerVO vo = service.select_by_cno(cno);
+		String name = vo.getName();
+		String mobile = vo.getMobile();
+		String reg = vo.getResident_registration_no();
+		
+		
+		ResponseEntity<String> res = null;
+		
+		String ano = "";
+		
+		ano += cat;
+		
+		String code = name.hashCode() + "";
+		
+		ano += code.substring(code.length()-6);
+	
+		ano += mobile.substring(mobile.length()-4);
+	
+		ano += reg;
+		
+		ano += (int)(Math.random()*10);
+		
+		
+		if(ano.length() == 14) {
+			res = new ResponseEntity<String>(ano, HttpStatus.OK); 
+			
+		}
+		return res;
+	}
+	
+	
+	
 	
 }

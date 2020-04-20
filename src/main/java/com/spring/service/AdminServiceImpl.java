@@ -65,6 +65,17 @@ public class AdminServiceImpl implements AdminService {
 
 		return adminMapper.get_deposit_list();
 	}
-	
+	@Override
+	public CustomerVO select_by_cno(int cno) {
+
+		return adminMapper.select_by_cno(cno);
+	}
+
+
+	@Override
+	public List<CustomerVO> search_customer(String name, String birth, String mobile) {
+
+		return adminMapper.search_customer(name, birth, mobile);
+	}
 	
 }
