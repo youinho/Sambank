@@ -128,7 +128,7 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/admin/search")
+	@PostMapping("/search")
 	@ResponseBody
 	public ResponseEntity<List<CustomerVO>> search(String name, String birth, String mobile) {
 		log.info("search"+name+birth+mobile);
@@ -161,20 +161,24 @@ public class AdminController {
 		ResponseEntity<String> res = null;
 		
 		String ano = "";
+		boolean run = true;
+		while(run) {
+			ano = "";
+			ano += cat;
+			
+			String code = name.hashCode() + "";
+			
+			ano += code.substring(code.length()-6);
 		
-		ano += cat;
+			ano += mobile.substring(mobile.length()-4);
 		
-		String code = name.hashCode() + "";
-		
-		ano += code.substring(code.length()-6);
-	
-		ano += mobile.substring(mobile.length()-4);
-	
-		ano += reg;
-		
-		ano += (int)(Math.random()*10);
-		
-		
+			ano += reg;
+			
+			ano += (int)(Math.random()*10);
+			if(!service.exists_deposit_ano(ano))
+				run = false;
+				
+		}
 		if(ano.length() == 14) {
 			res = new ResponseEntity<String>(ano, HttpStatus.OK); 
 			

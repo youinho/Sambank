@@ -74,8 +74,17 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<CustomerVO> search_customer(String name, String birth, String mobile) {
-
+		
+		
+		
 		return adminMapper.search_customer(name, birth, mobile);
+	}
+
+
+	@Override
+	public boolean exists_deposit_ano(String ano) {
+
+		return adminMapper.exists_deposit_ano(ano)>0;
 	}
 	
 }

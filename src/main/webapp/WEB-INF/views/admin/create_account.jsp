@@ -11,6 +11,31 @@
 </head>
 <body>
 
+<form action="" method="post" id="createForm">
+		
+			<label for="cat">통장 종류</label>
+			<select name="cat" >
+				<option value="1">입/출금</option>
+				<option value="2">적금</option>
+				<option value="3">대출</option>
+			</select>
+		
+		
+		
+			<label for="cno">cno</label>
+			<input type="text" name="cno" />
+		
+		
+			<label for="ano">ano</label>
+			<input type="text" name="ano" readonly/>
+		
+		<button id="call_ano">계좌번호 요청</button>
+		<button id="register">계좌발급</button>
+		
+	
+</form>
+
+
 <div class="panel-body">
 
 <table class="table table-striped table-bordered table-hover">
@@ -39,33 +64,10 @@
     <tbody id="resultList">
     	
     </tbody>
-<!-- 게시판 리스트 반복문 -->
 
 </table>
 </div>
-<form action="" method="post" id="createForm">
-		<div>
-			<label for="cat">통장 종류</label>
-			<select name="cat" >
-				<option value="1">입/출금</option>
-				<option value="2">적금</option>
-				<option value="3">대출</option>
-			</select>
-		</div>
-		
-		<div>
-			<label for="cno">cno</label>
-			<input type="text" name="cno" />
-		</div>
-		<div>
-			<label for="ano">ano</label>
-			<input type="text" name="ano" readonly/>
-		</div>
-		<button id="call_ano">계좌번호 요청</button>
-		<button id="register">계좌발급</button>
-		
-	
-	</form>
+
 		
 	
 
@@ -100,6 +102,7 @@ $(function(){
 	})
 	
 	$("#search").click(function(){
+		$("#resultList").html("");
 		$.ajax({
 			url : "/admin/search",
 			type : "post",
@@ -110,7 +113,31 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				console.log(result);
+				
+				let list = JSON.parse(result);
+				console.log(list);
+				if(list.length == 0){
+					return;
+				}
+				console.log("list.length"+list.length);
+				let str = "";
+				for(let i = 0; i < list.length; i++){
+					if(i>100){
+						break;
+					}
+					console.log(i)
+					str += "<tr>";
+					str += "<td>"+list[i].cno+"</td>";
+					str += "<td>"+list[i].name+"</td>";
+					str += "<td>"+list[i].birth+"</td>";
+					str += "<td>"+list[i].mobile+"</td>";
+					str += "<td><button data-cno="+list[i].cno+">입력</button></td>";
+					str += "</tr>";
+					
+				}
+				$("#resultList").html(str);
+				
+				
 				
 			}
 			
@@ -118,6 +145,11 @@ $(function(){
 		
 		})
 	})
+	
+	$("#resultList").on("click", "button", function(){
+		$("input[name='cno']").val($(this).data("cno"));
+	})
+	
 	
 	
 })

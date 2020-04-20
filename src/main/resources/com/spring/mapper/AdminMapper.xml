@@ -12,11 +12,24 @@
 
 	<!-- search (name, birth, mobile) -->
 	<select id="search_customer" resultType="com.spring.domain.CustomerVO">
-		select cno, name, birth, mobile 
+	<![CDATA[
+		select /*+INDEX_DESC(customertbl customertbl_index)*/
+		 cno, name, birth, mobile 
 		from customertbl
-		where name like '%'||#{name}||'%' and birth like '%'||#{birth}||'%' and mobile like '%'||#{mobile}||'%'
-		 
+		where cno > 0 and name like '%'||#{name}||'%' and birth like '%'||#{birth}||'%' and mobile like '%'||#{mobile}||'%' and rownum < 100
+		order by cno desc
+	]]>
 	</select>
+
+
+	<!-- ano 있나없나 deposittbl exists 조회 -->
+	<select id="exists_deposit_ano" resultType="int">
+		select count(ano) from deposittbl
+		where ano=#{ano}
+	</select>
+
+
+
 
 	<!-- 계정 확인 -->
 	<select id="selectOne" resultType="com.spring.domain.AdminVO">
