@@ -23,10 +23,10 @@
 .main-con1 ul.menu1 {background:#ffce0b;}
 .main-con1 ul.menu1 li a {color:#000;font-size:17px;font-weight:normal;padding:0 20px;letter-spacing:-1px;}
 .main-con1 ul.menu1 + ul li + li {position:relative;margin:0 0 0 1px;}
-.main-con1 ul.menu1 + ul li + li:before {content:'';display:block;position:absolute;left:-1px;top:50%;width:1px;height:16px;margin:-8px 0;background:#ddd;}
-
+/* .main-con1 ul.menu1 + ul li + li:before {content:'';display:block;position:absolute;left:-1px;top:50%;width:1px;height:16px;margin:-8px 0;background:#ddd;}
+ */
 @media \0screen\,screen\9 {
-	.main-con1 {border:1px solid #ddd;}
+	.main-con1 {border:1px solid #ddd;} */
 }
 
 /*--------------------------------------------------------------------------------

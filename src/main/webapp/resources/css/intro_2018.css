@@ -51,6 +51,13 @@ a:active {color:#222;}
 
 #headArea .logo a {overflow:hidden;width:0;height:24px;padding:0 0 0 108px;line-height:24px;background:url('../img/icon_set1.png') no-repeat -280px 2px;white-space:nowrap;}
 
+/* 
+		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+		<!-- 로그인 관련 css -->
+		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
+
+ */
+
 /* 로그인 */
 .certMenu {overflow:hidden;position:absolute;left:50%;top:57px;width:920px;margin:0 0 0 -490px;padding:0 30px;z-index:50;}
 .certMenu > li {float:left;line-height:28px;}
