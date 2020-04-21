@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <%-- <%@include file="includes/header_Main.jsp" %> --%>
 <!-- bootstrap css link -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ -->
+ <!-- bootstrap에서 min.css다운받은이후 resource파일안에집어넣은후 min.css 파일에서 리부트 부분 수정  -->
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />    
