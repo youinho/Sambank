@@ -16,7 +16,7 @@ public interface AdminService {
 	public CustomerVO select_by_cno(int cno);
 	public List<CustomerVO> search_customer(String name, String birth, String mobile);
 	public boolean exists_deposit_ano(String ano);
-	
+	public boolean checkId(String id);
 	
 	
 	public int test(int value);

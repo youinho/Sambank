@@ -1,6 +1,4 @@
-/**
- * step2.jsp 검증하기
- */
+
 $(function(){
 	$("#register_customer").validate({
 		errorPlacement:function(error,element){ 
@@ -21,13 +19,15 @@ $(function(){
 				required:true
 			},
 			resident_registration_no:{
-				required:true
+				required:true,
+				resident:true
 			},
 			address:{
 				required:true
 			},
 			mobile:{
-				required:true
+				required:true,
+				mobile:true
 			},
 			email:{
 				required:true,
@@ -36,15 +36,7 @@ $(function(){
 			id:{
 				required:true,
 				validId : true,
-				remote:{
-					url:"/register/checkId",
-					type:"post",
-					data:{
-						userid:function(){
-							return $('#userid').val();
-						}
-					}
-				}	
+				checkId : true
 			},
 			password:{
 				required:true,
@@ -58,7 +50,7 @@ $(function(){
 		},
 		messages:{
 			name:{
-				required:"이름은 필수 입력 요소입니다.",
+				required:"필수 입력 요소입니다.",
 				minlength:"이름은 최소 2자리는 입력해야 합니다"
 			},
 			gender:{
@@ -80,14 +72,14 @@ $(function(){
 				required:"이메일은 필수 입력 요소입니다."				
 			},
 			id:{
-				remote: "아이디가 중복되었습니다.",
 				required:"아이디는 필수 입력 요소입니다."				
+				
 			},
 			password:{
-				required:"비밀번호는 필수 입력 요소입니다."				
+				required:"필수 입력 요소입니다."				
 			},
 			confirm_password:{
-				required:"비밀번호는 필수 입력 요소입니다."	,				
+				required:"필수 입력 요소입니다."	,				
 				equalTo:"이전 비밀번호와 다릅니다."
 			},
 		}
@@ -112,9 +104,39 @@ $.validator.addMethod("gender",function(value){
 $.validator.addMethod("birth",function(value){
 	var regBirth=/^[0-9]{2}(0[1-9]|1[0-2])([1,2][0-9]|3[0,1])$/;
 	return regBirth.test(value);
-}, "생년월일 형식에 맞지 않습니다.");
-
-
+}, "6자리의 생년월일을 입력하세요.");
+$.validator.addMethod("resident", function(value) {
+	var regResident = /^[0-9]{2}$/;
+	return regResident.test(value);
+}, "정확한 지점번호를 입력해 주세요.");
+$.validator.addMethod("mobile", function(value) {
+	var regMobile = /^01[0,1,6,7,9][0-9]{3,4}[0-9]{4}$/;
+	
+	
+	return regMobile.test(value);
+}, "정확한 전화번호를 입력해 주세요");
+$.validator.addMethod("checkId", function(value) {
+	let check = "";
+	
+	console.log("method");
+	$.ajax({
+		url:"/admin/checkId",
+		type:"post",
+		async:false,
+		data:{
+			"id" :value
+		},
+		success: function(result){
+			check = result;
+			console.log("success"+result);
+		}
+	});
+	if(check==="false"){
+		return false;
+	}else{
+		return true;
+	}
+}, "중복되는 아이디가 있습니다.")
 
 
 

@@ -86,5 +86,12 @@ public class AdminServiceImpl implements AdminService {
 
 		return adminMapper.exists_deposit_ano(ano)>0;
 	}
+
+
+	@Override
+	public boolean checkId(String id) {
+
+		return adminMapper.checkId(id)>0;
+	}
 	
 }
