@@ -47,11 +47,6 @@ $(function(){
 		popup_password("passpopup_c");
 	})
 	
-	$("#submit").click(function(e){
-		console.log("prevent")
-		e.preventDefault();
-		$("#register_customer").submit();
-	})
 	
 })
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
@@ -177,7 +172,7 @@ function input_password(password, wInput){
         
         
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="button" id="submit">고객 정보 등록</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 등록</button>
       </form>
     </div>
 <script>

@@ -131,6 +131,7 @@ $.validator.addMethod("checkId", function(value) {
 			console.log("success"+result);
 		}
 	});
+	console.log("check? "+check);
 	if(check==="false"){
 		return false;
 	}else{
