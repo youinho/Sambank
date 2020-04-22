@@ -25,7 +25,7 @@
 </head>
 <body  style="background-color:#F5F5F5;">
 <div class="container" style="margin-top:40px">
-<form id="regist" method="post" action="step3">	
+<form id="regist" method="post" action="../main">	
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">			
@@ -81,7 +81,7 @@
 		</div>	
 	</div>
 	<div class="form-group row justify-content-center">
-		<label for = "email" class="col-sm-2 col-form-label">주소</label>
+		<label for = "email" class="col-sm-2 col-form-label">이메일</label>
 		<div class="col-sm-6">	
 			<input type="email" name="email" id="address" class="form-control" placeholder="example@gmail.com" value="${vo.email }"/>	
 			<small id="email" class="text-info"></small>		

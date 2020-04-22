@@ -1,4 +1,5 @@
 -- ������ ���̺�
+
 create table adminTBL(
     admin_no NUMBER(10) constraint pk_admin_no primary key, -- ������ ��ȣ(���)
     auth NVARCHAR2(2) not null, -- ������ ���
