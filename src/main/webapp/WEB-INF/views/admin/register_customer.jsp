@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="header.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <style>
 	form > div{
 		padding : 5px;
@@ -9,9 +9,12 @@
 	small{
 		color : red;	
 	}	
-	form > div > button{
+	form > div > div> button{
 		background-color : #c0c0c0;
 		margin-left : 10px;
+	}
+	.label{
+		margin-bottom: 3px;
 	}
 	
 </style>
@@ -19,6 +22,8 @@
 <script src="/resources/js/admin_registerCustomer_validate.js"></script>
 <script>
 $(function(){
+	$("#regCS").addClass("active");
+	
 	$('input').keydown(function() {
 		  if (event.keyCode === 13) {
 		    event.preventDefault();
@@ -78,89 +83,111 @@ function input_password(password, wInput){
 
 </script>
 
-	<div class="mb-6 order-md-1">
-      <h4 class="mb-3">고객 정보 등록</h4>
+	<div class="col-md-8 order-md-1">
+	
+      <h4 class="mb-3 title">고객 정보 등록</h4>
       <form class="needs-validation" novalidate="" method="post" id="register_customer">
         <div class="mb-3">
+       	 <div class="label">
           <label for="name">이름 </label>
           <small name="name">
             
           </small>
-          <input type="text" class="form-control" name="name" id="name" placeholder="예) 홍길동">
+         </div>
+         <input type="text" class="form-control" name="name" id="name" placeholder="예) 홍길동">
         </div>
         
 		
 		<div class="mb-3">
+		<div class="label">
           <label for="gender">성별 </label>
           <small name="gender">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="gender" id="gender" placeholder="예) 남">
         </div>
 		<div class="mb-3">
+		<div class="label">
           <label for="birth">생년월일 </label>
           <small name="birth">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="birth" id="birth" placeholder="예) 930928">
         </div>
 		
 		<div class="mb-3">
+		<div class="label">
           <label for="reg_no">주민등록번호 뒷자리</label>
           <small name="reg_no">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="reg_no" id="reg_no" placeholder="예) 1223344">
         </div>
         
         <div class="mb-3">
-          <label for="address">주소 </label><button class="btn btn-outline-primary" id="search_juso">주소 검색</button>
+         <div class="label">
+          <label for="address">주소 </label><button class="btn btn-outline-primary btn-sm" id="search_juso">주소 검색</button>
           <small name="address">
             
           </small>
-          <input type="text" class="form-control" name="address" id="address" placeholder="예) 서울시 노원구 공릉동 444-2" readonly>
+         </div>
+         <input type="text" class="form-control" name="address" id="address" placeholder="예) 서울시 노원구 공릉동 444-2" readonly>
         </div>
         <div class="mb-3">
+        <div class="label">
           <label for="mobile">전화번호 </label>
           <small name="mobile">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="mobile" id="mobile" placeholder="예) 01012345678">
         </div>
         <div class="mb-3">
+        <div class="label">
           <label for="email">이메일 </label>
           <small name="email">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="email" id="email" placeholder="예) abc123@naver.com">
         </div>
         
         <div class="mb-3">
+        <div class="label">
           <label for="id">아이디 </label>
           <small name="id">
             
           </small>
+          </div>
           <input type="text" class="form-control" name="id" id="id" placeholder="예) abc123">
         </div>
         <div class="mb-3">
-          <label for="password">비밀번호 </label><button class="btn btn-secondary" id="passwordBtn" >고객 입력</button>
+        <div class="label">
+          <label for="password">비밀번호 </label><button class="btn btn-outline-primary btn-sm" id="passwordBtn" >고객 입력</button>
           <small name="password">
             
           </small>
+          </div>
           <input type="password" class="form-control" name="password" id="password" placeholder="예) abc123!@#" readonly>
         </div>
         <div class="mb-3">
-          <label for="confirm_password">비밀번호 확인 </label><button class="btn btn-secondary" id="confirm_passwordBtn">고객 입력</button>
+        <div class="label">
+          <label for="confirm_password">비밀번호 확인 </label><button class="btn btn-outline-primary btn-sm" id="confirm_passwordBtn">고객 입력</button>
           <small name="password">
             
           </small>
+          </div>
           <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="예) abc123!@#" readonly>
         </div>
         <div>
-	        <!-- <input type="hidden" name="rating" value="1" />
+	        <input type="hidden" name="rating" value="1" />
 	        <input type="hidden" name="passhint" value="없음" />
 	        <input type="hidden" name="withdrawal_limits" value="0" />
-	        <input type="hidden" name="check_card" value="0" /> -->
+	        <input type="hidden" name="check_card" value="0" />
+	        <input type="hidden" name="resident_registration_no" value="01" />
         </div>
         
         
@@ -168,6 +195,28 @@ function input_password(password, wInput){
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 등록</button>
       </form>
     </div>
+    <div class="bottom">
+    </div>
 <script>
 
+
+let registered = "${registered}";
+
+alert_reg();
+
+history.replaceState({}, null, null);
+
+function alert_reg(){
+	if(registered ==='' || history.state){
+		return;
+	}
+	
+	if(registered === "success"){
+		alert("${name}"+" 고객님의 등록이 완료되었습니다.");
+	}else if(registered === "failed"){
+		alert("등록에 실패했습니다.");
+	}
+	
+	
+}
 </script>

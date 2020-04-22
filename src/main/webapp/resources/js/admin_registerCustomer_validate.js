@@ -65,16 +65,18 @@ $(function(){
 				required:"필수 입력 요소입니다."
 			},
 			address:{
-				required:"필수 입력 요소입니다."
+				required:"필수 입력 요소입니다.",
+				maxlength:"100자 이내로 입력해 주세요."
 			},
 			mobile:{
 				required:"필수 입력 요소입니다."
 			},
 			email:{
-				required:"이메일은 필수 입력 요소입니다."				
+				required:"필수 입력 요소입니다.",
+				maxlength:"30자 이내로 입력해 주세요."
 			},
 			id:{
-				required:"아이디는 필수 입력 요소입니다."				
+				required:"필수 입력 요소입니다."				
 				
 			},
 			password:{

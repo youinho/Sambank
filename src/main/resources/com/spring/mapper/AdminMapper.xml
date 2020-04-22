@@ -14,7 +14,7 @@
 	<select id="search_customer" resultType="com.spring.domain.CustomerVO">
 	<![CDATA[
 		select /*+INDEX_DESC(customertbl customertbl_index)*/
-		 cno, name, birth, mobile 
+		 cno, name, birth, mobile, address 
 		from customertbl
 		where cno > 0 and name like '%'||#{name}||'%' and birth like '%'||#{birth}||'%' and mobile like '%'||#{mobile}||'%' and rownum < 100
 		order by cno desc

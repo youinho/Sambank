@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.service.RegisterService;
+//import com.spring.service.RegisterService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,22 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 public class RegisterController {
 
 	@Autowired
-	private RegisterService service;
+//	private RegisterService service;
 	
 	
 	@GetMapping("/step1")
 	public void step1() {
-		log.info("step1 ¿äÃ»");
-		//step1.jsp ÆäÀÌÁö º¸¿©ÁÖ±â
+		log.info("step1 ï¿½ï¿½Ã»");
+		//step1.jsp ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 	}
 	
 	@PostMapping("/step2")
 	public String step2(@RequestParam(value="agree", defaultValue="false") boolean agree, RedirectAttributes rttr) {
-		//step1¿¡¼­ »ç¿ëÀÚÀÇ ¾à°üµ¿ÀÇ ¿©ºÎ¸¦ °¡Á®¿À±â
-		log.info("step2 ¿äÃ» ¾à°üµ¿ÀÇ¿©ºÎ : "+agree);
+		//step1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		log.info("step2 ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ : "+agree);
 		
-//			//¾à°üµ¿ÀÇ°¡ trueÀÎ°æ¿ì step2ÆäÀÌÁö º¸¿©ÁÖ±â
-//			//¾à°üµ¿ÀÇ°¡ false ÀÎ°æ¿ì step1 ÆäÀÌÁö º¸¿©ÁÖ±â
+//			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ trueï¿½Î°ï¿½ï¿½ step2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+//			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ false ï¿½Î°ï¿½ï¿½ step1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		if(!agree) {
 			rttr.addFlashAttribute("check", "false");
 			return "redirect:/register/step1";

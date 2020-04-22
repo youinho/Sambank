@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_registerVO;
@@ -110,16 +111,19 @@ public class AdminController {
 	
 	
 	@PostMapping("/register_customer")
-	public void register_customer_post(CustomerVO vo) {
+	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
 		log.info("register_customer_post vo : "+vo);
 		boolean result = false;
 		if(vali.check_customer(vo)) {
 			result = service.register_customer(vo);
 		}
 		if(result) {
-			
+			rttr.addFlashAttribute("registered", "success");
+			rttr.addFlashAttribute("name", vo.getName());
+		}else {
+			rttr.addFlashAttribute("registered", "failed");
 		}
-		
+		return "redirect:/admin/register_customer";
 	}
 	@GetMapping("/deposit_list")
 	public void deposit_list_get(Model model) {

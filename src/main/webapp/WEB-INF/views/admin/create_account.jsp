@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="header.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <script>
 $(function(){
+	$("#creACC").addClass("active");
+	
 	
 	$("#searchCS").click(function(e){
 		e.preventDefault();
@@ -21,7 +23,7 @@ $(function(){
 	
 	
 	function popup_searchCS(){
-		var pass = window.open("/popup/searchCS","고객 검색","width=770,height=520, scrollbars=yes, resizable=yes");
+		var pass = window.open("/popup/searchCS","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
 	}	
 	
 })
