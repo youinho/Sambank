@@ -29,8 +29,8 @@
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">			
-			<input type="text" name="userid" id="userid" class="form-control" placeholder="아이디를 입력하세요" value="${vo.userid }"/>
-			 <small id="userid" class="text-info"></small>	
+			<input type="text" name="id" id="id" class="form-control" placeholder="아이디를 입력하세요" value="${vo.id }"/>
+			 <small id="id" class="text-info"></small>	
 		</div>
 	</div>
 	<div class="form-group row justify-content-center">
@@ -69,7 +69,21 @@
 	<div class="form-group row justify-content-center">
 		<label for = "phone" class="col-sm-2 col-form-label">휴대폰번호</label>
 		<div class="col-sm-6">	
-			<input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" value="${vo.email }"/>	
+			<input type="mobile" name="mobile" id="mobile" class="form-control" placeholder="010xxxxxxxx" value="${vo.mobile }"/>	
+			<small id="mobile" class="text-info"></small>		
+		</div>	
+	</div>
+	<div class="form-group row justify-content-center">
+		<label for = "phone" class="col-sm-2 col-form-label">주소</label>
+		<div class="col-sm-6">	
+			<input type="address" name="address" id="address" class="form-control" placeholder="서울시 xx구 xx동" value="${vo.address }"/>	
+			<small id="address" class="text-info"></small>		
+		</div>	
+	</div>
+	<div class="form-group row justify-content-center">
+		<label for = "email" class="col-sm-2 col-form-label">주소</label>
+		<div class="col-sm-6">	
+			<input type="email" name="email" id="address" class="form-control" placeholder="example@gmail.com" value="${vo.email }"/>	
 			<small id="email" class="text-info"></small>		
 		</div>	
 	</div>

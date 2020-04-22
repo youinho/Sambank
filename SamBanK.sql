@@ -1,136 +1,136 @@
--- °ü¸®ÀÚ Å×ÀÌºí
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table adminTBL(
-    admin_no NUMBER(10) constraint pk_admin_no primary key, -- °ü¸®ÀÚ ¹øÈ£(»ç¹ø)
-    auth NVARCHAR2(2) not null, -- °ü¸®ÀÚ µî±Þ
-    id NVARCHAR2(10)not null UNIQUE, -- ¾ÆÀÌµð
-    password NVARCHAR2(20) not null, -- ÆÐ½º¿öµå
-    name NVARCHAR2(10) not null, -- ÀÌ¸§
-    rank NVARCHAR2(10) not null, -- Á÷Ã¥
-    branch NVARCHAR2(20) not null, -- ÁöÁ¡
-    phone NVARCHAR2(20) not null); -- ÀüÈ­¹øÈ£
+    admin_no NUMBER(10) constraint pk_admin_no primary key, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£(ï¿½ï¿½ï¿½)
+    auth NVARCHAR2(2) not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    id NVARCHAR2(10)not null UNIQUE, -- ï¿½ï¿½ï¿½Ìµï¿½
+    password NVARCHAR2(20) not null, -- ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½
+    name NVARCHAR2(10) not null, -- ï¿½Ì¸ï¿½
+    rank NVARCHAR2(10) not null, -- ï¿½ï¿½Ã¥
+    branch NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½
+    phone NVARCHAR2(20) not null); -- ï¿½ï¿½È­ï¿½ï¿½È£
     
--- ·Î±× ±â·Ï
+-- ï¿½Î±ï¿½ ï¿½ï¿½ï¿½
 create table logTBL(
-    log_no NUMBER(10) constraint pk_log_no primary key, -- ·Î±×¹øÈ£
-    admin_no NUMBER(10), -- °ü¸®ÀÚ ¹øÈ£(»ç¹ø)
-    logindate date DEFAULT sysdate, -- ·Î±×ÀÎ ½Ã°£
-    logoutdate date DEFAULT sysdate); -- ·Î±×¾Æ¿ô ½Ã°£
+    log_no NUMBER(10) constraint pk_log_no primary key, -- ï¿½Î±×¹ï¿½È£
+    admin_no NUMBER(10), -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£(ï¿½ï¿½ï¿½)
+    logindate date DEFAULT sysdate, -- ï¿½Î±ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    logoutdate date DEFAULT sysdate); -- ï¿½Î±×¾Æ¿ï¿½ ï¿½Ã°ï¿½
     
--- °ü¸®ÀÚ °Ô½ÃÆÇ
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½
 create table admin_board(
-    admin_bno number(10) constraint pk_admin_board primary key, -- ±Û¹øÈ£
-    admin_no number(10) not null, -- °ü¸®ÀÚ ¹øÈ£(»ç¹ø)
-    title VARCHAR2(200) not null, -- Á¦¸ñ
-    content VARCHAR2(2000) not null, -- ³»¿ë
-    writer VARCHAR2(50) not null, -- ÀÛ¼ºÀÚ
-    regdate date default sysdate, -- µî·Ï½Ã°£
-    updatedate date default sysdate); --¼öÁ¤½Ã°£
+    admin_bno number(10) constraint pk_admin_board primary key, -- ï¿½Û¹ï¿½È£
+    admin_no number(10) not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£(ï¿½ï¿½ï¿½)
+    title VARCHAR2(200) not null, -- ï¿½ï¿½ï¿½ï¿½
+    content VARCHAR2(2000) not null, -- ï¿½ï¿½ï¿½ï¿½
+    writer VARCHAR2(50) not null, -- ï¿½Û¼ï¿½ï¿½ï¿½
+    regdate date default sysdate, -- ï¿½ï¿½Ï½Ã°ï¿½
+    updatedate date default sysdate); --ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
     
--- º¸¾ÈÀÎÁõ¼­ °Ô½ÃÆÇ--
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½--
 create table authTBL(
-    auth_no number(10) constraint pk_auth_no primary key, -- ÀÎÁõ¼­ ¹øÈ£
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    certificate NUMBER(10) not null, -- ÀÎÁõ¼­ À¯¹« È®ÀÎ(boolean)
-    password NVARCHAR2(20) not null); -- ÀÎÁõ¼­ ¾ÏÈ£
+    auth_no number(10) constraint pk_auth_no primary key, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    certificate NUMBER(10) not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½(boolean)
+    password NVARCHAR2(20) not null); -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 
 
--- °í°´ Á¤º¸ Å×ÀÌºí
+-- ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table customerTBL(
-    cno number(10) constraint pk_cno primary key, -- °í°´ ¹øÈ£
-    rating number(10) not null, -- ½Å¿ëµµ
-    name NVARCHAR2(20) not null, -- °í°´ ÀÌ¸§
-    gender NVARCHAR2(20) not null, -- ¼ºº°
-    birth NVARCHAR2(20) not null, -- »ý³â¿ùÀÏ
-    resident_registration_no NVARCHAR2(20) not null, -- ÁÖ¹Î¹øÈ£
-    address NVARCHAR2(100) not null, -- ÁÖ¼Ò
-    mobile NVARCHAR2(15) not null, -- ¿¬¶ôÃ³
-    id NVARCHAR2(20) not null UNIQUE, -- ¾ÆÀÌµð
-    password NVARCHAR2(20) not null, -- ºñ¹Ð¹øÈ£
-    passhint NVARCHAR2(20) not null, -- ºñ¹Ð¹øÈ£ ÈùÆ®
-    email NVARCHAR2(30) not null, -- ÀÌ¸ÞÀÏ
-    withdrawal_limits number(38) not null, -- ÃÖ´ë Ãâ±Ý ÇÑµµ
-    check_card number(10) not null, -- Ä«µå ½ÅÃ»¿©ºÎ(boolean)
-    createdate date DEFAULT sysdate); -- °¡ÀÔ ³¯Â¥
+    cno number(10) constraint pk_cno primary key, -- ï¿½ï¿½ ï¿½ï¿½È£
+    rating number(10) not null, -- ï¿½Å¿ëµµ
+    name NVARCHAR2(20) not null, -- ï¿½ï¿½ ï¿½Ì¸ï¿½
+    gender NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½
+    birth NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    resident_registration_no NVARCHAR2(20) not null, -- ï¿½Ö¹Î¹ï¿½È£
+    address NVARCHAR2(100) not null, -- ï¿½Ö¼ï¿½
+    mobile NVARCHAR2(15) not null, -- ï¿½ï¿½ï¿½ï¿½Ã³
+    id NVARCHAR2(20) not null UNIQUE, -- ï¿½ï¿½ï¿½Ìµï¿½
+    password NVARCHAR2(20) not null, -- ï¿½ï¿½Ð¹ï¿½È£
+    passhint NVARCHAR2(20) not null, -- ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½Æ®
+    email NVARCHAR2(30) not null, -- ï¿½Ì¸ï¿½ï¿½ï¿½
+    withdrawal_limits number(38) not null, -- ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ñµï¿½
+    check_card number(10) not null, -- Ä«ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½(boolean)
+    createdate date DEFAULT sysdate); -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
     
 
--- ÀÔÃâ±Ý °èÁÂ Å×ÀÌºí    
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½    
 create table depositTBL(
-    dno number(10) constraint pk_dno primary key, -- °èÁÂ »ý¼º ¹øÈ£
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    ano NVARCHAR2(20) not null, -- °èÁÂ ¹øÈ£
-    balance NUMBER(20) not null, -- ÀÜ¾×
-    createdate date DEFAULT sysdate, -- °èÁÂ »ý¼º ³¯Â¥
-    updatedate date DEFAULT sysdate); -- °èÁÂ ¼öÁ¤ ³¯Â¥
+    dno number(10) constraint pk_dno primary key, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    ano NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    balance NUMBER(20) not null, -- ï¿½Ü¾ï¿½
+    createdate date DEFAULT sysdate, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
+    updatedate date DEFAULT sysdate); -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
     
     
--- Àû±Ý °èÁÂ Å×ÀÌºí
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table savings_accountTBL(
-    sno number(10) constraint pk_sno primary key, -- °èÁÂ »ý¼º ¹øÈ£
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    ano NVARCHAR2(20) not null, -- °èÁÂ ¹øÈ£
-    balance NUMBER(20) not null, -- ÀÜ¾×
-    createdate date DEFAULT sysdate, -- °èÁÂ »ý¼º ³¯Â¥
-    updatedate date DEFAULT sysdate); -- °èÁÂ ¼öÁ¤ ³¯Â¥
+    sno number(10) constraint pk_sno primary key, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    ano NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    balance NUMBER(20) not null, -- ï¿½Ü¾ï¿½
+    createdate date DEFAULT sysdate, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
+    updatedate date DEFAULT sysdate); -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
     
--- ´ëÃâ °èÁÂ Å×ÀÌºí
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table loanTBL(
-    lno number(10) constraint pk_lno primary key, -- °èÁÂ »ý¼º ¹øÈ£
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    ano NVARCHAR2(20) not null, -- °èÁÂ ¹øÈ£
-    balance NUMBER(20) not null, -- ÀÜ¾×
-    createdate date DEFAULT sysdate, -- °èÁÂ »ý¼º ³¯Â¥
-    updatedate date DEFAULT sysdate); -- °èÁÂ ¼öÁ¤ ³¯Â¥
+    lno number(10) constraint pk_lno primary key, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    ano NVARCHAR2(20) not null, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    balance NUMBER(20) not null, -- ï¿½Ü¾ï¿½
+    createdate date DEFAULT sysdate, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
+    updatedate date DEFAULT sysdate); -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
     
--- ÀÔÃâ±Ý °èÁÂ ³»¿ª --
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ --
 -- pk
--- ano, ÀÔ±Ý¸í+°èÁÂ, ÀÔ±Ý¾×, Ãâ±Ý¸í+°èÁÂ, Ãâ±Ý¾×, ³¯Â¥:½Ã°£
+-- ano, ï¿½Ô±Ý¸ï¿½+ï¿½ï¿½ï¿½ï¿½, ï¿½Ô±Ý¾ï¿½, ï¿½ï¿½Ý¸ï¿½+ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ý¾ï¿½, ï¿½ï¿½Â¥:ï¿½Ã°ï¿½
 create table account_history(
-    ano NVARCHAR2(20) constraint pk_ano primary key, -- °èÁÂ ¹øÈ£
-    deposit number(38) not null, -- ÀÔ±Ý
-    withdrawal number(38) not null); -- Ãâ±Ý
+    ano NVARCHAR2(20) constraint pk_ano primary key, -- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    deposit number(38) not null, -- ï¿½Ô±ï¿½
+    withdrawal number(38) not null); -- ï¿½ï¿½ï¿½
 
--- °í°´ °Ô½ÃÆÇ Å×ÀÌºí
+-- ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table customer_board(
-    bno number(10) constraint pk_customer_board primary key, -- °Ô½ÃÆÇ ¹øÈ£
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    title VARCHAR2(200) not null, -- Á¦¸ñ
-    content VARCHAR2(2000) not null, -- ³»¿ë
-    writer VARCHAR2(50) not null, -- ÀÛ¼ºÀÚ
-    regdate date default sysdate, -- ÀÛ¼º½Ã°£
-    updatedate date default sysdate); -- ¼öÁ¤½Ã°£
+    bno number(10) constraint pk_customer_board primary key, -- ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    title VARCHAR2(200) not null, -- ï¿½ï¿½ï¿½ï¿½
+    content VARCHAR2(2000) not null, -- ï¿½ï¿½ï¿½ï¿½
+    writer VARCHAR2(50) not null, -- ï¿½Û¼ï¿½ï¿½ï¿½
+    regdate date default sysdate, -- ï¿½Û¼ï¿½ï¿½Ã°ï¿½
+    updatedate date default sysdate); -- ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
     
--- °í°´ °Ô½ÃÆÇ ´ñ±Û Å×ÀÌºí
+-- ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table board_reply(
-	rno number(10) constraint pk_reply primary key, -- ´ñ±Û ¹øÈ£
-	bno number(10) not null, -- °Ô½ÃÆÇ ¹øÈ£
-	reply varchar2(1000) not null, -- ´ñ±Û ³»¿ë
-	replyer varchar2(50) not null, -- ´ñ±Û ÀÛ¼ºÀÚ
-	replydate date default sysdate, -- ´ñ±Û ÀÛ¼º½Ã°£
-	updatedate date default sysdate); -- ´ñ±Û ¼öÁ¤½Ã°£
+	rno number(10) constraint pk_reply primary key, -- ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	bno number(10) not null, -- ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	reply varchar2(1000) not null, -- ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	replyer varchar2(50) not null, -- ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½
+	replydate date default sysdate, -- ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ã°ï¿½
+	updatedate date default sysdate); -- ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
 
--- Ä«µå Å×ÀÌºí--
+-- Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½--
 create table cardTBL(
-    card_no number(10) constraint pk_card primary key, -- Ä«µå ¹øÈ£
-    cno number(10) not null, -- °í°´¹øÈ£
-    createdate date default sysdate); -- Ä«µå »ý¼º ³¯Â¥
+    card_no number(10) constraint pk_card primary key, -- Ä«ï¿½ï¿½ ï¿½ï¿½È£
+    cno number(10) not null, -- ï¿½ï¿½ï¿½ï¿½È£
+    createdate date default sysdate); -- Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 
--- Å¸ ÀºÇà Å×ÀÌºí
+-- Å¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 create table bankTBL(
     bnak_no number(10) constraint pk_bnak primary key, -- idx
-    bank_name varchar2(20) not null, -- ÀºÇà¸í
-    name varchar2(20) not null, -- ÀÌ¸§
-    ano number(20) not null); -- °èÁÂ¹øÈ£
+    bank_name varchar2(20) not null, -- ï¿½ï¿½ï¿½ï¿½ï¿½
+    name varchar2(20) not null, -- ï¿½Ì¸ï¿½
+    ano number(20) not null); -- ï¿½ï¿½ï¿½Â¹ï¿½È£
 
--- °í°´ ½Å¿ëµµ Å×ÀÌºí
+-- ï¿½ï¿½ ï¿½Å¿ëµµ ï¿½ï¿½ï¿½Ìºï¿½
 create table ratingTBL(
     rating_no number(10) constraint pk_rating primary key, -- idx
-    cno number(10) not null, -- °í°´ ¹øÈ£
-    name NVARCHAR2(10) not null, -- ÀÌ¸§
-    resident_registration_no NVARCHAR2(20) not null, -- ÁÖ¹Î¹øÈ£
-    rating number(10) not null); -- ½Å¿ëµµ
+    cno number(10) not null, -- ï¿½ï¿½ ï¿½ï¿½È£
+    name NVARCHAR2(10) not null, -- ï¿½Ì¸ï¿½
+    resident_registration_no NVARCHAR2(20) not null, -- ï¿½Ö¹Î¹ï¿½È£
+    rating number(10) not null); -- ï¿½Å¿ëµµ
     
 
--- ½ÃÄö½º »ý¼º
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 create sequence seq_customer;
 create sequence seq_deposit;
@@ -147,7 +147,7 @@ create sequence seq_card;
 create sequence seq_bank;
 create sequence seq_rating;
 
--- ½ÃÄö½º »èÁ¦
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 drop sequence seq_customer;
 drop sequence seq_deposit;
 drop sequence seq_savings_account;
@@ -163,7 +163,7 @@ drop sequence seq_card;
 drop sequence seq_bank;
 drop sequence seq_rating;
 
--- Á¦¾à Á¶°Ç
+-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 ALTER TABLE depositTBL add constraint fk_deposit foreign key(cno) references customerTBL(cno);
 ALTER TABLE savings_accountTBL add constraint fk_savings_account foreign key(cno) references customerTBL(cno);
 ALTER TABLE loanTBL add constraint fk_loan foreign key(cno) references customerTBL(cno);
@@ -177,7 +177,7 @@ ALTER TABLE admin_board add constraint fk_admin_board foreign key(admin_no) refe
 ALTER TABLE cardTBL add constraint fk_card foreign key(cno) references customerTBL(cno);
 ALTER TABLE ratingTBL add constraint fk_rating foreign key(cno) references customerTBL(cno);
 
--- Å×ÀÌºí »èÁ¦
+-- ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 drop table customerTBL;
 drop table depositTBL;
 drop table savings_accountTBL;
