@@ -44,17 +44,15 @@
 .list-board a > span:first-child {overflow:hidden;max-width:66%;color:#666;text-overflow:ellipsis;white-space:nowrap;}
 .list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;color:#929292;}
 .list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 no-repeat -30px -160px;vertical-align:top;}
-.list-board a > .icon-new {background-image: url(/resources/SB_files/img/btn_layerclose.png";} 
 .main-con2 > .section:first-child .list-board a > span:first-child {max-width:70%;}
-/* ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ */
 
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 공지사항,추가예정
 ---------------------------------------------------------------------------------*/
-.main-con3 {overflow:hidden;width:980px;margin:20px auto 0;}
-.main-con3 > .section {float:left;width:335px;padding-left:125px;}
-.main-con3 > .section:first-child {width:317px;margin-right:7px;}
-.main-con3 > .section + .section:before {display:none;}
+.main-con122 {overflow:hidden;width:980px;margin:20px auto 0;}
+.main-con122 > .section {float:left;width:335px;padding-left:125px;}
+.main-con122 > .section:first-child {width:317px;margin-right:7px;}
+.main-con122 > .section + .section:before {display:none;}
 
 .list-board {margin-top:-6px;}
 .list-board a {display:block;overflow:hidden;padding:7px 1px 7px 0;}
