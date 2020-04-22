@@ -18,12 +18,13 @@ $(function(){
 			birth:{
 				required:true
 			},
-			resident_registration_no:{
+			reg_no:{
 				required:true,
-				resident:true
+				regNo:true
 			},
 			address:{
-				required:true
+				required:true,
+				maxlength:100
 			},
 			mobile:{
 				required:true,
@@ -31,6 +32,7 @@ $(function(){
 			},
 			email:{
 				required:true,
+				maxlength:30,
 				email : true
 			},
 			id:{
@@ -59,7 +61,7 @@ $(function(){
 			birth:{
 				required:"필수 입력 요소입니다."
 			},
-			resident_registration_no:{
+			reg_no:{
 				required:"필수 입력 요소입니다."
 			},
 			address:{
@@ -105,10 +107,10 @@ $.validator.addMethod("birth",function(value){
 	var regBirth=/^[0-9]{2}(0[1-9]|1[0-2])([1,2][0-9]|3[0,1])$/;
 	return regBirth.test(value);
 }, "6자리의 생년월일을 입력하세요.");
-$.validator.addMethod("resident", function(value) {
-	var regResident = /^[0-9]{2}$/;
-	return regResident.test(value);
-}, "정확한 지점번호를 입력해 주세요.");
+$.validator.addMethod("regNo", function(value) {
+	var regRegNo = /^[1-4][0-9]{6}$/;
+	return regRegNo.test(value);
+}, "정확한 번호를 입력해 주세요.");
 $.validator.addMethod("mobile", function(value) {
 	var regMobile = /^01[0,1,6,7,9][0-9]{3,4}[0-9]{4}$/;
 	

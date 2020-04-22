@@ -22,5 +22,5 @@ public class CustomerVO {
 	private int check_card;						//카드 신청여부
 	private Date createdate;					//회원가입 날짜
 	
-	
+	private String reg_no;
 }
