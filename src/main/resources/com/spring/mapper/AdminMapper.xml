@@ -28,7 +28,11 @@
 		where ano=#{ano}
 	</select>
 
-
+	<!-- id 아이디 중복 체크 -->
+	<select id="checkId" resultType="int">
+		select count(*) from customertbl
+		where id=#{id}
+	</select>
 
 
 	<!-- 계정 확인 -->

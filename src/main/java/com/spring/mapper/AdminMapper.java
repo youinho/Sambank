@@ -19,7 +19,7 @@ public interface AdminMapper {
 	public CustomerVO select_by_cno(int cno);
 	public List<CustomerVO> search_customer(@Param("name") String name,@Param("birth") String birth,@Param("mobile") String mobile);
 	public int exists_deposit_ano(String ano);
-	
+	public int checkId(String id);
 	
 	
 	public int test1(int value);
