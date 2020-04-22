@@ -253,11 +253,9 @@
 
 .wrap-visual .area-control {position:absolute;left:50%;bottom:80px;width:910px;margin:0 0 0 -490px;padding:0 25px;}
 
-
 .wrap-visual .area-aside {position:absolute;right:50%;bottom:60px;margin:0 -490px 0 0;}
-.wrap-visual .area-aside a {position:relative;width:70px;height:68px;padding:15px;font-size:13px;line-height:16px;color:#635f5b;background:rgba(255,255,255,0.5);box-shadow:0 0 5px 0 rgba(0,0,0,0.05);box-sizing: content-box;}
+.wrap-visual .area-aside a {position:relative;width:70px;height:68px;padding:15px;font-size:13px;line-height:16px;color:#635f5b;background:rgba(255,255,255,0.5);box-shadow:0 0 5px 0 rgba(0,0,0,0.05);}
 .wrap-visual .area-aside a:before {content:'';position:absolute;left:15px;bottom:12px;width:30px;height:30px;background:url('../img/icon_set1.png') no-repeat -320px -85px;}
-
 
 @media \0screen\,screen\9 {
 	.wrap-visual .area-aside a {background:#fff;}

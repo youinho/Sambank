@@ -16,7 +16,7 @@
 	# 컨텐츠 : 빠른메뉴
 ---------------------------------------------------------------------------------*/
 .main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#fff;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
-.main-con1 ul {float:left;display:block;overflow:hidden;height:40px;padding:20px 10px;}
+.main-con1 ul {float:left;display:block;overflow:hidden;height:40px;padding:20px 10px;box-sizing: content-box;}
 .main-con1 ul.menu1{padding:19px 10px 21px;}
 .main-con1 ul li {float:left;}
 .main-con1 ul li a {padding:0 22px;font-size:16px;line-height:40px;color:#434343;letter-spacing:-2px;}
@@ -37,13 +37,16 @@
 .main-con2 > .section:first-child {width:317px;margin-right:7px;}
 .main-con2 > .section + .section:before {display:none;}
 
+/* ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ */
 .list-board {margin-top:-6px;}
 .list-board a {display:block;overflow:hidden;padding:7px 1px 7px 0;}
 .list-board a > span, .list-board a > em {display:inline-block;float:left;letter-spacing:-1px;}
 .list-board a > span:first-child {overflow:hidden;max-width:66%;color:#666;text-overflow:ellipsis;white-space:nowrap;}
 .list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;color:#929292;}
-.list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 url('../img/icon_set1.png') no-repeat -30px -160px;vertical-align:top;}
+.list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 no-repeat -30px -160px;vertical-align:top;}
+.list-board a > .icon-new {background-image: url(/resources/SB_files/img/btn_layerclose.png";} 
 .main-con2 > .section:first-child .list-board a > span:first-child {max-width:70%;}
+/* ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ */
 
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 공지사항,추가예정
@@ -201,7 +204,7 @@
 .wrap-visual .area-control {position:absolute;left:50%;bottom:80px;width:910px;margin:0 0 0 -490px;padding:0 25px;}
 
 .wrap-visual .area-aside {position:absolute;right:50%;bottom:60px;margin:0 -490px 0 0;}
-.wrap-visual .area-aside a {position:relative;width:70px;height:68px;padding:15px;font-size:13px;line-height:16px;color:#635f5b;background:rgba(255,255,255,0.5);box-shadow:0 0 5px 0 rgba(0,0,0,0.05);}
+.wrap-visual .area-aside a {position:relative;width:70px;height:68px;padding:15px;font-size:13px;line-height:16px;color:#635f5b;background:rgba(255,255,255,0.5);box-shadow:0 0 5px 0 rgba(0,0,0,0.05);box-sizing: content-box;}
 .wrap-visual .area-aside a:before {content:'';position:absolute;left:15px;bottom:12px;width:30px;height:30px;background:url('../img/icon_set1.png') no-repeat -320px -85px;}
 
 @media \0screen\,screen\9 {
