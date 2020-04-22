@@ -16,8 +16,58 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- 링크 스위퍼 CSS -->
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
+
+
+<!-- 슬라이더 styles -->
+<style>
+  .Swiper {
+    position: relative;
+    height: 200px;
+    background: #fbebba;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#fbebba;
+    margin: 0;
+    padding: 0;
+  }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+</style>
+
+
 </head>
 	<!-- Main Image 시작 -->
+	
+
+
+	
+	
+	
 	<!-- style="margin-top: 69px" -->
 	<div id="Main">
 	
@@ -70,6 +120,55 @@
 			</nav>
 		</div>
 		
+	
+	
+	<!-- 스위퍼 시작부분 -->
+		<div class="Swiper">
+		  <!-- Swiper -->
+		  <div class="swiper-container" >
+		    <div class="swiper-wrapper" style="background-color: #fbebba;" >
+		      <div class="swiper-slide">Slide 1</div>
+		      <div class="swiper-slide">Slide 2</div>
+		      <div class="swiper-slide">Slide 3</div>
+		      <div class="swiper-slide">Slide 4</div>
+		      <div class="swiper-slide">Slide 5</div>
+		      <div class="swiper-slide">Slide 6</div>
+		      <div class="swiper-slide">Slide 7</div>
+		      <div class="swiper-slide">Slide 8</div>
+		      <div class="swiper-slide">Slide 9</div>
+		      <div class="swiper-slide">Slide 10</div>
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination"></div>
+		    <!-- Add Arrows -->
+		    <div class="swiper-button-next"></div>
+		    <div class="swiper-button-prev"></div>
+		  </div>
+		
+		  <!-- Swiper JS -->
+		  <script src="/resources/js/swiper.min.js"></script>
+		
+		  <!-- Initialize Swiper -->
+		  <script>
+		    var swiper = new Swiper('.swiper-container', {
+		      slidesPerView: 1,
+		      spaceBetween: 30,
+		      loop: true,
+		      pagination: {
+		        el: '.swiper-pagination',
+		        clickable: true,
+		      },
+		      navigation: {
+		        nextEl: '.swiper-button-next',
+		        prevEl: '.swiper-button-prev',
+		      },
+		    });
+		  </script>	
+		</div>
+		<!-- 스위퍼 끝 -->
+		
+	
+	
 	
 	
 	

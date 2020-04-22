@@ -7,7 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sam Bank</title>
 <!-- bootstrap에서 min.css다운받은이후 resource파일안에집어넣은후 min.css 파일에서 리부트 부분 수정  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap-reboot.css" />
+<link rel="stylesheet" href="/resources/bootstrap/scss/_reboot.scss" />
+<link rel="stylesheet" href="/resources/bootstrap/navbar.css" />
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
@@ -72,7 +75,7 @@
 
 		<!-- header,headerWrap 끝나는부분 -->	
 		
-		<div id="content" class="contentWrap">
+		<div id="content" >
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- MainView -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
@@ -150,6 +153,14 @@
 				
 				
 				
+				<!-- ################################## -->
+				<!-- 슬라이더 -->
+				<!-- ################################## -->
+				
+				
+				
+				
+				<!-- 슬라이드 끝나는 부분 -->
 				
 				
 				<!-- ################################## -->
@@ -167,6 +178,7 @@
 			<!-- <div class="wrap-visual active1"> 끝내는 부분 -->
 		</div>
 		<!-- <div id="content" class="contentWrap"> 끝내는 부분 -->
+		
 	</div>
 	<!-- Main 끝나는부분 -->
 	
@@ -238,7 +250,6 @@
 
 
 
-
 	<!-- ################################## -->
 	<!-- 이벤트 -->
 	<!-- ################################## -->
@@ -277,9 +288,93 @@
 		<!-- 이벤트 끝나는 부분 -->
 			
 	</div>
-	<!-- 뉴스 페이지 끝 -->
+	<!-- 새소식,이벤트 페이지 끝 -->
 	
 	
 	
 	
+	<div class="main-section main-con122">
+		<div class="section">
+		<!-- ################################## -->
+		<!-- 공지사항 -->
+		<!-- ################################## -->		
+			<h2>공지사항</h2>
+			<ul class="list-board">
+				<!-- 공지사항 컨텐츠 - 1 -->
+					<li>
+						<a href="">
+							<span>공지사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>
+				<!-- 공지사항 컨텐츠 - 2 -->
+					<li>
+						<a href="">
+							<span>공지사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>		
+				<!-- 공지사항 컨텐츠 - 3 -->
+					<li>
+						<a href="">
+							<span>공지사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>				
+			</ul>
+			<!-- 공지사항 컨텐츠 끝 -->
+			<a href="" class="sub" title="공지사항 바로가기">바로가기</a>
+		</div>
+		<!-- 공지사항 끝 부분 -->
+		
+		
+		
+		<div class="section">
+		<!-- ################################## -->
+		<!-- 추가사항 -->
+		<!-- ################################## -->		
+			<h2>추가사항</h2>
+			<ul class="list-board">
+				<!-- 추가사항 컨텐츠 - 1 -->
+					<li>
+						<a href="">
+							<span>추가사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>
+				<!-- 추가사항 컨텐츠 - 2 -->
+					<li>
+						<a href="">
+							<span>추가사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>		
+				<!-- 추가사항 컨텐츠 - 2 -->
+					<li>
+						<a href="">
+							<span>추가사항 관련 내용</span>
+							<!-- <em class="icon-new">[NEW]</em>-->
+							<span>날짜 부분</span>
+						</a>
+					</li>	
+			</ul>
+			<a href="" class="sub" title="추가사항 바로가기">바로가기</a>
+			<!-- 추가사항 컨텐츠 끝 -->
+		</div>
+		<!-- 추가사항 끝 부분 -->
+		
+		
+		
+	</div>
+	<!-- 공지사항,추가사항 페이지 끝 -->
+
+
+	
+		
+
 </html>

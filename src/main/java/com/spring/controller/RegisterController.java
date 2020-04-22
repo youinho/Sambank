@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-//import com.spring.service.RegisterService;
+import com.spring.domain.CustomerVO;
+import com.spring.service.RegisterService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RegisterController {
 
 	@Autowired
-//	private RegisterService service;
+	private RegisterService service;
 	
 	
 	@GetMapping("/step1")
@@ -44,7 +45,6 @@ public class RegisterController {
 		
 		return "/register/step2";
 	}
-	
 	
 	
 	
