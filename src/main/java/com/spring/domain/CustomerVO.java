@@ -21,4 +21,6 @@ public class CustomerVO {
 	private int withdrawal_limits;
 	private int check_card;
 	private Date createdate;
+	
+	private String reg_no;
 }

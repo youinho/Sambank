@@ -19,6 +19,7 @@ import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Admin_testVO;
 import com.spring.domain.CustomerVO;
 import com.spring.service.AdminService;
+import com.spring.service.SBValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private SBValidator vali;
 	
 	@GetMapping("/login")
 	public String admin_login() {
@@ -108,7 +112,13 @@ public class AdminController {
 	@PostMapping("/register_customer")
 	public void register_customer_post(CustomerVO vo) {
 		log.info("register_customer_post vo : "+vo);
-		service.register_customer(vo);
+		boolean result = false;
+		if(vali.check_customer(vo)) {
+			result = service.register_customer(vo);
+		}
+		if(result) {
+			
+		}
 		
 	}
 	@GetMapping("/deposit_list")
@@ -200,30 +210,6 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("/jusopopup")
-	public String juso_popup() {
-		log.info("jusopopup 요청");
-		return "/popup/jusopopup";
-	}
-	@PostMapping("/jusopopup")
-	public String juso_popup_post() {
-		log.info("jusopopup_post 요청");
-		return "/popup/jusopopup";
-	}
-	
-	@GetMapping("/passpopup")
-	public String passpopup(Model model) {
-		log.info("passpopup 요청");
-		model.addAttribute("wInput", "password");
-		return "/popup/passpopup";
-	}
-	
-	@GetMapping("/passpopup_c")
-	public String passpopup_c(Model model) {
-		log.info("passpopup_c 요청");
-		model.addAttribute("wInput", "confirm_password");
-		return "/popup/passpopup";
-	}
 	
 	
 	

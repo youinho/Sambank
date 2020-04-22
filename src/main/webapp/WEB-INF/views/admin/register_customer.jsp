@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="header.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
 <style>
 	form > div{
 		padding : 5px;
@@ -53,7 +48,7 @@ $(function(){
 //document.domain = "abc.go.kr";
 function goPopup(){
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    var pop = window.open("/admin/jusopopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    var pop = window.open("/popup/jusopopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
     
 	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
     //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
@@ -70,7 +65,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 }
 
 function popup_password(wInput){
-	var pass = window.open("/admin/"+wInput,"input_passowrd","width=370,height=220, scrollbars=yes, resizable=yes");
+	var pass = window.open("/popup/"+wInput,"input_passowrd","width=370,height=220, scrollbars=yes, resizable=yes");
 }
 
 function input_password(password, wInput){
@@ -82,8 +77,6 @@ function input_password(password, wInput){
 
 
 </script>
-</head>
-<body>
 
 	<div class="mb-6 order-md-1">
       <h4 class="mb-3">고객 정보 등록</h4>
@@ -113,11 +106,11 @@ function input_password(password, wInput){
         </div>
 		
 		<div class="mb-3">
-          <label for="resident_registration_no">지점 번호 </label>
-          <small name="resident_registration_no">
+          <label for="reg_no">주민등록번호 뒷자리</label>
+          <small name="reg_no">
             
           </small>
-          <input type="text" class="form-control" name="resident_registration_no" id="resident_registration_no" placeholder="예) 01">
+          <input type="text" class="form-control" name="reg_no" id="reg_no" placeholder="예) 1223344">
         </div>
         
         <div class="mb-3">
@@ -164,10 +157,10 @@ function input_password(password, wInput){
           <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="예) abc123!@#" readonly>
         </div>
         <div>
-	        <input type="hidden" name="rating" value="1" />
+	        <!-- <input type="hidden" name="rating" value="1" />
 	        <input type="hidden" name="passhint" value="없음" />
 	        <input type="hidden" name="withdrawal_limits" value="0" />
-	        <input type="hidden" name="check_card" value="0" />
+	        <input type="hidden" name="check_card" value="0" /> -->
         </div>
         
         
@@ -178,5 +171,3 @@ function input_password(password, wInput){
 <script>
 
 </script>
-</body>
-</html>

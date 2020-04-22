@@ -8,6 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+$(function(){
+	
+	$("#searchCS").click(function(e){
+		e.preventDefault();
+		popup_searchCS();
+		
+		
+	})
+	
+	
+	
+	function popup_searchCS(){
+		var pass = window.open("/popup/searchCS","고객 검색","width=770,height=520, scrollbars=yes, resizable=yes");
+	}	
+	
+})
+
+function searchCS_callback(cno){
+		$("input[name='cno']").val(cno);
+}
+
+</script>
 </head>
 <body>
 
@@ -31,42 +54,11 @@
 		
 		<button id="call_ano">계좌번호 요청</button>
 		<button id="register">계좌발급</button>
+		<button id="searchCS">고객 검색</button>
 		
 	
 </form>
 
-
-<div class="panel-body">
-
-<table class="table table-striped table-bordered table-hover">
-	<div>
-		<label for="name">성함</label>
-		<input type="text" name="name" />	
-	</div>
-	<div>
-		<label for="name">생년월일</label>
-		<input type="text" name="birth" />	
-	</div>
-	<div>
-		<label for="name">전화번호</label>
-		<input type="text" name="mobile" />	
-	</div>
-	<button id="search">고객 검색</button>
-    <thead>
-        <tr>
-            <th>cno</th>
-            <th>성함</th>
-            <th>생년월일</th>
-            <th>전화번호</th>
-            <th>선택</th>
-        </tr>									
-    </thead>
-    <tbody id="resultList">
-    	
-    </tbody>
-
-</table>
-</div>
 
 		
 	
@@ -100,57 +92,6 @@ $(function(){
 		})
 		
 	})
-	
-	$("#search").click(function(){
-		$("#resultList").html("");
-		$.ajax({
-			url : "/admin/search",
-			type : "post",
-			data : {
-				name : $("input[name='name']").val(),
-				birth : $("input[name='birth']").val(),
-				mobile : $("input[name='mobile']").val()
-			},
-			dataType : "text",
-			success : function(result){
-				
-				let list = JSON.parse(result);
-				console.log(list);
-				if(list.length == 0){
-					return;
-				}
-				console.log("list.length"+list.length);
-				let str = "";
-				for(let i = 0; i < list.length; i++){
-					if(i>100){
-						break;
-					}
-					console.log(i)
-					str += "<tr>";
-					str += "<td>"+list[i].cno+"</td>";
-					str += "<td>"+list[i].name+"</td>";
-					str += "<td>"+list[i].birth+"</td>";
-					str += "<td>"+list[i].mobile+"</td>";
-					str += "<td><button data-cno="+list[i].cno+">입력</button></td>";
-					str += "</tr>";
-					
-				}
-				$("#resultList").html(str);
-				
-				
-				
-			}
-			
-		
-		
-		})
-	})
-	
-	$("#resultList").on("click", "button", function(){
-		$("input[name='cno']").val($(this).data("cno"));
-	})
-	
-	
 	
 })
 </script>
