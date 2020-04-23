@@ -3,7 +3,7 @@
 <%@include file="../../includes/header_admin.jsp" %>
 
 
-<div class="content">
+<div class="container">
 	<!-- 컨텐츠 타이틀 -->
 	<h3 class="tit_content title">공지사항</h3>
 	<!-- //컨텐츠 타이틀 -->
@@ -11,7 +11,7 @@
 	<!-- 컨텐츠 내용 -->
 	<div>
 		<div class="tbl_type2 leftPd">
-			<table summary="<b>4~5월 국가기술자격 상시검정 시행 안내</b>">
+			<table summary="" class="table table-sm table-bordered" style="text-align:center">
 				
 				<colgroup>
 					<col width="12%">
@@ -24,10 +24,10 @@
 				<tbody>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="5"><b><c:out value="${vo.title }"></c:out></b></td>
+						<td colspan="5" style="font-size:1.3em;"><b><c:out value="${vo.title }"></c:out></b></td>
 					</tr>
 					<tr>
-						<th scope="row">담당부서</th>
+						<th scope="row">담당지점</th>
 						<td>@담당부서</td>
 						<th scope="row">등록일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate }"/></td>
@@ -48,7 +48,7 @@
 
 					<tr>
 						<td colspan="6">
-							<div style="padding:20px;margin:20px">
+							<div style="padding:20px;margin:20px;text-align:left">
 								<c:out value="${vo.content }"></c:out>
 							</div>
 							<textarea id="contents_text" style="width:100%;display:none;" rows="10">
@@ -57,23 +57,19 @@
 							</textarea>
 						</td>
 					</tr>
-					
-					<tr>
-						<td colspan="5">
-						<td colspan="2">
-							<div class="btn-group outline-dark" role="group" aria-label="Basic example">
-								<button class="btn btn-outline-primary btn-sm" type="button">수정</button>
-								<button class="btn btn-outline-primary btn-sm" type="button" id="go-delete">삭제</button>
-								<button class="btn btn-outline-primary btn-sm" type="button" id="go-list">목록</button>
-							</div>
-						</td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+<div class="d-flex justify-content-end">
+							<div class="btn-group outline-dark" role="group" aria-label="Basic example">
+								<button class="btn btn-outline-primary btn-sm" type="button" id="go-modify">수정</button>
+								<button class="btn btn-outline-primary btn-sm" type="button" id="go-delete">삭제</button>
+								<button class="btn btn-outline-primary btn-sm" type="button" id="go-list">목록</button>
+							</div>
+</div>								
 </div>
-<form action="/admin/modify" id="myForm" method="get">
+<form action="/admin/modify" id="myForm">
 	<input type="hidden" name="bno" value="${vo.admin_bno }"/>
 	
 	<!-- 페이지 나누기 후 추가 -->
@@ -98,12 +94,16 @@ $(function(){
 	})
 	
 	$("#go-delete").click(function(){
-		$("#myForm").attr("action", "/admin/notice/"+"${vo.admin_bno}");
-		$("#myForm").append("<input type='hidden' name='_method' value='delete'/>");
-		$("#myForm").find("input[name='bno']").remove();
+		$("#myForm").attr("action", "/admin/notice/delete");
+		$("#myForm").attr("method", "post");
 		$("#myForm").submit();
 	})
 	
+	$("#go-modify").click(function(){
+		$("#myForm").attr("action", "/admin/notice/modify");
+		$("#myForm").attr("method", "get");
+		$("#myForm").submit();
+	})
 	
 })
 </script>

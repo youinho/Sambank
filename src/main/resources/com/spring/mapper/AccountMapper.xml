@@ -9,7 +9,8 @@
 	</select>
 
 	<insert id="create_deposit">
-		insert into deposittbl(dno, cno, ano, balance) values(seq_deposit.nextVal, #{cno}, #{ano}, 0)
+		insert into deposittbl(cno, ano, type, product, password, balance, day_withdraw, max_withdraw, branch)
+		values(#{cno}, #{ano}, #{type}, #{product}, #{password}, 0, #{day_withdraw}, #{max_withdraw}, #{branch})
 	</insert>
 	
 	
@@ -18,6 +19,13 @@
 
 	</select>
 
+
+	<!-- 상품 조회 -->
+	<select id="getProduct" resultType="com.spring.domain.ProductVO">
+		select product, p_name from producttbl
+		where round(product/100)=#{type}
+	
+	</select>
 
 
 </mapper>

@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.ProductVO;
 import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
 import com.spring.mapper.AdminNoticeMapper;
@@ -40,9 +42,9 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public boolean create_deposit(int cno, String ano) {
+	public boolean create_deposit(DepositVO vo) {
 
-		return accountMapper.create_deposit(cno, ano)==1;
+		return accountMapper.create_deposit(vo)==1;
 	}
 
 
@@ -120,5 +122,28 @@ public class AdminServiceImpl implements AdminService {
 	
 		return noticeMapper.delete(admin_bno)==1;
 	}
+
+
+	@Override
+	public boolean notice_update(Admin_noticeVO vo) {
+
+		return noticeMapper.update(vo)==1;
+	}
+	
+	
+	
+	@Override
+	public List<ProductVO> acc_getProduct(int type) {
+	
+		return accountMapper.getProduct(type);
+	}
+
+
+	@Override
+	public List<Acc_info> select_acc_info(int cno) {
+
+		return customerMapper.select_acc_info(cno);
+	}
+	
 	
 }

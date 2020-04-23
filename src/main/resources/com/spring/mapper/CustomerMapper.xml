@@ -9,6 +9,17 @@
 		where cno=#{cno}
 	</select>
 
+<!-- cno로 고객정보 (이름, 계좌정보) -->
+	<select id="select_acc_info" resultType="com.spring.domain.Acc_info">
+		select customertbl.name, deposittbl.ano from customertbl
+		left join deposittbl
+		on customertbl.cno=deposittbl.cno 
+		where customertbl.cno=#{cno}
+	</select>
+
+
+
+
 
 <!-- search (name, birth, mobile) -->
 	<select id="search_customer" resultType="com.spring.domain.CustomerVO">
@@ -30,8 +41,8 @@
 
 <!-- 고객 등록 -->
 	<insert id="register_customer">
-		insert into customertbl(cno, rating, name, gender, birth, resident_registration_no, address, mobile, id, password, passhint, email, withdrawal_limits, check_card) 
-		values(seq_customer.nextVal, #{rating}, #{name}, #{gender}, #{birth}, #{resident_registration_no},#{address}, #{mobile}, #{id}, #{password}, #{passhint}, #{email}, #{withdrawal_limits}, #{check_card}) 
+		insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
+		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth}, #{reg_no}, #{address}, #{mobile}, #{id}, #{password}, #{email}) 
 	
 	</insert>
 

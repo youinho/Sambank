@@ -4,7 +4,7 @@
 <%@include file="../includes/header_admin.jsp" %>
 <style>
 	form > div{
-		padding : 5px;
+		padding : 0;
 	}
 	small{
 		color : red;	
@@ -31,6 +31,15 @@ $(function(){
 	});
 	
 	
+	$("input[name='eng_name']").change(function(){
+		$(this).val($(this).val().toUpperCase());
+	})
+	
+	
+	
+	
+	
+	//팝업
 	
 	$("#search_juso").click(function(e){
 		e.preventDefault();
@@ -88,13 +97,25 @@ function input_password(password, wInput){
       <h4 class="mb-3 title">고객 정보 등록</h4>
       <form class="needs-validation" novalidate="" method="post" id="register_customer">
         <div class="mb-3">
-       	 <div class="label">
-          <label for="name">이름 </label>
-          <small name="name">
-            
-          </small>
+       	 <div class="label d-flex justify-content-between" >
+       	  <div class="col-6" style="padding:0">
+	          <label for="name">이름 </label>
+	          <small name="name">
+	            
+	          </small>
+          </div>
+          <div class="col-6" style="padding:0">
+          	  <label for="eng_name">영문 이름 </label>
+	          <small name="eng_name">
+	            
+	          </small>
+          </div>
          </div>
-         <input type="text" class="form-control" name="name" id="name" placeholder="예) 홍길동">
+         <!-- <input type="text" class="form-control" name="name" id="name" placeholder="예) 홍길동"> -->
+		<div class="input-group">
+			<input type="text" aria-label="name" class="form-control" name="name" id="name" placeholder="예) 홍길동">
+			<input type="text" aria-label="eng_name" class="form-control" name="eng_name" id="eng_name" placeholder="예) HONG GIL DONG">
+			</div>
         </div>
         
 		
@@ -114,12 +135,12 @@ function input_password(password, wInput){
             
           </small>
           </div>
-          <input type="text" class="form-control" name="birth" id="birth" placeholder="예) 930928">
+          <input type="text" class="form-control" name="birth" id="birth" placeholder="예) 19930928">
         </div>
 		
 		<div class="mb-3">
 		<div class="label">
-          <label for="reg_no">주민등록번호 뒷자리</label>
+          <label for="reg_no">주민등록번호</label>
           <small name="reg_no">
             
           </small>
@@ -181,13 +202,6 @@ function input_password(password, wInput){
           </small>
           </div>
           <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="예) abc123!@#" readonly>
-        </div>
-        <div>
-	        <input type="hidden" name="rating" value="1" />
-	        <input type="hidden" name="passhint" value="없음" />
-	        <input type="hidden" name="withdrawal_limits" value="0" />
-	        <input type="hidden" name="check_card" value="0" />
-	        <input type="hidden" name="resident_registration_no" value="01" />
         </div>
         
         

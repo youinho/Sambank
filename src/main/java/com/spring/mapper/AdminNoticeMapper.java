@@ -11,4 +11,5 @@ public interface AdminNoticeMapper {
 	public int insert(Admin_noticeVO vo);
 	public Admin_noticeVO getRow(int admin_bno);
 	public int delete(int admin_bno);
+	public int update(Admin_noticeVO vo);
 }

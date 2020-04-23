@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.domain.DepositVO;
 import com.spring.domain.PageVO;
+import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
 import com.spring.service.SBValidator;
 
@@ -104,41 +107,65 @@ public class AdminController {
 	
 	
 	
+	@ResponseBody
+	@PostMapping("/getProduct")
+	public ResponseEntity<List<ProductVO>> getProduct(int type){
+		
+		List<ProductVO> list = service.acc_getProduct(type);
+		
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<ProductVO>>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		return new ResponseEntity<List<ProductVO>>(list, HttpStatus.OK);
+		
+		
+	}
 	
-	
-	
-	
-	
+	@ResponseBody
+	@PostMapping("/getAccInfo")
+	public ResponseEntity<List<Acc_info>> get_accinfo(int cno){
+		
+		List<Acc_info> list = service.select_acc_info(cno);
+		
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<Acc_info>>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return new ResponseEntity<List<Acc_info>>(list, HttpStatus.OK);
+	}
 	
 	
 	
 	
 	@PostMapping("/call_ano")
 	@ResponseBody
-	private ResponseEntity<String> create_ano(int cat, int cno) {
+	public ResponseEntity<String> create_ano(int product, int cno) {
 		log.info("call_ano 요청");
 		CustomerVO vo = service.select_by_cno(cno);
 		String name = vo.getName();
 		String mobile = vo.getMobile();
-		String reg = vo.getResident_registration_no();
+		String reg = vo.getReg_no();
 		
 		
 		ResponseEntity<String> res = null;
 		
 		String ano = "";
 		boolean run = true;
+		
+		// 상품번호 3자리  +  이름 6자리  +  전화번호 3자리  +  랜덤 2자리  => 14자리
 		while(run) {
 			ano = "";
-			ano += cat;
+			ano += product;
 			
 			String code = name.hashCode() + "";
 			
 			ano += code.substring(code.length()-6);
 		
-			ano += mobile.substring(mobile.length()-4);
-		
-			ano += reg;
+			ano += mobile.substring(mobile.length()-3);
 			
+			ano += (int)(Math.random()*10);
 			ano += (int)(Math.random()*10);
 			if(!service.exists_deposit_ano(ano))
 				run = false;
@@ -191,7 +218,12 @@ public class AdminController {
 		boolean result = false;
 		if(vali.check_customer(vo)) {
 			result = service.register_customer(vo);
+		}else {
+			log.info("validate 결과 : "+result);
 		}
+		
+		
+		
 		if(result) {
 			rttr.addFlashAttribute("registered", "success");
 			rttr.addFlashAttribute("name", vo.getName());
@@ -207,16 +239,21 @@ public class AdminController {
 	}
 	
 	@PostMapping("/create_account")
-	public void create_account_post(int cat, int cno, String ano) {
-		log.info("create_account_post 요청, cno, ano : "+cno+" "+ano);
+	public void create_account_post(DepositVO vo, Model model) {
+		log.info("create_account_post 요청 "+vo);
 		
-		CustomerVO vo = service.select_by_cno(cno);
-		log.info("select by cno : "+vo);
-		
-		
+		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
+		log.info("select by cno : "+cs_vo);
 		
 		
-		service.create_deposit(cno, ano);
+		
+		
+		if(service.create_deposit(vo)) {
+			model.addAttribute("created", "true");
+			model.addAttribute("name", cs_vo.getName());
+		}else {
+			model.addAttribute("created", "false");
+		}
 	}
 	
 	
@@ -263,11 +300,11 @@ public class AdminController {
 		return "/admin/notice/read";
 	}
 	
-	@GetMapping("/notice/{bno}")
-	public String notice_view(@PathVariable("bno") String admin_bno,@ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/notice/read/{bno}")
+	public String notice_view(@PathVariable("bno") int admin_bno,@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("read 요청"+admin_bno);
 		try {
-			model.addAttribute("vo", service.notice_getRow(Integer.parseInt(admin_bno)));
+			model.addAttribute("vo", service.notice_getRow(admin_bno));
 		}catch (Exception e) {
 			return "redirect:/admin/notice";
 		}
@@ -276,8 +313,8 @@ public class AdminController {
 		return "/admin/notice/read";
 	}
 	
-	@DeleteMapping("notice/{bno}")
-	public String notice_delete(@PathVariable("bno") int admin_bno,@ModelAttribute("cri") Criteria cri,  Model model) {
+	@PostMapping("/notice/delete")
+	public String notice_delete(@RequestParam("bno") int admin_bno,@ModelAttribute("cri") Criteria cri,  Model model) {
 		log.info("삭제 요청");
 		// 권한확인
 		
@@ -290,9 +327,31 @@ public class AdminController {
 		}
 		
 		
-		return "/notice/"+admin_bno;
+		return "/notice/read/"+admin_bno;
 	}
 	
+	@GetMapping("/notice/modify")
+	public String notice_modify(@RequestParam("bno") int admin_bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("modify_get 요청");
+		
+		model.addAttribute("vo", service.notice_getRow(admin_bno));
+		
+		
+		return "/admin/notice/modify";
+	}
+	
+	@PostMapping("/notice/modify")
+	public String notice_update(Admin_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr) {
+		log.info("modify_post 요청"+vo);
+		
+		if(service.notice_update(vo)) {
+			rttr.addFlashAttribute("cri", cri);
+			return "redirect:/admin/notice";
+		}else {
+			model.addAttribute("vo", vo);
+			return "/admin/notice/modify";			
+		}
+	}
 	
 	
 }

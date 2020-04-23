@@ -256,7 +256,7 @@ $(function(){
 		//	/board/list?pageNum=5&amount=20
 		//actionForm 안의 pageNum값과 amount 값 변경하기
 		
-		actionForm.attr("action", "/admin/notice/"+$(this).attr("href"));
+		actionForm.attr("action", "/admin/notice/read/"+$(this).attr("href"));
 		actionForm.submit();
 	})
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.domain.Acc_info;
 import com.spring.domain.CustomerVO;
 
 public interface CustomerMapper {
@@ -12,4 +13,5 @@ public interface CustomerMapper {
 	public List<CustomerVO> search_customer(@Param("name") String name,@Param("birth") String birth,@Param("mobile") String mobile);
 	public int checkId(String id);
 	public int register_customer(CustomerVO vo);
+	public List<Acc_info> select_acc_info(int cno);
 }

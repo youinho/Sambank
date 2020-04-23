@@ -9,7 +9,14 @@ $(function(){
 		rules:{
 			name:{
 				required:true,
-				minlength:2
+				minlength:2,
+				maxlength:20,
+				validName:true
+			},
+			eng_name:{
+				required:true,
+				maxlength:20,
+				validEngName:true
 			},
 			gender:{
 				required:true,
@@ -53,8 +60,14 @@ $(function(){
 		messages:{
 			name:{
 				required:"필수 입력 요소입니다.",
-				minlength:"이름은 최소 2자리는 입력해야 합니다"
+				minlength:"이름은 최소 2자리는 입력해야 합니다",
+				maxlength:"20자 이내로 입력해 주세요."
 			},
+			eng_name:{
+				required:"필수 입력 요소입니다.",
+				maxlength:"20자 이내로 입력해 주세요."
+			},
+			
 			gender:{
 				required:"필수 입력 요소입니다."
 			},
@@ -89,6 +102,16 @@ $(function(){
 		}
 	});	
 });
+$.validator.addMethod("validName",function(value){
+	var regName=/^[가-힣]{2,}$/;
+	return regName.test(value);
+},"한글 이름을 입력해 주세요.");
+$.validator.addMethod("validEngName",function(value){
+	var regEngName=/^[A-Z,\s]{3,}$/;
+	return regEngName.test(value);
+},"영어 이름을 입력해 주세요.");
+
+
 $.validator.addMethod("validId",function(value){
 	var regId=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,12}$/;
 	return regId.test(value);
@@ -102,13 +125,13 @@ $.validator.addMethod("email",function(value){
 	return regEmail.test(value);
 },"이메일 형식을 확인해 주세요");
 $.validator.addMethod("gender",function(value){
-	var regGender=/^[남여]{1}$/;
+	var regGender=/^[남,여]{1}$/;
 	return regGender.test(value);
 },"입력 가능 : (남, 여)");
 $.validator.addMethod("birth",function(value){
-	var regBirth=/^[0-9]{2}(0[1-9]|1[0-2])([1,2][0-9]|3[0,1])$/;
+	var regBirth=/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	return regBirth.test(value);
-}, "6자리의 생년월일을 입력하세요.");
+}, "8자리의 생년월일을 입력하세요.");
 $.validator.addMethod("regNo", function(value) {
 	var regRegNo = /^[1-4][0-9]{6}$/;
 	return regRegNo.test(value);
