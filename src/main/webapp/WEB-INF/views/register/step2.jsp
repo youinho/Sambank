@@ -25,7 +25,7 @@
 </head>
 <body  style="background-color:#F5F5F5;">
 <div class="container" style="margin-top:40px">
-<form id="regist" method="post" action="../main">	
+<form id="regist" method="post" action="step3">	
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">			

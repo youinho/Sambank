@@ -24,7 +24,7 @@ public class HomeController {
 	private UserService service;
 	
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(Locale locale, Model model) {
 		
 		log.info("main페이지");
