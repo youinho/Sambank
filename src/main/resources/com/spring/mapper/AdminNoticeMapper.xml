@@ -30,8 +30,19 @@
 
 	<insert id="insert">
 		insert into admin_board(admin_bno, admin_no, title, content, writer)
-		values(seq_board.nextVal, #{admin_no}, #{title}, #{content}, #{writer}) 
+		values(seq_admin_board.nextVal, #{admin_no}, #{title}, #{content}, #{writer}) 
 	</insert>
+
+
+
+
+
+<!--  -->
+	<select id="getRow" resultType="com.spring.domain.Admin_noticeVO">
+		select * from admin_board
+		where admin_bno=#{admin_bno}
+	</select>
+
 
 
 

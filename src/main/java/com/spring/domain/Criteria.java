@@ -17,17 +17,34 @@ public class Criteria {
 	private String type;	//검색조건
 	private String keyword;	//검색어 : TC, TCW..
 	
+	private String typeT;
+	private String typeC;
+	private String typeW;
+	
 	
 	public Criteria() {
 		this(1,10);
 	}
 	public Criteria(int pageNum, int amount) {
+		
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
 	
 	public String[] getTypeArr() {
 		return type==null?new String[] {} : type.split("");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public String[] getTypeArr2() {
+		
+		return type==""||type==null?new String[] {} : type.split("");
 	}
 	
 	

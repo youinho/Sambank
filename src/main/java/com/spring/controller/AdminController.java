@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -221,15 +223,57 @@ public class AdminController {
 	
 	//notice
 	
-	@GetMapping("/main")
+	@GetMapping("/notice")
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model) {
-		
+		log.info("notice 요청 -"+cri);
 		model.addAttribute("list", service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, service.totalRows(cri)));
 		
-		return "/admin/main";
+		return "/admin/notice";
 	}
 	
+	@GetMapping("/notice/register")
+	public String notice_register_get() {
+		log.info("게시글 등록 페이지 요청");
+		
+		
+		return "/admin/notice/register";
+	}
+	
+	@PostMapping("/notice/register")
+	public String notice_register(Admin_noticeVO vo) {
+		log.info("register_post"+vo);
+		
+		vo.setAdmin_no("1");
+		vo.setWriter("dh");
+		
+		if(service.notice_insert(vo)) {
+			return "redirect:/admin/notice";
+		}
+		
+		return "/admin/notice/register";
+		
+	}
+	
+	@GetMapping("/notice/read")
+	public String notice_read() {
+		log.info("read 요청");
+		
+		return "/admin/notice/read";
+	}
+	
+	@GetMapping("/notice/{bno}")
+	public String notice_view(@PathVariable("bno") String admin_bno, Model model) {
+		log.info("read 요청"+admin_bno);
+		try {
+			model.addAttribute("vo", service.notice_getRow(Integer.parseInt(admin_bno)));
+		}catch (Exception e) {
+			return "redirect:/admin/notice";
+		}
+		
+		
+		return "/admin/notice/read";
+	}
 	
 }
 

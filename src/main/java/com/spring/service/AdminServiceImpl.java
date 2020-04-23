@@ -100,5 +100,19 @@ public class AdminServiceImpl implements AdminService {
 
 		return noticeMapper.getTotalCount(cri);
 	}
+
+
+	@Override
+	public boolean notice_insert(Admin_noticeVO vo) {
+
+		return noticeMapper.insert(vo)==1;
+	}
+
+
+	@Override
+	public Admin_noticeVO notice_getRow(int admin_bno) {
+
+		return noticeMapper.getRow(admin_bno);
+	}
 	
 }

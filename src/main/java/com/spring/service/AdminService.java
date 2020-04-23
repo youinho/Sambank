@@ -28,4 +28,8 @@ public interface AdminService {
 	public List<Admin_noticeVO> notice_getList(Criteria cri);
 	public int totalRows(Criteria cri);
 	
+	public boolean notice_insert(Admin_noticeVO vo);
+	
+	public Admin_noticeVO notice_getRow(int admin_bno);
+	
 }
