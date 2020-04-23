@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header_admin.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,35 @@ $(function(){
 	
 	
 	
+	/* $(".dropdown-menu").hover(function() {
+		$(this).dropdown("show");
+		
+	}) */
+	
+	
+	
+	
+	
 	
 })
 </script>
+<style>
+	table{
+		text-align:center;
+	}
+	a{
+		color:black;
+		
+	}
+	th, tr{
+		font-size:14px;
+		font-weight:normal;
+	}
+	.bno{
+		font-size:12px;
+	}
+	
+</style>
 </head>
 <body>
 	
@@ -97,35 +124,48 @@ $(function(){
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th>번 호</th>
+                                        <th style="width:10%">글 번호</th>
                                         <th>제 목</th>
-                                        <th>작성자</th>
-                                        <th>작성일</th>
-                                        <th>수정일</th>
+                                        <th style="width:15%">작성자</th>
+                                        <th style="width:25%">수정일</th>
                                     </tr>									
                                 </thead>
-								
+								<tbody>
+								<c:forEach items="${list }" var="vo">
+									<tr>
+                                        <td class="bno">${vo.admin_bno }</td>
+                                        <!-- 페이지 나누기 전 -->
+                                        <%-- <td><a href="/board/read?bno=${vo.bno}">${vo.title }</a></td> --%>
+                                        <td><a href="${vo.admin_bno}" class="move">${vo.title } </a></td>
+                                        <td>${vo.writer }</td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updatedate }"/> </td>
+                                    </tr>		
+								</c:forEach>
+									
+									
+									
+								</tbody>
                             </table>
 							
                             <!-- start Pagination -->
-                            <%-- <div class="text-center">
-                            	<ul class="pagination">
-                            		<c:if test="${pageVO.prev}">
-                            			<li class="paginate_button previous"><a href="${pageVO.startPage-1 }">Previous</a></li>
-                            		</c:if>
+                            <div class="text-center">
+                            	<ul class="pagination pagination-sm justify-content-end">
+                            		
+                            			<li class="page-item ${pageVO.prev?'':'disabled' }"><a class="page-link" href="${pageVO.startPage-1 }">Previous</a></li>
+                            		
                             		
                             		<c:forEach  begin="${pageVO.startPage }" end="${pageVO.endPage }" var="idx">
                             			
-                            			<li class="paginate_button ${cri.pageNum==idx?'active':'' }"><a href="${idx}">${idx}</a></li>
+                            			<li class="page-item ${cri.pageNum==idx?'active':'' }"><a class="page-link" href="${idx}">${idx}</a></li>
                             			
                             		</c:forEach>
                             		
-                            		<c:if test="${pageVO.next }">
-                            			<li class="paginate_button next"><a href="${pageVO.endPage+1 }">Next</a></li>
-                            		</c:if>
+                            		
+                            			<li class="page-item ${pageVO.next?'':'disabled' }"><a class="page-link" href="${pageVO.endPage+1 }">Next</a></li>
+                            		
                             		
                             	</ul>
-                            </div> --%>
+                            </div>
                             <!-- end Pagination -->   
                             </div>
                             <!-- end panel-body -->
@@ -134,5 +174,25 @@ $(function(){
                     </div>                   
                 </div>     
     </div>
+<form action="/admin/main" id="actionForm">
+	<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+	<input type="hidden" name="amount" value="${cri.amount }" />
+	<input type="hidden" name="type" value="${cri.type }" />
+	<input type="hidden" name="keyword" value="${cri.keyword }" />
+</form>
+<script>
+$(function(){
+	let actionForm = $("#actionForm");
+	$(".page-link").click(function(e){
+		e.preventDefault();
+		//	/board/list?pageNum=5&amount=20
+		//actionForm 안의 pageNum값과 amount 값 변경하기
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		actionForm.submit();
+	})
+})
+
+</script>
 </body>
 </html>

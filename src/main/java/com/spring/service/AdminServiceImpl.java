@@ -7,15 +7,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
+import com.spring.mapper.AdminNoticeMapper;
+import com.spring.mapper.CustomerMapper;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminMapper adminMapper;
+	
+	@Autowired
+	CustomerMapper customerMapper;
+	
+	@Autowired
+	AccountMapper accountMapper;
+	
+	@Autowired
+	AdminNoticeMapper noticeMapper;
 	
 	
 	@Override
@@ -25,50 +39,29 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 
-	@Transactional
-	@Override
-	public void register(String num) {
-		Admin_registerVO vo = new Admin_registerVO();
-		vo.setAno(num);
-		vo.setCno(num);
-		vo.setSno(num);
-		adminMapper.register_account(num);
-		adminMapper.insert_account(vo);
-	}
-
-
-	@Override
-	@Transactional
-	public int test(int value) {
-		adminMapper.test2(value);
-		adminMapper.test1(value);
-		return 0;
-	}
-
-
 	@Override
 	public boolean create_deposit(int cno, String ano) {
 
-		return adminMapper.create_deposit(cno, ano)==1;
+		return accountMapper.create_deposit(cno, ano)==1;
 	}
 
 
 	@Override
 	public boolean register_customer(CustomerVO vo) {
 
-		return adminMapper.register_customer(vo)==1;
+		return customerMapper.register_customer(vo)==1;
 	}
 
 
 	@Override
 	public List<DepositVO> get_deposit_list() {
 
-		return adminMapper.get_deposit_list();
+		return accountMapper.get_deposit_list();
 	}
 	@Override
 	public CustomerVO select_by_cno(int cno) {
 
-		return adminMapper.select_by_cno(cno);
+		return customerMapper.select_by_cno(cno);
 	}
 
 
@@ -77,21 +70,35 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		
-		return adminMapper.search_customer(name, birth, mobile);
+		return customerMapper.search_customer(name, birth, mobile);
 	}
 
 
 	@Override
 	public boolean exists_deposit_ano(String ano) {
 
-		return adminMapper.exists_deposit_ano(ano)>0;
+		return accountMapper.exists_deposit_ano(ano)>0;
 	}
 
 
 	@Override
 	public boolean checkId(String id) {
 
-		return adminMapper.checkId(id)>0;
+		return customerMapper.checkId(id)>0;
+	}
+
+
+	@Override
+	public List<Admin_noticeVO> notice_getList(Criteria cri) {
+
+		return noticeMapper.getList(cri);
+	}
+
+
+	@Override
+	public int totalRows(Criteria cri) {
+
+		return noticeMapper.getTotalCount(cri);
 	}
 	
 }
