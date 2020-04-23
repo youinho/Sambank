@@ -23,4 +23,8 @@ public class CustomerVO {
 	private Date createdate;					//회원가입 날짜
 	
 	private String reg_no;
+	
+	public boolean isPasswordEqualToConfirmPassword() {
+		return this.password.equals(passhint);
+	}
 }

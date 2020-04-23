@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value="/register/*",method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping(value= "/register/*",method = {RequestMethod.GET, RequestMethod.POST})
 public class RegisterController {
 
 	@Autowired
@@ -46,6 +46,25 @@ public class RegisterController {
 		return "/register/step2";
 	}
 	
-	
+	@PostMapping("/step3")
+	public String step3(@ModelAttribute("vo") CustomerVO vo) {
+		//step2.jsp에서 회원가입정보 가져오기
+		log.info("회원가입요청"+vo);
+		
+		//password와 confirm_password 값이 다르게 
+		//입력되었다면 step2로 보내기
+		//같다면 step3으로  이동
+		return "redirect:/main(index)";			
+//		if(vo.isPasswordEqualToConfirmPassword()) {
+//			//회원가입
+//			if(service.registMember(vo)) {
+//					
+//			}else {
+//				return "/register/step2";
+//			}
+//		}else {
+//			return "/register/step2";	
+//		}
+	}
 	
 }

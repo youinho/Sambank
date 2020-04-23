@@ -5,8 +5,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertMember">
-		insert into customerTBL(id, password, name, gender, email)
-		values(#{id},#{password},#{name},#{gender},#{email})
+			insert into customertbl(cno, rating, name, gender, birth, resident_registration_no, address, mobile, id, password, passhint, email, withdrawal_limits, check_card) 
+		values(seq_customer.nextVal, #{rating}, #{name}, #{gender}, #{birth}, #{resident_registration_no},#{address}, #{mobile}, #{id}, #{password}, #{passhint}, #{email}, #{withdrawal_limits}, #{check_card}) 
 	
 	</insert>
 
