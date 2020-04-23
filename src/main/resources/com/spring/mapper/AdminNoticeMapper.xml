@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.AdminNoticeMapper">
+
+	<select id="getList" resultType="com.spring.domain.Admin_noticeVO">
+	 <![CDATA[
+		select * from(
+			select /*+INDEX_DESC(admin_board pk_admin_board)*/ rownum rn, admin_bno, title, writer, regdate, updatedate
+			from admin_board
+			where 
+			]]>
+			<include refid="criteria"></include>
+		<![CDATA[		
+			rownum <= #{pageNum}*#{amount})
+		where rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+
+
+<!-- 페이지 나누기를 위한 전체 게시물 수 구하기 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from admin_board
+		where 
+		<!-- 검색 -->
+		<include refid="criteria"></include>
+		
+		admin_bno>0
+	</select>
+
+
+	<insert id="insert">
+		insert into admin_board(admin_bno, admin_no, auth, title, content, writer)
+		values(seq_admin_board.nextVal, #{admin_no}, #{auth}, #{title}, #{content}, #{writer}) 
+	</insert>
+
+
+
+
+
+<!--  -->
+	<select id="getRow" resultType="com.spring.domain.Admin_noticeVO">
+		select * from admin_board
+		where admin_bno=#{admin_bno}
+	</select>
+
+
+<!--  -->
+	<delete id="delete">
+		delete from admin_board
+		where admin_bno=#{admin_bno}
+	</delete>
+
+
+
+
+
+<!-- 동적 sql -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+					
+				</trim>
+			
+			</foreach>
+		
+		</trim>
+	</sql>
+
+
+
+
+</mapper>

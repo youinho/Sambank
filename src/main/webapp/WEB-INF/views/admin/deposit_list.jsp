@@ -3,12 +3,18 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@include file="header.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script>
+$(function(){
+	$("#viACC").addClass("active");
+	
+})
+</script>
 </head>
 <body>
 	<table class="table table-striped table-bordered table-hover">

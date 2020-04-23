@@ -31,8 +31,15 @@ public class HomeController {
 	
 		return "main(index)";
 	}
-	@GetMapping("/main")
+	
+	//testpage
+	@GetMapping("/gh")
 	public String GuideHeader() {
+		return "header_Main";
+	}
+	
+	@GetMapping("/main")
+	public String newmain() {
 		return "main";
 	}
 	
