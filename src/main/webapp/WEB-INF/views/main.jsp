@@ -6,11 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Sam Bank</title>
-<!-- bootstrap에서 min.css다운받은이후 resource파일안에집어넣은후 min.css 파일에서 리부트 부분 수정  -->
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
-<link rel="stylesheet" href="/resources/bootstrap/bootstrap-reboot.css" />
-<link rel="stylesheet" href="/resources/bootstrap/scss/_reboot.scss" />
-<link rel="stylesheet" href="/resources/bootstrap/navbar.css" />
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap.css" />
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
@@ -19,7 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-	
+<body>
 	<div id="Main">
 		<div id="header" class="headerWrap" >
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
@@ -86,7 +82,7 @@
 				<div class="area-con">
 					<ul>
 					<!-- 슬라이더 컨텐츠 설정 -->
-						<!--  컨텐츠 - 1 -->
+						<!--  슬라이더 페이지 - 1 -->
 						<li class="section section11 on">
 							<div>
 								<strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스"></strong>
@@ -94,7 +90,7 @@
 								<a href="" class="link">바로가기</a>
 							</div>
 						</li>
-						<!-- 컨텐츠 - 2 -->
+						<!--  슬라이더 페이지 - 2 -->
 						<li class="section section12">
 						<div>
 							<strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong>
@@ -102,7 +98,7 @@
 							<a href="" class="link">바로가기</a>
 						</div>
 						</li>
-						<!-- 컨텐츠 - 3 -->
+						<!--  슬라이더 페이지 - 3 -->
 						<li class="section section10">
 						<div>
 							<strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
@@ -110,7 +106,7 @@
 							<a href="" class="link">바로가기</a>
 						</div>
 						</li>
-						<!-- 컨텐츠 - 4 -->
+						<!--  슬라이더 페이지 - 4 -->
 						<li class="section section5">
 						<div>
 							<strong><img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서"></strong>
@@ -118,7 +114,7 @@
 							<a href="" class="link">바로가기</a>
 						</div>
 						</li>
-						<!-- 컨텐츠 - 5 -->
+						<!--  슬라이더 페이지 - 5 -->
 						<li class="section section6">
 						<div>
 							<strong><img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행"></strong>
@@ -376,5 +372,5 @@
 
 	
 		
-
+</body>	
 </html>

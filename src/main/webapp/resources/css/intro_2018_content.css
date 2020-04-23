@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------------*/
 .main-section {position:relative;margin:20px 0;}
 .main-section h2 {font-size:20px;line-height:26px;color:#333;font-weight:700;letter-spacing:-1px;}
-.main-section > .section {position:relative;width:770px;min-height:26px;margin:0 auto;padding:35px 30px 35px 180px;}
+.main-section > .section {position:relative;width:770px;min-height:26px;margin:0 auto;padding:35px 30px 35px 180px; box-sizing: content-box;}
 .main-section > .section h2, .main-section > .section .sub {position:absolute;left:30px;top:35px;}
 .main-section > .section .sub {left:32px;top:70px;padding-right:14px;font-size:12px;color:#929292;}
 .main-section > .section .sub:before, .main-section > .section .sub:after {content:'';display:block;position:absolute;top:50%;right:1px;margin:-3px 0;width:0;height:0;border:4px solid transparent;border-left-color:#fff;}
@@ -15,13 +15,14 @@
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 빠른메뉴
 ---------------------------------------------------------------------------------*/
-.main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#fff;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
+.main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#d8d5cb;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
 .main-con1 ul {float:left;display:block;overflow:hidden;height:40px;padding:20px 10px;box-sizing: content-box;}
 .main-con1 ul.menu1{padding:19px 10px 21px;}
 .main-con1 ul li {float:left;}
 .main-con1 ul li a {padding:0 22px;font-size:16px;line-height:40px;color:#434343;letter-spacing:-2px;}
-.main-con1 ul.menu1 {background:#ffce0b;}
-.main-con1 ul.menu1 li a {color:#000;font-size:17px;font-weight:normal;padding:0 20px;letter-spacing:-1px;}
+.main-con1 ul.menu1 {background:#004000;}
+.main-con1 ul.menu2 {background:#d8d5cb;}
+.main-con1 ul.menu1 li a {color:#ffffff;font-size:17px;font-weight:normal;padding:0 20px;letter-spacing:-1px;}
 .main-con1 ul.menu1 + ul li + li {position:relative;margin:0 0 0 1px;}
 /* .main-con1 ul.menu1 + ul li + li:before {content:'';display:block;position:absolute;left:-1px;top:50%;width:1px;height:16px;margin:-8px 0;background:#ddd;}
  */
@@ -216,6 +217,9 @@
 .wrap-visual {background:#fbebba}
 .wrap-visual .area-control .ui-btn.before:after {border-right-color:#fbebba;}
 .wrap-visual .area-control .ui-btn.next:after {border-left-color:#fbebba;}
+
+
+
 
 /* 슬라이드컨텐츠 : section11 : 오픈뱅킹 */
 .wrap-visual.active1 {background:#fbebba;}

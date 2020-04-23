@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <%-- <%@include file="includes/header_Main.jsp" %> --%>
 <!-- bootstrap css link -->
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
- -->
- <!-- bootstrap에서 min.css다운받은이후 resource파일안에집어넣은후 min.css 파일에서 리부트 부분 수정  -->
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<link rel="stylesheet" href="/resources/bootstrap/bootstrap.css" />
+<!-- bootstrap에서 min.css다운받은이후 resource파일안에집어넣은후 min.css 파일에서 리부트 부분 수정  -->
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />    
@@ -24,24 +25,19 @@
 <style>
   .Swiper {
     position: relative;
-    height: 200px;
-    background: #fbebba;
+    height: 400px;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
-    color:#fbebba;
     margin: 0;
     padding: 0;
   }
   .swiper-container {
     width: 100%;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
   }
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
 
     /* Center slide text vertically */
     display: -webkit-box;
@@ -57,6 +53,31 @@
     -webkit-align-items: center;
     align-items: center;
   }
+/* 슬라이드컨텐츠 : section11 : 오픈뱅킹 */
+.wrap-visual.active1 {background:#fbebba;}
+.wrap-visual.active1 .area-control .ui-btn.before:after {border-right-color:#fbebba;}
+.wrap-visual.active1 .area-control .ui-btn.next:after {border-left-color:#fbebba;}
+
+/* 슬라이드컨텐츠 : section25 LiivM*/
+.wrap-visual.active2 {background:#d0eefa;}
+.wrap-visual.active2 .area-control .ui-btn.before:after {border-right-color:#d0eefa;}
+.wrap-visual.active2 .area-control .ui-btn.next:after {border-left-color:#d0eefa;}
+
+/* 슬라이드컨텐츠 : section10 : 외환 */
+.wrap-visual.active3 {background:#cfe1f6;}
+.wrap-visual.active3 .area-control .ui-btn.before:after {border-right-color:#cfe1f6;}
+.wrap-visual.active3 .area-control .ui-btn.next:after {border-left-color:#cfe1f6;}
+
+/* 슬라이드컨텐츠 : section5 : KB모바일인증서 */
+.wrap-visual.active4 {background:#dbe8f9;}
+.wrap-visual.active4 .area-control .ui-btn.before:after {border-right-color:#dbe8f9;}
+.wrap-visual.active4 .area-control .ui-btn.next:after {border-left-color:#dbe8f9;}
+
+/* 슬라이드컨텐츠 : section6 : 봄시즌 */
+.wrap-visual.active5 {background:#d6de9e;}
+.wrap-visual.active5 .area-control .ui-btn.before:after {border-right-color:#d6de9e;}
+.wrap-visual.active5 .area-control .ui-btn.next:after {border-left-color:#d6de9e;}
+
 </style>
 
 
@@ -94,8 +115,7 @@
 				          로그인 관련창
 				        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-				          <a class="dropdown-item" href="#">프로필 관리</a>
+				          <a class="dropdown-item" hlocalref="#">프로필 관리</a>
 				          <a class="dropdown-item" href="#">개인정보수정</a>
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
@@ -124,140 +144,96 @@
 	
 	<!-- 스위퍼 시작부분 -->
 		<div class="Swiper">
-		  <!-- Swiper -->
-		  <div class="swiper-container" >
-		    <div class="swiper-wrapper" style="background-color: #fbebba;" >
-		      <div class="swiper-slide">Slide 1</div>
-		      <div class="swiper-slide">Slide 2</div>
-		      <div class="swiper-slide">Slide 3</div>
-		      <div class="swiper-slide">Slide 4</div>
-		      <div class="swiper-slide">Slide 5</div>
-		      <div class="swiper-slide">Slide 6</div>
-		      <div class="swiper-slide">Slide 7</div>
-		      <div class="swiper-slide">Slide 8</div>
-		      <div class="swiper-slide">Slide 9</div>
-		      <div class="swiper-slide">Slide 10</div>
-		    </div>
-		    <!-- Add Pagination -->
-		    <div class="swiper-pagination"></div>
-		    <!-- Add Arrows -->
-		    <div class="swiper-button-next"></div>
-		    <div class="swiper-button-prev"></div>
-		  </div>
-		
-		  <!-- Swiper JS -->
-		  <script src="/resources/js/swiper.min.js"></script>
-		
-		  <!-- Initialize Swiper -->
-		  <script>
-		    var swiper = new Swiper('.swiper-container', {
-		      slidesPerView: 1,
-		      spaceBetween: 30,
-		      loop: true,
-		      pagination: {
-		        el: '.swiper-pagination',
-		        clickable: true,
-		      },
-		      navigation: {
-		        nextEl: '.swiper-button-next',
-		        prevEl: '.swiper-button-prev',
-		      },
-		    });
-		  </script>	
-		</div>
+			<!-- Swiper -->
+			  <div class="swiper-container">
+			    	<!-- 이곳에다가 객체의 변수값에 컬러값을 담아서 회전될때마다 순차적으로 불러내는방식으로 페이지 컬러 변경 
+			    	style="background-color: #fbebba;" -->
+			    <div class="swiper-wrapper" >
+							<div class="swiper-slide"  >
+							<!--  컨텐츠 - 1 -->
+							<li >
+								<div>
+									<strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스"></strong><br />
+									<span><img src="/resources/SB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 SB뱅크 한 곳에서!"></span><br/>
+									<a href="" class="link">바로가기</a>
+								</div>
+							</li>
+							</div>
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 2 -->
+									<li class="wrap-visual.active2">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong><br />
+										<span><img src="/resources/SB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"></span><br />
+										<a href="" class="link">바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">	
+							<!-- 컨텐츠 - 3 -->
+									<li class="wrap-visual.active3">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
+										<span><img src="/resources/SB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span>
+										<a href="" class="link">바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 4 -->
+									<li class="wrap-visual.active4">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서"></strong>
+										<span><img src="/resources/SB_files/visual_section5_tit02.png" alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"></span>
+										<a href="" class="link">바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 5 -->
+									<li class="wrap-visual.active5">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행"></strong>
+										<span><img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."></span>
+									</div>
+							</div>
+			    </div>
+			    <!-- Add Pagination -->
+			    <div class="swiper-pagination"></div>
+			    <!-- Add Arrows -->
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
+			  </div>
+			
+			<!-- Swiper JS -->
+			<script src="/resources/js/swiper.min.js"></script>
+			
+			  <!-- Initialize Swiper -->
+			  <script>
+			    var swiper = new Swiper('.swiper-container', {
+			      spaceBetween: 30,
+			      
+			      centeredSlides: true,
+			      autoplay: {
+			        delay: 2500,
+			        disableOnInteraction: false,
+			      },
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+			    });
+			  </script>
 		<!-- 스위퍼 끝 -->
 		
 	
 	
 	
-	
-	
-	
-	
-	
-	
-		<div id="content" class="contentWrap">
-		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-		<!-- 상단 비주얼영역 -->
-		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-		<div class="wrap-visual active1">
-			<!-- ################################## -->
-			<!-- 슬라이더 : 컨텐츠 -->
-			<!-- ################################## -->
-			<div class="area-con">
-				<ul>
-					<!-- 컨텐츠하나 오픈뱅킹 ---------------------- // -->
-					<li class="section section11 on">
-						<div>
-							<strong><img src="/resources/KB_files/visual_section16_tit01.png" alt="KB오픈뱅킹 서비스"></strong>
-							<span><img src="/resources/KB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 KB스타뱅킹 한 곳에서!"></span>
-							<a href="https://obank.kbstar.com/quics?page=C066016" class="link">바로가기</a>
-						</div>
-					</li>
-					
-					<!-- 컨텐츠하나 LiivM  4/1 오픈 ---------------------- // -->
-					<li class="section section12">
-						<div>
-							<strong><img src="/resources/KB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong>
-							<span><img src="/resources/KB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"></span>
-							<a href="https://omoney.kbstar.com/quics?page=C016559&amp;cc=b033091:b032977&amp;%EC%9D%B4%EB%B2%A4%ED%8A%B8%EC%9D%BC%EB%A0%A8%EB%B2%88%ED%98%B8=311956&amp;QSL=F" class="link">바로가기</a>
-						</div>
-					</li>
 
-					<!-- 컨텐츠하나 환전  ---------------------- // -->
-					<li class="section section10">
-						<div>
-							<strong><img src="/resources/KB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 KB!"></strong>
-							<span><img src="/resources/KB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span>
-							<a href="https://okbfex.kbstar.com/quics?page=C015719" class="link">바로가기</a>
-						</div>
-					</li>
-					
-					<!-- 컨텐츠하나 KB모바일인증서 ---------------------- // -->
-					<li class="section section5">
-						<div>
-							<strong><img src="/resources/KB_files/visual_section5_tit01.png" alt="KB모바일인증서"></strong>
-							<span><img src="/resources/KB_files/visual_section5_tit02.png" alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"></span>
-							<a href="https://otalk.kbstar.com/quics?page=C063974&amp;QSL=F" class="link">바로가기</a>
-						</div>
-					</li>
-					
-					<!-- 컨텐츠하나 2020 봄 ---------------------- // -->
-					<li class="section section6">
-						<div>
-							<strong><img src="/resources/KB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 KB국민은행"></strong>
-							<span><img src="/resources/KB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, KB국민은행과 함께 하세요."></span>
-						</div>
-					</li>
-					<!-- ------------------------------------// -->
-
-				</ul>
-			</div>
-			<!-- ################################## -->
-			<!-- 슬라이더 : 컨트롤 -->
-			<!-- ################################## -->
-			<div class="area-control">
-				<button class="ui-btn before btn-off"></button>
-				<ul>
-					<li class="on"><a href="https://www.kbstar.com/#" class="on" title="선택됨">Sam Bank 은행 오픈뱅킹</a></li>
-					<li><a href="https://www.kbstar.com/#" title="" class="">안전하고 믿음직스러운 Sam Bank</a></li>
-					<li><a href="https://www.kbstar.com/#" title="" class="">잘생기고 똑똑한 김동혁 배우의 대표Bank</a></li>
-					<li><a href="https://www.kbstar.com/#" title="" class="">SB모바일인증서</a></li>
-					<li><a href="https://www.kbstar.com/#" title="" class="">늘 곁에, 더 가까이 SB 은행</a></li>
-				</ul>
-				<button class="ui-btn play off"></button>
-				<button class="ui-btn stop"></button>
-				<button class="ui-btn next"></button>
-			</div>
-			<!-- ################################## -->
-			<!-- 브랜드스토리보기 -->
-			<!-- ################################## -->
-			<div class="area-aside">
-				<a href="https://www.kbstar.com/#" class="ui-btn-brand" id="uiBtnBrand">SB브랜드 스토리 보기</a>
-			</div>
-			<!-- ################################## -->
-		</div>
-	</div>
 <!-- Main Image 끝 -->
 	
 <!--  link var 시작 -->
