@@ -57,13 +57,14 @@
 							</textarea>
 						</td>
 					</tr>
+					
 					<tr>
 						<td colspan="5">
 						<td colspan="2">
 							<div class="btn-group outline-dark" role="group" aria-label="Basic example">
 								<button class="btn btn-outline-primary btn-sm" type="button">수정</button>
-								<button class="btn btn-outline-primary btn-sm" type="button">삭제</button>
-								<button class="btn btn-outline-primary btn-sm" type="button">목록</button>
+								<button class="btn btn-outline-primary btn-sm" type="button" id="go-delete">삭제</button>
+								<button class="btn btn-outline-primary btn-sm" type="button" id="go-list">목록</button>
 							</div>
 						</td>
 					</tr>
@@ -72,6 +73,38 @@
 		</div>
 	</div>
 </div>
+<form action="/admin/modify" id="myForm" method="get">
+	<input type="hidden" name="bno" value="${vo.admin_bno }"/>
+	
+	<!-- 페이지 나누기 후 추가 -->
+	<input type="hidden" name="pageNum" value="${cri.pageNum }"/>
+	<input type="hidden" name="amount" value="${cri.amount }"/>
+	<input type="hidden" name="type" value="${cri.type }" />
+	<input type="hidden" name="keyword" value="${cri.keyword }" />	
+</form>
+<script>
+//list버튼이 클릭하면 list페이지 보여주기
+$(function(){
+	$("#go-list").click(function(){
+		//location.href="/board/list";
 		
-									
+		//페이지 나누기와 관련된 정보(pageNum, amount) 보내기
+		//bno는 삭제하고, myform 보내기
+		$("#myForm").attr("action","/admin/notice");
+		$("#myForm").find("input[name='bno']").remove();
+		$("#myForm").submit();
+		
+		
+	})
+	
+	$("#go-delete").click(function(){
+		$("#myForm").attr("action", "/admin/notice/"+"${vo.admin_bno}");
+		$("#myForm").append("<input type='hidden' name='_method' value='delete'/>");
+		$("#myForm").find("input[name='bno']").remove();
+		$("#myForm").submit();
+	})
+	
+	
+})
+</script>
 									

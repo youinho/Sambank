@@ -112,16 +112,18 @@ $(function(){
 							  <input type="hidden" name="amount" value="${cri.amount }" />
 							  <input type="hidden" name="type" value="" />
 							  
-						  </form>
-                          
-						  <input type="text" class="form-control" placeholder="검색어 또는 글작성제목" aria-label="검색어 또는 글작성제목" aria-describedby="button-addon4" name="keyword">
-						  <div class="input-group-append" id="button-addon4"  >
-						    <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
-						    <button class="btn btn-outline-secondary" type="button" id="registerBtn">글 등록</button>
-						  </div>
+							  
+							  
 						  
-						</div>
-						
+                          
+							  <input type="text" class="form-control" placeholder="검색어" aria-label="검색어 또는 글작성제목" aria-describedby="button-addon4" id="keyword" name="keyword">
+							  <div class="input-group-append" id="button-addon4"  >
+							    <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
+							    <button class="btn btn-outline-secondary" type="button" id="registerBtn">글 등록</button>
+							  </div>
+							  
+							</div>
+						</form>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover table-sm">
@@ -183,6 +185,20 @@ $(function(){
 </form>
 <script>
 $(function(){
+	
+	let keywordType = "${cri.type}";
+	typeL = keywordType.split("");
+	console.log("typeL"+typeL)
+	for(let i=0; i < typeL.length; i++){
+		$("input[value='"+typeL[i]+"']").prop("checked", true);
+	}
+	
+	$("#keyword").val("${cri.keyword}")
+	
+	
+	
+	
+	
 	let actionForm = $("#actionForm");
 	$(".page-link").click(function(e){
 		e.preventDefault();
@@ -212,9 +228,9 @@ $(function(){
 			alert("검색 기준을 선택해 주세요");
 			return false;
 		}
-		if(!searchForm.find("input[name='keyword']").val()){
+		if(!searchForm.find("input#keyword").val()){
 			alert("검색어를 입력해 주세요");
-			searchForm.find("input[name='keyword']").focus();
+			searchForm.find("input#keyword").focus();
 			return false;
 		}
 		
@@ -239,10 +255,13 @@ $(function(){
 		console.log("move click")
 		//	/board/list?pageNum=5&amount=20
 		//actionForm 안의 pageNum값과 amount 값 변경하기
-		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
 		actionForm.attr("action", "/admin/notice/"+$(this).attr("href"));
 		actionForm.submit();
 	})
+	
+	
+	
 	
 })
 

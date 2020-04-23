@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -246,7 +247,7 @@ public class AdminController {
 		
 		vo.setAdmin_no("1");
 		vo.setWriter("dh");
-		
+		vo.setAuth("1");
 		if(service.notice_insert(vo)) {
 			return "redirect:/admin/notice";
 		}
@@ -263,7 +264,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/notice/{bno}")
-	public String notice_view(@PathVariable("bno") String admin_bno, Model model) {
+	public String notice_view(@PathVariable("bno") String admin_bno,@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("read 요청"+admin_bno);
 		try {
 			model.addAttribute("vo", service.notice_getRow(Integer.parseInt(admin_bno)));
@@ -274,6 +275,25 @@ public class AdminController {
 		
 		return "/admin/notice/read";
 	}
+	
+	@DeleteMapping("notice/{bno}")
+	public String notice_delete(@PathVariable("bno") int admin_bno,@ModelAttribute("cri") Criteria cri,  Model model) {
+		log.info("삭제 요청");
+		// 권한확인
+		
+		
+		//삭제
+		
+		if(service.notice_delete(admin_bno)) {
+			return "redirect:/admin/notice";
+			
+		}
+		
+		
+		return "/notice/"+admin_bno;
+	}
+	
+	
 	
 }
 

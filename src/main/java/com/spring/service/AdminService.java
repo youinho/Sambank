@@ -32,4 +32,6 @@ public interface AdminService {
 	
 	public Admin_noticeVO notice_getRow(int admin_bno);
 	
+	public boolean notice_delete(int admin_bno);
+	
 }

@@ -115,4 +115,10 @@ public class AdminServiceImpl implements AdminService {
 		return noticeMapper.getRow(admin_bno);
 	}
 	
+	@Override
+	public boolean notice_delete(int admin_bno) {
+	
+		return noticeMapper.delete(admin_bno)==1;
+	}
+	
 }
