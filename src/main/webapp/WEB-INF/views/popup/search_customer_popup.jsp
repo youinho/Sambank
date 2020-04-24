@@ -72,7 +72,7 @@ $(function(){
 	$("#search").click(function(){
 		$("#resultList").html("");
 		$.ajax({
-			url : "/admin/search",
+			url : "/admin/customer/search",
 			type : "post",
 			data : {
 				name : $("input[name='name']").val(),

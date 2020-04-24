@@ -23,7 +23,8 @@ $(function(){
 				gender:true
 			},
 			birth:{
-				required:true
+				required:true,
+				birth:true
 			},
 			reg_no:{
 				required:true,
@@ -147,7 +148,7 @@ $.validator.addMethod("checkId", function(value) {
 	
 	console.log("method");
 	$.ajax({
-		url:"/admin/checkId",
+		url:"/admin/customer/checkId",
 		type:"post",
 		async:false,
 		data:{

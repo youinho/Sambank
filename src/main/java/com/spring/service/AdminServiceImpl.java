@@ -170,5 +170,12 @@ public class AdminServiceImpl implements AdminService {
 
 		return accountMapper.update_password(vo)==1;
 	}
+
+
+	@Override
+	public boolean delete_customer(CustomerVO vo) {
+
+		return customerMapper.delete_customer(vo)==1;
+	}
 	
 }

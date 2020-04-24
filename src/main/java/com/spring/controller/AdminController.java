@@ -89,48 +89,61 @@ public class AdminController {
 	
 	// account
 	
-	@GetMapping("/modify_account")
-	public void modify_account() {
+	@GetMapping("/account/modify")
+	public String modify_account() {
 		log.info("modifyaccount 요청");
+		return "/admin/account/modify";
 		
 	}
 	
-	@PostMapping("/modify_account")
+	@PostMapping("/account/modify")
 	public String update_account(DepositVO vo, RedirectAttributes attr, Model model) {
 		log.info("update_account 요청");
+		
+		if(!vali.check_account_update(vo)) {
+			model.addAttribute("updated", "false");
+			return "/admin/account/modify";
+		}
+		
+		
 		if(service.update_withdraw(vo)) {
 			
 			attr.addFlashAttribute("updated", "true");
 			attr.addFlashAttribute("ano", vo.getAno());
 			
-			return "redirect:/admin/modify_account";
+			return "redirect:/admin/account/modify";
 		}
 		model.addAttribute("updated", "false");
-		return "/admin/modify_account";
+		return "/admin/account/modify";
 		
 	}
 	
 	
 	
 	
-	@PostMapping("/create_account")
-	public void create_account_post(DepositVO vo,@RequestParam("confirm_password") String confirm_password, Model model) {
+	@PostMapping("/account/create")
+	public String create_account_post(DepositVO vo,@RequestParam("confirm_password") String confirm_password, RedirectAttributes rttr) {
 		
 		if(vo.getPassword()==null) {
-			model.addAttribute("created", "false");
-			return;
+			rttr.addFlashAttribute("created", "false");
+			return "redirect:/admin/account/create";
 		}
 		
 		if(!vo.getPassword().equals(confirm_password)||vo.getPassword().length()!=4) {
-			model.addAttribute("created", "false");
-			return;
+			rttr.addFlashAttribute("created", "false");
+			return "redirect:/admin/account/create";
 		}
 		try {
 			Integer.parseInt(vo.getPassword());
 		} catch (Exception e) {
-			model.addAttribute("created", "false");
-			return;
+			rttr.addFlashAttribute("created", "false");
+			return "redirect:/admin/account/create";
 		}
+		if(!vali.check_account_register(vo)) {
+			rttr.addFlashAttribute("created", "false");
+			return "redirect:/admin/account/create";
+		}
+			
 		
 		log.info("create_account_post 요청 "+vo);
 		
@@ -141,22 +154,24 @@ public class AdminController {
 		
 		
 		if(service.create_deposit(vo)) {
-			model.addAttribute("created", "true");
-			model.addAttribute("name", cs_vo.getName());
+			rttr.addFlashAttribute("created", "true");
+			rttr.addFlashAttribute("name", cs_vo.getName());
 		}else {
-			model.addAttribute("created", "false");
+			rttr.addFlashAttribute("created", "false");
 		}
+		return "redirect:/admin/account/create";
 	}
 	
 	
 
-	@GetMapping("/create_account")
-	public void create_account_get() {
+	@GetMapping("/account/create")
+	public String create_account_get() {
 		log.info("create_account_get 요청");
+		return "/admin/account/create";
 	}
 	
 	@ResponseBody
-	@PostMapping("/getProduct")
+	@PostMapping("/account/getProduct")
 	public ResponseEntity<List<ProductVO>> getProduct(int type){
 		
 		List<ProductVO> list = service.acc_getProduct(type);
@@ -172,7 +187,7 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/getAccInfo")
+	@PostMapping("/account/getAccInfo")
 	public ResponseEntity<List<Acc_info>> get_accinfo(int cno){
 		
 		List<Acc_info> list = service.select_acc_info(cno);
@@ -187,14 +202,13 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/call_ano")
+	@PostMapping("/account/call_ano")
 	@ResponseBody
 	public ResponseEntity<String> create_ano(int product, int cno) {
 		log.info("call_ano 요청");
 		CustomerVO vo = service.select_by_cno(cno);
 		String name = vo.getName();
 		String mobile = vo.getMobile();
-		String reg = vo.getReg_no();
 		
 		
 		ResponseEntity<String> res = null;
@@ -227,7 +241,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/deposit_list")
+	@GetMapping("/account/list")
 	public void deposit_list_get(Model model) {
 		log.info("deposit_list_get 요청");
 		model.addAttribute("list", service.get_deposit_list());
@@ -237,7 +251,7 @@ public class AdminController {
 	
 	
 	@ResponseBody
-	@PostMapping("/get_depositInfo")
+	@PostMapping("/account/get_depositInfo")
 	public ResponseEntity<DepositVO> get_depositInfo(String ano){
 		
 		DepositVO vo = service.get_deposit(ano);
@@ -282,7 +296,7 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/register_customer")
+	@PostMapping("/customer/register")
 	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
 		log.info("register_customer_post vo : "+vo);
 		boolean result = false;
@@ -300,17 +314,17 @@ public class AdminController {
 		}else {
 			rttr.addFlashAttribute("registered", "failed");
 		}
-		return "redirect:/admin/register_customer";
+		return "redirect:/admin/customer/register";
 	}
 	
-	@GetMapping("/register_customer")
+	@GetMapping("/customer/register")
 	public void register_customer_get() {
 		log.info("register_customer_get 요청");
 	}
 	
 	
 	@ResponseBody
-	@PostMapping("/checkId")
+	@PostMapping("/customer/checkId")
 	public String checkId(String id) {
 		if(service.checkId(id)) {
 			log.info("id 중복");
@@ -323,7 +337,7 @@ public class AdminController {
 	
 	
 	
-	@PostMapping("/search")
+	@PostMapping("/customer/search")
 	@ResponseBody
 	public ResponseEntity<List<CustomerVO>> search(String name, String birth, String mobile) {
 		log.info("search"+name+birth+mobile);
@@ -337,14 +351,14 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/modify_customer")
-	public void modify_customer() {
+	@GetMapping("/customer/modify")
+	public String modify_customer() {
 		log.info("modify_customer_get 요청");
 		
-		
+		return "/admin/customer/modify";
 	}
 	
-	@PostMapping("/modify_customer")
+	@PostMapping("/customer/modify")
 	public String update_customer(CustomerVO vo, RedirectAttributes rttr) {
 		
 		
@@ -364,7 +378,7 @@ public class AdminController {
 		}else {
 			rttr.addFlashAttribute("updated", "failed");
 		}
-		return "redirect:/admin/modify_customer";
+		return "redirect:/admin/customer/modify";
 		
 		
 		
@@ -374,7 +388,7 @@ public class AdminController {
 	
 	
 	@ResponseBody
-	@PostMapping("/getCSInfo")
+	@PostMapping("/customer/getCSInfo")
 	public ResponseEntity<CustomerVO> getCSInfo(int cno){
 		
 		CustomerVO vo = service.select_by_cno(cno);
@@ -386,6 +400,27 @@ public class AdminController {
 		return new ResponseEntity<CustomerVO>(vo,HttpStatus.OK);
 		
 	}
+	
+	@GetMapping("/customer/delete")
+	public void delete_customer_get() {
+		log.info("del_customer 요청");
+	}
+	
+	@PostMapping("/customer/delete")
+	public String delete_customer_post(CustomerVO vo, RedirectAttributes rttr) {
+		log.info("삭제 요청");
+		
+		if(service.delete_customer(vo)) {
+			rttr.addFlashAttribute("deleted", "success");
+			rttr.addFlashAttribute("name", vo.getName());
+			return "redirect:/admin/customer/delete";
+		}
+		rttr.addFlashAttribute("deleted", "failed");
+		return "redirect:/admin/customer/delete";
+		
+	}
+	
+	
 	
 	
 	
@@ -413,7 +448,7 @@ public class AdminController {
 	public String notice_register(Admin_noticeVO vo) {
 		log.info("register_post"+vo);
 		
-		vo.setAdmin_no("1");
+		vo.setAdmin_no("21");
 		vo.setWriter("dh");
 		vo.setAuth("1");
 		if(service.notice_insert(vo)) {

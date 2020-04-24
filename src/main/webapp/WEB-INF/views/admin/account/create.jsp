@@ -1,16 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_admin.jsp" %>
+<%@include file="../../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
+
 $(function(){
 	$("#creACC").addClass("active");
 })
-
-
+function alert_created(){
+	let created = "${created}";
+	console.log("alert_created"+created);
+	if(created ==="" || history.state){
+		return;
+	}
+	
+	
+	if(created != "" && created != null){
+		if(created=="true"){
+			alert("${name}"+"님의 계좌등록이 완료되었습니다.");
+		}else if(created=="false"){
+			alert("계좌등록에 실패했습니다.");
+		}
+	}
+}
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="/resources/js/admin_createAccount_validate.js"></script>
 
 <style>
 	.btn{
@@ -44,7 +61,7 @@ $(function(){
 			<td class="align-middle">
 			<div class="input-group">
 			  <div class="input-group-prepend" style="width:15%">
-			    <p class="input-group-text text-center" style="width:100%"><strong>고객 정보</strong></p>
+			    <p class="input-group-text text-center" style="width:100%" data-for="cno"><strong>고객 정보</strong></p>
 			  </div>
 			  <input type="text"  class="form-control" id="cno" name="cno" placeholder="고객 번호" readonly>
 			  <input type="text"  class="form-control" id="name" name="name" placeholder="성함" readonly>
@@ -65,7 +82,7 @@ $(function(){
 			<td>
 				<div class="input-group">
 				  <div class="input-group-prepend" style="width:15%">
-				    <span class="input-group-text" style="width:100%"><strong>상품</strong></span>
+				    <p class="input-group-text" style="width:100%"><strong>상품</strong></p>
 				  </div>
 				  <select class="custom-select" id="type" name="type">
 				    <option value="0" selected>-- 계좌 구분 --</option>
@@ -84,9 +101,9 @@ $(function(){
 			<td>
 				<div class="input-group">
 				  <div class="input-group-prepend" style="width:15%">
-				    <span class="input-group-text" style="width:100%"><strong>계좌번호</strong></span>
+				    <p class="input-group-text" style="width:100%"><strong>계좌번호</strong></p>
 				  </div>
-				  <input type="text" aria-label="First name" class="form-control" name="ano" readonly>
+				  <input type="text" aria-label="First name" class="form-control" id="ano" name="ano" readonly>
 				  
 				  <div class="input-group-append" style="width:18%">
 				    <button class="btn btn-outline-secondary" type="button" id="call_ano" style="width:100%">계좌번호 요청</button>
@@ -101,10 +118,10 @@ $(function(){
 			<td>
 			<div class="input-group">
 			  <div class="input-group-prepend" style="width:15%">
-			    <span class="input-group-text" style="width:100%"><strong>이체 한도</strong></span>
+			    <p class="input-group-text" style="width:100%"><strong>이체 한도</strong></p>
 			  </div>
-			  <input type="text"  class="form-control" name="day_withdraw" placeholder="일 이체 한도">
-			  <input type="text"  class="form-control" name="max_withdraw" placeholder="1회 이체 한도">
+			  <input type="text"  class="form-control" id="day_withdraw" name="day_withdraw" placeholder="일 이체 한도">
+			  <input type="text"  class="form-control" id="max_withdraw" name="max_withdraw" placeholder="1회 이체 한도">
 			</div>
 			</td>
 		</tr>
@@ -117,7 +134,7 @@ $(function(){
 			<td>
 			<div class="input-group">
 			  <div class="input-group-prepend" style="width:15%">
-			    <span class="input-group-text" style="width:100%"><strong>비밀번호</strong> </span>
+			    <p class="input-group-text" style="width:100%"><strong>비밀번호</strong> </p>
 			  </div>
 			  <input type="password"  class="form-control" name="password" id="password" readonly>
 			    <button class="btn btn-outline-secondary" type="button" id="passwordBtn">

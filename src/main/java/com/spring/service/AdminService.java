@@ -23,7 +23,7 @@ public interface AdminService {
 	public boolean checkId(String id);
 	
 	public boolean update_customer(CustomerVO vo);
-	
+	public boolean delete_customer(CustomerVO vo);
 	
 	
 	

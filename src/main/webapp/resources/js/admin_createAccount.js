@@ -1,7 +1,7 @@
 $(function(){
 	
 	alert_created();
-	
+	history.replaceState({}, null, null);
 	
 	
 	
@@ -21,7 +21,7 @@ $(function(){
 		
 		
 		$.ajax({
-			url : "/admin/call_ano",
+			url : "/admin/account/call_ano",
 			type : "post",
 			data :{
 				product : product,
@@ -46,7 +46,7 @@ $(function(){
 		console.log("type changed");
 		let type = $(this).val();
 		$.ajax({
-			url : "/admin/getProduct",
+			url : "/admin/account/getProduct",
 			type : "post",
 			data :{
 				type : type
@@ -118,29 +118,14 @@ function input_password(password, wInput){
 	$("#"+wInput).val(password);
 }
 
-function alert_created(){
-	let created = "${created}";
-	console.log("alert_created");
-	if(created ==="" || history.state){
-		return;
-	}
-	
-	
-	if(created != "" && created != null){
-		if(created=="true"){
-			alert("${name}"+"님의 계좌등록이 완료되었습니다.");
-		}else if(created=="false"){
-			alert("계좌등록에 실패했습니다.");
-		}
-	}
-}
+
 
 function searchCS_callback(cno){
 	$("input[name='cno']").val(cno);
 	
 	
 	$.ajax({
-		url : "/admin/getAccInfo",
+		url : "/admin/account/getAccInfo",
 		type : "post",
 		data :{
 			cno : cno

@@ -71,7 +71,7 @@
 			</div>
           </li>
           <li >
-           <a href="/admin/register_customer" class="nav-link">
+           <a href="/admin/customer/register" class="nav-link">
              <svg  width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
 				</svg> 고객 관리<span class="fa arrow">
@@ -79,19 +79,19 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                 	
-                                    <a href="/admin/register_customer" class="nav-link child" id="regCS">고객 정보 등록</a>
+                                    <a href="/admin/customer/register" class="nav-link child" id="regCS">고객 정보 등록</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/modify_customer" class="nav-link child" id="modCS">고객 정보 수정</a>
+                                    <a href="/admin/customer/modify" class="nav-link child" id="modCS">고객 정보 수정</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/delete_customer" class="nav-link child" id="delCS">고객 정보 삭제</a>
+                                    <a href="/admin/customer/delete" class="nav-link child" id="delCS">고객 정보 삭제</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
           </li>
           <li class="nav-item">
-            <a href="/admin/create_account" class="nav-link">
+            <a href="/admin/account/create" class="nav-link">
                             <svg class="bi bi-card-text" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
 							  <path fill-rule="evenodd" d="M3 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM3 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 013 8zm0 2.5a.5.5 0 01.5-.5h6a.5.5 0 010 1h-6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
@@ -100,19 +100,13 @@
                              계좌 관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/admin/create_account" class="nav-link child" id="creACC">신규 계좌 개설</a>
+                                    <a href="/admin/account/create" class="nav-link child" id="creACC">신규 계좌 개설</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/deposit_list" class="nav-link child" id="viACC">계좌 정보 확인</a>
-                                </li>
-                                <li>
-                                    <a href="/admin/modify_account" class="nav-link child" id="modACC">계좌 정보 수정</a>
+                                    <a href="/admin/account/modify" class="nav-link child" id="modACC">계좌 정보 수정</a>
                                 </li>
                                 <li>
                                     <a href="#" class="nav-link child" id="sendACC">계좌 입금 및 출금</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link child" id="mngACC">계좌 통합 관리</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -121,8 +115,45 @@
             
             
           </li>
-          
-       
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+                            <svg class="bi bi-credit-card" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M14 3H2a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1zM2 2a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+							  <rect width="3" height="3" x="2" y="9" rx="1"/>
+							  <path d="M1 5h14v2H1z"/>
+							</svg>
+                            
+                             카드 관리<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="" class="nav-link child" id="">카드 발급</a>
+                                </li>
+                                <li>
+                                    <a href="" class="nav-link child" id="">카드 정보 수정</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link child" id="">카드 통합 관리</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+            
+            
+            
+            
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link">
+                            <svg class="bi bi-gear" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 014.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 01-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 011.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 012.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 012.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 011.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 01-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 018.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 001.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 00.52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 00-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 00-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 00-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 00-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 00.52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 001.255-.52l.094-.319z" clip-rule="evenodd"/>
+							  <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 100 4.492 2.246 2.246 0 000-4.492zM4.754 8a3.246 3.246 0 116.492 0 3.246 3.246 0 01-6.492 0z" clip-rule="evenodd"/>
+							</svg>
+                            
+                             관리자 관리<span class="fa arrow"></span></a>
+            
+            
+            
+            
+          </li>
         </ul>
       </div>
     </nav>

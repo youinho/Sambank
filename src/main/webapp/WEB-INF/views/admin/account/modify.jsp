@@ -1,13 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_admin.jsp" %>
+<%@include file="../../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
 $(function(){
 	$("#modACC").addClass("active");
 })
+
+function alert_updated(){
+	let updated = "${updated}";
+	console.log("alert_updated");
+	if(updated ==='' || history.state){
+		return;
+	}
+	
+	
+	if(updated != "" && updated != null){
+		if(updated=="true"){
+			alert("${ano}"+"계좌의 수정이 완료되었습니다.");
+		}else if(updated=="false"){
+			alert("계좌수정에 실패했습니다.");
+		}
+	}
+}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="/resources/js/admin_modifyAccount_validate.js"></script>
 
 <style>
 	.btn{

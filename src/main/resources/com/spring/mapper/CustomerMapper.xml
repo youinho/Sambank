@@ -25,7 +25,11 @@
 	
 	</update>
 
-
+<!-- 고객 정보 삭제 -->
+	<delete id="delete_customer">
+		delete from customertbl
+		where cno=#{cno} and id=#{id} and birth=#{birth} and reg_no=#{reg_no} and mobile=#{mobile}
+	</delete>
 
 
 <!-- search (name, birth, mobile) -->

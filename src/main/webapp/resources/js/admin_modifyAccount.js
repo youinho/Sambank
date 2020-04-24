@@ -1,7 +1,7 @@
 $(function(){
 	
 	alert_updated();
-	
+	history.replaceState({}, null, null);
 	//팝업
 	
 	$("#passwordBtn").click(function(e){
@@ -17,7 +17,12 @@ $(function(){
 	
 	$("#changePwdBtn").click(function(e){
 		e.preventDefault();
-		if($("input[name='ano']").val()==null){
+		if($("input[name='cno']").val()==""){
+			$("input[name='cno']").focus();
+			return false;
+		}
+		if($("input[name='ano']").val()==""){
+			$("input[name='ano']").focus();
 			return false;
 		}
 		
@@ -81,7 +86,7 @@ $(function(){
 		var ano = $(this).text();
 		
 		$.ajax({
-			url:"/admin/get_depositInfo",
+			url:"/admin/account/get_depositInfo",
 			type : "post",
 			data : {
 				ano : ano
@@ -120,22 +125,7 @@ function input_password(password, wInput){
 	$("#"+wInput).val(password);
 }
 
-function alert_updated(){
-	let updated = "${updated}";
-	console.log("alert_updated");
-	if(updated ==='' || history.state){
-		return;
-	}
-	
-	
-	if(updated != "" && updated != null){
-		if(updated=="true"){
-			alert("${ano}"+"계좌의 수정이 완료되었습니다.");
-		}else if(updated=="false"){
-			alert("계좌수정에 실패했습니다.");
-		}
-	}
-}
+
 
 
 
@@ -144,7 +134,7 @@ function searchCS_callback(cno){
 	$("input[name='cno']").val(cno);
 	
 	$.ajax({
-		url : "/admin/getAccInfo",
+		url : "/admin/account/getAccInfo",
 		type : "post",
 		data :{
 			cno : cno
