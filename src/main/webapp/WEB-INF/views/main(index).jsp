@@ -30,6 +30,7 @@
     font-size: 14px;
     margin: 0;
     padding: 0;
+    background-color: #fbebba;
   }
   .swiper-container {
     width: 100%;
@@ -38,6 +39,7 @@
   .swiper-slide {
     text-align: center;
     font-size: 18px;
+    
 
     /* Center slide text vertically */
     display: -webkit-box;
@@ -53,31 +55,9 @@
     -webkit-align-items: center;
     align-items: center;
   }
-/* 슬라이드컨텐츠 : section11 : 오픈뱅킹 */
-.wrap-visual.active1 {background:#fbebba;}
-.wrap-visual.active1 .area-control .ui-btn.before:after {border-right-color:#fbebba;}
-.wrap-visual.active1 .area-control .ui-btn.next:after {border-left-color:#fbebba;}
-
-/* 슬라이드컨텐츠 : section25 LiivM*/
-.wrap-visual.active2 {background:#d0eefa;}
-.wrap-visual.active2 .area-control .ui-btn.before:after {border-right-color:#d0eefa;}
-.wrap-visual.active2 .area-control .ui-btn.next:after {border-left-color:#d0eefa;}
-
-/* 슬라이드컨텐츠 : section10 : 외환 */
-.wrap-visual.active3 {background:#cfe1f6;}
-.wrap-visual.active3 .area-control .ui-btn.before:after {border-right-color:#cfe1f6;}
-.wrap-visual.active3 .area-control .ui-btn.next:after {border-left-color:#cfe1f6;}
-
-/* 슬라이드컨텐츠 : section5 : KB모바일인증서 */
-.wrap-visual.active4 {background:#dbe8f9;}
-.wrap-visual.active4 .area-control .ui-btn.before:after {border-right-color:#dbe8f9;}
-.wrap-visual.active4 .area-control .ui-btn.next:after {border-left-color:#dbe8f9;}
-
-/* 슬라이드컨텐츠 : section6 : 봄시즌 */
-.wrap-visual.active5 {background:#d6de9e;}
-.wrap-visual.active5 .area-control .ui-btn.before:after {border-right-color:#d6de9e;}
-.wrap-visual.active5 .area-control .ui-btn.next:after {border-left-color:#d6de9e;}
-
+  .swiper-slide.swiper-slide-active {
+    background-color: #fbebba;
+  }
 </style>
 
 
@@ -97,8 +77,8 @@
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- Header function var -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-			<!-- style="background-color: #fbebba;" -->
-			<nav class="navbar navbar-expand-lg navbar navbar-light">
+			<!--  -->
+			<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #fbebba;" >
 			
 			<div id="Logo">  
 			  <strong><img src="/resources/KB_files/SamBank Image Logo.png" alt="로고 이미지"></strong>
@@ -109,7 +89,7 @@
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			  <!-- nav bar 오른쪽 정렬 -->
-		      	<ul class="navbar-nav ml-auto">
+		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
 				     <li class="nav-item dropdown">
 				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          로그인 관련창

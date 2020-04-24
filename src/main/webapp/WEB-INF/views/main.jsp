@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <title>Sam Bank</title>
 <link rel="stylesheet" href="/resources/bootstrap/bootstrap.css" />
 <link rel="stylesheet" href="/resources/css/font.css" />
@@ -14,6 +14,49 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<!-- 링크 스위퍼 CSS -->
+<link rel="stylesheet" href="/resources/css/swiper.min.css">
+
+<!-- 슬라이더 styles -->
+<style>
+  .Swiper {
+    position: relative;
+    height: 400px;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    background-color: #b5fdba;
+  }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .swiper-slide.swiper-slide-active {
+    background-color: #b5fdba;
+  }
+</style>
+
+
 </head>
 <body>
 	<div id="Main">
@@ -21,7 +64,7 @@
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- Header function var -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #fbebba;" >
+			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #b5fdba;" >
 			
 				<div id="Logo">  
 				  <strong><img src="/resources/SB_files/SamBank Image Logo.png" alt="로고 이미지"></strong>
@@ -33,7 +76,7 @@
 			  	</button>
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			 <!--  nav bar 오른쪽 정렬 -->
-		      	<ul class="navbar-nav ml-auto">
+		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
 			  		<li class="nav-item dropdown">
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          로그인 관련창
@@ -71,109 +114,106 @@
 
 		<!-- header,headerWrap 끝나는부분 -->	
 		
-		<div id="content" >
-		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-		<!-- MainView -->
-		<!-- //////////////////////////////////////////////////////////////////////////////////// -->
-			<div class="wrap-visual active1">
-			<!-- ################################## -->
-			<!-- 슬라이더 : 컨텐츠 -->
-			<!-- ################################## -->
-				<div class="area-con">
-					<ul>
-					<!-- 슬라이더 컨텐츠 설정 -->
-						<!--  슬라이더 페이지 - 1 -->
-						<li class="section section11 on">
-							<div>
-								<strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스"></strong>
-								<span><img src="/resources/SB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 SB뱅크 한 곳에서!"></span>
-								<a href="" class="link">바로가기</a>
+		
+		
+		<!-- 스위퍼 시작부분 -->
+		<div class="Swiper">
+			<!-- Swiper -->
+			  <div class="swiper-container">
+			    <div class="swiper-wrapper" >
+							<div class="swiper-slide"  >
+							<!--  컨텐츠 - 1 -->
+							<li >
+								<div>
+									<strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스"></strong><br/><br/>
+									<span>
+									<img src="/resources/SB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 SB뱅크 한 곳에서!" style="margin-top:20px;">
+									</span><br/>
+									<a href="" class="link" style="margin-left: 700px;">바로가기</a>
+								</div>
+							</li>
 							</div>
-						</li>
-						<!--  슬라이더 페이지 - 2 -->
-						<li class="section section12">
-						<div>
-							<strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong>
-							<span><img src="/resources/SB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"></span>
-							<a href="" class="link">바로가기</a>
-						</div>
-						</li>
-						<!--  슬라이더 페이지 - 3 -->
-						<li class="section section10">
-						<div>
-							<strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
-							<span><img src="/resources/SB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span>
-							<a href="" class="link">바로가기</a>
-						</div>
-						</li>
-						<!--  슬라이더 페이지 - 4 -->
-						<li class="section section5">
-						<div>
-							<strong><img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서"></strong>
-							<span><img src="/resources/SB_files/visual_section5_tit02.png" alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"></span>
-							<a href="" class="link">바로가기</a>
-						</div>
-						</li>
-						<!--  슬라이더 페이지 - 5 -->
-						<li class="section section6">
-						<div>
-							<strong><img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행"></strong>
-							<span><img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."></span>
-						</div>
-						</li>
-					<!-- 슬라이더 컨텐츠 설정 끝나는 부분 -->
-					</ul>
-				</div>
-				
-				
-				
-				
-				
-				
-				<div class="area-control">
-				<!-- ################################## -->
-				<!-- 슬라이더 : 컨트롤 -->
-				<!-- ################################## -->
-					<button class="ui-btn before btn-off"></button>
-					<ul>
-						<li class="on"><a href="" class="on" title="선택됨">컨텐츠 - 1</a></li>
-						<li><a href="" title="" class="">컨텐츠 - 2</a></li>
-						<li><a href="" title="" class="">컨텐츠 - 3</a></li>
-						<li><a href="" title="" class="">컨텐츠 - 4</a></li>
-						<li><a href="" title="" class="">컨텐츠 - 5</a></li>
-					</ul>
-					<button class="ui-btn play off"></button>
-					<button class="ui-btn stop"></button>
-					<button class="ui-btn next"></button>
-				</div><!-- 슬라이드 컨트롤 끝나는 부분 -->
-				
-				
-				
-				<!-- ################################## -->
-				<!-- 슬라이더 -->
-				<!-- ################################## -->
-				
-				
-				
-				
-				<!-- 슬라이드 끝나는 부분 -->
-				
-				
-				<!-- ################################## -->
-				<!-- 브랜드스토리보기 -->
-				<!-- ################################## -->
-				<div class="area-aside">
-					<a href="" class="ui-btn-brand" id="uiBtnBrand">SB브랜드 스토리 보기</a>
-				</div>
-				<!-- 브랜드스토리 끝나는 부분	 -->
-				
-				
-				
-				
-			</div>
-			<!-- <div class="wrap-visual active1"> 끝내는 부분 -->
-		</div>
-		<!-- <div id="content" class="contentWrap"> 끝내는 부분 -->
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 2 -->
+									<li class="wrap-visual.active2">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong><br />
+										<span><img src="/resources/SB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"
+										style="margin-top: 25px;margin-bottom: 25px;">
+										</span><br />
+										<a href="" class="link"style="margin-left: 600px;">바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">	
+							<!-- 컨텐츠 - 3 -->
+									<li class="wrap-visual.active3">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
+										<span><img src="/resources/SB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span><br />
+										<a href="" class="link"style="margin-left: 500px;">바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 4 -->
+									<li class="wrap-visual.active4">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서" 
+										style="margin-right: 200px;">
+										</strong><br />
+										<span><img src="/resources/SB_files/visual_section5_tit02.png"
+										style="margin-left: 500px;maring-bottom: 25px"
+										alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"
+										>
+										</span><br/><br />
+										<a href="" class="link" style="margin-left: 400px;" >바로가기</a>
+									</div>
+									</li>
+							</div>
+							<div class="swiper-slide">
+							<!-- 컨텐츠 - 5 -->
+									<li class="wrap-visual.active5">
+									<div>
+										<strong><img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행"></strong>
+										<span><img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."
+										style="margin-left: 100px;">
+										</span>
+									</div>
+							</div>
+			    </div>
+			    <!-- Add Pagination -->
+			    <div class="swiper-pagination"></div>
+			    <!-- Add Arrows -->
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
+			  </div>
+			
+			<!-- Swiper JS -->
+			<script src="/resources/js/swiper.min.js"></script>
+			
+			  <!-- Initialize Swiper -->
+			  <script>
+			    var swiper = new Swiper('.swiper-container', {
+			      spaceBetween: 30,
+			      
+			      centeredSlides: true,
+			      autoplay: {
+			        delay: 2500,
+			        disableOnInteraction: false,
+			      },
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+			    });
+			  </script>
+		<!-- 스위퍼 끝 -->
+		
 		
 	</div>
 	<!-- Main 끝나는부분 -->
@@ -192,7 +232,7 @@
 				<li><a href="" onclick="" title="새창 열기">빠른조회</a></li>
 			</ul>
 			<ul class="menu2">
-				<li><a href="">빠른조회</a></li>
+				<li><a href="">카드</a></li>
 				<li><a href="">보안센터</a></li>
 				<li><a href="">자료실</a></li>
 				<li><a href="">문의사항</a></li>
@@ -218,7 +258,7 @@
 					<li>
 						<a href="">
 							<span>코로나19 관련 해킹 등 피해예방 수칙 안내</span>
-							<em class="icon-new">[NEW]</em>
+                             <em> New </em>
 							<span>05.10</span>
 						</a>
 					</li>		
@@ -226,7 +266,7 @@
 					<li>
 						<a href="">
 							<span>은행업무 이제 집에서 편하게 보세요! </span>
-							<em class="icon-new">[NEW]</em>
+                             <em> New </em>
 							<span>05.05</span>
 						</a>
 					</li>		
@@ -234,7 +274,7 @@
 					<li>
 						<a href="">
 							<span>대구·경북지역 영업점 영업시간 변경 안내</span>
-							<em class="icon-new">[NEW]</em>
+                             <em>New </em>
 							<span>05.02</span>
 						</a>
 					</li>	
@@ -257,7 +297,7 @@
                 <li>
 					<a href="">
 						<span>「Happy Home, Happy Money」 편하게 집에서 주택청약종합저축 신규가입하고 해피머니 받자!!</span>
-							<em class="icon-new">[NEW]</em>
+                             <em> New </em>
 						<span>05.06 ~ 05.30</span>
 					</a>
 				</li>
@@ -265,7 +305,7 @@
                 <li>
 					<a href="">
 						<span>앵콜! 내 경품 내가 고르는! KB오픈뱅킹 신규 가입 이벤트</span>
-                            <em class="icon-new">[NEW]</em>
+                             <em> New </em>
 						<span>06.01 ~ 06.15</span>
 					</a>
 				</li>
@@ -273,7 +313,7 @@
                 <li>
 					<a href="">
 						<span>SB 대기시간 ‘제로(0)’ 프로젝트 “SB의 디지털서비스로 나의 시간을 혁신하다”</span>
-                             <em> ★New </em>
+                             <em> New </em>
 						<span>05.27 ~ 06.30</span>
 					</a>
 				</li>
@@ -373,4 +413,9 @@
 	
 		
 </body>	
+
+
+
+
+
 </html>

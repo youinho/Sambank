@@ -7,7 +7,7 @@
 .main-section h2 {font-size:20px;line-height:26px;color:#333;font-weight:700;letter-spacing:-1px;}
 .main-section > .section {position:relative;width:770px;min-height:26px;margin:0 auto;padding:35px 30px 35px 180px; box-sizing: content-box;}
 .main-section > .section h2, .main-section > .section .sub {position:absolute;left:30px;top:35px;}
-.main-section > .section .sub {left:32px;top:70px;padding-right:14px;font-size:12px;color:#929292;}
+.main-section > .section .sub {left:32px;top:70px;padding-right:14px;font-size:12px;color:#ffa428;}
 .main-section > .section .sub:before, .main-section > .section .sub:after {content:'';display:block;position:absolute;top:50%;right:1px;margin:-3px 0;width:0;height:0;border:4px solid transparent;border-left-color:#fff;}
 .main-section > .section .sub:before {right:0;border-left-color:#929292;}
 .main-section > .section + .section:before {content:'';position:absolute;left:30px;right:30px;top:0;border-top:1px dotted #ccc;}
@@ -15,13 +15,15 @@
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 빠른메뉴
 ---------------------------------------------------------------------------------*/
-.main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#d8d5cb;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
+.main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#ffa428;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
 .main-con1 ul {float:left;display:block;overflow:hidden;height:40px;padding:20px 10px;box-sizing: content-box;}
 .main-con1 ul.menu1{padding:19px 10px 21px;}
 .main-con1 ul li {float:left;}
 .main-con1 ul li a {padding:0 22px;font-size:16px;line-height:40px;color:#434343;letter-spacing:-2px;}
-.main-con1 ul.menu1 {background:#004000;}
-.main-con1 ul.menu2 {background:#d8d5cb;}
+.main-con1 ul.menu1 {background:#007d00;}
+.text {background:#b5fdba;}
+.main-con1 ul.menu2 {background:#ffa428;}
+/* .main-con1 ul.menu2 {background:#d8d5cb;} */
 .main-con1 ul.menu1 li a {color:#ffffff;font-size:17px;font-weight:normal;padding:0 20px;letter-spacing:-1px;}
 .main-con1 ul.menu1 + ul li + li {position:relative;margin:0 0 0 1px;}
 /* .main-con1 ul.menu1 + ul li + li:before {content:'';display:block;position:absolute;left:-1px;top:50%;width:1px;height:16px;margin:-8px 0;background:#ddd;}
@@ -37,13 +39,16 @@
 .main-con2 > .section {float:left;width:335px;padding-left:125px;}
 .main-con2 > .section:first-child {width:317px;margin-right:7px;}
 .main-con2 > .section + .section:before {display:none;}
+em {
+    color: #007bff;
+	margin-left: 3px
+}
 
 /* ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ */
 .list-board {margin-top:-6px;}
 .list-board a {display:block;overflow:hidden;padding:7px 1px 7px 0;}
 .list-board a > span, .list-board a > em {display:inline-block;float:left;letter-spacing:-1px;}
 .list-board a > span:first-child {overflow:hidden;max-width:66%;color:#666;text-overflow:ellipsis;white-space:nowrap;}
-.list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;color:#929292;}
 .list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 no-repeat -30px -160px;vertical-align:top;}
 .main-con2 > .section:first-child .list-board a > span:first-child {max-width:70%;}
 
@@ -59,7 +64,7 @@
 .list-board a {display:block;overflow:hidden;padding:7px 1px 7px 0;}
 .list-board a > span, .list-board a > em {display:inline-block;float:left;letter-spacing:-1px;}
 .list-board a > span:first-child {overflow:hidden;max-width:66%;color:#666;text-overflow:ellipsis;white-space:nowrap;}
-.list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;color:#929292;}
+.list-board a > span ~ span {float:right;padding-top:1px;font-size:12px;margin-top: 2px;color:#929292;}
 .list-board a > .icon-new {overflow:hidden;width:0;margin:4px 0 3px 5px;padding:0 0 0 15px;line-height:15px;background:#f46600 url('../img/icon_set1.png') no-repeat -30px -160px;vertical-align:top;}
 .main-con3 > .section:first-child .list-board a > span:first-child {max-width:70%;}
 

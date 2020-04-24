@@ -33,9 +33,9 @@ public class HomeController {
 	}
 	
 	//testpage
-	@GetMapping("/gh")
+	@GetMapping("/fm")
 	public String GuideHeader() {
-		return "header_Main";
+		return "footer_Main";
 	}
 	
 	@GetMapping("/main")
