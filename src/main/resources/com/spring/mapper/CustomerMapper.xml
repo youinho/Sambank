@@ -5,7 +5,7 @@
 
 <!-- cno로 고객정보 -->
 	<select id="select_by_cno" resultType="com.spring.domain.CustomerVO">
-		select * from customertbl
+		select cno, name, eng_name, gender, birth, reg_no, address, mobile, id, email from customertbl
 		where cno=#{cno}
 	</select>
 
@@ -17,6 +17,13 @@
 		where customertbl.cno=#{cno}
 	</select>
 
+<!-- 고객 정보 수정 -->
+	<update id="update_customer">
+		update customertbl 
+		set name=#{name}, eng_name=#{eng_name}, gender=#{gender}, birth=#{birth}, reg_no=#{reg_no}, address=#{address}, mobile=#{mobile}, email=#{email}
+		where cno=#{cno}
+	
+	</update>
 
 
 

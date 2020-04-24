@@ -145,5 +145,10 @@ public class AdminServiceImpl implements AdminService {
 		return customerMapper.select_acc_info(cno);
 	}
 	
+	@Override
+	public boolean update_customer(CustomerVO vo) {
+	
+		return customerMapper.update_customer(vo)==1;
+	}
 	
 }

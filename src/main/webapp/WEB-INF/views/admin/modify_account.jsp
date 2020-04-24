@@ -5,7 +5,7 @@
 
 <script>
 $(function(){
-	$("#creACC").addClass("active");
+	$("#modACC").addClass("active");
 	
 	
 	$("#searchCS").click(function(e){
@@ -45,16 +45,13 @@ function searchCS_callback(cno){
 				str = ""
 				for(let i = 0; i < list.length; i++){
 					if(list[i].ano!=null && list[i].ano!=""){
-						str += "<a class='dropdown-item' href='#'>"+list[i].ano+"</a>";
+						str += "<a class='dropdown-item account-item' href='#'>"+list[i].ano+"</a>";
 						total += 1;
 					}
 				}
 				str = "<a class='dropdown-item' href='#'>보유 계좌 : "+total+" 개</a>"+"<div class='dropdown-divider'></div>"+ str;
 				$("#ano-list").html(str);
 				$("#name").val(name);
-				
-				//$("#total").text("보유 계좌 : "+total+" 개");
-				
 				
 			}
 			
@@ -93,7 +90,7 @@ function searchCS_callback(cno){
 <div class="container">
 <div class="col-md-10">
 	<div class="col-md-10">
-		<h3 class="page-header title">계좌 발급</h3>
+		<h3 class="page-header title">계좌 정보 수정</h3>
 	</div>
 	<form action="" method="post" id="createForm">
 		<table class="table" style="margin:0;padding:0;">
@@ -144,11 +141,9 @@ function searchCS_callback(cno){
 				  <div class="input-group-prepend" style="width:15%">
 				    <span class="input-group-text" style="width:100%"><strong>계좌번호</strong></span>
 				  </div>
-				  <input type="text" aria-label="First name" class="form-control" name="ano">
+				  <input type="text" aria-label="First name" class="form-control" name="ano" readonly>
 				  
-				  <div class="input-group-append" style="width:18%">
-				    <button class="btn btn-outline-secondary" type="button" id="call_ano" style="width:100%">계좌번호 요청</button>
-				  </div>
+				  
 				</div>
 			</td>
 		</tr>
@@ -188,6 +183,9 @@ function searchCS_callback(cno){
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"/>
 					</svg>
+			    </button>
+			    <button class="btn btn-outline-secondary" type="button" id="confirm_passwordBtn">
+			    	비밀번호 변경
 			    </button>
 			  <div class="input-group-append">
 			  </div>

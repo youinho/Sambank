@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException.BadRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
@@ -75,30 +76,6 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	@GetMapping("/create_account")
-	public void create_account_get() {
-		log.info("create_account_get 요청");
-	}
-	
-	
-	
-	
-	
-	
-	@GetMapping("/deposit_list")
-	public void deposit_list_get(Model model) {
-		log.info("deposit_list_get 요청");
-		model.addAttribute("list", service.get_deposit_list());
-		
-	}
-	
-	
 	@GetMapping("/header")
 	public void header() {
 		log.info("header 요청");
@@ -106,6 +83,43 @@ public class AdminController {
 	
 	
 	
+	
+	
+	
+	// account
+	
+	@GetMapping("/modify_account")
+	public void modify_account() {
+		log.info("modifyaccount 요청");
+		
+	}
+	
+	
+	
+	@PostMapping("/create_account")
+	public void create_account_post(DepositVO vo, Model model) {
+		log.info("create_account_post 요청 "+vo);
+		
+		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
+		log.info("select by cno : "+cs_vo);
+		
+		
+		
+		
+		if(service.create_deposit(vo)) {
+			model.addAttribute("created", "true");
+			model.addAttribute("name", cs_vo.getName());
+		}else {
+			model.addAttribute("created", "false");
+		}
+	}
+	
+	
+
+	@GetMapping("/create_account")
+	public void create_account_get() {
+		log.info("create_account_get 요청");
+	}
 	
 	@ResponseBody
 	@PostMapping("/getProduct")
@@ -179,9 +193,50 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("/deposit_list")
+	public void deposit_list_get(Model model) {
+		log.info("deposit_list_get 요청");
+		model.addAttribute("list", service.get_deposit_list());
+		
+	}
 	
 	
-	// Customer
+	
+	
+	
+	
+	
+	
+	// customer @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	
+	
+	@PostMapping("/register_customer")
+	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
+		log.info("register_customer_post vo : "+vo);
+		boolean result = false;
+		if(vali.check_customer(vo)) {
+			result = service.register_customer(vo);
+		}else {
+			log.info("validate 결과 : "+result);
+		}
+		
+		
+		
+		if(result) {
+			rttr.addFlashAttribute("registered", "success");
+			rttr.addFlashAttribute("name", vo.getName());
+		}else {
+			rttr.addFlashAttribute("registered", "failed");
+		}
+		return "redirect:/admin/register_customer";
+	}
+	
+	@GetMapping("/register_customer")
+	public void register_customer_get() {
+		log.info("register_customer_get 요청");
+	}
+	
 	
 	@ResponseBody
 	@PostMapping("/checkId")
@@ -211,13 +266,21 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("/modify_customer")
+	public void modify_customer() {
+		log.info("modify_customer_get 요청");
+		
+		
+	}
 	
-	@PostMapping("/register_customer")
-	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
-		log.info("register_customer_post vo : "+vo);
+	@PostMapping("/modify_customer")
+	public String update_customer(CustomerVO vo, RedirectAttributes rttr) {
+		
+		
+		log.info("update_customer_post vo : "+vo);
 		boolean result = false;
-		if(vali.check_customer(vo)) {
-			result = service.register_customer(vo);
+		if(vali.check_customer_update(vo)) {
+			result = service.update_customer(vo);
 		}else {
 			log.info("validate 결과 : "+result);
 		}
@@ -225,41 +288,38 @@ public class AdminController {
 		
 		
 		if(result) {
-			rttr.addFlashAttribute("registered", "success");
+			rttr.addFlashAttribute("updated", "success");
 			rttr.addFlashAttribute("name", vo.getName());
 		}else {
-			rttr.addFlashAttribute("registered", "failed");
+			rttr.addFlashAttribute("updated", "failed");
 		}
-		return "redirect:/admin/register_customer";
+		return "redirect:/admin/modify_customer";
+		
+		
+		
+		
 	}
 	
-	@GetMapping("/register_customer")
-	public void register_customer_get() {
-		log.info("register_customer_get 요청");
-	}
 	
-	@PostMapping("/create_account")
-	public void create_account_post(DepositVO vo, Model model) {
-		log.info("create_account_post 요청 "+vo);
+	
+	@ResponseBody
+	@PostMapping("/getCSInfo")
+	public ResponseEntity<CustomerVO> getCSInfo(int cno){
 		
-		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
-		log.info("select by cno : "+cs_vo);
+		CustomerVO vo = service.select_by_cno(cno);
 		
-		
-		
-		
-		if(service.create_deposit(vo)) {
-			model.addAttribute("created", "true");
-			model.addAttribute("name", cs_vo.getName());
-		}else {
-			model.addAttribute("created", "false");
+		if(vo == null) {
+			return new ResponseEntity<CustomerVO>(vo, HttpStatus.BAD_REQUEST);
 		}
+		
+		return new ResponseEntity<CustomerVO>(vo,HttpStatus.OK);
+		
 	}
 	
 	
 	
 	
-	//notice
+	//notice @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	@GetMapping("/notice")
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model) {

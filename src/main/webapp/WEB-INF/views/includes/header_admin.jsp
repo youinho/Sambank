@@ -82,10 +82,10 @@
                                     <a href="/admin/register_customer" class="nav-link child" id="regCS">고객 정보 등록</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link child" id="modCS">고객 정보 수정</a>
+                                    <a href="/admin/modify_customer" class="nav-link child" id="modCS">고객 정보 수정</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link child" id="delCS">고객 정보 삭제</a>
+                                    <a href="/admin/delete_customer" class="nav-link child" id="delCS">고객 정보 삭제</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -106,7 +106,7 @@
                                     <a href="/admin/deposit_list" class="nav-link child" id="viACC">계좌 정보 확인</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link child" id="modACC">계좌 정보 수정</a>
+                                    <a href="/admin/modify_account" class="nav-link child" id="modACC">계좌 정보 수정</a>
                                 </li>
                                 <li>
                                     <a href="#" class="nav-link child" id="sendACC">계좌 입금 및 출금</a>

@@ -22,7 +22,7 @@ public interface AdminService {
 	public boolean exists_deposit_ano(String ano);
 	public boolean checkId(String id);
 	
-	
+	public boolean update_customer(CustomerVO vo);
 	
 	
 	

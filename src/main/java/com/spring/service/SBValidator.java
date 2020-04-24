@@ -57,17 +57,42 @@ public class SBValidator {
 			}
 			i++;
 		}
-//		boolean check_id = check(REG_ID, vo.getId());
-//		boolean check_pwd = check(REG_PWD, vo.getPassword());
-//		boolean check_birth = check(REG_BIRTH, vo.getBirth());
-//		boolean check_email = check(REG_EMAIL, vo.getEmail());
-//		boolean check_gender = check(REG_GENDER, vo.getGender());
-//		boolean check_regno = check(REG_REGNO, vo.getReg_no());
-//		boolean check_mobile = check(REG_MOBILE, vo.getMobile());
-		
-		
 		return true;
 	}
+	
+	
+	public boolean check_customer_update(CustomerVO vo) {
+		boolean check_email = true;
+		boolean check_address = true;
+		if(vo.getEmail().length()>30 || !check(REG_EMAIL, vo.getEmail()))
+			check_email = false;
+		
+		if(vo.getAddress().length()>100)
+			check_address = false;
+		
+		boolean[] check_list = new boolean[] {
+				check(REG_BIRTH, vo.getBirth()),
+				check_email,
+				check(REG_GENDER, vo.getGender()),
+				check(REG_REGNO, vo.getReg_no()),
+				check(REG_MOBILE, vo.getMobile()),
+				check(REG_NAME, vo.getName()),
+				check(REG_ENG_NAME, vo.getEng_name()),
+				check_address
+		};
+		int i = 0;
+		for(boolean b : check_list) {
+			
+			if(!b) {
+				log.info("invalid : "+i);
+				return false;
+			}
+			i++;
+		}
+		return true;
+	}
+	
+	
 	
 //	public static void main(String[] args) {
 //		SBValidator aa = new SBValidator();
