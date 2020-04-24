@@ -47,6 +47,9 @@ $(function(){
 		opener.input_password(password, wInput);
 		window.close();
 	})
+	
+	$("#password").focus();
+	
 })
 </script>
 </body>

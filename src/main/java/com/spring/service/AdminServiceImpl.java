@@ -151,4 +151,24 @@ public class AdminServiceImpl implements AdminService {
 		return customerMapper.update_customer(vo)==1;
 	}
 	
+	@Override
+	public DepositVO get_deposit(String ano) {
+	
+		return accountMapper.getRow(ano);
+	}
+
+
+	@Override
+	public boolean update_withdraw(DepositVO vo) {
+
+		return accountMapper.update_withdraw(vo)==1;
+	}
+
+
+	@Override
+	public boolean update_password(DepositVO vo) {
+
+		return accountMapper.update_password(vo)==1;
+	}
+	
 }

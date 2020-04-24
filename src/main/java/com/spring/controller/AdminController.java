@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -94,10 +95,43 @@ public class AdminController {
 		
 	}
 	
+	@PostMapping("/modify_account")
+	public String update_account(DepositVO vo, RedirectAttributes attr, Model model) {
+		log.info("update_account 요청");
+		if(service.update_withdraw(vo)) {
+			
+			attr.addFlashAttribute("updated", "true");
+			attr.addFlashAttribute("ano", vo.getAno());
+			
+			return "redirect:/admin/modify_account";
+		}
+		model.addAttribute("updated", "false");
+		return "/admin/modify_account";
+		
+	}
+	
+	
 	
 	
 	@PostMapping("/create_account")
-	public void create_account_post(DepositVO vo, Model model) {
+	public void create_account_post(DepositVO vo,@RequestParam("confirm_password") String confirm_password, Model model) {
+		
+		if(vo.getPassword()==null) {
+			model.addAttribute("created", "false");
+			return;
+		}
+		
+		if(!vo.getPassword().equals(confirm_password)||vo.getPassword().length()!=4) {
+			model.addAttribute("created", "false");
+			return;
+		}
+		try {
+			Integer.parseInt(vo.getPassword());
+		} catch (Exception e) {
+			model.addAttribute("created", "false");
+			return;
+		}
+		
 		log.info("create_account_post 요청 "+vo);
 		
 		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
@@ -202,8 +236,45 @@ public class AdminController {
 	
 	
 	
+	@ResponseBody
+	@PostMapping("/get_depositInfo")
+	public ResponseEntity<DepositVO> get_depositInfo(String ano){
+		
+		DepositVO vo = service.get_deposit(ano);
+		
+		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+		
+	}
 	
 	
+	
+	
+	@ResponseBody
+	@PostMapping("/account/update_password")
+	public ResponseEntity<String> update_deposit_password(DepositVO vo, @RequestParam("confirm_password") String confirm_password){
+		log.info("비밀번호 변경 요청con:"+confirm_password+vo);
+		if(vo.getPassword()==null)
+			return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		
+		if(!vo.getPassword().equals(confirm_password)||vo.getPassword().length()!=4) {
+			return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		}
+		try {
+			Integer.parseInt(vo.getPassword());
+		} catch (Exception e) {
+			return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		
+		if(service.update_password(vo)) {
+			log.info("update password success "+vo);
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		
+		log.info("update password failed"+vo);
+		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+	}
 	
 	
 	

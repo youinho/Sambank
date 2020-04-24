@@ -120,6 +120,8 @@ $(function(){
 		opener.searchCS_callback($(this).data("cno"));
 		window.close();
 	})
+	
+	$("input[name='name']").focus();
 })
 
 </script>

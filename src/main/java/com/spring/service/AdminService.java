@@ -48,5 +48,10 @@ public interface AdminService {
 	public boolean create_deposit(DepositVO vo);
 	public List<Acc_info> select_acc_info(int cno);
 	
+	public DepositVO get_deposit(String ano);
+	
+
+	public boolean update_withdraw(DepositVO vo);
+	public boolean update_password(DepositVO vo);
 	
 }

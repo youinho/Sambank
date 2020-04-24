@@ -18,4 +18,7 @@ public class DepositVO {
 	private String branch;
 	private Date createdate;
 	private Date updatedate;
+	
+	
+	private String p_name;
 }

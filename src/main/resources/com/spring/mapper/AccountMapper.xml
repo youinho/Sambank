@@ -27,5 +27,27 @@
 	
 	</select>
 
+	<!-- ano로 계좌정보 -->
+	<select id="getRow" resultType="com.spring.domain.DepositVO">
+		select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw from (select * from deposittbl where ano=#{ano}) a
+		left join producttbl
+		on a.product = producttbl.product
+		
+		
+	</select>
+
+
+	<!-- 계좌 정보 수정 (max, day withdraw) -->
+	<update id="update_withdraw">
+		update deposittbl set max_withdraw=#{max_withdraw}, day_withdraw=#{day_withdraw}, updatedate=sysdate
+		where ano=#{ano}
+	
+	</update>
+	<!-- 계좌 비밀번호 수정 -->
+	<update id="update_password">
+		update deposittbl set password=#{password}, updatedate=sysdate
+		where ano=#{ano}
+	</update>
+
 
 </mapper>
