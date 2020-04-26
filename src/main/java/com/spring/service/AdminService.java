@@ -25,7 +25,7 @@ public interface AdminService {
 	public boolean update_customer(CustomerVO vo);
 	public boolean delete_customer(CustomerVO vo);
 	
-	
+	public boolean check_deposit_password(DepositVO vo);
 	
 	
 	//notice
@@ -53,5 +53,6 @@ public interface AdminService {
 
 	public boolean update_withdraw(DepositVO vo);
 	public boolean update_password(DepositVO vo);
+	public boolean check_customer_password(DepositVO vo);
 	
 }

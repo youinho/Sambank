@@ -50,4 +50,11 @@
 	</update>
 
 
+	<!-- 계좌 비밀번호 받기 -->
+	<select id="get_password">
+		select password from deposittbl
+		where ano=#{ano}
+	</select>
+
+
 </mapper>

@@ -58,7 +58,11 @@
 	</insert>
 
 
-
+<!-- 고객 비밀번호 받기 -->
+	<select id="get_password">
+		select password from customertbl
+		where id=#{id}
+	</select>
 
 
 

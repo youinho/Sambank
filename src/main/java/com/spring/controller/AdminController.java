@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -44,8 +45,8 @@ public class AdminController {
 	
 	@Autowired
 	private SBValidator vali;
-	
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	//admin -------------------------------
 	
@@ -72,7 +73,7 @@ public class AdminController {
 		
 		
 		log.info("로그인 성공");
-		return "/admin/main";
+		return "/admin/notice";
 	}
 	
 	
@@ -150,7 +151,7 @@ public class AdminController {
 		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
 		log.info("select by cno : "+cs_vo);
 		
-		
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 		
 		
 		if(service.create_deposit(vo)) {
@@ -280,6 +281,8 @@ public class AdminController {
 		}
 		
 		
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+		
 		
 		if(service.update_password(vo)) {
 			log.info("update password success "+vo);
@@ -300,7 +303,9 @@ public class AdminController {
 	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
 		log.info("register_customer_post vo : "+vo);
 		boolean result = false;
+		
 		if(vali.check_customer(vo)) {
+			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 			result = service.register_customer(vo);
 		}else {
 			log.info("validate 결과 : "+result);

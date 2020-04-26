@@ -18,6 +18,6 @@ public interface AccountMapper {
 	
 	public int update_withdraw(DepositVO vo);
 	public int update_password(DepositVO vo);
-	
+	public String get_password(String ano);
 	
 }

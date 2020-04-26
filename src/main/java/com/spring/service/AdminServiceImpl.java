@@ -3,6 +3,7 @@ package com.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,17 +23,19 @@ import com.spring.mapper.CustomerMapper;
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
-	AdminMapper adminMapper;
+	private AdminMapper adminMapper;
 	
 	@Autowired
-	CustomerMapper customerMapper;
+	private CustomerMapper customerMapper;
 	
 	@Autowired
-	AccountMapper accountMapper;
+	private AccountMapper accountMapper;
 	
 	@Autowired
-	AdminNoticeMapper noticeMapper;
+	private AdminNoticeMapper noticeMapper;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	public AdminVO selectOne(AdminVO vo) {
@@ -176,6 +179,24 @@ public class AdminServiceImpl implements AdminService {
 	public boolean delete_customer(CustomerVO vo) {
 
 		return customerMapper.delete_customer(vo)==1;
+	}
+
+
+	@Override
+	public boolean check_deposit_password(DepositVO vo) {
+		
+		
+		
+		
+		
+		return passwordEncoder.matches(vo.getPassword(), accountMapper.get_password(vo.getAno()));
+	}
+
+
+	@Override
+	public boolean check_customer_password(DepositVO vo) {
+
+		return passwordEncoder.matches(vo.getPassword(), customerMapper.get_password(vo.getPassword()));
 	}
 	
 }

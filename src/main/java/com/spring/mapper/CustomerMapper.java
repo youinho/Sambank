@@ -16,4 +16,5 @@ public interface CustomerMapper {
 	public List<Acc_info> select_acc_info(int cno);
 	public int update_customer(CustomerVO vo);
 	public int delete_customer(CustomerVO vo);
+	public String get_password(String id);
 }
