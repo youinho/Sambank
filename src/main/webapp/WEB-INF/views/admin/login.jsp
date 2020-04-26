@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,20 +29,31 @@
 <body>
 	<div id="background">
 		<div id="login" class="col-xs-12">
-	        <form action="/admin/login" method="POST" class="post-form">
+			<c:url value="/login" var="loginUrl" />
+	        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
+	        <form:form name="f" action="${loginUrl}" method="POST">
+	            <c:if test="${param.error != null}"> 
+	            	<p>아이디와 비밀번호가 잘못되었습니다.</p> 
+	            </c:if> 
+	            <c:if test="${param.logout != null}"> 
+	            	<p>로그아웃 하였습니다.</p> 
+	            </c:if>
+
+	            
 	            <fieldset>
 	                <legend style="text-align: center">Sambank Admin Login Page</legend><br>
 	                <div class="form-group">
 	                  <label for="id"><strong>ID</strong></label>
-	                  <input type="text" class="form-control" name="id" placeholder="아이디" required>
+	                  <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required>
 	                </div>
 	                <div class="form-group">
 	                  <label for="password"><strong>PASSWORD</strong></label>
-	                  <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+	                  <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호" required>
 	                </div>
 	                <input type="submit" class="btn btn-primary btn-block" value="로그인" />
 	            </fieldset>
-	        </form>
+	        <%-- </form> --%>
+	        </form:form>
 	    </div>
 	</div>
 	

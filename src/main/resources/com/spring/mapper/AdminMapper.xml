@@ -20,7 +20,11 @@
 	</select>
 
 	
-
+	<!-- 비밀번호 받기  -->
+	<select id="get_password" resultType="String">
+		select password from admintbl2
+		where id=#{id}
+	</select>
 
 
 	

@@ -14,6 +14,9 @@ import com.spring.domain.ProductVO;
 public interface AdminService {
 	public AdminVO selectOne(AdminVO vo);
 	
+	public boolean check_admin_password(AdminVO vo);
+	
+	
 	
 	public boolean register_customer(CustomerVO vo);
 	public List<DepositVO> get_deposit_list();

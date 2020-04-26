@@ -189,14 +189,21 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		
-		return passwordEncoder.matches(vo.getPassword(), accountMapper.get_password(vo.getAno()));
+		return passwordEncoder.matches(vo.getPassword(), accountMapper.get_password(vo.getAno()).substring(8));
 	}
 
 
 	@Override
 	public boolean check_customer_password(DepositVO vo) {
 
-		return passwordEncoder.matches(vo.getPassword(), customerMapper.get_password(vo.getPassword()));
+		return passwordEncoder.matches(vo.getPassword(), customerMapper.get_password(vo.getPassword()).substring(8));
+	}
+
+
+	@Override
+	public boolean check_admin_password(AdminVO vo) {
+
+		return passwordEncoder.matches(vo.getPassword(), adminMapper.get_password(vo.getId()).substring(8));
 	}
 	
 }

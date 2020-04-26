@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +46,11 @@
   <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">로그아웃</a>
+    <sec:authorize access="isAuthenticated()">
+    	<form:form action="${pageContext.request.contextPath}/admin/logout" method="POST">
+      		<input class="nav-link btn btn-outline-secondary btn-sm" type="submit" value="로그아웃">
+      	</form:form>
+    </sec:authorize>
     </li>
   </ul>
 </nav>

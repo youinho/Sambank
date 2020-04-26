@@ -12,7 +12,7 @@ import com.spring.domain.DepositVO;
 public interface AdminMapper {
 	public AdminVO selectOne(AdminVO vo);
 	
-	public int insert_account(Admin_registerVO vo);
+	public String get_password(String id);
 	
 	
 	

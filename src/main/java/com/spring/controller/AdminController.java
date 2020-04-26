@@ -63,9 +63,10 @@ public class AdminController {
 	@PostMapping("/login")
 	public String admin_login_post(AdminVO vo) {
 		
-		AdminVO checkedVO = service.selectOne(vo);
+		;
 		
-		if(checkedVO == null) {
+		
+		if(!service.check_admin_password(vo)) {
 			log.info("로그인 실패");
 			return "/admin/login";
 			
