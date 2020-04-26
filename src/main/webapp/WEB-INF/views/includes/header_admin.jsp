@@ -16,7 +16,7 @@
     <meta name="author" content="">
     <title>SamBank 전산포털</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
+
 <style>
 	.child{
 		font-size:14px;
@@ -39,6 +39,10 @@
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+let hn = "${_csrf.headerName}";
+let tk = "${_csrf.token}"
+</script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
@@ -114,6 +118,9 @@
                                     <a href="/admin/account/modify" class="nav-link child" id="modACC">계좌 정보 수정</a>
                                 </li>
                                 <li>
+                                    <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
+                                </li>
+                                <li>
                                     <a href="#" class="nav-link child" id="sendACC">계좌 입금 및 출금</a>
                                 </li>
                             </ul>
@@ -149,6 +156,7 @@
             
             
           </li>
+          <sec:authorize access="hasRole('ROLE_10')">
           <li class="nav-item">
             <a href="" class="nav-link">
                             <svg class="bi bi-gear" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -162,6 +170,7 @@
             
             
           </li>
+          </sec:authorize>
         </ul>
       </div>
     </nav>

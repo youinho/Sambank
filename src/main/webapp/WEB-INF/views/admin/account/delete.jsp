@@ -5,21 +5,21 @@
 
 <script>
 $(function(){
-	$("#modACC").addClass("active");
+	$("#delACC").addClass("active");
 })
 
-function alert_updated(){
-	let updated = "${updated}";
-	console.log("alert_updated");
-	if(updated ==='' || history.state){
+function alert_deleted(){
+	let deleted = "${deleted}";
+	console.log("alert_deleted");
+	if(deleted ==='' || history.state){
 		return;
 	}
 	
 	
-	if(updated != "" && updated != null){
-		if(updated=="true"){
+	if(deleted != "" && deleted != null){
+		if(deleted=="true"){
 			alert("${ano}"+"계좌의 수정이 완료되었습니다.");
-		}else if(updated=="false"){
+		}else if(deleted=="false"){
 			alert("계좌수정에 실패했습니다.");
 		}
 	}
@@ -51,9 +51,9 @@ function alert_updated(){
 <div class="container">
 <div class="col-md-10">
 	<div class="col-md-10">
-		<h3 class="page-header title">계좌 정보 수정</h3>
+		<h3 class="page-header title">계좌 정보 삭제</h3>
 	</div>
-	<form action="" method="post" id="modifyForm">
+	<form action="" method="post" id="deleteForm">
 		<table class="table" style="margin:0;padding:0;">
 		
 		<tr>
@@ -97,10 +97,10 @@ function alert_updated(){
 			<td>
 			<div class="input-group">
 			  <div class="input-group-prepend" style="width:15%">
-			    <span class="input-group-text" style="width:100%"><strong>이체 한도</strong></span>
+			    <span class="input-group-text" style="width:100%"><strong>계좌 정보</strong></span>
 			  </div>
-			  <input type="text"  class="form-control" name="day_withdraw" placeholder="일 이체 한도">
-			  <input type="text"  class="form-control" name="max_withdraw" placeholder="1회 이체 한도">
+			  <input type="text"  class="form-control" name="latest_date" placeholder="최근 거래일" readonly>
+			  <input type="text"  class="form-control" name="balance" placeholder="잔여 예금" readonly>
 			</div>
 			</td>
 		</tr>
@@ -128,7 +128,7 @@ function alert_updated(){
 					</svg>
 			    </button>
 			    <button class="btn btn-outline-primary" type="button" id="changePwdBtn">
-			    	비밀번호 변경
+			    	비밀번호 확인
 			    </button>
 			  <div class="input-group-append">
 			  </div>
@@ -141,7 +141,7 @@ function alert_updated(){
 			<td>
 				<div class="d-flex justify-content-end">
 					<div class="btn-group outline-primary" role="group">
-						<button class="btn btn-outline-primary" style="border-radius:0.25em;" type="submit" id="submitBtn">한도 변경</button>
+						<button class="btn btn-outline-danger" style="border-radius:0.25em;" type="submit" id="submitBtn" disabled>계좌 삭제</button>
 					</div>
 				</div>
 			</td>
@@ -162,4 +162,4 @@ function alert_updated(){
 	
 
 
-<script src="/resources/js/admin_modifyAccount.js"></script>
+<script src="/resources/js/admin_deleteAccount.js"></script>

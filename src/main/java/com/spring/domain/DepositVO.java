@@ -21,4 +21,5 @@ public class DepositVO {
 	
 	
 	private String p_name;
+	private Date depositdate;
 }

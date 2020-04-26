@@ -2,6 +2,8 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,22 +62,22 @@ public class AdminController {
 		
 		return "/admin/login";
 	}
-	@PostMapping("/login")
-	public String admin_login_post(AdminVO vo) {
-		
-		;
-		
-		
-		if(!service.check_admin_password(vo)) {
-			log.info("로그인 실패");
-			return "/admin/login";
-			
-		}
-		
-		
-		log.info("로그인 성공");
-		return "/admin/notice";
-	}
+//	@PostMapping("/login")
+//	public String admin_login_post(AdminVO vo) {
+//		
+//		;
+//		
+//		
+//		if(!service.check_admin_password(vo)) {
+//			log.info("로그인 실패");
+//			return "/admin/login";
+//			
+//		}
+//		
+//		
+//		log.info("로그인 성공");
+//		return "/admin/notice";
+//	}
 	
 	
 	
@@ -90,6 +92,13 @@ public class AdminController {
 	
 	
 	// account
+	
+	@GetMapping("/account/delete")
+	public String delete_account() {
+		log.info("delete_account_get 요청");
+		return "/admin/account/delete";
+	}
+	
 	
 	@GetMapping("/account/modify")
 	public String modify_account() {
@@ -294,7 +303,25 @@ public class AdminController {
 		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
 	}
 	
-	
+	@PostMapping("/account/check_password")
+	public ResponseEntity<String> check_account_password(DepositVO vo, @RequestParam("confirm_password") String confirm_password){
+		if(vo.getPassword()==null)
+			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
+		
+		if(!vo.getPassword().equals(confirm_password)||vo.getPassword().length()!=4) {
+			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
+		}
+		try {
+			Integer.parseInt(vo.getPassword());
+		} catch (Exception e) {
+			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
+		}
+		if(service.check_deposit_password(vo)) {
+			return new ResponseEntity<String>("true", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
+		
+	}
 	
 	// customer @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
@@ -451,8 +478,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/notice/register")
-	public String notice_register(Admin_noticeVO vo) {
+	public String notice_register(Admin_noticeVO vo, HttpServletRequest req) {
 		log.info("register_post"+vo);
+		log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
 		
 		vo.setAdmin_no("21");
 		vo.setWriter("dh");

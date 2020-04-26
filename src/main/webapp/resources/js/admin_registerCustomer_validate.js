@@ -150,6 +150,10 @@ $.validator.addMethod("checkId", function(value) {
 	$.ajax({
 		url:"/admin/customer/checkId",
 		type:"post",
+		beforeSend : function(xhr)
+        {   
+			xhr.setRequestHeader(hn, tk);
+        },
 		async:false,
 		data:{
 			"id" :value

@@ -49,6 +49,7 @@ function alert_reg(){
 	
       <h4 class="mb-3 title">고객 정보 등록</h4>
       <form class="needs-validation" novalidate="" method="post" id="register_customer">
+      
         <div class="mb-3">
        	 <div class="label d-flex justify-content-between" >
        	  <div class="col-6" style="padding:0">
@@ -159,6 +160,7 @@ function alert_reg(){
         
         
         <hr class="mb-4">
+        <sec:csrfInput/>
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 등록</button>
       </form>
     </div>

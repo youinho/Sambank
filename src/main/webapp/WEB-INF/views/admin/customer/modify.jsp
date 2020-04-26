@@ -197,6 +197,7 @@ function alert_reg(){
         
         <hr class="mb-4">
         <input type="hidden" name="cno" id="form_cno"/>
+        <sec:csrfInput/>
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 수정</button>
       </form>
     </div>

@@ -29,10 +29,14 @@
 
 	<!-- ano로 계좌정보 -->
 	<select id="getRow" resultType="com.spring.domain.DepositVO">
-		select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw from (select * from deposittbl where ano=#{ano}) a
+		<!-- select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw, a.balance from (select * from deposittbl where ano=#{ano}) a
 		left join producttbl
-		on a.product = producttbl.product
-		
+		on a.product = producttbl.product -->
+		select d.ano, d.p_name, d.day_withdraw, d.max_withdraw, d.balance, h.depositdate from (select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw, a.balance from (select * from deposittbl where ano=#{ano}) a
+		left join producttbl
+		on a.product = producttbl.product) d
+        left join (select * from deposit_history where ano=#{ano} and rownum=1 order by ano_h desc) h
+        on d.ano=h.ano
 		
 	</select>
 

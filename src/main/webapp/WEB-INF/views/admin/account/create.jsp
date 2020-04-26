@@ -172,6 +172,7 @@ function alert_created(){
 		</table>
 		
 		<input type="hidden" name="branch" value="01" />
+		<sec:csrfInput/>
 	</form>
 </div>
 </div>

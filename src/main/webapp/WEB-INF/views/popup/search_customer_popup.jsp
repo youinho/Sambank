@@ -74,6 +74,10 @@ $(function(){
 		$.ajax({
 			url : "/admin/customer/search",
 			type : "post",
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
 			data : {
 				name : $("input[name='name']").val(),
 				birth : $("input[name='birth']").val(),

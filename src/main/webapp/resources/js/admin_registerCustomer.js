@@ -59,6 +59,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	document.form.roadAddrPart2.value = roadAddrPart2;
 	document.form.addrDetail.value = addrDetail;
 	document.form.zipNo.value = zipNo; */
+	console.log("cb")
 	$("input[name='address']").val(roadAddrPart1+" "+roadAddrPart2+" "+addrDetail);
 }
 

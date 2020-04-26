@@ -312,11 +312,15 @@ create table adminTBL2(
     (select password from deposittbl where cno='590801');
 delete from admintbl2 where id='tester';
 insert into admintbl2 values('sam', 'ROLE_10', 'bank', 'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl2 values('sam1', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 1);
+insert into admintbl2 values('sam2', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 0);
 insert into admintbl2 values('tester', 'ROLE_10', (select password from deposittbl where ano='10335034467857'), 'dh', '사장', '본사', '01065889752', 1);
 commit;
+
+select * from admintbl2;
 select * from customertbl where name='김동혁';
 select * from deposittbl;
-update admintbl2 set password=(select concat('{bcryptPasswordEncoder}',password) from deposittbl where ano='10335034467857') where id='sam';
+update admintbl2 set password=(select concat('{bcrypt}',password) from deposittbl where ano='10335034467857') where id='sam2';
 alter table deposittbl modify (password nvarchar2(100));
 alter table customertbl modify (password nvarchar2(100));
 select * from admintbl2;
@@ -324,6 +328,48 @@ select * from admin_groups;
 select * from admin_group_authorities;
 select * from admin_group_members;
 insert into admin_group_members values(10, 'tester');
+insert into admin_group_members values(1, 'sam1');
+insert into admin_group_members values(1, 'sam2');
 delete from admin_group_members where id='tester';
 select * from admin;
 commit;
+
+select * from deposit_history;
+select * from customertbl where name='김동혁';
+
+select customertbl.name, deposittbl.ano from customertbl
+		left join deposittbl
+		on customertbl.cno=deposittbl.cno 
+		where customertbl.cno=590801;
+        select * from customertbl where cno=590644;
+        select * from deposittbl where cno=590644;
+        select * from customertbl where cno=590801;
+ select c.name, d.ano from (select * from customertbl where cno=590801) c
+		left join (select * from deposittbl where cno=590801) d
+		on c.cno=d.cno;
+
+
+select d.ano, d.p_name, d.day_withdraw, d.max_withdraw, d.balance, h.depositdate from (select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw, a.balance from (select * from deposittbl where ano=10135034475252) a
+		left join producttbl
+		on a.product = producttbl.product) d
+        left join (select * from deposit_history where ano=10135034475252 and rownum=1 order by ano_h desc) h
+        on d.ano=h.ano;
+select * from deposit_history;
+select * from deposittbl;
+delete from deposit_history;
+insert into deposit_history values(seq_deposit_history.nextVal, 10135034475252, '사장', 50000, 0, (select balance from deposittbl where ano=10135034475252)+50000, sysdate);
+update deposittbl set balance=balance+50000 where ano=10335034467868;
+update deposittbl set balance=0 where ano=10335034467868;
+commit;
+
+delete from deposit_history;
+delete from deposittbl;
+        
+        
+        
+        
+        
+        
+        
+        
+        

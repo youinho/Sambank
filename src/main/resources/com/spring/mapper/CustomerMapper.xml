@@ -11,10 +11,9 @@
 
 <!-- cno로 고객정보 (이름, 계좌정보) -->
 	<select id="select_acc_info" resultType="com.spring.domain.Acc_info">
-		select customertbl.name, deposittbl.ano from customertbl
-		left join deposittbl
-		on customertbl.cno=deposittbl.cno 
-		where customertbl.cno=#{cno}
+		 select c.name, d.ano from (select * from customertbl where cno=#{cno}) c
+		left join (select * from deposittbl where cno=#{cno}) d
+		on c.cno=d.cno
 	</select>
 
 <!-- 고객 정보 수정 -->

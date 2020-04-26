@@ -58,6 +58,10 @@ function searchCS_callback(cno){
 	$.ajax({
 		url : "/admin/customer/getCSInfo",
 		type : "post",
+		beforeSend : function(xhr)
+        {   
+            xhr.setRequestHeader(hn, tk);
+        },
 		data :{
 			cno : cno
 		},
@@ -85,6 +89,10 @@ function searchCS_callback(cno){
 	$.ajax({
 		url : "/admin/account/getAccInfo",
 		type : "post",
+		beforeSend : function(xhr)
+        {   
+			xhr.setRequestHeader(hn, tk);
+        },
 		data :{
 			cno : cno
 		},

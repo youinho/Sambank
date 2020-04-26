@@ -51,6 +51,7 @@ $(function(){
 				<button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">확인</button>
 			</div>
 		</div>
+		<sec:csrfInput/>
 	</form>
 	
 	

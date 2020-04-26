@@ -23,6 +23,10 @@ $(function(){
 		$.ajax({
 			url : "/admin/account/call_ano",
 			type : "post",
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
 			data :{
 				product : product,
 				cno : cno
@@ -48,6 +52,10 @@ $(function(){
 		$.ajax({
 			url : "/admin/account/getProduct",
 			type : "post",
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
 			data :{
 				type : type
 			},
@@ -127,6 +135,10 @@ function searchCS_callback(cno){
 	$.ajax({
 		url : "/admin/account/getAccInfo",
 		type : "post",
+		beforeSend : function(xhr)
+        {   
+            xhr.setRequestHeader(hn, tk);
+        },
 		data :{
 			cno : cno
 		},
