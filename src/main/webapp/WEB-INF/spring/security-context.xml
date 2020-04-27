@@ -16,10 +16,14 @@
     <!-- 시큐리티 예외사항 -->
     <sec:http pattern="/popup/jusopopup" security="none" />
     <!-- 검사 URL -->
-    <http auto-config='true'  use-expressions="true">
-        <intercept-url pattern="/admin/login" access="permitAll" /> 
-        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
-        
+    
+    <!-- admin페이지 인터셉터, 로그인관리 -->
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" >
+        <intercept-url pattern="/admin/login" access="permitAll" />  
+        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
+        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
+        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
+        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
 		<!-- <form-login />
    		<logout /> -->
         <form-login login-page="/admin/login" 
@@ -31,12 +35,9 @@
         		logout-url="/admin/logout" 
         		logout-success-url="/admin/login" />
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/">
-
+		<session-management invalid-session-url="/admin/login?error">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
-
     	</session-management>
-
         <csrf disabled="false"/>
     </http>
     
@@ -48,16 +49,25 @@
   
     
     
-    <!--  provider  -->
-    <authentication-manager>
+    <!--  provider (admin 페이지) -->
+    <authentication-manager id="admin_auth">
         <authentication-provider>
             <jdbc-user-service data-source-ref="ds" role-prefix="" 
             users-by-username-query="select id, concat('{bcrypt}', password), enabled from admintbl2 where id = ?" 
             authorities-by-username-query="select id, authority from admin_authorities where id = ?" 
             group-authorities-by-username-query="select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = ? and g.id = ga.group_id and g.id = gm.group_id" />
-			
-            
         </authentication-provider>
     </authentication-manager>
     
+    
+    
+    <!-- provider 유저페이지 추가할것** -->
+    <authentication-manager id="customer_auth">
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="ds" role-prefix="" 
+            users-by-username-query="select id, password, enabled from admintbl2 where id = ?" 
+            authorities-by-username-query="select id, authority from admin_authorities where id = ?" 
+            group-authorities-by-username-query="select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = ? and g.id = ga.group_id and g.id = gm.group_id" />
+        </authentication-provider>
+    </authentication-manager>
 </beans:beans>
