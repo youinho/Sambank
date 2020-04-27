@@ -18,9 +18,9 @@ function alert_deleted(){
 	
 	if(deleted != "" && deleted != null){
 		if(deleted=="true"){
-			alert("${ano}"+"계좌의 수정이 완료되었습니다.");
+			alert("${ano}"+"계좌의 삭제가 완료되었습니다.");
 		}else if(deleted=="false"){
-			alert("계좌수정에 실패했습니다.");
+			alert("계좌삭제에 실패했습니다.");
 		}
 	}
 }

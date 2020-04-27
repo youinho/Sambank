@@ -205,5 +205,15 @@ public class AdminServiceImpl implements AdminService {
 
 		return passwordEncoder.matches(vo.getPassword(), adminMapper.get_password(vo.getId()).substring(8));
 	}
+
+
+	@Override
+	public boolean delete_deposit(DepositVO vo) {
+		if(accountMapper.get_balance(vo)!=0)
+			return false;
+		
+		
+		return accountMapper.delete(vo)==1;
+	}
 	
 }

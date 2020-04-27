@@ -123,7 +123,7 @@ $(function(){
 							  </div>
 							  
 							</div>
-							<sec:csrfInput/>
+							<%-- <sec:csrfInput/> --%>
 							
 						</form>
                         <!-- /.panel-heading -->
@@ -184,7 +184,7 @@ $(function(){
 	<input type="hidden" name="amount" value="${cri.amount }" />
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
-	<sec:csrfInput/>
+	<%-- <sec:csrfInput/> --%>
 </form>
 <script>
 $(function(){

@@ -77,16 +77,13 @@
 	<input type="hidden" name="amount" value="${cri.amount }"/>
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
-	<sec:csrfInput/>	
+	<%-- <sec:csrfInput/> --%>	
 </form>
 <script>
 //list버튼이 클릭하면 list페이지 보여주기
 $(function(){
 	$("#go-list").click(function(){
 		//location.href="/board/list";
-		
-		//페이지 나누기와 관련된 정보(pageNum, amount) 보내기
-		//bno는 삭제하고, myform 보내기
 		$("#myForm").attr("action","/admin/notice");
 		$("#myForm").find("input[name='bno']").remove();
 		$("#myForm").submit();
@@ -97,6 +94,7 @@ $(function(){
 	$("#go-delete").click(function(){
 		$("#myForm").attr("action", "/admin/notice/delete");
 		$("#myForm").attr("method", "post");
+		$("#myForm").append("<input type='hidden' name='_csrf' value='${_csrf.token}'>")
 		$("#myForm").submit();
 	})
 	

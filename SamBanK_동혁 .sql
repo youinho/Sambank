@@ -1,4 +1,4 @@
-﻿-- 관리자 테이블
+-- 관리자 테이블
 create table adminTBL(
     admin_no NUMBER(10) constraint pk_admin_no primary key, -- 관리자 번호(사번)
     auth NVARCHAR2(2) not null, -- 관리자 등급
@@ -357,16 +357,17 @@ select d.ano, d.p_name, d.day_withdraw, d.max_withdraw, d.balance, h.depositdate
 select * from deposit_history;
 select * from deposittbl;
 delete from deposit_history;
-insert into deposit_history values(seq_deposit_history.nextVal, 10135034475252, '사장', 50000, 0, (select balance from deposittbl where ano=10135034475252)+50000, sysdate);
+insert into deposit_history values(seq_deposit_history.nextVal, 10335034467868, '사장', 50000, 0, (select balance from deposittbl where ano=10335034467868)+50000, sysdate);
 update deposittbl set balance=balance+50000 where ano=10335034467868;
 update deposittbl set balance=0 where ano=10335034467868;
 commit;
-
+rollback;
 delete from deposit_history;
 delete from deposittbl;
+select * from deposittbl;
         
         
-        
+select * from admin_board order by admin_bno asc;        
         
         
         

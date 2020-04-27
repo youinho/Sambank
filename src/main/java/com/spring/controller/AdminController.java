@@ -50,6 +50,14 @@ public class AdminController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	//admin -------------------------------
 	
 	
@@ -98,6 +106,25 @@ public class AdminController {
 		log.info("delete_account_get 요청");
 		return "/admin/account/delete";
 	}
+	
+	@PostMapping("/account/delete")
+	public String delete_account_post(DepositVO vo, @RequestParam("confirm_password") String confirm_password, RedirectAttributes rttr) {
+		log.info("계좌 삭제 요청"+confirm_password+vo);
+		if(!vo.getPassword().equals(confirm_password) || !service.check_deposit_password(vo)) {
+			rttr.addFlashAttribute("deleted", "false");
+			return "redirect:/admin/account/delete";
+		}
+		
+		if(service.delete_deposit(vo)) {
+			rttr.addFlashAttribute("ano", vo.getAno());
+			rttr.addFlashAttribute("deleted", "true");
+			return "redirect:/admin/account/delete";
+		}
+		
+		rttr.addFlashAttribute("deleted", "false");
+		return "redirect:/admin/account/delete";
+	}
+	
 	
 	
 	@GetMapping("/account/modify")

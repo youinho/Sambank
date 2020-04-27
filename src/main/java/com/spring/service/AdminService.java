@@ -29,7 +29,7 @@ public interface AdminService {
 	public boolean delete_customer(CustomerVO vo);
 	
 	public boolean check_deposit_password(DepositVO vo);
-	
+	public boolean delete_deposit(DepositVO vo);
 	
 	//notice
 	public List<Admin_noticeVO> notice_getList(Criteria cri);

@@ -20,6 +20,7 @@ $(function(){
 		$("#modForm").attr("action","/admin/notice/read/"+"${vo.admin_bno}");
 		$("#modForm").find("input[name='content']").remove();
 		$("#modForm").find("input[name='title']").remove();
+		$("#modForm").find("input[name='_csrf']").remove();
 		$("#modForm").submit();
 	})
 	

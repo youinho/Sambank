@@ -59,6 +59,19 @@
 		select password from deposittbl
 		where ano=#{ano}
 	</select>
-
-
+	
+	
+	<!-- 계좌 삭제 --> 			<!-- 카드확인 추가해야함 -->
+	<delete id="delete">
+		delete from deposittbl
+		where ano=#{ano}
+	
+	</delete>
+	
+	<!-- 계좌 잔액 -->
+	<select id="get_balance" resultType="int">
+		select balance from deposittbl
+		where ano=#{ano}
+	</select>
+	
 </mapper>
