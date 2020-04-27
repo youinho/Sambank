@@ -365,8 +365,8 @@ rollback;
 delete from deposit_history;
 delete from deposittbl;
 select * from deposittbl;
-        
-        
+select * from customertbl where length(password) < 20;       
+delete from customertbl where length(password) < 20 and name!='김동혁';
         
 select * from admin_board order by admin_bno asc;        
         
