@@ -203,7 +203,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean check_admin_password(AdminVO vo) {
 
-		return passwordEncoder.matches(vo.getPassword(), adminMapper.get_password(vo.getId()).substring(8));
+		return passwordEncoder.matches(vo.getPassword(), adminMapper.get_password(vo.getId()));
 	}
 
 

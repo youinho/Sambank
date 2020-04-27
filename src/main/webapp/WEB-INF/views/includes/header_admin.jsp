@@ -47,7 +47,7 @@ let tk = "${_csrf.token}"
 <body>
     <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
-  <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+  
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
     <sec:authorize access="isAuthenticated()">
@@ -121,9 +121,9 @@ let tk = "${_csrf.token}"
                                     <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link child" id="sendACC">계좌 입금 및 출금</a>
+                                    <a href="#" class="nav-link child" id="sendACC">계좌 입금&출금</a>
                                 </li>
-                            </ul>
+                            </ul> 
                             <!-- /.nav-second-level -->
             
             

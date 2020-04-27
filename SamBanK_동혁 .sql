@@ -367,10 +367,11 @@ delete from deposittbl;
 select * from deposittbl;
         
         
+        
 select * from admin_board order by admin_bno asc;        
         
-        
-        
-        
-        
-        
+select * from customertbl where id = 'rlaehdgur2';
+
+select id, password from admintbl2 where id = 'rlaehdgur2'
+union all
+select id, password from customertbl where id = 'rleahdgur2';
