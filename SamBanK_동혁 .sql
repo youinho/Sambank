@@ -372,6 +372,11 @@ select * from admin_board order by admin_bno asc;
         
 select * from customertbl where id = 'rlaehdgur2';
 
-select id, password from admintbl2 where id = 'rlaehdgur2'
+select * from (select id, password, auth from admintbl2 where id = 'sam'
 union all
-select id, password from customertbl where id = 'rleahdgur2';
+select id, password, gender from customertbl where id = 'sam') where auth like 'ROLE_%';
+commit;
+select * from admintbl2;
+update admintbl2 set password=replace(password, '{bcrypt}','');
+
+select id, concat('{bcrypt}', password), enabled from admintbl2 where id = 'sam';
