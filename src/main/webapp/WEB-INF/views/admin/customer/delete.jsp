@@ -128,7 +128,7 @@ function alert_del(){
         <input type="hidden" name="cno" id="form_cno"/>
         <input type="hidden" name="id" id="form_id" />
         <sec:csrfInput/>
-        <button class="btn btn-danger btn-lg btn-block" type="submit" id="submit">고객 정보 삭제</button>
+        <button class="btn btn-danger btn-lg btn-block" type="submit" id="submit" disabled>고객 정보 삭제</button>
       </form>
     </div>
     <div class="bottom">
