@@ -13,8 +13,8 @@ public class CardVO {
 	private int condition;
 	private Date createdate;
 	private Date updatedate;
-	private int limit;
-	private int limit_month;
+	private long limit;
+	private long limit_month;
 	private String password;
 	
 	private String confirm_password;

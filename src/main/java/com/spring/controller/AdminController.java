@@ -693,7 +693,6 @@ public class AdminController {
 		return new ResponseEntity<List<Card_productVO>>(list, HttpStatus.OK);
 		
 	}
-	
 	@PostMapping("/card/call_card_no")
 	public ResponseEntity<String> call_card_no(int product){
 		String card_no = "";

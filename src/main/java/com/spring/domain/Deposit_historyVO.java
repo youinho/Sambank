@@ -16,5 +16,5 @@ public class Deposit_historyVO {
 	
 	
 	
-	private int amount;
+	private long amount;
 }

@@ -69,7 +69,7 @@
 	</delete>
 	
 	<!-- 계좌 잔액 -->
-	<select id="get_balance" resultType="int">
+	<select id="get_balance" resultType="long">
 		select balance from deposittbl
 		where ano=#{ano}
 	</select>
@@ -98,7 +98,7 @@
 	
 	
 	<update id="updateBalance_after"  parameterType="com.spring.domain.DepositVO">
-		<selectKey keyProperty="balance" order="BEFORE" resultType="int">
+		<selectKey keyProperty="balance" order="BEFORE" resultType="long">
 			select balance from
 			(select rownum, balance from deposit_history where ano=#{ano} order by depositdate desc)
 			where rownum=1

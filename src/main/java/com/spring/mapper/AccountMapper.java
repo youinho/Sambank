@@ -21,7 +21,7 @@ public interface AccountMapper {
 	public int update_password(DepositVO vo);
 	public String get_password(String ano);
 	public int delete(DepositVO vo);
-	public int get_balance(String ano);
+	public long get_balance(String ano);		//금액은 long으로 할것
 	
 	public DepositVO check_ano(String ano);
 	
