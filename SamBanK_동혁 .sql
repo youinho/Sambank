@@ -463,3 +463,4 @@ select * from admin_group_members;
 select * from cardtbl;
 delete from cardtbl where security_key=245;
 commit;
+select * from card_product;
