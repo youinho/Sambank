@@ -20,6 +20,8 @@ public class DepositVO {
 	private Date updatedate;
 	
 	
+	private String name;
+	
 	private String p_name;
 	private Date depositdate;
 }

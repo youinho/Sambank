@@ -16,7 +16,7 @@
 	<!-- 계정 확인 -->
 	<select id="selectOne" resultType="com.spring.domain.AdminVO">
 		select * from admintbl
-		where id=#{id} and password=#{password}
+		where id=#{id}
 	</select>
 
 	

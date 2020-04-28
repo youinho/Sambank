@@ -14,6 +14,7 @@ import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
@@ -38,9 +39,9 @@ public class AdminServiceImpl implements AdminService {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
-	public AdminVO selectOne(AdminVO vo) {
+	public AdminVO selectOne(String id) {
 	
-		return adminMapper.selectOne(vo);
+		return adminMapper.selectOne(id);
 	}
 
 
@@ -209,11 +210,51 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public boolean delete_deposit(DepositVO vo) {
-		if(accountMapper.get_balance(vo)!=0)
+		if(accountMapper.get_balance(vo.getAno())!=0)
 			return false;
 		
 		
 		return accountMapper.delete(vo)==1;
+	}
+
+
+	@Override
+	public DepositVO check_ano(String ano) {
+
+		return accountMapper.check_ano(ano);
+	}
+
+	@Transactional
+	@Override
+	public boolean deposit(Deposit_historyVO vo) {
+		
+		if(accountMapper.deposit_hist(vo)!=1) {
+			return false;
+		}
+		if(accountMapper.updateBalance_after(vo)!=1) {
+			return false;
+		}
+		
+		
+		return true;
+	}
+
+	@Transactional
+	@Override
+	public boolean withdraw(Deposit_historyVO vo) {
+
+		if((accountMapper.get_balance(vo.getAno())-vo.getBalance())<0) {
+			return false;
+		}
+		
+		
+		if(accountMapper.withdraw_hist(vo)!=1) {
+			return false;
+		}
+		if(accountMapper.updateBalance_after(vo)!=1) {
+			return false;
+		}
+		return true;
 	}
 	
 }

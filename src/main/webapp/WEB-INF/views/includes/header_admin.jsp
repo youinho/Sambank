@@ -121,7 +121,10 @@ let tk = "${_csrf.token}"
                                     <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link child" id="sendACC">계좌 입금&출금</a>
+                                    <a href="/admin/account/deposit" class="nav-link child" id="deposit">계좌 입금</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/withdraw" class="nav-link child" id="withdraw">계좌 출금</a>
                                 </li>
                             </ul> 
                             <!-- /.nav-second-level -->

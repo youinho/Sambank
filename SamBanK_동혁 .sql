@@ -253,7 +253,7 @@ select * from customertbl where cno='590658';
 select * from admin_board;
 select * from admintbl;
 
-insert into admin_board(admin_bno, admin_no, auth, title, content, writer) (select seq_admin_board.nextVal, admin_no, auth, title, content, writer from admin_board);
+insert into admin_board(admin_bno, id, title, content, writer) (select seq_admin_board.nextVal, id, title, content, writer from admin_board);
 commit;
 
 
@@ -282,8 +282,13 @@ create table admin_group_authorities(
     
 create table admin_group_members(
     group_id nvarchar2(20) not null references admin_groups(id),
-    id nvarchar2(20) not null references admintbl2(id)
+    id nvarchar2(20) not null references admintbl(id)
 );
+
+drop table admin_group_members;
+drop table admin_groups;
+drop table admin_group_authorities;
+
 
 select * from admintbl;
 update admintbl set enabled=1 where admin_no=21;
@@ -300,9 +305,10 @@ insert into admin_group_members values(10, 'sam');
 
 
 
-create table adminTBL2(
+create table adminTBL(
     id NVARCHAR2(10) not null constraint pk_admin_id primary key, 
     auth NVARCHAR2(10) not null,
+    admin_no number(20) not null,
     password NVARCHAR2(100) not null,
     name NVARCHAR2(10) not null,
     rank NVARCHAR2(10) not null,
@@ -311,16 +317,19 @@ create table adminTBL2(
     enabled number(10) not null);
     (select password from deposittbl where cno='590801');
 delete from admintbl2 where id='tester';
-insert into admintbl2 values('sam', 'ROLE_10', 'bank', 'dh', '사장', '본사', '01065889752', 1);
-insert into admintbl2 values('sam1', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 1);
-insert into admintbl2 values('sam2', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 0);
-insert into admintbl2 values('tester', 'ROLE_10', (select password from deposittbl where ano='10335034467857'), 'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl values('sam','bank', '1' ,'ROLE_10',  'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl values('sam1','bank', '2' ,'ROLE_5',  'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl values('sam2','bank', '3' ,'ROLE_1',  'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl values('sam1', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 1);
+insert into admintbl values('sam2', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 0);
+insert into admintbl values('tester', 'ROLE_10', (select password from deposittbl where ano='10335034467857'), 'dh', '사장', '본사', '01065889752', 1);
 commit;
 
 select * from admintbl2;
 select * from customertbl where name='김동혁';
 select * from deposittbl;
-update admintbl2 set password=(select concat('{bcrypt}',password) from deposittbl where ano='10335034467857') where id='sam2';
+select password from deposittbl where ano='10335034467868';
+update admintbl set password=(select password from deposittbl where ano='10335034467868') where id='sam';
 alter table deposittbl modify (password nvarchar2(100));
 alter table customertbl modify (password nvarchar2(100));
 select * from admintbl2;
@@ -328,10 +337,11 @@ select * from admin_groups;
 select * from admin_group_authorities;
 select * from admin_group_members;
 insert into admin_group_members values(10, 'tester');
-insert into admin_group_members values(1, 'sam1');
+insert into admin_group_members values(10, 'sam');
+insert into admin_group_members values(5, 'sam1');
 insert into admin_group_members values(1, 'sam2');
 delete from admin_group_members where id='tester';
-select * from admin;
+select * from admin_group_authorities;
 commit;
 
 select * from deposit_history;
@@ -380,3 +390,38 @@ select * from admintbl2;
 update admintbl2 set password=replace(password, '{bcrypt}','');
 
 select id, concat('{bcrypt}', password), enabled from admintbl2 where id = 'sam';
+
+
+insert into admin_groups values('10', '사장');
+insert into admin_group_authorities values('10', 'ROLE_10');
+
+inser;
+
+select * from admin_groups;
+select * from admin_group_authorities;
+
+
+select customertbl.name, d.cno, d.ano 
+from (select cno, ano from deposittbl where ano = 10335034467868) d
+join customertbl
+on customertbl.cno = d.cno;
+
+rollback;
+select * from deposittbl where ano = 10335034467868;
+
+select * from deposit_history;
+update deposittbl set balance=(select balance from deposit_history where ano=10335034467868 and rownum=1 order by depositdate) where ano=10335034467868;
+
+select balance from deposit_history where ano=10335034467868 and rownum=1 order by depositdate;
+
+rollback;
+select * from deposittbl where ano=10335034467868;
+select * from deposit_history order by depositdate desc;
+commit;
+delete from deposit_history;
+select balance from
+(select rownum, balance from deposit_history where ano=10335034467868 order by depositdate desc)
+where rownum=1;
+select * from customertbl;
+select * from deposit_history;
+

@@ -6,21 +6,7 @@
 		height:500px;
 	}
 </style>
-<script>
-$(function(){
-	$('input').keydown(function() {
-		  if (event.keyCode === 13) {
-		    event.preventDefault();
-		  };
-	});
-	
-	$("#cancel").click(function(e){
-		e.preventDefault();
-		location.href = "/admin/notice";
-	})
-	
-})
-</script>
+
 <div class="col-md-10">
 	<h3 class="page-header title">공지 등록</h3>
 </div>
@@ -62,3 +48,19 @@ $(function(){
 	
 	
 </div>
+<script>
+$(function(){
+	$('input').keydown(function() {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		  };
+	});
+	
+	$("#cancel").click(function(e){
+		e.preventDefault();
+		location.href = "/admin/notice";
+	})
+	
+	$("input[name='title']").focus();
+})
+</script>

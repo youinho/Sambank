@@ -10,7 +10,7 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 
 public interface AdminMapper {
-	public AdminVO selectOne(AdminVO vo);
+	public AdminVO selectOne(String id);
 	
 	public String get_password(String id);
 	
