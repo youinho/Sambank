@@ -2,6 +2,8 @@ package com.spring.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
@@ -9,10 +11,11 @@ import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 
 public interface AdminService {
-	public AdminVO selectOne(AdminVO vo);
+	public AdminVO selectOne(String id);
 	
 	public boolean check_admin_password(AdminVO vo);
 	
@@ -57,5 +60,8 @@ public interface AdminService {
 	public boolean update_withdraw(DepositVO vo);
 	public boolean update_password(DepositVO vo);
 	public boolean check_customer_password(DepositVO vo);
+	public DepositVO check_ano(String ano);
 	
+	public boolean deposit(Deposit_historyVO vo);
+	public boolean withdraw(Deposit_historyVO vo);
 }

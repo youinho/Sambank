@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Admin_noticeVO {
 	private String admin_bno;
-	private String admin_no;
+	private String id;
 	private String auth;
 	private String title;	//200
 	private String content;	//2000

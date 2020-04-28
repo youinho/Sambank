@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 
 public interface AccountMapper {
@@ -20,5 +21,11 @@ public interface AccountMapper {
 	public int update_password(DepositVO vo);
 	public String get_password(String ano);
 	public int delete(DepositVO vo);
-	public int get_balance(DepositVO vo);
+	public int get_balance(String ano);
+	
+	public DepositVO check_ano(String ano);
+	
+	public int deposit_hist(Deposit_historyVO vo);
+	public int withdraw_hist(Deposit_historyVO vo);
+	public int updateBalance_after(Deposit_historyVO vo);
 }

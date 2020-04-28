@@ -245,7 +245,6 @@ $(function(){
 		
 		
 		
-		//버튼을 눌렀을 때 무조건 페이지 번호는 1로 세팅
 		searchForm.find("input[name='pageNum']").val("1");	
 		
 		

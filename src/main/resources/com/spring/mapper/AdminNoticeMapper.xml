@@ -4,6 +4,7 @@
 
 	<select id="getList" resultType="com.spring.domain.Admin_noticeVO">
 	 <![CDATA[
+	 
 		select * from(
 			select /*+INDEX_DESC(admin_board pk_admin_board)*/ rownum rn, admin_bno, title, writer, regdate, updatedate
 			from admin_board
@@ -29,8 +30,8 @@
 
 
 	<insert id="insert">
-		insert into admin_board(admin_bno, admin_no, auth, title, content, writer)
-		values(seq_admin_board.nextVal, #{admin_no}, #{auth}, #{title}, #{content}, #{writer}) 
+		insert into admin_board(admin_bno, id, title, content, writer)
+		values(seq_admin_board.nextVal, #{id}, #{title}, #{content}, #{writer}) 
 	</insert>
 
 

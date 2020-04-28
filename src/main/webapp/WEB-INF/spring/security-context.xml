@@ -53,7 +53,7 @@
     <authentication-manager id="admin_auth">
         <authentication-provider>
             <jdbc-user-service data-source-ref="ds" role-prefix="" 
-            users-by-username-query="select id, concat('{bcrypt}', password), enabled from admintbl2 where id = ?" 
+            users-by-username-query="select id, concat('{bcrypt}', password), enabled from admintbl where id = ?" 
             authorities-by-username-query="select id, authority from admin_authorities where id = ?" 
             group-authorities-by-username-query="select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = ? and g.id = ga.group_id and g.id = gm.group_id" />
         </authentication-provider>
@@ -65,7 +65,7 @@
     <authentication-manager id="customer_auth">
         <authentication-provider>
             <jdbc-user-service data-source-ref="ds" role-prefix="" 
-            users-by-username-query="select id, password, enabled from admintbl2 where id = ?" 
+            users-by-username-query="select id, password, enabled from admintbl where id = ?" 
             authorities-by-username-query="select id, authority from admin_authorities where id = ?" 
             group-authorities-by-username-query="select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = ? and g.id = ga.group_id and g.id = gm.group_id" />
         </authentication-provider>

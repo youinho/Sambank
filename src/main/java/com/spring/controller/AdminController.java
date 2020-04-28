@@ -31,6 +31,7 @@ import com.spring.domain.Admin_registerVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
@@ -47,6 +48,7 @@ public class AdminController {
 	
 	@Autowired
 	private SBValidator vali;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -100,6 +102,68 @@ public class AdminController {
 	
 	
 	// account
+	@PostMapping("/account/check_ano")
+	public ResponseEntity<DepositVO> check_ano(String ano){
+		
+		DepositVO vo = service.check_ano(ano);
+		log.info("check_ano vo : "+vo);
+		if(vo != null) {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+	}
+	
+	
+	
+	
+	@PostMapping("/account/deposit")
+	public String deposit(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
+		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 입금");
+		vo.setFrom_ano("");
+		if(service.deposit(vo)) {
+			rttr.addFlashAttribute("success", "true");
+			rttr.addFlashAttribute("ano", vo.getAno());
+			rttr.addFlashAttribute("amount", vo.getAmount());
+		}else {
+			rttr.addFlashAttribute("success", "false");
+		}
+		
+		
+		return "redirect:/admin/account/deposit";
+	}
+	
+	@PostMapping("/account/withdraw")
+	public String withdraw(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
+		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 출금");
+		vo.setFrom_ano("");
+		if(service.withdraw(vo)) {
+			rttr.addFlashAttribute("success", "true");
+			rttr.addFlashAttribute("ano", vo.getAno());
+			rttr.addFlashAttribute("amount", vo.getAmount());
+			log.info("출금 성공");
+		}else {
+			rttr.addFlashAttribute("success", "false");
+			log.info("출금 실패");
+		}
+		
+		
+		return "redirect:/admin/account/withdraw";
+	}
+	
+	
+	@GetMapping("/account/deposit")
+	public void deposit_get() {
+		log.info("deposit get 요청");
+	}
+	
+	@GetMapping("/account/withdraw")
+	public void withdraw_get() {
+		log.info("withdraw get 요청");
+	}
+	
 	
 	@GetMapping("/account/delete")
 	public String delete_account() {
@@ -509,10 +573,8 @@ public class AdminController {
 	public String notice_register(Admin_noticeVO vo, HttpServletRequest req) {
 		log.info("register_post"+vo);
 		log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
-		
-		vo.setAdmin_no("21");
-		vo.setWriter("dh");
-		vo.setAuth("1");
+		vo.setId(req.getRemoteUser());
+		vo.setWriter(service.selectOne(req.getRemoteUser()).getName());
 		if(service.notice_insert(vo)) {
 			return "redirect:/admin/notice";
 		}

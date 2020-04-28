@@ -35,7 +35,7 @@
 		select d.ano, d.p_name, d.day_withdraw, d.max_withdraw, d.balance, h.depositdate from (select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw, a.balance from (select * from deposittbl where ano=#{ano}) a
 		left join producttbl
 		on a.product = producttbl.product) d
-        left join (select * from deposit_history where ano=#{ano} and rownum=1 order by ano_h desc) h
+        left join (select * from deposit_history where ano=#{ano} and rownum=1 order by depositdate desc) h
         on d.ano=h.ano
 		
 	</select>
@@ -74,4 +74,36 @@
 		where ano=#{ano}
 	</select>
 	
+	
+	<!-- ano로 고객이름, cno, ano -->
+	<select id="check_ano" resultType="com.spring.domain.DepositVO">
+		select customertbl.name, d.cno, d.ano, d.balance 
+		from (select cno, ano, balance from deposittbl where ano = #{ano}) d
+		join customertbl
+		on customertbl.cno = d.cno
+	</select>
+	
+	
+	<!-- 계좌 입금 -->	
+	<insert id="deposit_hist">
+		insert into deposit_history(hno, from_ano, ano, name, deposit, balance, depositdate)
+		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})+#{amount}, sysdate)
+	</insert>
+	
+	<!-- 계좌 출금 -->	
+	<insert id="withdraw_hist">
+		insert into deposit_history(hno, from_ano, ano, name, withdrawal, balance, depositdate)
+		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})-#{amount}, sysdate)
+	</insert>
+	
+	
+	<update id="updateBalance_after"  parameterType="com.spring.domain.DepositVO">
+		<selectKey keyProperty="balance" order="BEFORE" resultType="int">
+			select balance from
+			(select rownum, balance from deposit_history where ano=#{ano} order by depositdate desc)
+			where rownum=1
+		</selectKey>
+		update deposittbl set balance=#{balance}
+		where ano=#{ano}
+	</update>
 </mapper>
