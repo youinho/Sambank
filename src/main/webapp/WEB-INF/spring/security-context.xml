@@ -38,7 +38,7 @@
 		<session-management invalid-session-url="/admin/login?error">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
-        <csrf disabled="false"/>
+        <csrf disabled="true"/>
     </http>
     
     

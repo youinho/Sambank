@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.domain.CustomerVO;
+import com.spring.service.RegisterService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -28,12 +34,16 @@ import lombok.extern.slf4j.Slf4j;
 
 
 public class LoginController {
-	@GetMapping("/login")
+	//login 
+	@Autowired
+	private RegisterService service;
+	
+	@GetMapping("/customerlogin")
 	public String registerGet(){		
-		log.info("¾ÆÀÌµð µî·Ï Æû º¸¿©ÁÖ±â");
+		log.info("ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½");
 		File file=new File("d://sam//1.txt");
 		if (file.exists()) {
-			return "/member/login";
+			return "/member/customerlogin";
 		}
 		else {
 			return "/member/downloadForm";
@@ -41,7 +51,24 @@ public class LoginController {
 	}
 
 	
+
 	
+//	@PostMapping("/customerlogin")
+//	public String loginPost(CustomerVO vo, HttpSession session) {
+//		
+//		log.info("login "+vo);
+//		
+//		CustomerVO info = service.customer_login(vo);
+//		log.info("dbï¿½ì ™è¹‚ï¿½ :"+info);
+//		if(info!=null) {	//
+//			session.setAttribute("info", info);
+//			return "redirect:/";
+//		}else {	//
+//			return "redirect:customerlogin";
+//		}
+//		
+//	}
+//	
 }
 
 

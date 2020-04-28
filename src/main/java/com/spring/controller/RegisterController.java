@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,20 +25,20 @@ public class RegisterController {
 	@Autowired
 	private RegisterService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/step1")
 	public void step1() {
-		log.info("step1 ��û");
-		//step1.jsp ������ �����ֱ�
+		log.info("step1 요청");
+	
 	}
 	
 	@PostMapping("/step2")
 	public String step2(@RequestParam(value="agree", defaultValue="false") boolean agree, RedirectAttributes rttr) {
-		//step1���� ������� ������� ���θ� ��������
-		log.info("step2 ��û ������ǿ��� : "+agree);
-		
-//			//������ǰ� true�ΰ�� step2������ �����ֱ�
-//			//������ǰ� false �ΰ�� step1 ������ �����ֱ�
+	
+		log.info("step2 요청 : "+agree);
+
 		if(!agree) {
 			rttr.addFlashAttribute("check", "false");
 			return "redirect:/register/step1";
@@ -50,21 +51,36 @@ public class RegisterController {
 	public String step3(@ModelAttribute("vo") CustomerVO vo) {
 		//step2.jsp에서 회원가입정보 가져오기
 		log.info("회원가입요청"+vo);
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+		if(service.registMember(vo)) {
+			return "redirect:/main";				
+		}else {
+			return "/register/step2";
+		}
+	}
+	
+	@GetMapping(value= {"/step2", "/step3"})
+	public String handleStep2_3() {
+		log.info("/step2, /step3 직접 요청");
+		return "redirect:step1";
+	}
+	
+	
+	//중복아이디 검사
+	@ResponseBody
+	@PostMapping("/checkId")
+	public String checkId(String userid) {
+		log.info("중복 아이디 검사 "+userid);
 		
-		//password와 confirm_password 값이 다르게 
-		//입력되었다면 step2로 보내기
-		//같다면 step3으로  이동
-		return "redirect:/main(index)";			
-//		if(vo.isPasswordEqualToConfirmPassword()) {
-//			//회원가입
-//			if(service.registMember(vo)) {
-//					
-//			}else {
-//				return "/register/step2";
-//			}
-//		}else {
-//			return "/register/step2";	
-//		}
+		if(service.dupId(userid) != null) {
+			log.info("널 아님");
+			return "false";
+		}else {
+			log.info("널");
+			return "true";
+		}
+		
+		
 	}
 	
 }

@@ -13,22 +13,23 @@ public class RegisterServiceImpl implements RegisterService {
 	@Autowired
 	private RegisterMapper mapper;
 	
-//	@Override
-//	public RegisterVO dupId(String userid) {
-//		return mapper.selectById(userid);
-//	}
-	
+	@Override
+	public CustomerVO dupId(String userid) {
+		return mapper.selectById(userid);
+	}
+	//회원가입
 	@Override
 	public boolean registMember(CustomerVO vo) {
 	
 		return mapper.insertMember(vo)>0?true:false;
 	}
-//	@Override
-//	public AuthInfo login(LoginVO vo) {
-//	
-//		return mapper.login(vo);
-//	}
-//	
+
+	@Override
+	public CustomerVO customer_login(CustomerVO vo) {
+	
+		return mapper.login(vo);
+	}
+	
 //	
 //	@Override
 //	public boolean leaveMember(LoginVO vo) {	

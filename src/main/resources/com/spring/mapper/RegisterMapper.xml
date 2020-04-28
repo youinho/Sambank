@@ -5,11 +5,20 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertMember">
-			insert into customertbl(cno, rating, name, gender, birth, resident_registration_no, address, mobile, id, password, passhint, email, withdrawal_limits, check_card) 
-		values(seq_customer.nextVal, #{rating}, #{name}, #{gender}, #{birth}, #{resident_registration_no},#{address}, #{mobile}, #{id}, #{password}, #{passhint}, #{email}, #{withdrawal_limits}, #{check_card}) 
-	
+		insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
+		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth}, #{reg_no}, #{address}, #{mobile}, #{id}, #{password}, #{email}) 
 	</insert>
 
+	<!-- 중복 아이디 검사 -->
+	<select id="selectById" resultType="com.spring.domain.CustomerVO">
+		select * from customertbl where id=#{id}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="com.spring.domain.CustomerVO">
+		select id, name from customertbl where id=#{id} and password=#{password}
+	
+	</select>
 
 
 	

@@ -55,6 +55,13 @@
 		</div>	
 	</div>
 	<div class="form-group row justify-content-center">
+		<label for="eng_name" class="col-sm-2 col-form-label">이름 </label>
+		<div class="col-sm-6">	
+			<input type="text" name="eng_name" id="eng_name" class="form-control" placeholder="영어 이름을 입력하세요" value="${vo.eng_name }"/>
+			<small id="eng_name" class="text-info"></small>
+		</div>	
+	</div>
+	<div class="form-group row justify-content-center">
 	<label for="gender" class="col-sm-2 col-form-label">성별 </label>
 	  <div class="col-sm-6">		
 			<div class="form-check form-check-inline">		
@@ -74,6 +81,20 @@
 		</div>	
 	</div>
 	<div class="form-group row justify-content-center">
+		<label for = "birth" class="col-sm-2 col-form-label">생년월일</label>
+		<div class="col-sm-6">	
+			<input type="birth" name="birth" id="birth" class="form-control" placeholder="000000" value="${vo.birth}"/>	
+			<small id="birth" class="text-info"></small>		
+		</div>	
+	</div>
+	<div class="form-group row justify-content-center">
+		<label for = "reg_no" class="col-sm-2 col-form-label">주민등록번호</label>
+		<div class="col-sm-6">	
+			<input type="reg_no" name="reg_no" id="reg_no" class="form-control" placeholder="000000" value="${vo.reg_no}"/>	
+			<small id="reg_no" class="text-info"></small>		
+		</div>	
+	</div>
+	<div class="form-group row justify-content-center">
 		<label for = "phone" class="col-sm-2 col-form-label">주소</label>
 		<div class="col-sm-6">	
 			<input type="address" name="address" id="address" class="form-control" placeholder="서울시 xx구 xx동" value="${vo.address }"/>	
@@ -87,6 +108,7 @@
 			<small id="email" class="text-info"></small>		
 		</div>	
 	</div>
+	
 	<div class="form-group text-center">		
 		<button type="submit" class="btn btn-primary">입력</button>
 	    <button type="reset" class="btn btn-secondary">취소</button>		
