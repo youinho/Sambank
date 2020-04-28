@@ -8,6 +8,8 @@ import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.CardVO;
+import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
@@ -64,4 +66,12 @@ public interface AdminService {
 	
 	public boolean deposit(Deposit_historyVO vo);
 	public boolean withdraw(Deposit_historyVO vo);
+	
+	
+	
+	//card
+	public List<Card_productVO> get_card_product();
+	public int check_card_no(String card_no);
+	public List<CardVO> get_cardList_by_ano(String ano);
+	public boolean register_card(CardVO vo);
 }

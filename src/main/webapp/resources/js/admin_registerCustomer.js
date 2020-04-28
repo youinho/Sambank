@@ -19,6 +19,9 @@ $(function(){
 		$(this).val($(this).val().toUpperCase());
 	})
 	
+	$(".gender-radio").change(function(){
+		$("input[name='gender']").val($(this).val());
+	})
 	
 	
 	

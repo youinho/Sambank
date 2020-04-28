@@ -50,8 +50,8 @@ function alert_success(){
 
 
 <div class="container">
-<div class="col-md-10">
-	<div class="col-md-10">
+<div class="col-md-12">
+	<div class="col-md-12">
 		<h3 class="page-header title">입금</h3>
 	</div>
 	<form action="" method="post" id="depositForm">
@@ -122,25 +122,6 @@ function alert_success(){
 		<sec:csrfInput/>
 		
 	</form>
-	
-	<ul class="list-group">
-	  <li class="list-group-item disabled" aria-disabled="true">
-	  	<tr>
-	  		<td>성함
-	  		</td>
-	  		<td>계좌번호
-	  		</td>
-	  		<td>입금액
-	  		</td>
-	  		<td>x버튼
-	  		</td>
-	  	</tr>
-	  </li>
-	  <li class="list-group-item">Dapibus ac facilisis in</li>
-	  <li class="list-group-item">Morbi leo risus</li>
-	  <li class="list-group-item">Porta ac consectetur ac</li>
-	  <li class="list-group-item">Vestibulum at eros</li>
-	</ul>
 	
 	
 	

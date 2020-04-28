@@ -50,8 +50,8 @@ function alert_created(){
 
 
 <div class="container">
-<div class="col-md-10">
-	<div class="col-md-10">
+<div class="col-md-12">
+	<div class="col-md-12">
 		<h3 class="page-header title">계좌 발급</h3>
 	</div>
 	<form action="" method="post" id="createForm">
@@ -171,7 +171,6 @@ function alert_created(){
 		
 		</table>
 		
-		<input type="hidden" name="branch" value="01" />
 		<sec:csrfInput/>
 	</form>
 </div>

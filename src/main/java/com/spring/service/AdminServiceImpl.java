@@ -11,6 +11,8 @@ import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.CardVO;
+import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
@@ -19,6 +21,7 @@ import com.spring.domain.ProductVO;
 import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
 import com.spring.mapper.AdminNoticeMapper;
+import com.spring.mapper.CardMapper;
 import com.spring.mapper.CustomerMapper;
 
 @Service
@@ -37,6 +40,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private CardMapper cardMapper;
 	
 	@Override
 	public AdminVO selectOne(String id) {
@@ -255,6 +261,34 @@ public class AdminServiceImpl implements AdminService {
 			return false;
 		}
 		return true;
+	}
+
+
+	@Override
+	public List<Card_productVO> get_card_product() {
+
+		return cardMapper.get_product();
+	}
+
+
+	@Override
+	public int check_card_no(String card_no) {
+
+		return cardMapper.check_card_no(card_no);
+	}
+
+
+	@Override
+	public List<CardVO> get_cardList_by_ano(String ano) {
+
+		return cardMapper.get_cardList(ano);
+	}
+
+
+	@Override
+	public boolean register_card(CardVO vo) {
+		
+		return cardMapper.register_card(vo)==1;
 	}
 	
 }

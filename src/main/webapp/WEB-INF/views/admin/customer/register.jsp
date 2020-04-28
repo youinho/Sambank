@@ -45,7 +45,7 @@ function alert_reg(){
 
 </script>
 
-	<div class="col-md-8 order-md-1">
+	<div class="col-md-12 order-md-1">
 	
       <h4 class="mb-3 title">고객 정보 등록</h4>
       <form class="needs-validation" novalidate="" method="post" id="register_customer">
@@ -80,7 +80,22 @@ function alert_reg(){
             
           </small>
           </div>
-          <input type="text" class="form-control" name="gender" id="gender" placeholder="예) 남">
+          <!-- <input type="text" class="form-control" name="gender" id="gender" placeholder="예) 남"> -->
+          <div class="input-group">
+			  <div class="input-group-prepend">
+			    <div class="input-group-text">
+			      <input type="radio" aria-label="Radio button for following text input" name="gender" id="male" value="남" checked>
+			    </div>
+			    
+			  </div>
+		  	  <input type="text" class="form-control" aria-label="Text input with radio button" readonly placeholder="남">
+		  	  <div class="input-group-prepend">
+			    <div class="input-group-text">
+			      <input type="radio" aria-label="Radio button for following text input" name="gender" id="female" value="여">
+			    </div>
+			  </div>
+		  	  <input type="text" class="form-control" aria-label="Text input with radio button" readonly placeholder="여">
+		</div>
         </div>
 		<div class="mb-3">
 		<div class="label">
@@ -92,15 +107,6 @@ function alert_reg(){
           <input type="text" class="form-control" name="birth" id="birth" placeholder="예) 19930928">
         </div>
 		
-		<div class="mb-3">
-		<div class="label">
-          <label for="reg_no">주민등록번호</label>
-          <small name="reg_no">
-            
-          </small>
-          </div>
-          <input type="text" class="form-control" name="reg_no" id="reg_no" placeholder="예) 1223344">
-        </div>
         
         <div class="mb-3">
          <div class="label">
@@ -160,6 +166,7 @@ function alert_reg(){
         
         
         <hr class="mb-4">
+        
         <sec:csrfInput/>
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 등록</button>
       </form>

@@ -18,17 +18,13 @@ $(function(){
 				maxlength:20,
 				validEngName:true
 			},
-			gender:{
+			/*gender:{
 				required:true,
 				gender:true
-			},
+			},*/
 			birth:{
 				required:true,
 				birth:true
-			},
-			reg_no:{
-				required:true,
-				regNo:true
 			},
 			address:{
 				required:true,
@@ -69,13 +65,10 @@ $(function(){
 				maxlength:"20자 이내로 입력해 주세요."
 			},
 			
-			gender:{
+			/*gender:{
 				required:"필수 입력 요소입니다."
-			},
+			},*/
 			birth:{
-				required:"필수 입력 요소입니다."
-			},
-			reg_no:{
 				required:"필수 입력 요소입니다."
 			},
 			address:{
@@ -125,10 +118,10 @@ $.validator.addMethod("email",function(value){
 	var regEmail=/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 	return regEmail.test(value);
 },"이메일 형식을 확인해 주세요");
-$.validator.addMethod("gender",function(value){
+/*$.validator.addMethod("gender",function(value){
 	var regGender=/^[남,여]{1}$/;
 	return regGender.test(value);
-},"입력 가능 : (남, 여)");
+},"입력 가능 : (남, 여)");*/
 $.validator.addMethod("birth",function(value){
 	var regBirth=/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	return regBirth.test(value);

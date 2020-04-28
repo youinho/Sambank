@@ -28,6 +28,8 @@ import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.CardVO;
+import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
@@ -72,24 +74,16 @@ public class AdminController {
 		
 		return "/admin/login";
 	}
-//	@PostMapping("/login")
-//	public String admin_login_post(AdminVO vo) {
-//		
-//		;
-//		
-//		
-//		if(!service.check_admin_password(vo)) {
-//			log.info("로그인 실패");
-//			return "/admin/login";
-//			
-//		}
-//		
-//		
-//		log.info("로그인 성공");
-//		return "/admin/notice";
-//	}
 	
 	
+	@PostMapping("/get_adminInfo")
+	public ResponseEntity<AdminVO> get_adminInfo(HttpServletRequest req){
+		AdminVO vo = service.selectOne(req.getRemoteUser());
+		vo.setPassword("");
+		vo.setPhone("");
+		
+		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
+	}
 	
 	@GetMapping("/header")
 	public void header() {
@@ -225,7 +219,7 @@ public class AdminController {
 	
 	
 	@PostMapping("/account/create")
-	public String create_account_post(DepositVO vo,@RequestParam("confirm_password") String confirm_password, RedirectAttributes rttr) {
+	public String create_account_post(DepositVO vo,@RequestParam("confirm_password") String confirm_password, RedirectAttributes rttr, HttpServletRequest req) {
 		
 		if(vo.getPassword()==null) {
 			rttr.addFlashAttribute("created", "false");
@@ -242,6 +236,8 @@ public class AdminController {
 			rttr.addFlashAttribute("created", "false");
 			return "redirect:/admin/account/create";
 		}
+		AdminVO admin_vo = service.selectOne(req.getRemoteUser());
+		vo.setBranch(admin_vo.getBranch());
 		if(!vali.check_account_register(vo)) {
 			rttr.addFlashAttribute("created", "false");
 			return "redirect:/admin/account/create";
@@ -644,5 +640,79 @@ public class AdminController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	//card
+	@GetMapping("/card/register")
+	public void register_card_get(Model model) {
+		
+		log.info("register_card_get 요청");
+	}
+	@PostMapping("/card/register")
+	public String register_card(CardVO vo, RedirectAttributes rttr) {
+		log.info("카드 등록 요청"+vo);
+		String sec = "";
+		sec += (int)(Math.random()*10);
+		sec += (int)(Math.random()*10);
+		sec += (int)(Math.random()*10);
+		vo.setSecurity_key(sec);
+		if(!vali.check_card_register(vo)) {
+			rttr.addFlashAttribute("registered", "false");
+			return "redirect:/admin/card/register";
+		}
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+		log.info("카드 등록 요청2");
+		if(service.register_card(vo)) {
+			rttr.addFlashAttribute("registered", "true");
+			rttr.addFlashAttribute("ano", vo.getAno());
+			rttr.addFlashAttribute("card_no", vo.getCard_no());
+		}else {
+			rttr.addFlashAttribute("registered", "false");
+		}
+			 
+		
+		
+		
+		return "redirect:/admin/card/register";
+	}
+	
+	
+	@PostMapping("/card/get_card_product")
+	public ResponseEntity<List<Card_productVO>> get_card_product(){
+		log.info("get_card_product 요청");
+		List<Card_productVO> list = service.get_card_product();
+		log.info(""+list);
+		if(list.size()==0) {
+			return new ResponseEntity<List<Card_productVO>>(list, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<List<Card_productVO>>(list, HttpStatus.OK);
+		
+	}
+	
+	@PostMapping("/card/call_card_no")
+	public ResponseEntity<String> call_card_no(int product){
+		String card_no = "";
+		while(true) {
+			card_no = product + "";
+			for(int i = 0; i < 13; i++) 
+				card_no += (int)(Math.random()*10);
+			if(service.check_card_no(card_no)==0)
+				break;
+		}
+		return new ResponseEntity<String>(card_no, HttpStatus.OK);
+	}
+	@PostMapping("card/get_cardInfo")
+	public ResponseEntity<List<CardVO>> get_cardInfo(String ano){
+		
+		List<CardVO> list = service.get_cardList_by_ano(ano);
+		
+		return new ResponseEntity<List<CardVO>>(list, HttpStatus.OK);
+		
+	}
 }
 

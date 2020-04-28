@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.CardMapper">
+
+
+	<!-- 카드 상품 목록 -->
+	<select id="get_product" resultType="com.spring.domain.Card_productVO">
+		select * from card_product
+	</select>
+
+	<!-- 카드번호 중복 확인 -->
+	<select id="check_card_no" resultType="int">
+		select count(*) from cardtbl where card_no=#{card_no}
+	</select>
+
+	<!-- ano로 카드번호 불러오기 -->
+	<select id="get_cardList" resultType="com.spring.domain.CardVO">
+		select card_no from cardtbl
+		where ano=#{ano}
+	</select>
+	
+	<!-- 카드 등록 -->
+	<insert id="register_card">
+		insert into cardtbl(card_no, password, ano, c_type,  security_key, limit, limit_month)
+		values(#{card_no}, #{password}, #{ano}, #{c_type},  #{security_key}, #{limit}, #{limit_month} )
+	</insert>
+	
+
+</mapper>

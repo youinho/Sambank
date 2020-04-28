@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.CardVO;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 
@@ -18,7 +19,6 @@ public class SBValidator {
 	public static final String REG_EMAIL = "^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
 	public static final String REG_GENDER = "^[남,여]{1}$";
 	public static final String REG_BIRTH = "^(19[0-9][0-9]|20\\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$";
-	public static final String REG_REGNO = "^[1-4][0-9]{6}$";
 	public static final String REG_MOBILE = "^01[0,1,6,7,9][0-9]{3,4}[0-9]{4}$";
 	public static final String REG_NAME = "^[가-힣]{2,}$";
 	public static final String REG_ENG_NAME = "^[A-Z,\\s]{3,}$";
@@ -28,6 +28,11 @@ public class SBValidator {
 	public static final String REG_ACC_TYPE = "^[1,2,3]{1}$";
 	public static final String REG_ACC_PRODUCT = "^[1,2,3]{1}[0-9]{2}$";
 	public static final String REG_ACC_WITHDRAW = "^[0-9]{1,12}$";
+	// -- card
+	public static final String REG_CARD_PWD = "^[0-9]{4}$";
+	public static final String REG_CARD_LIMIT = "^[0-9]{1,12}$";
+	public static final String REG_CARD_C_TYPE = "^[1,2,3][0-9]{2}$";
+	public static final String REG_CARD_SECURITY_KEY = "^[0-9]{3}$";
 	
 	
 	
@@ -53,7 +58,6 @@ public class SBValidator {
 				check(REG_BIRTH, vo.getBirth()),
 				check_email,
 				check(REG_GENDER, vo.getGender()),
-				check(REG_REGNO, vo.getReg_no()),
 				check(REG_MOBILE, vo.getMobile()),
 				check(REG_NAME, vo.getName()),
 				check(REG_ENG_NAME, vo.getEng_name()),
@@ -85,7 +89,6 @@ public class SBValidator {
 				check(REG_BIRTH, vo.getBirth()),
 				check_email,
 				check(REG_GENDER, vo.getGender()),
-				check(REG_REGNO, vo.getReg_no()),
 				check(REG_MOBILE, vo.getMobile()),
 				check(REG_NAME, vo.getName()),
 				check(REG_ENG_NAME, vo.getEng_name()),
@@ -109,11 +112,6 @@ public class SBValidator {
 		log.info("vali_acc_reg");
 		if(vo.getCno()==0)
 			return false;
-		try {
-			Integer.parseInt(vo.getBranch());
-		} catch (Exception e) {
-			return false;
-		}
 		
 		boolean[] check_list = new boolean[] {
 				check(REG_ACC_PWD, vo.getPassword()),
@@ -123,11 +121,14 @@ public class SBValidator {
 				check(REG_ACC_WITHDRAW, ""+vo.getDay_withdraw()),
 				check(REG_ACC_WITHDRAW, ""+vo.getMax_withdraw())
 		};
-		for(boolean b : check_list)
-			if(!b)
+		int i = 0;
+		for(boolean b : check_list) {
+			if(!b) {
+				System.out.println("vali "+i);
 				return false;
+			}
+		}
 		return true;
-			
 	}
 	
 	public boolean check_account_update(DepositVO vo) {
@@ -143,6 +144,34 @@ public class SBValidator {
 			if(!b)	
 				return false;
 			
+		return true;
+			
+	}
+	
+	public boolean check_card_register(CardVO vo) {
+		log.info("vali card start");
+		if(!vo.getPassword().equals(vo.getConfirm_password())) {
+			log.info("password v");
+			return false;
+		}
+		
+		boolean[] check_list = new boolean[] {
+				check(REG_CARD_PWD, vo.getPassword()),
+				check(REG_CARD_LIMIT, ""+vo.getLimit()),
+				check(REG_CARD_LIMIT, ""+vo.getLimit_month()),
+				check(REG_CARD_C_TYPE, ""+vo.getC_type()),
+				check(REG_CARD_SECURITY_KEY, ""+vo.getSecurity_key())
+
+		};
+		
+		int i = 0;
+		for(boolean b : check_list) {
+			if(!b) {	
+				System.out.println("vali"+i);
+				return false;
+			}
+			i++;
+		}	
 		return true;
 			
 	}

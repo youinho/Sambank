@@ -5,7 +5,7 @@
 
 <!-- cno로 고객정보 -->
 	<select id="select_by_cno" resultType="com.spring.domain.CustomerVO">
-		select cno, name, eng_name, gender, birth, reg_no, address, mobile, id, email from customertbl
+		select cno, name, eng_name, gender, birth, address, mobile, id, email from customertbl
 		where cno=#{cno}
 	</select>
 
@@ -19,7 +19,7 @@
 <!-- 고객 정보 수정 -->
 	<update id="update_customer">
 		update customertbl 
-		set name=#{name}, eng_name=#{eng_name}, gender=#{gender}, birth=#{birth}, reg_no=#{reg_no}, address=#{address}, mobile=#{mobile}, email=#{email}
+		set name=#{name}, eng_name=#{eng_name}, gender=#{gender}, birth=#{birth}, address=#{address}, mobile=#{mobile}, email=#{email}
 		where cno=#{cno}
 	
 	</update>
@@ -27,7 +27,7 @@
 <!-- 고객 정보 삭제 -->
 	<delete id="delete_customer">
 		delete from customertbl
-		where cno=#{cno} and id=#{id} and birth=#{birth} and reg_no=#{reg_no} and mobile=#{mobile}
+		where cno=#{cno} and id=#{id} and birth=#{birth} and mobile=#{mobile}
 	</delete>
 
 
@@ -51,8 +51,8 @@
 
 <!-- 고객 등록 -->
 	<insert id="register_customer">
-		insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
-		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth}, #{reg_no}, #{address}, #{mobile}, #{id}, #{password}, #{email}) 
+		insert into customertbl(cno, name, eng_name, gender, birth, address, mobile, id, password, email) 
+		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth}, #{address}, #{mobile}, #{id}, #{password}, #{email}) 
 	
 	</insert>
 

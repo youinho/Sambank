@@ -49,8 +49,8 @@ function alert_updated(){
 
 
 <div class="container">
-<div class="col-md-10">
-	<div class="col-md-10">
+<div class="col-md-12">
+	<div class="col-md-12">
 		<h3 class="page-header title">계좌 정보 수정</h3>
 	</div>
 	<form action="" method="post" id="modifyForm">
@@ -153,7 +153,6 @@ function alert_updated(){
 		
 		</table>
 		
-		<input type="hidden" name="branch" value="01" />
 		<sec:csrfInput/>
 	</form>
 </div>

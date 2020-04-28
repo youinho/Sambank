@@ -425,3 +425,41 @@ where rownum=1;
 select * from customertbl;
 select * from deposit_history;
 
+create table card_product(
+    product number(3) not null primary key,
+    p_name nvarchar2(100) not null,
+    service1 char(1) default 0,
+    service2 char(1) default 0,
+    service3 char(1) default 0,
+    service4 char(1) default 0,
+    service5 char(1) default 0,
+    service6 char(1) default 0,
+    service7 char(1) default 0,
+    service8 char(1) default 0,
+    service9 char(1) default 0,
+    service10 char(1) default 0
+);
+drop table card_product;
+insert into card_product(product, p_name) values(101, 'SAMBANK 골드카드');
+insert into card_product(product, p_name) values(102, 'SAMBANK 실버카드');
+insert into card_product(product, p_name) values(103, 'SAMBANK 브론즈카드');
+alter table cardtbl modify(exp_date nvarchar2(10) default to_char(sysdate,'YYYYMM'));
+alter table cardtbl add(limit_month number(10) not null);
+alter table cardtbl add(limit number(10) not null);
+alter table cardtbl modify(limit_month number(10) not null);
+alter table cardtbl modify(condition char(1) default 0);
+alter table cardtbl drop(p_name);
+alter table cardtbl drop(limit);
+alter table cardtbl add(password nvarchar2(100) not null);
+alter table cardtbl modify(card_no number(16));
+commit;
+select * from cardtbl;
+delete from cardtbl;
+insert into cardtbl(card_no, password, ano, c_type,  security_key, limit, limit_month)   values(1018805244807484, '1234', '10335034467868', 101,  235, 50, 540 );
+select * from admintbl;
+update admintbl set name='김동혁' where id='sam';
+select * from admintbl;
+select * from admin_group_members;
+select * from cardtbl;
+delete from cardtbl where security_key=245;
+commit;

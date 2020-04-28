@@ -42,21 +42,64 @@
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
+$(function(){
+	$.ajax({
+		url : "/admin/get_adminInfo",
+		type : "post",
+		beforeSend : function(xhr)
+        {   
+            xhr.setRequestHeader(hn, tk);
+        },
+        dataType : "text",
+		success : function(result){
+			let vo = JSON.parse(result); 
+			
+			$("#admin_branch").html("<strong>"+vo.branch+"</strong>");
+			$("#admin_rank").html("<strong>"+vo.rank+"</strong>");
+			$("#admin_name").html("<strong>"+vo.name+"</strong>");
+			
+			
+		}
+	})
+})
 </script>
 </head>
 <body>
     <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
-  
+  <ul class="navbar-nav px-3 mr-auto">
+  	<li></li>
+  </ul>
   <ul class="navbar-nav px-3">
+  	<li class="nav-item text-nowrap">
+	  	<span class="navbar-text" id="admin_branch">
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li>
+  		<span class="navbar-text" id="admin_rank">
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li>
+  		<span class="navbar-text" id="admin_name">
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	
     <li class="nav-item text-nowrap">
     <sec:authorize access="isAuthenticated()">
+    	
     	<form:form action="${pageContext.request.contextPath}/admin/logout" method="POST">
       		<input class="nav-link btn btn-outline-secondary btn-sm" type="submit" value="로그아웃">
       	</form:form>
     </sec:authorize>
     </li>
   </ul>
+  
 </nav>
 
 <div class="container-fluid">
@@ -121,10 +164,10 @@ let tk = "${_csrf.token}"
                                     <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/account/deposit" class="nav-link child" id="deposit">계좌 입금</a>
+                                    <a href="/admin/account/deposit" class="nav-link child" id="deposit">계좌 입금 　　</a>
                                 </li>
                                 <li>
-                                    <a href="/admin/account/withdraw" class="nav-link child" id="withdraw">계좌 출금</a>
+                                    <a href="/admin/account/withdraw" class="nav-link child" id="withdraw">계좌 출금 　　</a>
                                 </li>
                             </ul> 
                             <!-- /.nav-second-level -->
@@ -144,10 +187,10 @@ let tk = "${_csrf.token}"
                              카드 관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="" class="nav-link child" id="">카드 발급</a>
+                                    <a href="/admin/card/register" class="nav-link child" id="regCard">카드 발급 　　</a>
                                 </li>
                                 <li>
-                                    <a href="" class="nav-link child" id="">카드 정보 수정</a>
+                                    <a href="/admin/card/modify" class="nav-link child" id="modCard">카드 정보 수정</a>
                                 </li>
                                 <li>
                                     <a href="#" class="nav-link child" id="">카드 통합 관리</a>

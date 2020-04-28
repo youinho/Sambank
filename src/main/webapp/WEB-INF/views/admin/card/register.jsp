@@ -5,22 +5,28 @@
 
 <script>
 $(function(){
-	$("#delACC").addClass("active");
+	$("#regCard").addClass("active");
+	
+	
+	
+	
+	
+	
 })
 
-function alert_deleted(){
-	let deleted = "${deleted}";
-	console.log("alert_deleted");
-	if(deleted ==='' || history.state){
+function alert_registered(){
+	let registered = "${registered}";
+	console.log("alert_registered");
+	if(registered ==='' || history.state){
 		return;
 	}
 	
 	
-	if(deleted != "" && deleted != null){
-		if(deleted=="true"){
-			alert("${ano}"+"계좌의 삭제가 완료되었습니다.");
-		}else if(deleted=="false"){
-			alert("계좌삭제에 실패했습니다.");
+	if(registered != "" && registered != null){
+		if(registered=="true"){
+			alert("${ano}"+"계좌의 카드 등록이 완료되었습니다.");
+		}else if(registered=="false"){
+			alert("카드 등록에 실패했습니다.");
 		}
 	}
 }
@@ -51,9 +57,9 @@ function alert_deleted(){
 <div class="container">
 <div class="col-md-12">
 	<div class="col-md-12">
-		<h3 class="page-header title">계좌 정보 삭제</h3>
+		<h3 class="page-header title">신규 카드 등록</h3>
 	</div>
-	<form action="" method="post" id="deleteForm">
+	<form action="" method="post" id="registerForm">
 		<table class="table" style="margin:0;padding:0;">
 		
 		<tr>
@@ -64,13 +70,19 @@ function alert_deleted(){
 			  </div>
 			  <input type="text"  class="form-control" id="cno" name="cno" placeholder="고객 번호" readonly>
 			  <input type="text"  class="form-control" id="name" name="name" placeholder="성함" readonly>
-			  <div class="input-group-append" style="width:18%">
+			  <div class="input-group-append" style="width:110px">
+			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total_card" name="total" style="width:100%">보유 카드</button>
+			    <div class="dropdown-menu" id="card-list">
+			    	<div role="separator" class="dropdown-divider"></div>
+			    </div>
+			  </div>
+			  <div class="input-group-append" style="width:110px">
 			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
 			    	<div role="separator" class="dropdown-divider"></div>
 			    </div>
 			  </div>
-			  <div class="input-group-append" style="width:18%">
+			  <div class="input-group-append" style="width:20%">
 			    <button class="btn btn-outline-secondary" type="button" id="searchCS" style="width:100%">고객 검색</button>
 			  </div>
 			</div>
@@ -85,16 +97,38 @@ function alert_deleted(){
 				  <div class="input-group-prepend" style="width:15%">
 				    <span class="input-group-text" style="width:100%"><strong>상품/ 계좌</strong></span>
 				  </div>
-				  
 				  <input type="text" aria-label="p_name" class="form-control" name="p_name" readonly>
 				  <input type="text" aria-label="ano" class="form-control" name="ano" readonly>
-				  <div class="input-group-append" style="width:110px">
-				    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total_card" name="total" style="width:100%">보유 카드</button>
-				    <div class="dropdown-menu" id="card-list">
-				    	<div role="separator" class="dropdown-divider"></div>
-				    </div>
-				  </div>
 				  
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<div class="input-group">
+				  <div class="input-group-prepend" style="width:15%">
+				    <p class="input-group-text" style="width:100%"><strong>카드 상품</strong></p>
+				  </div>
+				  <select class="custom-select" id="product" name="c_type">
+				    <option value="0" selected>-- 상품 선택 --</option>
+				  </select>
+				</div>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td>
+				<div class="input-group">
+				  <div class="input-group-prepend" style="width:15%">
+				    <p class="input-group-text" style="width:100%"><strong>카드번호</strong></p>
+				  </div>
+				  <input type="text" aria-label="First name" class="form-control" id="card_no" name="card_no" readonly>
+				  
+				  <div class="input-group-append" style="width:18%">
+				    <button class="btn btn-outline-secondary" type="button" id="call_card_no" style="width:100%">카드번호 요청</button>
+				  </div>
 				</div>
 			</td>
 		</tr>
@@ -104,10 +138,10 @@ function alert_deleted(){
 			<td>
 			<div class="input-group">
 			  <div class="input-group-prepend" style="width:15%">
-			    <span class="input-group-text" style="width:100%"><strong>계좌 정보</strong></span>
+			    <span class="input-group-text" style="width:100%"><strong>한도</strong></span>
 			  </div>
-			  <input type="text"  class="form-control" name="latest_date" placeholder="최근 거래일" readonly>
-			  <input type="text"  class="form-control" name="balance" placeholder="잔여 예금" readonly>
+			  <input type="text"  class="form-control" name="limit_month" placeholder="월 한도" required>
+			  <input type="text"  class="form-control" name="limit" placeholder="1회 한도" required>
 			</div>
 			</td>
 		</tr>
@@ -134,9 +168,6 @@ function alert_deleted(){
 					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"/>
 					</svg>
 			    </button>
-			    <button class="btn btn-outline-primary" type="button" id="changePwdBtn">
-			    	비밀번호 확인
-			    </button>
 			  <div class="input-group-append">
 			  </div>
 			</div>
@@ -148,7 +179,7 @@ function alert_deleted(){
 			<td>
 				<div class="d-flex justify-content-end">
 					<div class="btn-group outline-primary" role="group">
-						<button class="btn btn-outline-danger" style="border-radius:0.25em;" type="submit" id="submitBtn" disabled>계좌 삭제</button>
+						<button class="btn btn-outline-primary" style="border-radius:0.25em;" type="submit" id="submitBtn">카드 등록</button>
 					</div>
 				</div>
 			</td>
@@ -159,7 +190,6 @@ function alert_deleted(){
 		
 		
 		</table>
-		
 		<sec:csrfInput/>
 	</form>
 </div>
@@ -168,4 +198,7 @@ function alert_deleted(){
 	
 
 
-<script src="/resources/js/admin_deleteAccount.js"></script>
+<script src="/resources/js/admin_registerCard.js"></script>
+<script>
+
+</script>

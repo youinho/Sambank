@@ -50,8 +50,8 @@ function alert_success(){
 
 
 <div class="container">
-<div class="col-md-10">
-	<div class="col-md-10">
+<div class="col-md-12">
+	<div class="col-md-12">
 		<h3 class="page-header title">출금</h3>
 	</div>
 	<form action="" method="post" id="withdrawForm">

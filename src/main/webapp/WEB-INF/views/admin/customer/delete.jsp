@@ -41,7 +41,7 @@ function alert_del(){
 }
 </script>
 
-	<div class="col-md-8 order-md-1">
+	<div class="col-md-12 order-md-1">
 	
       <h4 class="mb-3 title">고객 정보 삭제</h4>
       <div class="input-group">
@@ -85,24 +85,7 @@ function alert_del(){
 		    </div>
         </div>
 		
-		<div class="mb-3">
-		<div class="label">
-          <label for="reg_no">주민등록번호</label>
-          <small name="reg_no">
-            
-          </small>
-          </div>
-          <div class="input-group">
-          <input type="text" class="form-control" name="reg_no" id="reg_no" placeholder="예) 1223344" readonly>
-          <button class="btn btn-outline-secondary" type="button" id="reg_no_lock">
-					    	<svg class="bi bi-lock-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  <rect width="11" height="9" x="2.5" y="7" rx="2"/>
-							  <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
-							</svg>
-					    </button>
-		    </div>
-        </div>
-        
+		
         <div class="mb-3">
         <div class="label">
           <label for="mobile">전화번호 </label>

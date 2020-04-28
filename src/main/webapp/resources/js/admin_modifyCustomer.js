@@ -100,7 +100,6 @@ function searchCS_callback(cno){
 				$("input[name='eng_name']").val(vo.eng_name);
 				$("input[name='gender']").val(vo.gender);
 				$("input[name='birth']").val(vo.birth);
-				$("input[name='reg_no']").val(vo.reg_no);
 				$("input[name='address']").val(vo.address);
 				$("input[name='mobile']").val(vo.mobile);
 				$("input[name='email']").val(vo.email);

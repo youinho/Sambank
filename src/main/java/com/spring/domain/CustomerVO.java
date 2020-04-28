@@ -11,7 +11,6 @@ public class CustomerVO {
 	private String eng_name;
 	private String gender;						//고객 성별
 	private String birth;						//고객 생일
-	private String reg_no;						//고객 주민번호
 	private String address;						//고객 주소
 	private String mobile;						//고객 휴대폰번호
 	private String id;							//아이디
