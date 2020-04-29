@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +77,9 @@
 			  	</button>
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			 <!--  nav bar 오른쪽 정렬 -->
+			  <h2>${info.id }</h2>
+			<c:choose>
+  			<c:when test="${empty info }">
 		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
 			  		<li class="nav-item dropdown">
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,6 +92,16 @@
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
 					</li>
+			</c:when>
+			<c:otherwise>
+					<li class="nav-item active">
+					  <a class="nav-link" href="#">회원가입</a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="#">로그인</a>
+					</li>
+			</c:otherwise>	
+			</c:choose>
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">개인</a>
 					</li>
@@ -227,7 +241,7 @@
 		<!-- 빠른메뉴 -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
-				<li><a href="" class="q1">전체계좌조회</a></li>
+				<li><a href="account" class="q1">전체계좌조회</a></li>
 				<li><a href="" class="q2">계좌이체</a></li>
 				<li><a href="" onclick="" title="새창 열기">빠른조회</a></li>
 			</ul>

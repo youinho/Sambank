@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value="/member/*",method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/member/*")
 
 
 public class LoginController {
@@ -38,9 +39,12 @@ public class LoginController {
 	@Autowired
 	private RegisterService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@GetMapping("/customerlogin")
 	public String registerGet(){		
-		log.info("���̵� ��� �� �����ֱ�");
+		
 		File file=new File("d://sam//1.txt");
 		if (file.exists()) {
 			return "/member/customerlogin";
@@ -50,25 +54,30 @@ public class LoginController {
 		}
 	}
 
+	@GetMapping("/downloadForm")
+	public void download(){
+		log.info("download 요청");
+	}
 	
 
 	
-//	@PostMapping("/customerlogin")
-//	public String loginPost(CustomerVO vo, HttpSession session) {
-//		
-//		log.info("login "+vo);
-//		
-//		CustomerVO info = service.customer_login(vo);
-//		log.info("db�젙蹂� :"+info);
-//		if(info!=null) {	//
-//			session.setAttribute("info", info);
-//			return "redirect:/";
-//		}else {	//
-//			return "redirect:customerlogin";
-//		}
-//		
-//	}
-//	
+	@PostMapping("/customerlogin")
+	public String loginPost(CustomerVO vo, HttpSession session) {
+		
+		log.info("login "+vo);
+		log.info("확인전 비밀번호"+vo.getPassword());
+		CustomerVO info = service.customer_login(vo);
+		log.info("확인후 비밀번호"+info.getPassword());
+		String pw=vo.getPassword();
+		log.info("db�젙蹂� :"+info);
+		session.setAttribute("info", info);
+		if(passwordEncoder.matches( pw,info.getPassword())) {
+			return "redirect:/main";
+		}
+		return "/member/customerlogin";
+		
+	}
+	
 }
 
 
