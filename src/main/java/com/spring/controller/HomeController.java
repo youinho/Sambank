@@ -90,10 +90,5 @@ public class HomeController {
 		return "/test_success";
 	}
 	
-	@GetMapping("/login")	// 로그인 테스트 페이지
-	public String loginadm() {
-		
-		
-		return "/admin/login";
-	}
+
 }

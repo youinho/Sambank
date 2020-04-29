@@ -38,7 +38,7 @@ let tk = "${_csrf.token}"
 			<div id="login" class="col-lg-3">
 				<c:url value="/customer/login_process" var="loginUrl" />
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
-		        <%-- <sec:authorize access="isAnonymous()"> --%>
+		        <sec:authorize access="isAnonymous()">
 		        <form:form name="f" action="${loginUrl}" method="POST">
 		            <c:if test="${param.error != null}"> 
 		            	<p>로그인이 거부되었습니다.</p> 
@@ -60,9 +60,9 @@ let tk = "${_csrf.token}"
 		            </fieldset>
 		        <%-- </form> --%>
 		        </form:form>
-		        <%-- </sec:authorize> --%>
+		        </sec:authorize>
 		        <sec:authorize access="isAuthenticated()">
-			        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+			        <form:form action="${pageContext.request.contextPath}/customer/logout" method="POST">
 		      			<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />
 		      		</form:form>
 	      		</sec:authorize>
