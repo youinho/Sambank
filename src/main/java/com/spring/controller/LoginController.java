@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value="/member/*",method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/member/*")
 
 
 public class LoginController {
@@ -40,7 +40,7 @@ public class LoginController {
 	
 	@GetMapping("/customerlogin")
 	public String registerGet(){		
-		log.info("���̵� ��� �� �����ֱ�");
+		
 		File file=new File("d://sam//1.txt");
 		if (file.exists()) {
 			return "/member/customerlogin";
@@ -50,25 +50,29 @@ public class LoginController {
 		}
 	}
 
+	@GetMapping("/downloadForm")
+	public void download(){
+		log.info("download 요청");
+	}
 	
 
 	
-//	@PostMapping("/customerlogin")
-//	public String loginPost(CustomerVO vo, HttpSession session) {
-//		
-//		log.info("login "+vo);
-//		
-//		CustomerVO info = service.customer_login(vo);
-//		log.info("db�젙蹂� :"+info);
-//		if(info!=null) {	//
-//			session.setAttribute("info", info);
-//			return "redirect:/";
-//		}else {	//
-//			return "redirect:customerlogin";
-//		}
-//		
-//	}
-//	
+	@PostMapping("/customerlogin")
+	public String loginPost(CustomerVO vo, HttpSession session) {
+		
+		log.info("login "+vo);
+		
+		CustomerVO info = service.customer_login(vo);
+		log.info("db�젙蹂� :"+info);
+		if(info!=null) {	//
+			session.setAttribute("info", info);
+			return "redirect:/main";
+		}else {	//
+			return "redirect:/customerlogin";
+		}
+		
+	}
+	
 }
 
 

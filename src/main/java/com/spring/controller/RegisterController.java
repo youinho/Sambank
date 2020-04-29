@@ -59,11 +59,11 @@ public class RegisterController {
 		}
 	}
 	
-	@GetMapping(value= {"/step2", "/step3"})
-	public String handleStep2_3() {
-		log.info("/step2, /step3 직접 요청");
-		return "redirect:step1";
-	}
+//	@GetMapping(value= {"/step2", "/step3"})
+//	public String handleStep2_3() {
+//		log.info("/step2, /step3 직접 요청");
+//		return "redirect:step1";
+//	}
 	
 	
 	//중복아이디 검사
