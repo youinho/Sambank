@@ -314,8 +314,18 @@ select * from admin_groups;
 select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, admin_group_authorities.group_id, admin_groups.group_name
 		from (select * from admintbl where id='sam') ad, admin_group_members, admin_groups,admin_group_authorities
 		where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = admin_group_authorities.group_id;
-        
+        select group_id from admin_group_members where id='sam';
 select * from admin_groups;
+select * from admin_group_members;
 select admin_groups.id, admin_groups.group_name from admin_groups
-where admin_groups.id<(select group_id from admin_group_members where id='sam');
+where admin_groups.id < to_number((select group_id from admin_group_members where admin_group_members.id='sam'), '99')
+order by id asc;
 select * from admintbl;
+
+
+select group_id from admin_group_members where id='sam';
+
+select * from admintbl;
+select * from admin_group_members;
+
+select seq_admin.nextVal from dual;
