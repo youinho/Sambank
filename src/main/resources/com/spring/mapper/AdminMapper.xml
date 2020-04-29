@@ -74,4 +74,17 @@
 		values(#{group_id}, #{id})
 		
 	</insert>
+	
+	
+	<update id="update_admin">
+		update admintbl set name=#{name}, branch=#{branch}, rank=#{rank}, enabled=#{enabled}, mobile=#{mobile}
+		where id=#{id}
+	
+	</update>
+	<update id="update_admin_member">
+		update admin_group_members set group_id=#{group_id}
+		where id=#{id}
+	</update>
+	
+	
 </mapper>

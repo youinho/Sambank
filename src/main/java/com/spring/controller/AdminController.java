@@ -113,6 +113,17 @@ public class AdminController {
 		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
 	}
 	
+	@ResponseBody
+	@PostMapping("/get_adminInfo")
+	public ResponseEntity<AdminVO> get_adminInfo(HttpServletRequest req){
+		AdminVO vo = service.selectOne(req.getRemoteUser());
+		vo.setPassword("");
+		vo.setMobile("");
+		
+		log.info("return vo : "+vo);
+		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
+	}
+	
 	@GetMapping("/header")
 	public void header() {
 		log.info("header 요청");
@@ -151,12 +162,9 @@ public class AdminController {
 			if(vo.getPassword().equals(vo.getConfirm_password())) {
 				if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
 					vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-					try {
-						if(service.admin_insert(vo)) {
-							rttr.addFlashAttribute("registered", "true");
-						}
-					} catch (Exception e) {
-						rttr.addFlashAttribute("registered", "false");
+					if(service.admin_insert(vo)) {
+						rttr.addFlashAttribute("registered", "true");
+						rttr.addFlashAttribute("name", vo.getName());
 						return "redirect:/admin/manage";
 					}
 				}

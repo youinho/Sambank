@@ -23,22 +23,23 @@ function alert_updated(){
 	
 	if(updated != "" && updated != null){
 		if(updated=="true"){
-			alert("${card_no}"+"카드의 카드 수정이 완료되었습니다.");
+			alert("관리자 ${name}"+" 의 정보수정이 완료되었습니다.");
 		}else if(updated=="false"){
-			alert("카드 정보 수정에 실패했습니다.");
+			alert("정보 수정에 실패했습니다.");
 		}
 	}
 }
 
 function alert_reg(){
 	let registered = "${registered}";
+	console.log(registered);
 	if(registered ==='' || history.state){
 		return;
 	}
 	
-	if(registered === "success"){
-		alert("${name}"+" 고객님의 등록이 완료되었습니다.");
-	}else if(registered === "failed"){
+	if(registered === "true"){
+		alert("관리자 ${name}"+" 의 등록이 완료되었습니다.");
+	}else if(registered === "false"){
 		alert("등록에 실패했습니다.");
 	}
 	
