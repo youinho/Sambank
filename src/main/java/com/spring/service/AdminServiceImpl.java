@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.CardVO;
+import com.spring.domain.Card_conditionVO;
 import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
@@ -289,6 +291,82 @@ public class AdminServiceImpl implements AdminService {
 	public boolean register_card(CardVO vo) {
 		
 		return cardMapper.register_card(vo)==1;
+	}
+
+
+	@Override
+	public CardVO get_cardInfo(String card_no) {
+
+		return cardMapper.get_cardInfo(card_no);
+	}
+
+
+	@Override
+	public List<Card_conditionVO> get_condition() {
+
+		return cardMapper.get_condition();
+	}
+
+
+	@Override
+	public boolean update_card_password(CardVO vo) {
+
+		return cardMapper.update_password(vo)==1;
+	}
+
+
+	@Override
+	public boolean update_cardInfo(CardVO vo) {
+
+		return cardMapper.update_cardInfo(vo)==1;
+	}
+
+
+	@Override
+	public List<AdminVO> get_admins(AdminVO vo) {
+
+		return adminMapper.search_admins(vo);
+	}
+
+
+	@Override
+	public int get_groupID(String id) {
+
+		return adminMapper.get_groupID(id);
+	}
+
+
+	@Override
+	public AdminVO get_adminInfo(String id) {
+
+		return adminMapper.get_adminInfo(id);
+	}
+
+
+	@Override
+	public List<Admin_groupVO> get_groupList(String id) {
+
+		return adminMapper.get_groupList(id);
+	}
+
+
+	@Override
+	public boolean admin_update_password(AdminVO vo) {
+
+		return adminMapper.admin_update_password(vo)==1;
+	}
+
+	@Transactional
+	@Override
+	public boolean admin_insert(AdminVO vo) {
+		if(adminMapper.insert_admin(vo)==1) {
+			if(adminMapper.insert_admin_group(vo)==1) {
+				return true;
+			}
+		}
+		
+		
+		return false;
 	}
 	
 }

@@ -1,6 +1,6 @@
 $(function(){
 	
-	alert_registered();
+	alert_updated();
 	history.replaceState({}, null, null);
 	//팝업
 	
@@ -47,14 +47,14 @@ $(function(){
 		
 		
 		$.ajax({
-			url: "/admin/account/update_password",
+			url: "/admin/card/update_password",
 			type : "post",
 			beforeSend : function(xhr)
             {   
 				xhr.setRequestHeader(hn, tk);
             },
 			data : {
-				ano : $("input[name='ano']").val(),
+				card_no : $("input[name='card_no']").val(),
 				password : $("input[name='password']").val(),
 				confirm_password : $("input[name='confirm_password']").val()
 			},
@@ -102,7 +102,7 @@ $(function(){
 			dataType : "text",
 			success : function(result){
 				var vo = JSON.parse(result);
-				$("input[name='p_name']").val(vo.p_name);
+				$("input[name='deposit_p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
 			}
 		})
@@ -141,43 +141,34 @@ $(function(){
 		
 	})
 	
-	$("#call_card_no").click(function(e){
-		e.preventDefault();
+	$("#card-list").on("click",".card-item" ,function(){
+		console.log("클릭!")
 		
-		
-		
-		console.log("call_card_no")
-		let form = $("#registerForm");
-		let product = form.find("#product").val();
-		let cno = form.find("input[name='cno']").val();
-		
-		if(cno==null||cno==""||product==null||product=="0"){
-			return false;
-		}
-		
+		var card_no = $(this).text();
 		
 		$.ajax({
-			url : "/admin/card/call_card_no",
+			url:"/admin/card/get_cardInfo",
 			type : "post",
 			beforeSend : function(xhr)
             {   
-                xhr.setRequestHeader(hn, tk);
+				xhr.setRequestHeader(hn, tk);
             },
-			data :{
-				product : product,
-				cno : cno
+			data : {
+				card_no : card_no
 			},
 			dataType : "text",
 			success : function(result){
-				$("input[name='card_no']").val(result);
+				var vo = JSON.parse(result);
+				$("input[name='card_p_name']").val(vo.p_name);
+				$("input[name='card_no']").val(vo.card_no);
+				$("input[name='limit']").val(vo.limit);
+				$("input[name='limit_month']").val(vo.limit_month);
+				$("select[name='condition']").find("option").removeAttr("selected");
+				$("select[name='condition']").find("option[value='"+vo.condition+"']").prop("selected", true);
 			}
-			
-			
-			
-		
-			
 		})
-	
+		
+		
 	})
 	
 	
@@ -185,10 +176,7 @@ $(function(){
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
 		console.log("prevent");
-		if($("input[name='ano']").val()===""){
-			console.log("ano");
-			return false;
-		}
+		
 		if($("input[name='card_no']").val()===""){
 			console.log("card_no");
 			return false;
@@ -197,54 +185,8 @@ $(function(){
 			console.log("limit");
 			return false;
 		}
-		if($("#c_type").val()=="0"){
-			console.log("ctype");
-			return false;
-		}
-		if($("input[name='password']").val()===""||$("input[name='password']").val()!==$("input[name='confirm_password']").val()){
-			alert("비밀번호를 확인해 주세요.");
-			return false;
-		}
-		$("#registerForm").submit();
+		$("#modifyForm").submit();
 	})
-	
-	
-	
-	$.ajax({
-		url : "/admin/card/get_card_product",
-		type : "post",
-		beforeSend : function(xhr)
-	    {   
-	        xhr.setRequestHeader(hn, tk);
-	    },
-	    dataType : "text",
-		success : function(result){
-			console.log(result);
-			let list = JSON.parse(result); 
-			if(list.length == 0){
-				return;
-			}
-			
-			str = "<option value='0' selected>-- 상품 선택 --</option>"
-			for(let i = 0; i < list.length; i++){
-				
-				str += "<option value='"+list[i].product+"'>"+list[i].p_name+"</option>";		
-				
-			}
-			$("#product").html(str);
-			console.log(str);
-		},
-		error: function(result){
-			alert("상품목록을 불러오는 중 오류가 발생했습니다.");
-		}
-			
-			
-			
-
-			
-	})
-	
-	
 	
 	
 	
@@ -270,7 +212,7 @@ function input_password(password, wInput){
 
 
 function searchCS_callback(cno){
-	$("#registerForm")[0].reset();
+	$("#modifyForm")[0].reset();
 	$("input[name='cno']").val(cno);
 	
 	$.ajax({

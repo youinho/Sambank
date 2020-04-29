@@ -17,6 +17,7 @@
 	<select id="get_cardList" resultType="com.spring.domain.CardVO">
 		select card_no from cardtbl
 		where ano=#{ano}
+		order by createdate desc
 	</select>
 	
 	<!-- 카드 등록 -->
@@ -25,5 +26,32 @@
 		values(#{card_no}, #{password}, #{ano}, #{c_type},  #{security_key}, #{limit}, #{limit_month} )
 	</insert>
 	
+	<!-- card_no로 카드정보 -->
+	<select id="get_cardInfo" resultType="com.spring.domain.CardVO">
+		select c.card_no, c.limit, c.limit_month, c.condition, card_product.p_name 
+		from (select * from cardtbl where card_no=#{card_no}) c
+		join card_product
+		on c.c_type = card_product.product
+	</select>
+
+
+	<!-- 카드 컨디션 -->
+	<select id="get_condition" resultType="com.spring.domain.Card_conditionVO">
+		select * from card_condition order by condition asc
+	</select>
+
+	<!-- 카드 비밀번호 변경 -->
+	<update id="update_password">
+		update cardtbl set password=#{password}
+		where card_no=#{card_no}
+	</update>
+
+	
+	<!-- 카드 정보 변경 -->
+	<update id="update_cardInfo">
+		update cardtbl set limit=#{limit}, limit_month=#{limit_month}, condition=#{condition}
+		where card_no=#{card_no}
+	</update>
+
 
 </mapper>

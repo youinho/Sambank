@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.CardVO;
@@ -40,6 +42,7 @@ import com.spring.service.AdminService;
 import com.spring.service.SBValidator;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @Slf4j
@@ -63,8 +66,32 @@ public class AdminController {
 	
 	
 	//admin -------------------------------
-	
-	
+	@ResponseBody
+	@PostMapping("/searchAD")
+	public ResponseEntity<List<AdminVO>> get_admins(AdminVO vo, HttpServletRequest req){
+		log.info("searchAD 요청"+vo);
+		if(vo.getBranch()==null) {
+			vo.setBranch("");
+		}
+		if(vo.getName()==null) {
+			vo.setName("");
+		}
+		if(vo.getId()==null) {
+			vo.setId("");
+		}
+		vo.setAuthority(service.get_groupID(req.getRemoteUser()));
+		
+		
+
+		
+		List<AdminVO> list = service.get_admins(vo);
+		
+		if(list.size()==0) {
+			return new ResponseEntity<List<AdminVO>>(list, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<AdminVO>>(list, HttpStatus.OK);
+		
+	}
 	
 	
 	@GetMapping("/login")
@@ -75,13 +102,14 @@ public class AdminController {
 		return "/admin/login";
 	}
 	
-	
-	@PostMapping("/get_adminInfo")
-	public ResponseEntity<AdminVO> get_adminInfo(HttpServletRequest req){
-		AdminVO vo = service.selectOne(req.getRemoteUser());
+	@ResponseBody
+	@PostMapping("/getAdminInfo")
+	public ResponseEntity<AdminVO> get_adminInfo(String id){
+		AdminVO vo = service.get_adminInfo(id);
 		vo.setPassword("");
-		vo.setPhone("");
 		
+		
+		log.info("return vo : "+vo);
 		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
 	}
 	
@@ -90,12 +118,60 @@ public class AdminController {
 		log.info("header 요청");
 	}
 	
+	@GetMapping("/manage")
+	public void admin_manage(HttpServletRequest req, Model model) {
+		log.info("admin manage 요청");
+		List<Admin_groupVO> list = service.get_groupList(req.getRemoteUser());
+		model.addAttribute("groups", list);
+	}
+	
+	@PostMapping("/admin_update_password")
+	@ResponseBody
+	public ResponseEntity<String> admin_update_password(AdminVO vo){
+		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
+			if(vo.getPassword().equals(vo.getConfirm_password())) {
+				if(vo.getId()!=null) {
+					vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+					if(service.admin_update_password(vo)) {
+						return new ResponseEntity<String>("success", HttpStatus.OK);						
+					}
+				}
+			}
+		}
+		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@PostMapping("/registerAdmin")
+	public String insert_admin(AdminVO vo, RedirectAttributes rttr) {
+		
+		
+		
+		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
+			if(vo.getPassword().equals(vo.getConfirm_password())) {
+				if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
+					vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+					try {
+						if(service.admin_insert(vo)) {
+							rttr.addFlashAttribute("registered", "true");
+						}
+					} catch (Exception e) {
+						rttr.addFlashAttribute("registered", "false");
+						return "redirect:/admin/manage";
+					}
+				}
+			}
+		}
+		rttr.addFlashAttribute("registered", "false");
+		return "redirect:/admin/manage";
+	}
 	
 	
 	
 	
 	
 	// account
+	@ResponseBody
 	@PostMapping("/account/check_ano")
 	public ResponseEntity<DepositVO> check_ano(String ano){
 		
@@ -390,7 +466,7 @@ public class AdminController {
 		log.info("update password failed"+vo);
 		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
 	}
-	
+	@ResponseBody
 	@PostMapping("/account/check_password")
 	public ResponseEntity<String> check_account_password(DepositVO vo, @RequestParam("confirm_password") String confirm_password){
 		if(vo.getPassword()==null)
@@ -680,7 +756,7 @@ public class AdminController {
 		return "redirect:/admin/card/register";
 	}
 	
-	
+	@ResponseBody
 	@PostMapping("/card/get_card_product")
 	public ResponseEntity<List<Card_productVO>> get_card_product(){
 		log.info("get_card_product 요청");
@@ -693,6 +769,7 @@ public class AdminController {
 		return new ResponseEntity<List<Card_productVO>>(list, HttpStatus.OK);
 		
 	}
+	@ResponseBody
 	@PostMapping("/card/call_card_no")
 	public ResponseEntity<String> call_card_no(int product){
 		String card_no = "";
@@ -705,13 +782,67 @@ public class AdminController {
 		}
 		return new ResponseEntity<String>(card_no, HttpStatus.OK);
 	}
-	@PostMapping("card/get_cardInfo")
-	public ResponseEntity<List<CardVO>> get_cardInfo(String ano){
+	@ResponseBody
+	@PostMapping("card/get_cardList")
+	public ResponseEntity<List<CardVO>> get_cardList(String ano){
 		
 		List<CardVO> list = service.get_cardList_by_ano(ano);
 		
 		return new ResponseEntity<List<CardVO>>(list, HttpStatus.OK);
 		
 	}
+	@GetMapping("/card/modify")
+	public void card_modify_get(Model model) {
+		log.info("card modify get 요청");
+		model.addAttribute("condition", service.get_condition());
+		
+	}
+	@ResponseBody
+	@PostMapping("/card/get_cardInfo")
+	public ResponseEntity<CardVO> get_cardInfo(String card_no){
+		
+		CardVO vo = service.get_cardInfo(card_no);
+		
+		if(vo==null) {
+			return new ResponseEntity<CardVO>(vo, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<CardVO>(vo, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@PostMapping("/card/update_password")
+	public ResponseEntity<String> update_card_password(CardVO vo){
+		log.info("card update password 요청"+vo);
+		if(vali.check(SBValidator.REG_CARD_PWD, vo.getPassword())) {
+			if(vo.getPassword().equals(vo.getConfirm_password())) {
+				vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+				if(service.update_card_password(vo)) {
+					return new ResponseEntity<String>("success", HttpStatus.OK);
+				}
+			}
+		}
+		
+		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@PostMapping("/card/modify")
+	public String update_cardInfo(CardVO vo, RedirectAttributes rttr) {
+		log.info("update cardInfo 요청");
+		
+		if(service.update_cardInfo(vo)) {
+			rttr.addFlashAttribute("updated", "true");
+			rttr.addFlashAttribute("card_no", vo.getCard_no());
+		}else {
+			rttr.addFlashAttribute("updated", "false");
+		}
+		return "redirect:/admin/card/modify";
+		
+	}
+	
+	
+	
+	
 }
 

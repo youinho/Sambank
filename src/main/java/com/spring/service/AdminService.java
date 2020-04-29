@@ -6,9 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.CardVO;
+import com.spring.domain.Card_conditionVO;
 import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
@@ -20,7 +22,12 @@ public interface AdminService {
 	public AdminVO selectOne(String id);
 	
 	public boolean check_admin_password(AdminVO vo);
-	
+	public List<AdminVO> get_admins(AdminVO vo);
+	public int get_groupID(String id);
+	public AdminVO get_adminInfo(String id);
+	public List<Admin_groupVO> get_groupList(String id);
+	public boolean admin_update_password(AdminVO vo);
+	public boolean admin_insert(AdminVO vo);
 	
 	
 	public boolean register_customer(CustomerVO vo);
@@ -74,4 +81,9 @@ public interface AdminService {
 	public int check_card_no(String card_no);
 	public List<CardVO> get_cardList_by_ano(String ano);
 	public boolean register_card(CardVO vo);
+	public CardVO get_cardInfo(String card_no);
+	public List<Card_conditionVO> get_condition();
+	
+	public boolean update_card_password(CardVO vo);
+	public boolean update_cardInfo(CardVO vo);
 }

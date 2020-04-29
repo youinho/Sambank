@@ -47,7 +47,11 @@ public class Admin_PopupController {
 	}
 	
 	
-	
+	@GetMapping("/searchAD")
+	public String popup_searchAD() {
+		log.info("popup searchAD 요청");
+		return "/popup/search_admin_popup";
+	}
 	
 	
 }
