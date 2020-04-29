@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,9 @@ public class LoginController {
 	@Autowired
 	private RegisterService service;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@GetMapping("/customerlogin")
 	public String registerGet(){		
 		
@@ -61,15 +65,16 @@ public class LoginController {
 	public String loginPost(CustomerVO vo, HttpSession session) {
 		
 		log.info("login "+vo);
-		
+		log.info("확인전 비밀번호"+vo.getPassword());
 		CustomerVO info = service.customer_login(vo);
+		log.info("확인후 비밀번호"+info.getPassword());
+		String pw=vo.getPassword();
 		log.info("db�젙蹂� :"+info);
-		if(info!=null) {	//
-			session.setAttribute("info", info);
+		session.setAttribute("info", info);
+		if(passwordEncoder.matches( pw,info.getPassword())) {
 			return "redirect:/main";
-		}else {	//
-			return "redirect:/customerlogin";
 		}
+		return "/member/customerlogin";
 		
 	}
 	
