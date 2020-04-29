@@ -87,4 +87,11 @@
 	</update>
 	
 	
+	
+	<!-- 중복 아이디 검사 -->
+	<select id="check_adminId" resultType="int">
+		select count(*) from admintbl
+		where id=#{id}
+	</select>
+	
 </mapper>

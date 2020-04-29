@@ -368,5 +368,27 @@ public class AdminServiceImpl implements AdminService {
 		
 		return false;
 	}
+
+	@Transactional
+	@Override
+	public boolean update_admin(AdminVO vo) {
+		
+		if(adminMapper.update_admin(vo)==1) {
+			if(adminMapper.update_admin_member(vo)==1) {
+				return true;
+			}
+		}
+		
+		
+		
+		return false;
+	}
+
+
+	@Override
+	public boolean check_adminId(String id) {
+
+		return adminMapper.check_adminId(id)>0;
+	}
 	
 }

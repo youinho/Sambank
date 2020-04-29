@@ -329,3 +329,13 @@ select * from admintbl;
 select * from admin_group_members;
 
 select seq_admin.nextVal from dual;
+select * from customertbl where name='김동혁';
+
+alter table customertbl add(authority nvarchar2(10) default 'ROLE_USER');
+alter table customertbl add(enabled number(1) default 1);
+alter table customertbl modify(enabled number(1) not null);
+alter table customertbl modify(authority nvarchar2(10) not null);
+commit;
+update customertbl set authority='ROLE_USER';
+update customertbl set enabled=1;
+select * from customertbl;

@@ -80,8 +80,8 @@ $(function(){
             },
 			data : {
 				name : $("input[name='name']").val(),
-				birth : $("input[name='birth']").val(),
-				mobile : $("input[name='mobile']").val()
+				branch : $("input[name='branch']").val(),
+				id : $("input[name='id']").val()
 			},
 			dataType : "text",
 			success : function(result){

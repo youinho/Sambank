@@ -91,6 +91,27 @@ $(function(){
 		if($("select[name='group_id']").val()==="-1" || $("input[name='enabled']").val()==="-1"){
 			return false;
 		}
+		let check = false;
+		$.ajax({
+			url:"/admin/check_adminId",
+			type:"post",
+			beforeSend : function(xhr)
+	        {   
+				xhr.setRequestHeader(hn, tk);
+	        },
+			async:false,
+			data:{
+				id : $("input[name='id']").val() 
+			},
+			success: function(){
+				
+			},
+			error: function(){
+				alert("아이디가 이미 존재합니다.")
+			}
+		});
+		
+		
 		$("#manageForm").attr("action", "/admin/registerAdmin");
 		$("#manageForm").submit();
 	})
@@ -101,7 +122,28 @@ $(function(){
 		var pass = window.open("/popup/searchAD","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
 	}	
 	
+	$("#modifyBtn").click(function(e){
+		e.preventDefault();
+		console.log("prevent");
+		
+		if($("input[name='id']").val()==="" || $("input[name='name']").val()===""){
+			return false;
+		}
+		if($("input[name='branch']").val()==="" || $("input[name='rank']").val()===""){
+			return false;
+		}
+		if($("select[name='group_id']").val()==="-1" || $("input[name='enabled']").val()==="-1"){
+			return false;
+		}
+		$("#manageForm").attr("action", "/admin/updateAdmin");
+		$("#manageForm").submit();
+	})
 	
+	
+	
+	function popup_searchAD(){
+		var pass = window.open("/popup/searchAD","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
+	}	
 })
 
 function popup_password(wInput){

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Sambank Admin Login</title>
+<title>테스트 로그인 Login</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <style>
       #background {
@@ -26,15 +26,19 @@
       	padding: 40px;
       }
 </style>
+<script>
+let hn = "${_csrf.headerName}";
+let tk = "${_csrf.token}"
+</script>
 </head>
 
 <body>
 	<div id="container">
 		<div class="row justify-content-md-center">
 			<div id="login" class="col-lg-3">
-				<c:url value="/admin/login_process" var="loginUrl" />
+				<c:url value="/customer/login_process" var="loginUrl" />
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
-		        
+		        <%-- <sec:authorize access="isAnonymous()"> --%>
 		        <form:form name="f" action="${loginUrl}" method="POST">
 		            <c:if test="${param.error != null}"> 
 		            	<p>로그인이 거부되었습니다.</p> 
@@ -43,7 +47,7 @@
 		            	<p>로그아웃 하였습니다.</p> 
 		            </c:if>
 		            <fieldset>
-		                <legend style="text-align: center">Sambank Admin Login Page</legend><br>
+		                <legend style="text-align: center">삼뱅크 테스트 로그인 페이지 !</legend><br>
 		                <div class="form-group">
 		                  <label for="id"><strong>ID</strong></label>
 		                  <input type="text" class="form-control" name="id" id="id" placeholder="아이디" required>
@@ -56,9 +60,9 @@
 		            </fieldset>
 		        <%-- </form> --%>
 		        </form:form>
-		        
+		        <%-- </sec:authorize> --%>
 		        <sec:authorize access="isAuthenticated()">
-			        <form:form action="${pageContext.request.contextPath}/admin/logout" method="POST">
+			        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
 		      			<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />
 		      		</form:form>
 	      		</sec:authorize>

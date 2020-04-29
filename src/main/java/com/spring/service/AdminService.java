@@ -28,7 +28,8 @@ public interface AdminService {
 	public List<Admin_groupVO> get_groupList(String id);
 	public boolean admin_update_password(AdminVO vo);
 	public boolean admin_insert(AdminVO vo);
-	
+	public boolean update_admin(AdminVO vo);
+	public boolean check_adminId(String id);
 	
 	public boolean register_customer(CustomerVO vo);
 	public List<DepositVO> get_deposit_list();

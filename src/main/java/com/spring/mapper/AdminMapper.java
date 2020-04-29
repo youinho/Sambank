@@ -27,4 +27,9 @@ public interface AdminMapper {
 	
 	public int insert_admin(AdminVO vo);
 	public int insert_admin_group(AdminVO vo);
+	
+	public int update_admin(AdminVO vo);
+	public int update_admin_member(AdminVO vo);
+	
+	public int check_adminId(String id);
 }

@@ -126,10 +126,6 @@ $.validator.addMethod("birth",function(value){
 	var regBirth=/^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 	return regBirth.test(value);
 }, "8자리의 생년월일을 입력하세요.");
-$.validator.addMethod("regNo", function(value) {
-	var regRegNo = /^[1-4][0-9]{6}$/;
-	return regRegNo.test(value);
-}, "정확한 번호를 입력해 주세요.");
 $.validator.addMethod("mobile", function(value) {
 	var regMobile = /^01[0,1,6,7,9][0-9]{3,4}[0-9]{4}$/;
 	

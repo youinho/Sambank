@@ -46,8 +46,6 @@ function alert_reg(){
 	
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_modifyAccount_validate.js"></script>
 
 <style>
 	.btn{
@@ -195,3 +193,5 @@ function alert_reg(){
 
 
 <script src="/resources/js/admin_manage.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+<script src="/resources/js/admin_manage_validate.js"></script>

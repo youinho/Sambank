@@ -155,9 +155,7 @@ public class AdminController {
 	
 	@PostMapping("/registerAdmin")
 	public String insert_admin(AdminVO vo, RedirectAttributes rttr) {
-		
-		
-		
+
 		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
 			if(vo.getPassword().equals(vo.getConfirm_password())) {
 				if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
@@ -173,6 +171,36 @@ public class AdminController {
 		rttr.addFlashAttribute("registered", "false");
 		return "redirect:/admin/manage";
 	}
+	
+	@PostMapping("/updateAdmin")
+	public String update_admin(AdminVO vo, RedirectAttributes rttr) {
+		if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
+			
+			if(service.update_admin(vo)) {
+				rttr.addFlashAttribute("updated", "true");
+				rttr.addFlashAttribute("name", vo.getName());
+				return "redirect:/admin/manage";
+			}
+		}
+		rttr.addFlashAttribute("updated", "false");
+		return "redirect:/admin/manage";
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/check_adminId")
+	public ResponseEntity<String> check_adminId(String id){
+		if(id!=null) {
+			if(!id.equals("")) {
+				if(!service.check_adminId(id)) {
+					return new ResponseEntity<String>("OK", HttpStatus.OK);
+				}				
+			}
+		}
+		return new ResponseEntity<String>("NO", HttpStatus.BAD_REQUEST);
+	}
+	
+	
 	
 	
 	

@@ -33,30 +33,30 @@ public class HomeController {
 	}
 	
 	//testpage
-	@GetMapping("/fm")
-	public String GuideHeader() {
-		return "footer_Main";
-	}
-	
-	@GetMapping("/main")
-	public String newmain() {
-		return "main";
-	}
-	
-	@GetMapping("/login")
-	public String loginPage() {
-		
-		
-		return "user/login";
-	}
-	
-	
-	@PostMapping("/login")
-	public void user_login_post(CustomerVO vo) {
-		
-		CustomerVO checkedVO = service.selectOne(vo);
-		
-		log.info(""+vo);
+//	@GetMapping("/fm")
+//	public String GuideHeader() {
+//		return "footer_Main";
+//	}
+//	
+//	@GetMapping("/main")
+//	public String newmain() {
+//		return "main";
+//	}
+//	
+//	@GetMapping("/login")
+//	public String loginPage() {
+//		
+//		
+//		return "user/login";
+//	}
+//	
+//	
+//	@PostMapping("/login")
+//	public void user_login_post(CustomerVO vo) {
+//		
+//		CustomerVO checkedVO = service.selectOne(vo);
+//		
+//		log.info(""+vo);
 //		if(checkedVO == null) {
 //			log.info("로그인 실패");
 //			return "user/login";
@@ -67,5 +67,33 @@ public class HomeController {
 //		log.info("로그인 성공");
 //		return "main";
 		
+//	}
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/customer/login_test")	// 로그인 테스트 페이지
+	public String customer_test_login() {
+		log.info("customer test_login 페이지 요청");
+		
+		
+		return "/test_login";
+	}
+	@GetMapping("/customer/test")	// 로그인 테스트 페이지
+	public String login_test_success() {
+		log.info("로그인 성공");
+		
+		
+		return "/test_success";
+	}
+	
+	@GetMapping("/login")	// 로그인 테스트 페이지
+	public String loginadm() {
+		
+		
+		return "/admin/login";
 	}
 }

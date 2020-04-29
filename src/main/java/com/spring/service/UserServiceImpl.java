@@ -16,7 +16,8 @@ public class UserServiceImpl implements UserService {
 	
 	
 	public CustomerVO selectOne(CustomerVO vo) {
-		return usermapper.selectOne(vo);
+		//return usermapper.selectOne(vo);
+		return null;
 	}
 	
 }
