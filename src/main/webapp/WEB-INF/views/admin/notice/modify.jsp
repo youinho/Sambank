@@ -228,7 +228,16 @@ $(function(){
 	$("#modifyBtn").click(function(e){
 		//submit 막기
 		e.preventDefault();
-		
+		if($("input[name='title']").val()===""){
+			$("input[name='title']").focus();
+			alert("제목을 입력해 주세요.")
+			return false;
+		}
+		if($("#content").val()==="" || $("#content").val()== null){
+			
+			alert("글 내용을 입력해 주세요.")
+			return false;
+		}
 		//첨부파일 정보 수집하기
 		let str = "";
 		

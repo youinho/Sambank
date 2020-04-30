@@ -17,7 +17,7 @@
 		  <div class="input-group-prepend">
 		    <span class="input-group-text">제목</span>
 		  </div>
-		  <input type="text" aria-label="제목" class="form-control" name="title">
+		  <input type="text" aria-label="제목" class="form-control" name="title" required>
 		<div class="input-group-append" id="button-addon4">
 			<button class="btn btn-outline-primary" type="submit" id="submitBtn">등록</button>
 			<button class="btn btn-outline-secondary" type="button" id="cancel">취소</button>
@@ -69,7 +69,16 @@ $(function(){
 		e.preventDefault();
 			
 		let str = "";
-		
+		if($("input[name='title']").val()===""){
+			$("input[name='title']").focus();
+			alert("제목을 입력해 주세요.")
+			return false;
+		}
+		if($("#content").val()==="" || $("#content").val()== null){
+			
+			alert("글 내용을 입력해 주세요.")
+			return false;
+		}
 		//첨부파일 정보를 수집하여 hidden 태그로 추가
 		$(".uploadResult ul li").each(function(i, obj){
 			let job = $(obj);

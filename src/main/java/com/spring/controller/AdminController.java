@@ -89,7 +89,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/searchAD")
 	public ResponseEntity<List<AdminVO>> get_admins(AdminVO vo, HttpServletRequest req){
-		log.info("searchAD 요청"+vo);
+		//log.info("searchAD 요청");
 		if(vo.getBranch()==null) {
 			vo.setBranch("");
 		}
@@ -116,7 +116,7 @@ public class AdminController {
 	
 	@GetMapping("/login")
 	public String admin_login() {
-		log.info("admin_login 페이지 요청");
+		//log.info("admin_login 페이지 요청");
 		
 		
 		return "/admin/login";
@@ -129,7 +129,7 @@ public class AdminController {
 		vo.setPassword("");
 		
 		
-		log.info("return vo : "+vo);
+		//log.info("return vo : ");
 		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
 	}
 	
@@ -140,18 +140,18 @@ public class AdminController {
 		vo.setPassword("");
 		vo.setMobile("");
 		
-		log.info("return vo : "+vo);
+		//log.info("return vo : "+vo);
 		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
 	}
 	
 	@GetMapping("/header")
 	public void header() {
-		log.info("header 요청");
+		//log.info("header 요청");
 	}
 	
 	@GetMapping("/manage")
 	public void admin_manage(HttpServletRequest req, Model model) {
-		log.info("admin manage 요청");
+		//log.info("admin manage 요청");
 		List<Admin_groupVO> list = service.get_groupList(req.getRemoteUser());
 		model.addAttribute("groups", list);
 	}
@@ -229,14 +229,14 @@ public class AdminController {
 	// account
 	@GetMapping("/account/history")
 	public void account_history_get() {
-		log.info("account history 요청");
+		//log.info("account history 요청");
 	}
 	@ResponseBody
 	@PostMapping("/account/get_history")
 	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date){
-		log.info("get_history 요청 ano : "+ano);
-		log.info("get_history 요청 sDates : "+start_date);
-		log.info("get_history 요청 eDates : "+end_date);
+		//log.info("get_history 요청 ano : "+ano);
+		//log.info("get_history 요청 sDates : "+start_date);
+		//log.info("get_history 요청 eDates : "+end_date);
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		
@@ -255,11 +255,11 @@ public class AdminController {
 			e.printStackTrace();
 			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
 		}
-		log.info("get_history 요청 sDate : "+start);
-		log.info("get_history 요청 eDate : "+end2);
+		//log.info("get_history 요청 sDate : "+start);
+		//log.info("get_history 요청 eDate : "+end2);
 		
 		list = service.get_history(ano, start, end2);
-		log.info("history : "+list);
+		//log.info("history : "+list);
 		
 		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
 		
@@ -271,7 +271,7 @@ public class AdminController {
 	public ResponseEntity<DepositVO> check_ano(String ano){
 		
 		DepositVO vo = service.check_ano(ano);
-		log.info("check_ano vo : "+vo);
+		//log.info("check_ano vo : "+vo);
 		if(vo != null) {
 			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
 		}else {
@@ -308,10 +308,10 @@ public class AdminController {
 			rttr.addFlashAttribute("success", "true");
 			rttr.addFlashAttribute("ano", vo.getAno());
 			rttr.addFlashAttribute("amount", vo.getAmount());
-			log.info("출금 성공");
+			//log.info("출금 성공");
 		}else {
 			rttr.addFlashAttribute("success", "false");
-			log.info("출금 실패");
+			//log.info("출금 실패");
 		}
 		
 		
@@ -321,24 +321,24 @@ public class AdminController {
 	
 	@GetMapping("/account/deposit")
 	public void deposit_get() {
-		log.info("deposit get 요청");
+		//log.info("deposit get 요청");
 	}
 	
 	@GetMapping("/account/withdraw")
 	public void withdraw_get() {
-		log.info("withdraw get 요청");
+		//log.info("withdraw get 요청");
 	}
 	
 	
 	@GetMapping("/account/delete")
 	public String delete_account() {
-		log.info("delete_account_get 요청");
+		//log.info("delete_account_get 요청");
 		return "/admin/account/delete";
 	}
 	
 	@PostMapping("/account/delete")
 	public String delete_account_post(DepositVO vo, @RequestParam("confirm_password") String confirm_password, RedirectAttributes rttr) {
-		log.info("계좌 삭제 요청"+confirm_password+vo);
+		//log.info("계좌 삭제 요청"+confirm_password+vo);
 		if(!vo.getPassword().equals(confirm_password) || !service.check_deposit_password(vo)) {
 			rttr.addFlashAttribute("deleted", "false");
 			return "redirect:/admin/account/delete";
@@ -359,14 +359,14 @@ public class AdminController {
 	
 	@GetMapping("/account/modify")
 	public String modify_account() {
-		log.info("modifyaccount 요청");
+		//log.info("modifyaccount 요청");
 		return "/admin/account/modify";
 		
 	}
 	
 	@PostMapping("/account/modify")
 	public String update_account(DepositVO vo, RedirectAttributes attr, Model model) {
-		log.info("update_account 요청");
+		//log.info("update_account 요청");
 		
 		if(!vali.check_account_update(vo)) {
 			model.addAttribute("updated", "false");
@@ -415,10 +415,10 @@ public class AdminController {
 		}
 			
 		
-		log.info("create_account_post 요청 "+vo);
+		//log.info("create_account_post 요청 "+vo);
 		
 		CustomerVO cs_vo = service.select_by_cno(vo.getCno());
-		log.info("select by cno : "+cs_vo);
+		//log.info("select by cno : "+cs_vo);
 		
 		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 		
@@ -436,7 +436,7 @@ public class AdminController {
 
 	@GetMapping("/account/create")
 	public String create_account_get() {
-		log.info("create_account_get 요청");
+		//log.info("create_account_get 요청");
 		return "/admin/account/create";
 	}
 	
@@ -475,7 +475,7 @@ public class AdminController {
 	@PostMapping("/account/call_ano")
 	@ResponseBody
 	public ResponseEntity<String> create_ano(int product, int cno) {
-		log.info("call_ano 요청");
+		//log.info("call_ano 요청");
 		CustomerVO vo = service.select_by_cno(cno);
 		String name = vo.getName();
 		String mobile = vo.getMobile();
@@ -513,7 +513,7 @@ public class AdminController {
 	
 	@GetMapping("/account/list")
 	public void deposit_list_get(Model model) {
-		log.info("deposit_list_get 요청");
+		//log.info("deposit_list_get 요청");
 		model.addAttribute("list", service.get_deposit_list());
 		
 	}
@@ -536,7 +536,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/account/update_password")
 	public ResponseEntity<String> update_deposit_password(DepositVO vo, @RequestParam("confirm_password") String confirm_password){
-		log.info("비밀번호 변경 요청con:"+confirm_password+vo);
+		//log.info("비밀번호 변경 요청con:"+confirm_password+vo);
 		if(vo.getPassword()==null)
 			return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
 		
@@ -554,11 +554,11 @@ public class AdminController {
 		
 		
 		if(service.update_password(vo)) {
-			log.info("update password success "+vo);
+			//log.info("update password success "+vo);
 			return new ResponseEntity<String>("success", HttpStatus.OK);
 		}
 		
-		log.info("update password failed"+vo);
+		//log.info("update password failed"+vo);
 		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
 	}
 	@ResponseBody
@@ -588,14 +588,14 @@ public class AdminController {
 	
 	@PostMapping("/customer/register")
 	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr) {
-		log.info("register_customer_post vo : "+vo);
+		//log.info("register_customer_post vo : "+vo);
 		boolean result = false;
 		
 		if(vali.check_customer(vo)) {
 			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 			result = service.register_customer(vo);
 		}else {
-			log.info("validate 결과 : "+result);
+			//log.info("validate 결과 : "+result);
 		}
 		
 		
@@ -611,7 +611,7 @@ public class AdminController {
 	
 	@GetMapping("/customer/register")
 	public void register_customer_get() {
-		log.info("register_customer_get 요청");
+		//log.info("register_customer_get 요청");
 	}
 	
 	
@@ -619,10 +619,10 @@ public class AdminController {
 	@PostMapping("/customer/checkId")
 	public String checkId(String id) {
 		if(service.checkId(id)) {
-			log.info("id 중복");
+			//log.info("id 중복");
 			return "false";
 		}else {
-			log.info("id 가능");
+			//log.info("id 가능");
 			return "true";
 		}
 	}
@@ -632,7 +632,7 @@ public class AdminController {
 	@PostMapping("/customer/search")
 	@ResponseBody
 	public ResponseEntity<List<CustomerVO>> search(String name, String birth, String mobile) {
-		log.info("search"+name+birth+mobile);
+		//log.info("search"+name+birth+mobile);
 		
 		List<CustomerVO> list = service.search_customer(name, birth, mobile);
 		if(list.isEmpty()) {
@@ -645,7 +645,7 @@ public class AdminController {
 	
 	@GetMapping("/customer/modify")
 	public String modify_customer() {
-		log.info("modify_customer_get 요청");
+		//log.info("modify_customer_get 요청");
 		
 		return "/admin/customer/modify";
 	}
@@ -654,12 +654,12 @@ public class AdminController {
 	public String update_customer(CustomerVO vo, RedirectAttributes rttr) {
 		
 		
-		log.info("update_customer_post vo : "+vo);
+		//log.info("update_customer_post vo : "+vo);
 		boolean result = false;
 		if(vali.check_customer_update(vo)) {
 			result = service.update_customer(vo);
 		}else {
-			log.info("validate 결과 : "+result);
+			//log.info("validate 결과 : "+result);
 		}
 		
 		
@@ -695,12 +695,12 @@ public class AdminController {
 	
 	@GetMapping("/customer/delete")
 	public void delete_customer_get() {
-		log.info("del_customer 요청");
+		//log.info("del_customer 요청");
 	}
 	
 	@PostMapping("/customer/delete")
 	public String delete_customer_post(CustomerVO vo, RedirectAttributes rttr) {
-		log.info("삭제 요청");
+		//log.info("삭제 요청");
 		
 		if(service.delete_customer(vo)) {
 			rttr.addFlashAttribute("deleted", "success");
@@ -739,8 +739,8 @@ public class AdminController {
 	@GetMapping("/notice/downloadFile")
 	@ResponseBody
 	public ResponseEntity<Resource> download(AttachFileDTO dto, @RequestHeader("user-Agent") String userAgent, HttpServletRequest req){
-		log.info("파일 다운로드"+dto);
-		log.info("파일 user : "+req.getRemoteUser());
+		//log.info("파일 다운로드"+dto);
+		//log.info("파일 user : "+req.getRemoteUser());
 		if(service.selectOne(req.getRemoteUser())==null){
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
@@ -748,7 +748,7 @@ public class AdminController {
 		if(data==null) {
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
-		log.info("data :"+data);
+		//log.info("data :"+data);
 		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
 		
 		
@@ -797,7 +797,7 @@ public class AdminController {
 	@PostMapping("/notice/get_attachList")
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> getAttachList(String admin_bno){
-		log.info(admin_bno+" 첨부물 가져오기");
+		//log.info(admin_bno+" 첨부물 가져오기");
 		
 		return new ResponseEntity<List<AttachFileDTO>>(service.getAttachList(admin_bno), HttpStatus.OK);
 	}
@@ -823,8 +823,8 @@ public class AdminController {
 		
 		
 		for(MultipartFile multipartFile : uploadFile) {
-			log.info("upload 요청 "+multipartFile.getOriginalFilename());
-			log.info("upload 파일 크기"+multipartFile.getSize());
+			//log.info("upload 요청 "+multipartFile.getOriginalFilename());
+			//log.info("upload 파일 크기"+multipartFile.getSize());
 		
 			uploadFileName = multipartFile.getOriginalFilename();
 			
@@ -859,7 +859,7 @@ public class AdminController {
 	@PostMapping("/notice/deleteFile")
 	@ResponseBody
 	public ResponseEntity<String> deleteFile(String fileName, String type){
-		log.info("파일 삭제 : "+fileName);
+		//log.info("파일 삭제 : ");
 		
 		File file = null;
 		
@@ -888,7 +888,7 @@ public class AdminController {
 	
 	@GetMapping("/notice")
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("notice 요청 -"+cri);
+		//log.info("notice 요청 -");
 		model.addAttribute("list", service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, service.totalRows(cri)));
 		
@@ -897,7 +897,7 @@ public class AdminController {
 	
 	@GetMapping("/notice/register")
 	public String notice_register_get() {
-		log.info("게시글 등록 페이지 요청");
+		//log.info("게시글 등록 페이지 요청");
 		
 		
 		return "/admin/notice/register";
@@ -905,13 +905,11 @@ public class AdminController {
 	
 	@PostMapping("/notice/register")
 	public String notice_register(Admin_noticeVO vo, HttpServletRequest req, RedirectAttributes rttr) {
-		if(vo.getAttachList() != null) {
-			vo.getAttachList().forEach(attach -> log.info(""+attach));
-		}else {
-			log.info("첨부 없음");
+		if(vo.getTitle()==null || vo.getTitle().equals("") || vo.getContent()==null || vo.getContent().equals("")) {
+			return "/admin/notice/register";
 		}
-		log.info("register_post"+vo);
-		log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
+		//log.info("register_post"+vo);
+		//log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
 		vo.setId(req.getRemoteUser());
 		vo.setWriter(service.selectOne(req.getRemoteUser()).getName());
 		
@@ -927,14 +925,14 @@ public class AdminController {
 	
 	@GetMapping("/notice/read")
 	public String notice_read() {
-		log.info("read 요청");
+		//log.info("read 요청");
 		
 		return "/admin/notice/read";
 	}
 	
 	@GetMapping("/notice/read/{bno}")
 	public String notice_view(@PathVariable("bno") int admin_bno,@ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("read 요청"+admin_bno);
+		//log.info("read 요청"+admin_bno);
 		try {
 			model.addAttribute("vo", service.notice_getRow(admin_bno));
 		}catch (Exception e) {
@@ -947,7 +945,7 @@ public class AdminController {
 	
 	@PostMapping("/notice/delete")
 	public String notice_delete(@RequestParam("bno") int admin_bno,@ModelAttribute("cri") Criteria cri,  Model model) {
-		log.info("삭제 요청");
+		//log.info("삭제 요청");
 		// 권한확인
 		
 		
@@ -964,7 +962,7 @@ public class AdminController {
 	
 	@GetMapping("/notice/modify")
 	public String notice_modify(@RequestParam("bno") int admin_bno, @ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("modify_get 요청");
+		//log.info("modify_get 요청");
 		
 		model.addAttribute("vo", service.notice_getRow(admin_bno));
 		
@@ -974,7 +972,7 @@ public class AdminController {
 	
 	@PostMapping("/notice/modify")
 	public String notice_update(Admin_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr) {
-		log.info("modify_post 요청"+vo);
+		//log.info("modify_post 요청"+vo);
 		
 		if(service.notice_update(vo)) {
 			rttr.addFlashAttribute("cri", cri);
@@ -996,11 +994,11 @@ public class AdminController {
 	@GetMapping("/card/register")
 	public void register_card_get(Model model) {
 		
-		log.info("register_card_get 요청");
+		//log.info("register_card_get 요청");
 	}
 	@PostMapping("/card/register")
 	public String register_card(CardVO vo, RedirectAttributes rttr) {
-		log.info("카드 등록 요청"+vo);
+		//log.info("카드 등록 요청"+vo);
 		String sec = "";
 		sec += (int)(Math.random()*10);
 		sec += (int)(Math.random()*10);
@@ -1011,7 +1009,7 @@ public class AdminController {
 			return "redirect:/admin/card/register";
 		}
 		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-		log.info("카드 등록 요청2");
+		//log.info("카드 등록 요청2");
 		if(service.register_card(vo)) {
 			rttr.addFlashAttribute("registered", "true");
 			rttr.addFlashAttribute("ano", vo.getAno());
@@ -1029,9 +1027,9 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/card/get_card_product")
 	public ResponseEntity<List<Card_productVO>> get_card_product(){
-		log.info("get_card_product 요청");
+		//log.info("get_card_product 요청");
 		List<Card_productVO> list = service.get_card_product();
-		log.info(""+list);
+		//log.info(""+list);
 		if(list.size()==0) {
 			return new ResponseEntity<List<Card_productVO>>(list, HttpStatus.NOT_FOUND);
 		}
@@ -1063,7 +1061,7 @@ public class AdminController {
 	}
 	@GetMapping("/card/modify")
 	public void card_modify_get(Model model) {
-		log.info("card modify get 요청");
+		//log.info("card modify get 요청");
 		model.addAttribute("condition", service.get_condition());
 		
 	}
@@ -1083,7 +1081,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/card/update_password")
 	public ResponseEntity<String> update_card_password(CardVO vo){
-		log.info("card update password 요청"+vo);
+		//log.info("card update password 요청"+vo);
 		if(vali.check(SBValidator.REG_CARD_PWD, vo.getPassword())) {
 			if(vo.getPassword().equals(vo.getConfirm_password())) {
 				vo.setPassword(passwordEncoder.encode(vo.getPassword()));
@@ -1099,7 +1097,7 @@ public class AdminController {
 	
 	@PostMapping("/card/modify")
 	public String update_cardInfo(CardVO vo, RedirectAttributes rttr) {
-		log.info("update cardInfo 요청");
+		//log.info("update cardInfo 요청");
 		
 		if(service.update_cardInfo(vo)) {
 			rttr.addFlashAttribute("updated", "true");
@@ -1128,32 +1126,32 @@ public class AdminController {
 	
 	@GetMapping("/popup/searchCS")
 	public String searchCS() {
-		log.info("searchCS 요청");
+		//log.info("searchCS 요청");
 		return "/admin/popup/search_customer_popup";
 	}
 	
 
 	@GetMapping("/popup/jusopopup")
 	public String juso_popup() {
-		log.info("jusopopup 요청");
+		//log.info("jusopopup 요청");
 		return "/admin/popup/jusopopup";
 	}
 	@PostMapping("/popup/jusopopup")
 	public String juso_popup_post() {
-		log.info("jusopopup_post 요청");
+		//log.info("jusopopup_post 요청");
 		return "/admin/popup/jusopopup";
 	}
 	
 	@GetMapping("/popup/passpopup")
 	public String passpopup(Model model) {
-		log.info("passpopup 요청");
+		//log.info("passpopup 요청");
 		model.addAttribute("wInput", "password");
 		return "/admin/popup/passpopup";
 	}
 	
 	@GetMapping("/popup/passpopup_c")
 	public String passpopup_c(Model model) {
-		log.info("passpopup_c 요청");
+		//log.info("passpopup_c 요청");
 		model.addAttribute("wInput", "confirm_password");
 		return "/admin/popup/passpopup";
 	}
@@ -1161,7 +1159,7 @@ public class AdminController {
 	
 	@GetMapping("/popup/searchAD")
 	public String popup_searchAD() {
-		log.info("popup searchAD 요청");
+		//log.info("popup searchAD 요청");
 		return "/admin/popup/search_admin_popup";
 	}
 	
