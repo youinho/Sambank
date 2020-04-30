@@ -158,6 +158,9 @@ $(function(){
                                     <a href="/admin/account/create" class="nav-link child" id="creACC">신규 계좌 개설</a>
                                 </li>
                                 <li>
+                                    <a href="/admin/account/history" class="nav-link child" id="histACC">거래 내역 조회</a>
+                                </li>
+                                <li>
                                     <a href="/admin/account/modify" class="nav-link child" id="modACC">계좌 정보 수정</a>
                                 </li>
                                 <li>
@@ -191,9 +194,6 @@ $(function(){
                                 </li>
                                 <li>
                                     <a href="/admin/card/modify" class="nav-link child" id="modCard">카드 정보 수정</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link child" id="">카드 통합 관리</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

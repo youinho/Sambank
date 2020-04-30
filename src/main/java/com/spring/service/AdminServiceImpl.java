@@ -1,5 +1,6 @@
 package com.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -389,6 +390,13 @@ public class AdminServiceImpl implements AdminService {
 	public boolean check_adminId(String id) {
 
 		return adminMapper.check_adminId(id)>0;
+	}
+
+
+	@Override
+	public List<Deposit_historyVO> get_history(String ano, Date start_date, Date end_date) {
+
+		return accountMapper.get_history(ano, start_date, end_date);
 	}
 	
 }

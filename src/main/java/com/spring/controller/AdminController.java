@@ -1,5 +1,9 @@
 package com.spring.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +45,7 @@ import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
 import com.spring.service.SBValidator;
 
+import ch.qos.logback.core.helpers.Transform;
 import lombok.extern.slf4j.Slf4j;
 import oracle.jdbc.proxy.annotation.Post;
 
@@ -207,6 +212,45 @@ public class AdminController {
 	
 	
 	// account
+	@GetMapping("/account/history")
+	public void account_history_get() {
+		log.info("account history 요청");
+	}
+	@ResponseBody
+	@PostMapping("/account/get_history")
+	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date){
+		log.info("get_history 요청 ano : "+ano);
+		log.info("get_history 요청 sDates : "+start_date);
+		log.info("get_history 요청 eDates : "+end_date);
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		
+		Date start = null;
+		Date end = null;
+		Date end2 = null;
+		List<Deposit_historyVO> list = null;
+		try {
+			start = transFormat.parse(start_date);
+			end = transFormat.parse(end_date);
+			cal.setTime(end);
+			cal.add(Calendar.DATE, 1);
+			end2 = transFormat.parse(transFormat.format(cal.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
+		}
+		log.info("get_history 요청 sDate : "+start);
+		log.info("get_history 요청 eDate : "+end2);
+		
+		list = service.get_history(ano, start, end2);
+		log.info("history : "+list);
+		
+		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		
+	}
+	
+	
 	@ResponseBody
 	@PostMapping("/account/check_ano")
 	public ResponseEntity<DepositVO> check_ano(String ano){
@@ -683,6 +727,7 @@ public class AdminController {
 		log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
 		vo.setId(req.getRemoteUser());
 		vo.setWriter(service.selectOne(req.getRemoteUser()).getName());
+		
 		if(service.notice_insert(vo)) {
 			return "redirect:/admin/notice";
 		}

@@ -1,5 +1,6 @@
 package com.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -75,6 +76,7 @@ public interface AdminService {
 	public boolean deposit(Deposit_historyVO vo);
 	public boolean withdraw(Deposit_historyVO vo);
 	
+	public List<Deposit_historyVO> get_history(String ano, Date start_date, Date end_date);
 	
 	
 	//card
