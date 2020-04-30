@@ -338,4 +338,4 @@ alter table customertbl modify(authority nvarchar2(10) not null);
 commit;
 update customertbl set authority='ROLE_USER';
 update customertbl set enabled=1;
-select * from customertbl;
+select * from customertbl where name='김동혁';

@@ -880,5 +880,63 @@ public class AdminController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 팝업
+	
+	@GetMapping("/popup/searchCS")
+	public String searchCS() {
+		log.info("searchCS 요청");
+		return "/admin/popup/search_customer_popup";
+	}
+	
+
+	@GetMapping("/popup/jusopopup")
+	public String juso_popup() {
+		log.info("jusopopup 요청");
+		return "/admin/popup/jusopopup";
+	}
+	@PostMapping("/popup/jusopopup")
+	public String juso_popup_post() {
+		log.info("jusopopup_post 요청");
+		return "/admin/popup/jusopopup";
+	}
+	
+	@GetMapping("/popup/passpopup")
+	public String passpopup(Model model) {
+		log.info("passpopup 요청");
+		model.addAttribute("wInput", "password");
+		return "/admin/popup/passpopup";
+	}
+	
+	@GetMapping("/popup/passpopup_c")
+	public String passpopup_c(Model model) {
+		log.info("passpopup_c 요청");
+		model.addAttribute("wInput", "confirm_password");
+		return "/admin/popup/passpopup";
+	}
+	
+	
+	@GetMapping("/popup/searchAD")
+	public String popup_searchAD() {
+		log.info("popup searchAD 요청");
+		return "/admin/popup/search_admin_popup";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
 

@@ -14,7 +14,7 @@
         <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
         
     <!-- 시큐리티 예외사항 -->
-    <sec:http pattern="/popup/jusopopup" security="none" />
+    <sec:http pattern="/admin/popup/jusopopup" security="none" />
     <!-- 검사 URL -->
     
     <!-- admin페이지 인터셉터, 로그인관리 -->

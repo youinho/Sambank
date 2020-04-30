@@ -249,14 +249,14 @@ $(function(){
 	
 	
 	function popup_searchCS(){
-		var pass = window.open("/popup/searchCS","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
+		var pass = window.open("/admin/popup/searchCS","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
 	}	
 	
 	
 })
 
 function popup_password(wInput){
-	var pass = window.open("/popup/"+wInput,"input_passowrd","width=370,height=220, scrollbars=yes, resizable=yes");
+	var pass = window.open("/admin/popup/"+wInput,"input_passowrd","width=370,height=220, scrollbars=yes, resizable=yes");
 }
 
 function input_password(password, wInput){
