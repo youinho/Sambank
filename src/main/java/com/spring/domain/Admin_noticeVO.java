@@ -1,6 +1,7 @@
 package com.spring.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 @Data
@@ -13,4 +14,7 @@ public class Admin_noticeVO {
 	private String writer;	//50
 	private Date regdate;
 	private Date updatedate;
+	
+	//첨부파일 목록
+	private List<AttachFileDTO> attachList;
 }

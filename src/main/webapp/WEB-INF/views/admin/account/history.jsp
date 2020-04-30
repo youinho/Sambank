@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_modifyAccount_validate.js"></script>
+<script src="/resources/js/admin/account/admin_modifyAccount_validate.js"></script>
 
 <style>
 	.btn{
@@ -138,4 +138,4 @@ $(function(){
 })
 </script>
 
-<script src="/resources/js/admin_historyAccount.js"></script>
+<script src="/resources/js/admin/account/admin_historyAccount.js"></script>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
@@ -10,7 +10,7 @@ $(function(){
 
 function alert_updated(){
 	let updated = "${updated}";
-	console.log("alert_updated");
+	
 	if(updated ==='' || history.state){
 		return;
 	}
@@ -26,7 +26,7 @@ function alert_updated(){
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_modifyAccount_validate.js"></script>
+<script src="/resources/js/admin/account/admin_modifyAccount_validate.js"></script>
 
 <style>
 	.btn{
@@ -161,4 +161,4 @@ function alert_updated(){
 	
 
 
-<script src="/resources/js/admin_modifyAccount.js"></script>
+<script src="/resources/js/admin/account/admin_modifyAccount.js"></script>

@@ -87,17 +87,17 @@ $(function(){
 			success : function(result){
 				
 				let list = JSON.parse(result);
-				console.log(list);
+				
 				if(list.length == 0){
 					return;
 				}
-				console.log("list.length"+list.length);
+				
 				let str = "";
 				for(let i = 0; i < list.length; i++){
 					if(i>100){
 						break;
 					}
-					console.log(i)
+					
 					str += "<tr>";
 					str += "<td>"+list[i].cno+"</td>";
 					str += "<td>"+list[i].name+"</td>";

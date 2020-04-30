@@ -1,7 +1,8 @@
 $(function(){
 	
-	alert_registered();
+	alert_deleted();
 	history.replaceState({}, null, null);
+	let total_cards = 0;
 	//팝업
 	
 	$("#passwordBtn").click(function(e){
@@ -47,7 +48,7 @@ $(function(){
 		
 		
 		$.ajax({
-			url: "/admin/account/update_password",
+			url: "/admin/account/check_password",
 			type : "post",
 			beforeSend : function(xhr)
             {   
@@ -60,13 +61,15 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				alert("비밀번호가 변경되었습니다."+result);
-				$("input[name='password']").val("");
-				$("input[name='confirm_password']").val("");
-				
+				alert("비밀번호가 확인되었습니다."+result);
+				if($("input[name='balance']").val()==0){
+					if(total_cards===0){
+						$("#submitBtn").removeAttr("disabled");
+					}
+				}
 			},
 			error : function(result){
-				alert("비밀번호 변경에 실패했습니다.");
+				alert("비밀번호 일치하지 않습니다.");
 				$("input[name='password']").val("");
 				$("input[name='confirm_password']").val("");
 			}
@@ -85,8 +88,13 @@ $(function(){
 	})
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		console.log("클릭!")
 		
+		$("input[name='p_name']").val("");
+		$("input[name='ano']").val("");
+		$("input[name='latest_date']").val("");
+		$("input[name='balance']").val("");
+		$("input[name='password']").val("");
+		$("input[name='confirm_password']").val("");
 		var ano = $(this).text();
 		
 		$.ajax({
@@ -102,14 +110,31 @@ $(function(){
 			dataType : "text",
 			success : function(result){
 				var vo = JSON.parse(result);
+				
 				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
+				
+				$("input[name='balance']").val(vo.balance);
+				if(vo.depositdate!=null){
+					var date = new Date(vo.depositdate);
+					var year = date.getFullYear();
+					var month = date.getMonth()+1;
+					month = month >=10?month:"0"+month;
+					var day = date.getDate();
+					day = day>=10?day:"0"+day;
+							
+					$("input[name='latest_date']").val(year+"년 "+month+"월 "+day+"일"  );
+					
+				}else{
+					$("input[name='latest_date']").val("거래내역 없음");
+				}
+				$("#submitBtn").prop("disabled", true);
 			}
 		})
 		
 		
 		$.ajax({
-			url:"/admin/card/get_cardList",
+			url:"/admin/card/get_cardInfo",
 			type : "post",
 			beforeSend : function(xhr)
             {   
@@ -120,7 +145,7 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				console.log("accinfo result : "+result)
+				
 				let list = JSON.parse(result); 
 				let total = 0;
 				
@@ -131,7 +156,11 @@ $(function(){
 				}
 				str = "<a class='dropdown-item' href='#'>계좌의 카드 : "+total+" 개</a>"+"<div class='dropdown-divider'></div>"+ str;
 				$("#card-list").html(str);
-				
+				if(total>0){
+					
+					$("#submitBtn").prop("disabled", true);
+				}
+				total_cards=total;
 			}
 			
 			
@@ -139,114 +168,10 @@ $(function(){
 		})
 		
 		
+		
+		
+		
 	})
-	
-	$("#call_card_no").click(function(e){
-		e.preventDefault();
-		
-		
-		
-		console.log("call_card_no")
-		let form = $("#registerForm");
-		let product = form.find("#product").val();
-		let cno = form.find("input[name='cno']").val();
-		
-		if(cno==null||cno==""||product==null||product=="0"){
-			return false;
-		}
-		
-		
-		$.ajax({
-			url : "/admin/card/call_card_no",
-			type : "post",
-			beforeSend : function(xhr)
-            {   
-                xhr.setRequestHeader(hn, tk);
-            },
-			data :{
-				product : product,
-				cno : cno
-			},
-			dataType : "text",
-			success : function(result){
-				$("input[name='card_no']").val(result);
-			}
-			
-			
-			
-		
-			
-		})
-	
-	})
-	
-	
-	
-	$("#submitBtn").click(function(e){
-		e.preventDefault();
-		console.log("prevent");
-		if($("input[name='ano']").val()===""){
-			console.log("ano");
-			return false;
-		}
-		if($("input[name='card_no']").val()===""){
-			console.log("card_no");
-			return false;
-		}
-		if($("input[name='limit']").val()==="" || $("input[name='limit_month']").val()===""){
-			console.log("limit");
-			return false;
-		}
-		if($("#c_type").val()=="0"){
-			console.log("ctype");
-			return false;
-		}
-		if($("input[name='password']").val()===""||$("input[name='password']").val()!==$("input[name='confirm_password']").val()){
-			alert("비밀번호를 확인해 주세요.");
-			return false;
-		}
-		$("#registerForm").submit();
-	})
-	
-	
-	
-	$.ajax({
-		url : "/admin/card/get_card_product",
-		type : "post",
-		beforeSend : function(xhr)
-	    {   
-	        xhr.setRequestHeader(hn, tk);
-	    },
-	    dataType : "text",
-		success : function(result){
-			console.log(result);
-			let list = JSON.parse(result); 
-			if(list.length == 0){
-				return;
-			}
-			
-			str = "<option value='0' selected>-- 상품 선택 --</option>"
-			for(let i = 0; i < list.length; i++){
-				
-				str += "<option value='"+list[i].product+"'>"+list[i].p_name+"</option>";		
-				
-			}
-			$("#product").html(str);
-			console.log(str);
-		},
-		error: function(result){
-			alert("상품목록을 불러오는 중 오류가 발생했습니다.");
-		}
-			
-			
-			
-
-			
-	})
-	
-	
-	
-	
 	
 	function popup_searchCS(){
 		var pass = window.open("/admin/popup/searchCS","고객 검색","width=770,height=380, scrollbars=yes, resizable=yes");
@@ -270,7 +195,7 @@ function input_password(password, wInput){
 
 
 function searchCS_callback(cno){
-	$("#registerForm")[0].reset();
+	$("#deleteForm")[0].reset();
 	$("input[name='cno']").val(cno);
 	
 	$.ajax({
@@ -285,7 +210,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;
@@ -302,7 +227,7 @@ function searchCS_callback(cno){
 			str = "<a class='dropdown-item' href='#'>보유 계좌 : "+total+" 개</a>"+"<div class='dropdown-divider'></div>"+ str;
 			$("#ano-list").html(str);
 			$("#name").val(name);
-			
+			$("#submitBtn").prop("disabled", true);
 		}
 		
 		

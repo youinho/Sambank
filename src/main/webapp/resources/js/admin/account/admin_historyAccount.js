@@ -37,18 +37,18 @@ $(function(){
 			dataType : "text",
 			success : function(result){
 				let list = JSON.parse(result);
-				console.log(list);
+				
 				if(list.length == 0){
 					return;
 				}
-				console.log("list.length"+list.length);
+				
 				let str = "";
 				for(let i = 0; i < list.length; i++){
 					if(i>100){
 						break;
 					}
 					let date = new Date(list[i].depositdate);
-					console.log(i)
+					
 					
 					str += "<tr>";
 					str += "<td>"+date.toISOString().slice(0, 10)+" "+date.toTimeString().slice(0, 8)+"</td>";					
@@ -81,7 +81,7 @@ $(function(){
 	})
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		console.log("클릭!")
+		
 		
 		var ano = $(this).text();
 		
@@ -134,7 +134,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;

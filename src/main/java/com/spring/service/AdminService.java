@@ -10,6 +10,7 @@ import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.AttachFileDTO;
 import com.spring.domain.CardVO;
 import com.spring.domain.Card_conditionVO;
 import com.spring.domain.Card_productVO;
@@ -57,7 +58,8 @@ public interface AdminService {
 	
 	public boolean notice_update(Admin_noticeVO vo);
 	
-	
+	public List<AttachFileDTO> getAttachList(String admin_bno);
+	public AttachFileDTO get_oneFile(AttachFileDTO dto);
 	
 	//account
 	

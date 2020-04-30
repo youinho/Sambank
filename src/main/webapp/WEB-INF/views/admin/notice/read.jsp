@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 
 
 <div class="container">
@@ -36,12 +36,11 @@
 					</tr>
 
 					<tr>
-						<th scope="row">첨부파일</th>
-						<td colspan="5">
-
-							<a href="javascript:fileDown('bbs/Q001/Q001_2194542', '4~5월 국가기술자격 상시검정 시행 조치 계획.hwp', '2194542')" class="btn3_icon download">4~5월 국가기술자격 상시검정 시행 조치 계획.hwp<span class="blind">다운로드</span></a>
-
-							<a href="javascript:fileDown('bbs/Q001/Q001_2194543', '4~5월 국가기술자격 상시검정 시행 조치 계획.pdf', '2194543')" class="btn3_icon download">4~5월 국가기술자격 상시검정 시행 조치 계획.pdf<span class="blind">다운로드</span></a>
+						<th scope="row" class="align-middle">첨부파일</th>
+						<td colspan="5" >
+							<div class="d-flex align-content-start flex-wrap" id="fileBlock" >
+							
+							</div>
 
 						</td>
 					</tr>
@@ -82,6 +81,10 @@
 <script>
 //list버튼이 클릭하면 list페이지 보여주기
 $(function(){
+	$("#inner-notice").addClass("active");
+	
+	$(".container").css("max-width", $(window).width()+"px");
+	
 	$("#go-list").click(function(){
 		//location.href="/board/list";
 		$("#myForm").attr("action","/admin/notice");
@@ -102,6 +105,62 @@ $(function(){
 		$("#myForm").attr("action", "/admin/notice/modify");
 		$("#myForm").attr("method", "get");
 		$("#myForm").submit();
+	})
+	
+	
+	
+	
+	
+	$.ajax({
+		url : '/admin/notice/get_attachList',
+		beforeSend : function(xhr)
+        {   
+            xhr.setRequestHeader(hn, tk);
+        },
+		data : {
+			admin_bno:"${vo.admin_bno}"
+		},
+		type : 'post',
+		dataType : 'text',
+		success : function(result){
+			
+			data = JSON.parse(result);
+			
+			let str = "";
+			let uploadResult = $("#fileBlock");
+			let icon = "<svg class='bi bi-file-earmark-text' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'><path d='M4 1h5v1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6h1v7a2 2 0 01-2 2H4a2 2 0 01-2-2V3a2 2 0 012-2z'/><path d='M9 4.5V1l5 5h-3.5A1.5 1.5 0 019 4.5z'/><path fill-rule='evenodd' d='M5 11.5a.5.5 0 01.5-.5h2a.5.5 0 010 1h-2a.5.5 0 01-.5-.5zm0-2a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5zm0-2a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5z' clip-rule='evenodd'/></svg>"
+			$(data).each(function(i,obj){
+				
+				let fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+				str += "<div data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"'>";
+				str += "<a href='#' class='btn btn-outline-secondary'>"+icon+" "+obj.fileName+"</a><br>";			
+				str += "</div>";
+				
+			})
+			uploadResult.append(str);
+		}
+		
+		
+		
+		
+		
+	})
+	
+	$("#fileBlock").on("click", "div", function(){
+			let li = $(this);
+			
+			let fileName = encodeURIComponent(li.data("filename"));
+			
+			
+			self.location="/admin/notice/downloadFile?fileName="+fileName+"&uuid="+li.data("uuid");
+				
+			
+			
+		})
+	
+	
+	$(window).resize(function(){
+		$(".container").css("max-width", $(window).width()+"px");
 	})
 	
 })

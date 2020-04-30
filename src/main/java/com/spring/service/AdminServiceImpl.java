@@ -13,6 +13,7 @@ import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.AttachFileDTO;
 import com.spring.domain.CardVO;
 import com.spring.domain.Card_conditionVO;
 import com.spring.domain.Card_productVO;
@@ -119,8 +120,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public boolean notice_insert(Admin_noticeVO vo) {
-
-		return noticeMapper.insert(vo)==1;
+		if(noticeMapper.insert(vo)!=1) {
+			return false;
+		}
+		
+		//첨부파일이 null이 아니면 첨부파일 등록
+		if(vo.getAttachList() == null ||vo.getAttachList().size() <= 0) {
+			return true;
+		}
+		
+		vo.getAttachList().forEach(attach1 ->{
+			attach1.setAdmin_bno(vo.getAdmin_bno());
+			noticeMapper.insertFile(attach1);
+			
+		});
+		return true;
 	}
 
 
@@ -132,15 +146,33 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public boolean notice_delete(int admin_bno) {
-	
-		return noticeMapper.delete(admin_bno)==1;
+		boolean result = true;
+		if(noticeMapper.deleteAllFiles(""+admin_bno)==1) {
+			result = noticeMapper.delete(admin_bno)==1;
+		}
+		
+		
+		return result;
 	}
 
 
+	@Transactional
 	@Override
 	public boolean notice_update(Admin_noticeVO vo) {
 
-		return noticeMapper.update(vo)==1;
+		boolean modifyresult = noticeMapper.update(vo)==1;
+		
+		
+		if(vo.getAttachList() != null) {
+			if(modifyresult && vo.getAttachList().size() > 0) {
+				noticeMapper.deleteAllFiles(vo.getAdmin_bno());
+				for(AttachFileDTO dto : vo.getAttachList()) {
+					dto.setAdmin_bno(vo.getAdmin_bno());
+					noticeMapper.insertFile(dto);
+				}
+			}
+		}
+		return modifyresult;
 	}
 	
 	
@@ -397,6 +429,20 @@ public class AdminServiceImpl implements AdminService {
 	public List<Deposit_historyVO> get_history(String ano, Date start_date, Date end_date) {
 
 		return accountMapper.get_history(ano, start_date, end_date);
+	}
+
+
+	@Override
+	public List<AttachFileDTO> getAttachList(String admin_bno) {
+
+		return noticeMapper.selectFile(admin_bno);
+	}
+
+
+	@Override
+	public AttachFileDTO get_oneFile(AttachFileDTO dto) {
+
+		return noticeMapper.get_oneFile(dto);
 	}
 	
 }

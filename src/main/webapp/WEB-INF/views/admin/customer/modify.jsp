@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <style>
 	form > div{
 		padding : 0;
@@ -19,7 +19,7 @@
 	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_registerCustomer_validate.js"></script>
+<script src="/resources/js/admin/customer/admin_registerCustomer_validate.js"></script>
 <script>
 function alert_reg(){
 	let updated = "${updated}";
@@ -187,4 +187,4 @@ function alert_reg(){
     </div>
     <div class="bottom">
     </div>
-<script src="/resources/js/admin_modifyCustomer.js"></script>
+<script src="/resources/js/admin/customer/admin_modifyCustomer.js"></script>

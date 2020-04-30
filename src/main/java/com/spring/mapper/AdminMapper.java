@@ -32,4 +32,9 @@ public interface AdminMapper {
 	public int update_admin_member(AdminVO vo);
 	
 	public int check_adminId(String id);
+	
+	
+	
+	
+	
 }

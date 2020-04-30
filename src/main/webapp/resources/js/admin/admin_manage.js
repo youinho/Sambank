@@ -80,7 +80,7 @@ $(function(){
 	
 	$("#registerBtn").click(function(e){
 		e.preventDefault();
-		console.log("prevent");
+		
 		
 		if($("input[name='id']").val()==="" || $("input[name='name']").val()===""){
 			return false;
@@ -124,7 +124,7 @@ $(function(){
 	
 	$("#modifyBtn").click(function(e){
 		e.preventDefault();
-		console.log("prevent");
+		
 		
 		if($("input[name='id']").val()==="" || $("input[name='name']").val()===""){
 			return false;
@@ -175,7 +175,7 @@ function searchAD_callback(id){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("admin result : "+result)
+			
 			let vo = JSON.parse(result); 
 
 			$("input[name='name']").val(vo.name);

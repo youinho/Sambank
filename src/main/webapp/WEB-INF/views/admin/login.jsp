@@ -31,7 +31,7 @@
 <body>
 	<div id="container">
 		<div class="row justify-content-md-center">
-			<div id="login" class="col-lg-3">
+			<div id="login" class="col-lg-6">
 				<c:url value="/admin/login_process" var="loginUrl" />
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        

@@ -10,7 +10,7 @@ $(function(){
 		
 		
 		
-		console.log("call_ano")
+		
 		let form = $("#createForm");
 		let product = form.find("#product").val();
 		let cno = form.find("input[name='cno']").val();
@@ -47,7 +47,7 @@ $(function(){
 	
 	
 	$("#type").change(function(){
-		console.log("type changed");
+		
 		let type = $(this).val();
 		$.ajax({
 			url : "/admin/account/getProduct",
@@ -144,7 +144,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;

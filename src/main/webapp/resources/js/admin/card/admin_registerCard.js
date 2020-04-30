@@ -1,6 +1,6 @@
 $(function(){
 	
-	alert_updated();
+	alert_registered();
 	history.replaceState({}, null, null);
 	//팝업
 	
@@ -47,14 +47,14 @@ $(function(){
 		
 		
 		$.ajax({
-			url: "/admin/card/update_password",
+			url: "/admin/account/update_password",
 			type : "post",
 			beforeSend : function(xhr)
             {   
 				xhr.setRequestHeader(hn, tk);
             },
 			data : {
-				card_no : $("input[name='card_no']").val(),
+				ano : $("input[name='ano']").val(),
 				password : $("input[name='password']").val(),
 				confirm_password : $("input[name='confirm_password']").val()
 			},
@@ -85,7 +85,7 @@ $(function(){
 	})
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		console.log("클릭!")
+		
 		
 		var ano = $(this).text();
 		
@@ -102,7 +102,7 @@ $(function(){
 			dataType : "text",
 			success : function(result){
 				var vo = JSON.parse(result);
-				$("input[name='deposit_p_name']").val(vo.p_name);
+				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
 			}
 		})
@@ -120,7 +120,7 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				console.log("accinfo result : "+result)
+				
 				let list = JSON.parse(result); 
 				let total = 0;
 				
@@ -141,52 +141,110 @@ $(function(){
 		
 	})
 	
-	$("#card-list").on("click",".card-item" ,function(){
-		console.log("클릭!")
+	$("#call_card_no").click(function(e){
+		e.preventDefault();
 		
-		var card_no = $(this).text();
+		
+		
+		
+		let form = $("#registerForm");
+		let product = form.find("#product").val();
+		let cno = form.find("input[name='cno']").val();
+		
+		if(cno==null||cno==""||product==null||product=="0"){
+			return false;
+		}
+		
 		
 		$.ajax({
-			url:"/admin/card/get_cardInfo",
+			url : "/admin/card/call_card_no",
 			type : "post",
 			beforeSend : function(xhr)
             {   
-				xhr.setRequestHeader(hn, tk);
+                xhr.setRequestHeader(hn, tk);
             },
-			data : {
-				card_no : card_no
+			data :{
+				product : product,
+				cno : cno
 			},
 			dataType : "text",
 			success : function(result){
-				var vo = JSON.parse(result);
-				$("input[name='card_p_name']").val(vo.p_name);
-				$("input[name='card_no']").val(vo.card_no);
-				$("input[name='limit']").val(vo.limit);
-				$("input[name='limit_month']").val(vo.limit_month);
-				$("select[name='condition']").find("option").removeAttr("selected");
-				$("select[name='condition']").find("option[value='"+vo.condition+"']").prop("selected", true);
+				$("input[name='card_no']").val(result);
 			}
+			
+			
+			
+		
+			
 		})
-		
-		
+	
 	})
 	
 	
 	
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
-		console.log("prevent");
 		
+		if($("input[name='ano']").val()===""){
+			
+			return false;
+		}
 		if($("input[name='card_no']").val()===""){
-			console.log("card_no");
+			
 			return false;
 		}
 		if($("input[name='limit']").val()==="" || $("input[name='limit_month']").val()===""){
-			console.log("limit");
+			
 			return false;
 		}
-		$("#modifyForm").submit();
+		if($("#c_type").val()=="0"){
+			
+			return false;
+		}
+		if($("input[name='password']").val()===""||$("input[name='password']").val()!==$("input[name='confirm_password']").val()){
+			alert("비밀번호를 확인해 주세요.");
+			return false;
+		}
+		$("#registerForm").submit();
 	})
+	
+	
+	
+	$.ajax({
+		url : "/admin/card/get_card_product",
+		type : "post",
+		beforeSend : function(xhr)
+	    {   
+	        xhr.setRequestHeader(hn, tk);
+	    },
+	    dataType : "text",
+		success : function(result){
+			
+			let list = JSON.parse(result); 
+			if(list.length == 0){
+				return;
+			}
+			
+			str = "<option value='0' selected>-- 상품 선택 --</option>"
+			for(let i = 0; i < list.length; i++){
+				
+				str += "<option value='"+list[i].product+"'>"+list[i].p_name+"</option>";		
+				
+			}
+			$("#product").html(str);
+			
+		},
+		error: function(result){
+			alert("상품목록을 불러오는 중 오류가 발생했습니다.");
+		}
+			
+			
+			
+
+			
+	})
+	
+	
 	
 	
 	
@@ -212,7 +270,7 @@ function input_password(password, wInput){
 
 
 function searchCS_callback(cno){
-	$("#modifyForm")[0].reset();
+	$("#registerForm")[0].reset();
 	$("input[name='cno']").val(cno);
 	
 	$.ajax({
@@ -227,7 +285,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;

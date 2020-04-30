@@ -20,7 +20,7 @@ $(function(){
 		$("input[name='cno']").val("");
 		$("input[name='amount']").val("")
 		$("input[name='amount_korean']").val("")
-		console.log("check_ano")
+		
 		let form = $("#withdrawForm");
 		
 		
@@ -61,7 +61,7 @@ $(function(){
 	
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		console.log("클릭!")
+		
 		
 		
 		$("input[name='amount']").val("");
@@ -160,7 +160,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;

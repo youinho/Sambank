@@ -1,14 +1,26 @@
 package com.spring.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +35,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException.BadRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
@@ -34,6 +48,7 @@ import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.AttachFileDTO;
 import com.spring.domain.CardVO;
 import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
@@ -704,6 +719,173 @@ public class AdminController {
 	
 	//notice @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
+	
+	
+	
+	
+	
+	
+	//폴더 생성
+	private String getFolder() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+		return str.replace("-", File.separator);		
+	}
+	
+	
+	//첨부파일 다운로드
+//	@PostMapping("/notice/downloadFile")
+	@GetMapping("/notice/downloadFile")
+	@ResponseBody
+	public ResponseEntity<Resource> download(AttachFileDTO dto, @RequestHeader("user-Agent") String userAgent, HttpServletRequest req){
+		log.info("파일 다운로드"+dto);
+		log.info("파일 user : "+req.getRemoteUser());
+		if(service.selectOne(req.getRemoteUser())==null){
+			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
+		}
+		AttachFileDTO data = service.get_oneFile(dto);
+		if(data==null) {
+			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
+		}
+		log.info("data :"+data);
+		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
+		
+		
+		Resource resource = new FileSystemResource("d:\\upload\\"+fileName);
+		
+		if(!resource.exists()) {
+			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+		}
+		
+		String resourceUidName = resource.getFilename();
+		String resourceName = resourceUidName.substring(resourceUidName.indexOf("_")+1);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		String downloadName = null;
+		
+		if(userAgent.contains("Trident") || userAgent.contains("Edge")) {
+			try {
+				downloadName = URLEncoder.encode(resourceName, "utf-8").replaceAll("\\+", " ");
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				downloadName = new String(resourceName.getBytes("utf-8"), "ISO-8859-1");
+			} catch (UnsupportedEncodingException e) {
+
+				e.printStackTrace();
+			}
+		}
+		headers.add("Content-Disposition", "attachment;filename="+downloadName);
+		
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@PostMapping("/notice/get_attachList")
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> getAttachList(String admin_bno){
+		log.info(admin_bno+" 첨부물 가져오기");
+		
+		return new ResponseEntity<List<AttachFileDTO>>(service.getAttachList(admin_bno), HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	@PostMapping("/notice/upload")
+	@ResponseBody
+	public ResponseEntity<List<AttachFileDTO>> uploadPost(MultipartFile[] uploadFile) {
+		String uploadFolder = "d:\\upload";
+		String uploadFileName = null;
+		String uploadFolderPath = getFolder();
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		List<AttachFileDTO> attachList = new ArrayList<AttachFileDTO>();
+		
+		
+		
+		for(MultipartFile multipartFile : uploadFile) {
+			log.info("upload 요청 "+multipartFile.getOriginalFilename());
+			log.info("upload 파일 크기"+multipartFile.getSize());
+		
+			uploadFileName = multipartFile.getOriginalFilename();
+			
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+			
+			UUID uuid = UUID.randomUUID();
+			uploadFileName = uuid.toString()+"_"+uploadFileName;
+			
+			AttachFileDTO attach = new AttachFileDTO();
+			attach.setFileName(multipartFile.getOriginalFilename());
+			attach.setUploadPath(uploadFolderPath);
+			attach.setUuid(uuid.toString());
+			
+			Path pathFile = Paths.get(uploadPath.getPath(), uploadFileName);
+			
+			try {
+				multipartFile.transferTo(pathFile);
+				attachList.add(attach);
+			} catch (IllegalStateException e) {
+	
+				e.printStackTrace();
+			} catch (IOException e) {
+	
+				e.printStackTrace();
+			}
+		}
+		return new ResponseEntity<List<AttachFileDTO>>(attachList, HttpStatus.OK);
+	}
+
+	
+	//파일 삭제하기
+	@PostMapping("/notice/deleteFile")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		log.info("파일 삭제 : "+fileName);
+		
+		File file = null;
+		
+		try {
+			String file_p = "d:\\upload\\"+URLDecoder.decode(fileName, "utf-8");
+			file = new File(file_p);
+			//썸네일과 일반파일 삭제
+			System.out.println(file_p);
+			file.delete();
+			System.out.println(type);
+			
+			
+			
+		} catch (UnsupportedEncodingException e) {
+
+			e.printStackTrace();
+		}
+		
+		
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
 	@GetMapping("/notice")
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("notice 요청 -"+cri);
@@ -722,13 +904,20 @@ public class AdminController {
 	}
 	
 	@PostMapping("/notice/register")
-	public String notice_register(Admin_noticeVO vo, HttpServletRequest req) {
+	public String notice_register(Admin_noticeVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+		if(vo.getAttachList() != null) {
+			vo.getAttachList().forEach(attach -> log.info(""+attach));
+		}else {
+			log.info("첨부 없음");
+		}
 		log.info("register_post"+vo);
 		log.info("게시글 등록. 아이디 : "+req.getRemoteUser());
 		vo.setId(req.getRemoteUser());
 		vo.setWriter(service.selectOne(req.getRemoteUser()).getName());
 		
 		if(service.notice_insert(vo)) {
+			rttr.addFlashAttribute("registered", "true");
+			rttr.addFlashAttribute("admin_bno", vo.getAdmin_bno());
 			return "redirect:/admin/notice";
 		}
 		

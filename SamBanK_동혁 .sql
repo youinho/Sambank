@@ -339,3 +339,11 @@ commit;
 update customertbl set authority='ROLE_USER';
 update customertbl set enabled=1;
 select * from customertbl where name='김동혁';
+
+
+select * from deposit_history;
+select * from admin_board;
+commit;
+delete from admin_board where admin_bno!=4 and admin_bno!=5 and admin_bno!=6;
+select * from admin_attach;
+-- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

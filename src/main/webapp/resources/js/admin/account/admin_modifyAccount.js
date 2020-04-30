@@ -85,7 +85,7 @@ $(function(){
 	})
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		console.log("클릭!")
+		
 		
 		var ano = $(this).text();
 		
@@ -153,7 +153,7 @@ function searchCS_callback(cno){
 		},
 		dataType : "text",
 		success : function(result){
-			console.log("accinfo result : "+result)
+			
 			let list = JSON.parse(result); 
 			if(list.length == 0){
 				return;
