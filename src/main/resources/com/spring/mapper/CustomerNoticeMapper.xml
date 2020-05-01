@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.CustomerNoticeMapper">
+
+
+	<select id="getList" resultType="com.spring.domain.Customer_noticeVO">
+	 <![CDATA[
+	 
+		select * from(
+			select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, type
+			from notice_board
+			where 
+			]]>
+			<include refid="criteria"></include>
+		<![CDATA[		
+			rownum <= #{pageNum}*#{amount})
+		where rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+
+
+<!-- 페이지 나누기를 위한 전체 게시물 수 구하기 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from notice_board
+		where 
+		<!-- 검색 -->
+		<include refid="criteria"></include>
+		
+		notice_bno>0
+	</select>
+
+
+	<insert id="insert">
+		
+		<selectKey keyProperty="notice_bno" order="BEFORE" resultType="String">
+			select seq_notice_board.nextVal from dual
+		</selectKey>
+		insert into notice_board(notice_bno, id, title, content, writer, type)
+		values(#{notice_bno}, #{id}, #{title}, #{content}, #{writer}, #{type}) 
+	</insert>
+
+
+
+
+
+<!--  -->
+	<select id="getRow" resultType="com.spring.domain.Customer_noticeVO">
+		select * from notice_board
+		where notice_bno=#{notice_bno}
+	</select>
+
+
+<!--  -->
+	<delete id="delete">
+		delete from notice_board
+		where notice_bno=#{notice_bno}
+	</delete>
+
+
+
+	<update id="update">
+		update notice_board
+		set title=#{title}, content=#{content}, type=#{type} updatedate=sysdate
+		where notice_bno=#{notice_bno}
+	
+	</update>
+
+
+
+
+	<insert id="insertFile"> <!-- 컬럼 전체 삽입 -->
+		insert into notice_attach(uuid, uploadPath, fileName, notice_bno) values(#{uuid}, #{uploadPath}, #{fileName}, #{notice_bno})	
+	</insert>
+	
+	<delete id="deleteFile">	<!-- uuid 값 일치 -->
+		delete from notice_attach where uuid=#{uuid}	
+	</delete>
+	
+	
+	<select id="selectFile" resultType="com.spring.domain.AttachFileDTO">	<!-- bno값 일치 -->
+		select * from notice_attach where notice_bno=#{notice_bno}
+	</select>
+	
+	<delete id="deleteAllFiles">
+			delete from notice_attach where notice_bno=#{notice_bno}
+	</delete>
+	
+	<!-- 어제 날짜의 첨부파일 목록 가져오기 -->
+	<select id="getOldFiles" resultType="com.spring.domain.AttachFileDTO">
+		select * from notice_attach
+		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
+	
+	</select>
+
+	<!-- uuid, filename 파일찾기 -->
+	<select id="get_oneFile" resultType="com.spring.domain.AttachFileDTO">
+		select * from notice_attach
+		where uuid=#{uuid} and filename=#{fileName}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 동적 sql -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type=='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type=='W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+					
+				</trim>
+			
+			</foreach>
+		
+		</trim>
+	</sql>
+
+
+
+
+</mapper>

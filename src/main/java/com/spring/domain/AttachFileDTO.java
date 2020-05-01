@@ -11,4 +11,5 @@ public class AttachFileDTO {
 	private String fileType;
 	private String admin_bno;
 	
+	private String notice_bno;
 }
