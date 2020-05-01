@@ -5,7 +5,7 @@
 
 <div class="container">
 	<!-- 컨텐츠 타이틀 -->
-	<h3 class="tit_content title">공지사항</h3>
+	<h3 class="tit_content title">고객 공지사항</h3>
 	<!-- //컨텐츠 타이틀 -->
 
 	<!-- 컨텐츠 내용 -->

@@ -91,7 +91,7 @@ $(function(){
 <body>
 	
 	<div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title">사내 공지</h4>
+      <h4 class="mb-3 title">고객 공지</h4>
       <div class="row">
                 <!-- /.col-lg-12 -->
             </div>

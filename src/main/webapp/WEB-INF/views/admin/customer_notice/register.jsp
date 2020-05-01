@@ -8,7 +8,7 @@
 </style>
 
 <div class="col-md-10">
-	<h3 class="page-header title">공지 등록</h3>
+	<h3 class="page-header title">고객 공지 등록</h3>
 </div>
 
 <div class="col-md-10">     
