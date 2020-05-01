@@ -29,28 +29,33 @@ public class HomeController {
 		
 		log.info("main페이지");
 	
-		return "main(index)";
+		return "main";
 	}
 	
 	//testpage
-//	@GetMapping("/fm")
-//	public String GuideHeader() {
-//		return "footer_Main";
-//	}
-//	
-//	@GetMapping("/main")
-//	public String newmain() {
-//		return "main";
-//	}
-//	
+	@GetMapping("/ft")
+	public String GuideHeader() {
+		return "footer_Main";
+	}
+	
+	@GetMapping("/hd")
+	public String newmain() {
+		return "header_Main";
+	}
+	
+	@GetMapping("/Q")
+	public String Questions() {
+		return "Questions";
+	}
+	
 //	@GetMapping("/login")
 //	public String loginPage() {
 //		
 //		
 //		return "user/login";
 //	}
-//	
-//	
+	
+	
 //	@PostMapping("/login")
 //	public void user_login_post(CustomerVO vo) {
 //		
