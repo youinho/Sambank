@@ -27,8 +27,8 @@
 						<td colspan="5" style="font-size:1.3em;"><b><c:out value="${vo.title }"></c:out></b></td>
 					</tr>
 					<tr>
-						<th scope="row">글 번호</th>
-						<td>${vo.admin_bno }</td>
+						<th scope="row">작성자</th>
+						<td><c:out value="${vo.branch } ${vo.rank } ${vo.writer }"></c:out></td>
 						<th scope="row">등록일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate }"/></td>
 						<th scope="row">최종수정일</th>

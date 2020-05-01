@@ -381,6 +381,56 @@ commit;
 
 rollback;
 
+select * from admin_attach;
+
+alter table notice_board add(content2 clob);
+alter table notice_board add(type nvarchar2(30) not null);
+alter table notice_board modify(content clob);
+alter table notice_board rename column content2 to content;
+alter table notice_board drop column content3;
+alter table notice_board modify(type nvarchar2(20) default '공지사항');
+select * from notice_board;
+select * from notice_attach;
+
+select to_char(sysdate, 'yyyy-MM-dd HH:mm:ss') from dual;
+create sequence seq_inquiry;
+insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
+
+create table customer_inquiry(
+    inquiry_no number(10) not null,
+    customer_id nvarchar2(20) not null,
+    customer_name nvarchar2(20) not null,
+    title nvarchar2(1000),
+    content clob,
+    answer_id nvarchar2(20),
+    answer_branch nvarchar2(20),
+    answer_rank nvarchar2(20),
+    answer_name nvarchar2(20),
+    condition number(2) default 1 not null,
+    regdate date default sysdate,
+    updatedate date default sysdate
+);
+create table customer_inquiry_reply(
+    inquiry_reply_no number(10) not null,
+    inquiry_no number(10) not null,
+    answer_id nvarchar2(20),
+    answer_branch nvarchar2(20),
+    answer_rank nvarchar2(20),
+    answer_name nvarchar2(20),
+    content blob,
+    regdate date default sysdate
+    );
+    
+    
+
+drop table customer_inquiry;
+insert into customer_inquiry(customer_id, customer_name, content) values('rlaehdgur1', '김동혁', '안녕하세요 문의입니다~');
+commit;
+
+select * from customer_inquiry;
+update customer_inquiry set answer_id='sam', answer_branch='본사', answer_rank='사장', answer_name='김동혁' where inquiry_no=4;
+    
+
 
 
 

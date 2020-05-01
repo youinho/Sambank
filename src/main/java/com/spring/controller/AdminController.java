@@ -58,10 +58,12 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.Customer_noticeVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
+import com.spring.domain.InquiryVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.InquiryService;
 import com.spring.service.SBValidator;
 
 
@@ -84,6 +86,9 @@ public class AdminController {
 	@Autowired
 	private CustomerNoticeService cn_service;
 	
+	@Autowired
+	private InquiryService inquiry_service;
+	
 	//관리자_ 고객 공지 페이지
 	@GetMapping("/customer_notice")
 	public String admin_show_customer_notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
@@ -94,6 +99,71 @@ public class AdminController {
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		return "/admin/customer_notice";
 	}
+	
+	
+	@GetMapping("/inquiry")
+	public String admin_inquiry_get(Model model, HttpServletRequest req) {
+		logging(req);
+		
+		model.addAttribute("list", inquiry_service.getList());
+		
+		
+		return "/admin/inquiry";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/check_inquiry")
+	public ResponseEntity<String> inquiry_check(String inquiry_no, HttpServletRequest req){
+		logging(req);		
+		return new ResponseEntity<String>(req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")+"", HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/charge_inquiry", produces = "application/text; charset=utf8")
+	public ResponseEntity<String> charge_inquiry(String inquiry_no, HttpServletRequest req){
+		
+		if(inquiry_service.getRow(inquiry_no).getAnswer_id()==null) {
+			AdminVO admin = service.selectOne(req.getRemoteUser());
+			InquiryVO vo = new InquiryVO();
+			vo.setInquiry_no(inquiry_no);
+			vo.setAnswer_id(admin.getId());
+			vo.setAnswer_branch(admin.getBranch());
+			vo.setAnswer_rank(admin.getRank());
+			vo.setAnswer_name(admin.getName());
+			if(inquiry_service.charge_inquiry(vo)) {
+				log.info("name : "+vo.getAnswer_name());
+				return new ResponseEntity<String>(vo.getAnswer_name(), HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<String>("gg", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	
+	
+	@GetMapping("/inquiry/{inquiry_no}")
+	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
+		logging(req);
+		if(!req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")) {
+			return "redirect:/admin/inquiry";
+		}
+		//log.info("read 요청"+admin_bno);
+		try {
+			model.addAttribute("vo", inquiry_service.getRow(inquiry_no));
+		}catch (Exception e) {
+			return "redirect:/admin/inquiry";
+		}
+		return "/admin/inquiry/read";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -879,7 +949,11 @@ public class AdminController {
 		logging(req);
 		//log.info("read 요청"+admin_bno);
 		try {
-			model.addAttribute("vo", service.notice_getRow(admin_bno));
+			Admin_noticeVO vo = service.notice_getRow(admin_bno);
+			AdminVO admin = service.selectOne(req.getRemoteUser());
+			vo.setBranch(admin.getBranch());
+			vo.setRank(admin.getRank());
+			model.addAttribute("vo", vo);
 		}catch (Exception e) {
 			return "redirect:/admin/notice";
 		}

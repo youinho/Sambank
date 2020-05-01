@@ -38,10 +38,10 @@ public class HomeController {
 //		return "footer_Main";
 //	}
 //	
-//	@GetMapping("/main")
-//	public String newmain() {
-//		return "main";
-//	}
+	@GetMapping("/main")
+	public String newmain() {
+		return "main";
+	}
 //	
 //	@GetMapping("/login")
 //	public String loginPage() {

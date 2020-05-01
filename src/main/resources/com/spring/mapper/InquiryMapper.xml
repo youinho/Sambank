@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.InquiryMapper">
+
+	<!-- 전체 리스트 -->
+	<select id="getList" resultType="com.spring.domain.InquiryVO">
+		select * from customer_inquiry
+		where condition != 0
+		order by updatedate asc
+	</select>
+
+	<!-- 리스트 by answer_id -->
+	<select id="getList_by_answer" resultType="com.spring.domain.InquiryVO">
+		select * from customer_inquiry
+		where condition != 0 and answer_id=#{answer_id}
+		order by updatedate asc
+	</select>
+
+	<!-- 글 번호로 정보 -->
+	<select id="getRow" resultType="com.spring.domain.InquiryVO">
+		select * from customer_inquiry
+		where inquiry_no=#{inquiry_no}
+	</select>
+	
+	
+	<!-- 담당  -->
+	<update id="charge_inquiry">
+		update customer_inquiry 
+		set answer_id=#{answer_id}, answer_branch=#{answer_branch}, answer_rank=#{answer_rank}, answer_name=#{answer_name} 
+		where inquiry_no=#{inquiry_no}
+	</update>
+
+</mapper>
