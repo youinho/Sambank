@@ -18,11 +18,11 @@
 
 	<!-- Header function var -->
 		<div id="header">
-			<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #fbebba;">
-			
+		<!-- style="background-color: #fbebba;" -->
+			<nav class="navbar navbar-expand-lg navbar navbar-light" >
 			<div id="Logo">  
-			  <strong><img src="/resources/KB_files/SamBank Image Logo.png" alt="로고 이미지"></strong>
-			  <a class="navbar-brand" src="/resources/KB_files/SamBank Image Logo.png" href="#"></a>
+			  <strong><img src="/resources/KB_files/SamBank Image Logo.png" alt="로고 이미지" ></strong>
+			  <a class="navbar-brand" src="/resources/KB_files/SamBank Image Logo.png" href="/"></a>
 			</div>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
