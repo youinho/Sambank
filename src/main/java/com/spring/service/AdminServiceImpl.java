@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.AttachFileDTO;
@@ -143,13 +144,13 @@ public class AdminServiceImpl implements AdminService {
 
 		return noticeMapper.getRow(admin_bno);
 	}
-	
+	@Transactional
 	@Override
 	public boolean notice_delete(int admin_bno) {
 		boolean result = true;
-		if(noticeMapper.deleteAllFiles(""+admin_bno)==1) {
-			result = noticeMapper.delete(admin_bno)==1;
-		}
+		noticeMapper.deleteAllFiles(""+admin_bno);
+		result = noticeMapper.delete(admin_bno)==1;
+		
 		
 		
 		return result;
@@ -443,6 +444,13 @@ public class AdminServiceImpl implements AdminService {
 	public AttachFileDTO get_oneFile(AttachFileDTO dto) {
 
 		return noticeMapper.get_oneFile(dto);
+	}
+
+
+	@Override
+	public boolean insertLog(Admin_logVO vo) {
+
+		return adminMapper.insertLog(vo)==1;
 	}
 	
 }

@@ -104,13 +104,15 @@ $(function(){
 				id : $("input[name='id']").val() 
 			},
 			success: function(){
-				
+				check=true;
 			},
 			error: function(){
 				alert("아이디가 이미 존재합니다.")
+				check=false;
 			}
 		});
-		
+		if(!check)
+			return false;
 		
 		$("#manageForm").attr("action", "/admin/registerAdmin");
 		$("#manageForm").submit();

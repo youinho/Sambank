@@ -224,6 +224,22 @@ $(function(){
 	
 	
 	
+	let groupId = 0;
+	$.ajax({
+		url : "/admin/get_groupId",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+		},
+		dataType : "text",
+		success : function(result){
+			groupId = parseInt(result);
+		}
+	})
+	
 	
 	let actionForm = $("#actionForm");
 	$(".page-link").click(function(e){
@@ -237,6 +253,11 @@ $(function(){
 	
 	$("#registerBtn").click(function(e){
 		e.preventDefault();
+		if(groupId < 5){
+			alert("공지를 등록할 권한이 없습니다.");
+			return false;
+		}
+		
 		location.href = "/admin/notice/register";
 		
 		

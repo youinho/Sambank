@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.AttachFileDTO;
@@ -32,6 +33,10 @@ public interface AdminService {
 	public boolean admin_insert(AdminVO vo);
 	public boolean update_admin(AdminVO vo);
 	public boolean check_adminId(String id);
+	public boolean insertLog(Admin_logVO vo);
+	
+	
+	
 	
 	public boolean register_customer(CustomerVO vo);
 	public List<DepositVO> get_deposit_list();

@@ -9,6 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<noscript> 
+	<meta http-equiv="Refresh" content="0; URL=/admin/noscript"> 
+</noscript>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,8 +66,13 @@ $(function(){
 	})
 })
 </script>
+
 </head>
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
+
+
+
+
     <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
   <ul class="navbar-nav px-3 mr-auto">

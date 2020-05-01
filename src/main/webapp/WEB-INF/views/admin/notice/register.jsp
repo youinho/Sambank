@@ -65,9 +65,47 @@ $(function(){
 	
 	$("input[name='title']").focus();
 	
+	let groupId = 0;
+	$.ajax({
+		url : "/admin/get_groupId",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+		},
+		dataType : "text",
+		success : function(result){
+			console.log("res : "+result)
+			groupId = parseInt(result);
+			if(groupId < 5){
+				
+				alert("공지를 등록할 권한이 없습니다."+groupId);
+				
+				location.href = "/admin/notice";
+			}
+		}
+	})
+	
+	
+	
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
-			
+		if(groupId < 5){
+			alert("공지를 등록할 권한이 없습니다."+groupId);
+			location.href = "/admin/notice";
+		}	
 		let str = "";
 		if($("input[name='title']").val()===""){
 			$("input[name='title']").focus();

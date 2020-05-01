@@ -339,11 +339,53 @@ commit;
 update customertbl set authority='ROLE_USER';
 update customertbl set enabled=1;
 select * from customertbl where name='김동혁';
-
-
+alter table admin_board add(content2 clob);
+update admin_board set content2 = content;
+commit;
+alter table admin_board rename column content to content3;
+alter table admin_board rename column content2 to content;
+commit;
+alter table admin_board modify(content3 nvarchar2(2000) default '임시');
+alter table admin_board modify(content clob default 'NULL');
 select * from deposit_history;
 select * from admin_board;
 commit;
 delete from admin_board where admin_bno!=4 and admin_bno!=5 and admin_bno!=6;
 select * from admin_attach;
+update admin_board set content='임시' where admin_bno=21;
+select * from admin_board;
+commit;
+
+
+
+select * from admin_attach;
+select * from admin_board;
+select * from admin_group_members;
+
+
+
+alter table logtbl add(uri nvarchar2(1000) not null);
+alter table logtbl add(logdate date default sysdate);
+alter table logtbl add(local_name nvarchar2(100));
+alter table logtbl add(local_addr nvarchar2(100));
+alter table logtbl add(local_port nvarchar2(100));
+alter table logtbl add(remote_addr nvarchar2(100));
+alter table logtbl add(remote_port nvarchar2(100));
+alter table logtbl add(admin_session nvarchar2(200));
+alter table logtbl modify id null;
+alter table logtbl drop constraint fk_log;
+
+
+select * from logtbl order by logdate desc;
+commit;
+
+rollback;
+
+
+
+
+
+
+
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

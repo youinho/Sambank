@@ -15,6 +15,8 @@ public class Admin_noticeVO {
 	private Date regdate;
 	private Date updatedate;
 	
+	private String rank;
+	private String branch;
 	//첨부파일 목록
 	private List<AttachFileDTO> attachList;
 }

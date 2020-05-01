@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
@@ -33,7 +34,7 @@ public interface AdminMapper {
 	
 	public int check_adminId(String id);
 	
-	
+	public int insertLog(Admin_logVO vo);
 	
 	
 	

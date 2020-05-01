@@ -11,7 +11,7 @@
 	<!-- 컨텐츠 내용 -->
 	<div>
 		<div class="tbl_type2 leftPd">
-			<table summary="" class="table table-sm table-bordered" style="text-align:center">
+			<table summary="" class="table table-sm table-bordered" style="text-align:center;max-width:1300px">
 				
 				<colgroup>
 					<col width="12%">
@@ -70,7 +70,7 @@
 </div>
 <form action="/admin/modify" id="myForm">
 	<input type="hidden" name="bno" value="${vo.admin_bno }"/>
-	
+	<input type="hidden" name="id" value="${vo.id }" />
 	<!-- 페이지 나누기 후 추가 -->
 	<input type="hidden" name="pageNum" value="${cri.pageNum }"/>
 	<input type="hidden" name="amount" value="${cri.amount }"/>
@@ -79,11 +79,44 @@
 	<%-- <sec:csrfInput/> --%>	
 </form>
 <script>
+
 //list버튼이 클릭하면 list페이지 보여주기
 $(function(){
 	$("#inner-notice").addClass("active");
 	
-	$(".container").css("max-width", $(window).width()+"px");
+	let boardId = 0;
+	let myId = 0;
+	$.ajax({
+		url : "/admin/get_groupId_by_id",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+			id : "${vo.id}"
+		},
+		dataType : "text",
+		success : function(result){
+			boardId = parseInt(result);
+		}
+	})
+	$.ajax({
+		url : "/admin/get_groupId",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+		},
+		dataType : "text",
+		success : function(result){
+			myId = parseInt(result);
+		}
+	})
+	
+	
 	
 	$("#go-list").click(function(){
 		//location.href="/board/list";
@@ -94,7 +127,14 @@ $(function(){
 		
 	})
 	
+	
+	
 	$("#go-delete").click(function(){
+		
+		if(myId < boardId){
+			alert("글을 삭제할 권한이 없습니다.");
+			return false;
+		}
 		$("#myForm").attr("action", "/admin/notice/delete");
 		$("#myForm").attr("method", "post");
 		$("#myForm").append("<input type='hidden' name='_csrf' value='${_csrf.token}'>")
@@ -102,6 +142,11 @@ $(function(){
 	})
 	
 	$("#go-modify").click(function(){
+		console.log("myid : "+myId);
+		if(myId < boardId){
+			alert("글을 수정할 권한이 없습니다.");
+			return false;
+		}
 		$("#myForm").attr("action", "/admin/notice/modify");
 		$("#myForm").attr("method", "get");
 		$("#myForm").submit();
