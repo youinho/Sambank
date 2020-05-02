@@ -45,7 +45,7 @@
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
-$(function(){
+/* $(function(){
 	$.ajax({
 		url : "/admin/get_adminInfo",
 		type : "post",
@@ -64,7 +64,7 @@ $(function(){
 			
 		}
 	})
-})
+}) */
 </script>
 
 </head>
@@ -81,18 +81,21 @@ $(function(){
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
 	  	<span class="navbar-text" id="admin_branch">
+	  	<strong><c:out value="${admin_branch }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_rank">
+  		<strong><c:out value="${admin_rank }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_name">
+  		<strong><c:out value="${admin_name }"></c:out></strong>
 	    </span>
   	</li>
   </ul>

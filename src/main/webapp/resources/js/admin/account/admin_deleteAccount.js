@@ -134,7 +134,7 @@ $(function(){
 		
 		
 		$.ajax({
-			url:"/admin/card/get_cardInfo",
+			url:"/admin/card/get_cardList",
 			type : "post",
 			beforeSend : function(xhr)
             {   

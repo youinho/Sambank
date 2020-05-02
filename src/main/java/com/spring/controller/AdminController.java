@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -931,10 +931,16 @@ public class AdminController {
 	
 	//사내 공지 페이지
 	@GetMapping("/notice")
-	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
+	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req, HttpSession session) {
 		logging(req);
 		//log.info("notice 요청 -");
-		
+		log.info("session@ : "+session.getAttribute("admin_branch"));
+		if(session.getAttribute("admin_branch")==null) {
+			AdminVO vo = service.selectOne(req.getRemoteUser());
+			session.setAttribute("admin_branch", vo.getBranch());
+			session.setAttribute("admin_rank", vo.getRank());
+			session.setAttribute("admin_name", vo.getName());
+		}
 		model.addAttribute("list", service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, service.totalRows(cri)));
 		return "/admin/notice";
