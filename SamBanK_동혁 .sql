@@ -457,8 +457,17 @@ select seq_admin.nextVal from dual;
 commit;
 
 
-
+select * from admintbl;
+alter table admintbl add(profile_image blob);
 CREATE OR REPLACE DIRECTORY load_DIR AS 'D:/oracle/product/1014/dm/load';
-
-
+commit;
+update admintbl set profile_image=(select profile_image from admintbl where name='호호호');
+select profile_image from admintbl
+where id='sam';
+create table default_profile_image(
+    profile_image blob
+    );
+    select profile_image from admintbl where name='호호호';
+insert into default_profile_image select profile_image from admintbl where name='호호호';
+commit;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

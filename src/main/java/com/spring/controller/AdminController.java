@@ -104,7 +104,11 @@ public class AdminController {
 		catch (IOException e) {
 			e.printStackTrace(); 
 		}
-			if (mimeType.startsWith("image")) { return true; } else { return false; }
+			if (mimeType.startsWith("image")) {
+				return true; 
+			} else {
+				return false; 
+			}
 	
 	}
 	
@@ -114,7 +118,7 @@ public class AdminController {
 	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
 		
 		try {
-			if(!checkImageMimeType(uploadFile_header[0].getInputStream())) {
+			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize()>300000) {
 				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			try {
@@ -269,6 +273,8 @@ public class AdminController {
 		return "/errorpage/noscript";
 	}
 	
+	
+	//로깅, 로그 남기기
 	private boolean logging(HttpServletRequest req) {
 		
 		Admin_logVO vo = new Admin_logVO();
@@ -283,7 +289,7 @@ public class AdminController {
 		vo.setRemote_addr(req.getRemoteAddr());
 		vo.setRemote_port(req.getRemotePort()+"");
 		vo.setAdmin_session((req.getSession()+"").substring(49));
-		log.info("log vo : "+vo);
+		//log.info("log vo : "+vo);
 		return service.insertLog(vo);
 	}
 	
@@ -757,7 +763,7 @@ public class AdminController {
 	@PostMapping("/customer/register")
 	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		//log.info("register_customer_post vo : "+vo);
+		log.info("register_customer_post vo : "+vo);
 		boolean result = false;
 		if(vali.check_customer(vo)) {
 			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
