@@ -4,9 +4,11 @@
 
 <script>
 
-//list버튼이 클릭하면 list페이지 보여주기
+
 $(function(){
 	$("#inquiry_list").addClass("active");
+	
+	// 담당자인지 아닌지 확인, 아닐경우 목록으로 이동
 	$.ajax({
 		url : "/admin/check_inquiry",
 		type : "post",
@@ -28,17 +30,7 @@ $(function(){
 	
 	
 	
-	$("#go-reply").click(function(e){
-		e.preventDefault();
-		if($("#content").val()==="" || $("#content").val()===null){
-			return false;
-		}
-	})
 	
-	$("#go-list").click(function(e){
-		e.preventDefault();
-		location.href="/admin/inquiry";
-	})
 	
 })
 </script>
@@ -50,7 +42,7 @@ $(function(){
 	<!-- 컨텐츠 내용 -->
 	<div>
 		<div class="tbl_type2 leftPd">
-			<table summary="" class="table table-sm table-bordered" style="text-align:center;max-width:1300px">
+			<table summary="" class="table table-sm table-bordered" style="text-align:center;max-width:1300px" id="inquiry_table">
 				
 				<colgroup>
 					<col width="12%">
@@ -61,11 +53,11 @@ $(function(){
 					<col width="20%">
 				</colgroup>
 				<tbody>
-					<tr>
+					<tr class="ori">
 						<th scope="row">제목</th>
 						<td colspan="5" style="font-size:1.3em;"><b><c:out value="${vo.title }"></c:out></b></td>
 					</tr>
-					<tr>
+					<tr class="ori">
 						<th scope="row">글 번호</th>
 						<td><c:out value="${vo.inquiry_no }"></c:out> </td>
 						<th scope="row">등록일</th>
@@ -73,7 +65,7 @@ $(function(){
 						<th scope="row">최종수정일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updateDate }"/> </td>
 					</tr>
-					<tr>
+					<tr class="ori">
 						<th scope="row">고객 성함</th>
 						<td><c:out value="${vo.customer_name }"></c:out></td>
 						<th scope="row">담당자 정보</th>
@@ -83,15 +75,17 @@ $(function(){
 					</tr>
 					
 
-					<tr>
+					<tr class="ori">
 						<td colspan="6">
-							<div style="padding:20px;margin:20px;text-align:left">
+							<div style="padding:20px;margin:20px;text-align:left" id="contentDiv">
 								<c:out value="${vo.content }"></c:out>
 							</div>
-							<textarea id="contents_text" style="width:100%;display:none;" rows="10">
-							
-							
-							</textarea>
+						</td>
+					</tr>
+					<tr class="ori" >
+						<td colspan="6" style="border-left-color:#ffffff;border-right-color:#ffffff">
+							<div style="height:20px">
+							</div>
 						</td>
 					</tr>
 				</tbody>
@@ -114,4 +108,102 @@ $(function(){
 </form>				
 </div>
 
-									
+<script>
+$(function(){
+	$("#contentDiv").html($("#contentDiv").html().replace(/\n/gi, "<br>"));
+	show_reply();
+	
+	$("#go-reply").click(function(e){
+		e.preventDefault();
+		console.log("go_reply")
+		if($("#content").val()==="" || $("#content").val()===null){
+			return false;
+		}
+		
+		$.ajax({
+			url : "/admin/inquiry_register_reply",
+			type : "post",
+			beforeSend : function(xhr)
+	           {   
+	               xhr.setRequestHeader(hn, tk);
+	           },
+			data :{
+				inquiry_no:"${vo.inquiry_no}",
+				content : $("#content").val()
+			},
+			dataType : "text",
+			success : function(result){
+				$("#content").val("");
+				show_reply();
+			}
+		})
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	})
+
+	$("#go-list").click(function(e){
+		e.preventDefault();
+		location.href="/admin/inquiry";
+	})
+
+	
+	
+	
+	
+	
+})
+
+function show_reply(){
+	$.ajax({
+		url : "/admin/inquiry_get_reply",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+			inquiry_no:"${vo.inquiry_no}"
+		},
+		dataType : "text",
+		success : function(result){
+			replyList = JSON.parse(result);
+			
+			
+			if(replyList.length <= 0){
+				return false;
+			}
+			$("tr[class!='ori']").remove();
+			str="";
+			
+			for(var i=0; i < replyList.length; i++){
+				
+				var date = new Date(replyList[i].regDate);
+				
+				
+				
+				str += "<tr><td colspan='6' style='text-align:left'><div class='media text-muted pt-3'><img src='/resources/SB_files/SamBank Image Logo.png' alt='로고 이미지' style='width=32px;height:32px'><p class='media-body pb-3 mb-0 small lh-125 border-bottom border-gray'>";
+			    str += "<strong class='d-block text-gray-dark' style='font-size:16px'>"+replyList[i].answer_branch+" "+replyList[i].answer_rank+" "+replyList[i].answer_name+"&nbsp&nbsp&nbsp<small>"+date.toISOString().slice(0, 10)+"  "+date.toTimeString().slice(0, 8)+"</small></strong>";
+			    str += ""+replyList[i].content.replace(/\n/gi, "<br>");    
+			    str += "</p></div></td></tr>";
+		
+		
+				
+			}
+			
+			$("#inquiry_table").append(str);			
+			
+			
+		}
+	})
+}
+
+
+</script>

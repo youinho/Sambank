@@ -394,7 +394,7 @@ select * from notice_attach;
 
 select to_char(sysdate, 'yyyy-MM-dd HH:mm:ss') from dual;
 create sequence seq_inquiry;
-insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
+
 
 create table customer_inquiry(
     inquiry_no number(10) not null,
@@ -410,6 +410,7 @@ create table customer_inquiry(
     regdate date default sysdate,
     updatedate date default sysdate
 );
+-- drop table customer_inquiry_reply;
 create table customer_inquiry_reply(
     inquiry_reply_no number(10) not null,
     inquiry_no number(10) not null,
@@ -417,22 +418,23 @@ create table customer_inquiry_reply(
     answer_branch nvarchar2(20),
     answer_rank nvarchar2(20),
     answer_name nvarchar2(20),
-    content blob,
+    content clob,
     regdate date default sysdate
     );
     
     
-
-drop table customer_inquiry;
-insert into customer_inquiry(customer_id, customer_name, content) values('rlaehdgur1', '김동혁', '안녕하세요 문의입니다~');
+delete from customer_inquiry;
+-- drop table customer_inquiry;
+insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
 commit;
 
 select * from customer_inquiry;
+select * from customer_inquiry_reply;
 update customer_inquiry set answer_id='sam', answer_branch='본사', answer_rank='사장', answer_name='김동혁' where inquiry_no=4;
-    
-
-
-
+create sequence seq_inquiry_reply;
+-- drop sequence inquiry_reply_no;
+select * from admintbl;
+commit;
 
 
 

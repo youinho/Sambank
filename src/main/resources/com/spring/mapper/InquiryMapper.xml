@@ -29,5 +29,28 @@
 		set answer_id=#{answer_id}, answer_branch=#{answer_branch}, answer_rank=#{answer_rank}, answer_name=#{answer_name} 
 		where inquiry_no=#{inquiry_no}
 	</update>
+	
+	
+	<!-- 문의 답변 입력-->
+	<insert id="insert_reply">
+		insert into customer_inquiry_reply(inquiry_reply_no, inquiry_no, answer_id, answer_branch, answer_rank, answer_name, content)
+		values(seq_inquiry_reply.nextVal, #{inquiry_no}, #{answer_id}, #{answer_branch}, #{answer_rank}, #{answer_name}, #{content})
+	</insert>
+	
+	<!-- 문의 답변 리스트 -->
+	<select id="get_replyList" resultType="com.spring.domain.Inquiry_replyVO">
+		select * from customer_inquiry_reply
+		where inquiry_no=#{inquiry_no}
+		order by regdate asc
+	</select>
+
+
+
+
+
+
+
+
+
 
 </mapper>

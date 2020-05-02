@@ -47,13 +47,9 @@
 
 					<tr>
 						<td colspan="6">
-							<div style="padding:20px;margin:20px;text-align:left">
+							<div style="padding:20px;margin:20px;text-align:left" id="contentDiv">
 								<c:out value="${vo.content }"></c:out>
 							</div>
-							<textarea id="contents_text" style="width:100%;display:none;" rows="10">
-							
-							
-							</textarea>
 						</td>
 					</tr>
 				</tbody>
@@ -83,6 +79,10 @@
 //list버튼이 클릭하면 list페이지 보여주기
 $(function(){
 	$("#inner-notice").addClass("active");
+	
+	$("#contentDiv").html($("#contentDiv").html().replace(/\n/gi, "<br>"));
+	
+	
 	
 	let boardId = 0;
 	let myId = 0;

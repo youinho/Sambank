@@ -59,6 +59,7 @@ import com.spring.domain.Customer_noticeVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.InquiryVO;
+import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
@@ -102,11 +103,13 @@ public class AdminController {
 	
 	
 	@GetMapping("/inquiry")
-	public String admin_inquiry_get(Model model, HttpServletRequest req) {
+	public String admin_inquiry_get(String search,Model model, HttpServletRequest req) {
 		logging(req);
-		
-		model.addAttribute("list", inquiry_service.getList());
-		
+		if(search==null) {
+			model.addAttribute("list", inquiry_service.getList());
+		}else {
+			model.addAttribute("list", inquiry_service.getList_by_answer(req.getRemoteUser()));
+		}
 		
 		return "/admin/inquiry";
 	}
@@ -155,6 +158,39 @@ public class AdminController {
 		}
 		return "/admin/inquiry/read";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("/inquiry_get_reply")
+	public ResponseEntity<List<Inquiry_replyVO>> get_inquiry_reply(String inquiry_no, HttpServletRequest req){
+		logging(req);
+		List<Inquiry_replyVO> list  = inquiry_service.get_replyList(inquiry_no);
+		
+		
+		return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.OK);
+		
+	}
+	@ResponseBody
+	@PostMapping("/inquiry_register_reply")
+	public ResponseEntity<String> insert_inquiry_reply(Inquiry_replyVO vo, HttpServletRequest req){
+		logging(req);
+		AdminVO admin = service.selectOne(req.getRemoteUser());
+		vo.setAnswer_id(admin.getId());
+		vo.setAnswer_branch(admin.getBranch());
+		vo.setAnswer_rank(admin.getRank());
+		vo.setAnswer_name(admin.getName());
+		if(inquiry_service.insert_reply(vo)) {
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
+		
+	}
+	
+		
+	
+	
+	
 	
 	
 	
