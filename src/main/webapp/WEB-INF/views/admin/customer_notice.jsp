@@ -165,7 +165,7 @@ $(function(){
 								<c:forEach items="${list }" var="vo">
 									<tr>
                                         <td class="bno"><c:out value="${vo.notice_bno }"></c:out></td>
-                                        <td class="type"><c:out value="${vo.type}"></c:out></td>
+                                        <td class="type"><c:out value="${vo.notice_type}"></c:out></td>
                                         <td><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
                                         
                                         <td><c:out value="${vo.writer }"></c:out></td>

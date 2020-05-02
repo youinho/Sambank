@@ -1008,14 +1008,14 @@ public class AdminController {
 		logging(req);
 		//log.info("삭제 요청");
 		// 권한확인
-		if(service.get_groupID(req.getRemoteUser())< service.get_groupID(id)) {
-			return "/notice/read/"+admin_bno;
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((service.notice_getRow(admin_bno).getId()))) {
+			return "redirect:/admin/notice/read/"+admin_bno;
 		}
 		//삭제
 		if(service.notice_delete(admin_bno)) {
 			return "redirect:/admin/notice";
 		}
-		return "/notice/read/"+admin_bno;
+		return "/admin/notice/read/"+admin_bno;
 	}
 	
 	//사내 공지 수정 페이지
@@ -1023,6 +1023,11 @@ public class AdminController {
 	public String notice_modify(@RequestParam("bno") int admin_bno, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
 		//log.info("modify_get 요청");
+		
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((service.notice_getRow(admin_bno).getId()))) {
+			return "redirect:/admin/notice/read/"+admin_bno;
+		}
+		
 		model.addAttribute("vo", service.notice_getRow(admin_bno));
 		return "/admin/notice/modify";
 	}
@@ -1390,7 +1395,7 @@ public class AdminController {
 		}
 		return "/admin/customer_notice/register";
 	}
-	//사내 공지 게시글 페이지 (빈 페이지)
+	//고객 공지 게시글 페이지 (빈 페이지)
 	@GetMapping("/customer_notice/read")
 	public String customer_notice_read(HttpServletRequest req) {
 		logging(req);
@@ -1398,7 +1403,7 @@ public class AdminController {
 		return "/admin/customer_notice/read";
 	}
 
-	//사내 공지 게시글 페이지
+	//고객 공지 게시글 페이지
 	@GetMapping("/customer_notice/read/{bno}")
 	public String customer_notice_view(@PathVariable("bno") int notice_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
@@ -1412,7 +1417,7 @@ public class AdminController {
 		return "/admin/customer_notice/read";
 	}
 	
-	//사내 공지 삭제
+	//고객 공지 삭제
 	@PostMapping("/customer_notice/delete")
 	public String customer_notice_delete(@RequestParam("bno") int notice_bno, String id,@ModelAttribute("cri") Criteria cri,  Model model, HttpServletRequest req) {
 		logging(req);
@@ -1428,7 +1433,7 @@ public class AdminController {
 		return "/customer_notice/read/"+notice_bno;
 	}
 	
-	//사내 공지 수정 페이지
+	//고객 공지 수정 페이지
 	@GetMapping("/customer_notice/modify")
 	public String customer_notice_modify(@RequestParam("bno") int notice_bno, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
@@ -1437,14 +1442,15 @@ public class AdminController {
 		return "/admin/customer_notice/modify";
 	}
 	
-	//사내 공지 수정
+	
+	//고객 공지 수정
 	@PostMapping("/customer_notice/modify")
 	public String notice_update(Customer_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		//log.info("modify_post 요청"+vo);
+		log.info("modify_post 요청"+vo);
 		if(cn_service.notice_update(vo)) {
 			rttr.addFlashAttribute("cri", cri);
-			return "redirect:/admin/customer_notice";
+			return "redirect:/admin/customer_notice/read/"+vo.getNotice_bno();
 		}else {
 			model.addAttribute("vo", vo);
 			return "/admin/customer_notice/modify";			

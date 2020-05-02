@@ -7,7 +7,7 @@
 	 <![CDATA[
 	 
 		select * from(
-			select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, type
+			select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, notice_type
 			from notice_board
 			where 
 			]]>
@@ -35,8 +35,8 @@
 		<selectKey keyProperty="notice_bno" order="BEFORE" resultType="String">
 			select seq_notice_board.nextVal from dual
 		</selectKey>
-		insert into notice_board(notice_bno, id, title, content, writer, type)
-		values(#{notice_bno}, #{id}, #{title}, #{content}, #{writer}, #{type}) 
+		insert into notice_board(notice_bno, id, title, content, writer, notice_type)
+		values(#{notice_bno}, #{id}, #{title}, #{content}, #{writer}, #{notice_type}) 
 	</insert>
 
 
@@ -60,7 +60,7 @@
 
 	<update id="update">
 		update notice_board
-		set title=#{title}, content=#{content}, type=#{type} updatedate=sysdate
+		set title=#{title}, content=#{content}, notice_type=#{notice_type} , updatedate=sysdate
 		where notice_bno=#{notice_bno}
 	
 	</update>

@@ -49,19 +49,15 @@
 	</select>
 
 
-<!--  -->
+	<!--  -->
 	<delete id="delete">
 		delete from admin_board
 		where admin_bno=#{admin_bno}
 	</delete>
-
-
-
+	
 	<update id="update">
 		update admin_board
-		set title=#{title}, content=#{content}, updatedate=sysdate
-		where admin_bno=#{admin_bno}
-	
+		set title=#{title}, content=#{content} , updatedate=sysdate where admin_bno=#{admin_bno}
 	</update>
 
 

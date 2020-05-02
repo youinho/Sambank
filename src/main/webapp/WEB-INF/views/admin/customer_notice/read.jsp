@@ -28,7 +28,7 @@
 					</tr>
 					<tr>
 						<th scope="row">분류</th>
-						<td>${vo.type }</td>
+						<td>${vo.notice_type }</td>
 						<th scope="row">등록일</th>
 						<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.regdate }"/></td>
 						<th scope="row">최종수정일</th>
