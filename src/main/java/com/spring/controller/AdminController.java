@@ -94,58 +94,43 @@ public class AdminController {
 	@Autowired
 	private InquiryService inquiry_service;
 	
+	//프로필 이미지 이미지타입 확인
 	private boolean checkImageMimeType(InputStream file) {
-
-		Tika tika = new Tika();
-		String mimeType="";
-		try {
-			mimeType = tika.detect(file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+		Tika tika = new Tika(); String mimeType=""; 
+		try { 
+			mimeType = tika.detect(file); 
+		} 
+		catch (IOException e) {
+			e.printStackTrace(); 
 		}
-		 
-        log.debug("### MIME Type = {}", mimeType);
- 
-        if (mimeType.startsWith("image")) {
-            return true;
-        } else {
-            return false;
-        }
-
+			if (mimeType.startsWith("image")) { return true; } else { return false; }
+	
 	}
-
 	
-	
-	
-	
+	//프로필 이미지 저장(DB저장)
 	@ResponseBody
 	@PostMapping("/save_profile_image")
-	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile, HttpServletRequest req){
-		log.info(" id : "+req.getRemoteUser()+"image : "+uploadFile);
-		log.info(" @@@@@@@@@@@@@@@@ : "+uploadFile[0]);
+	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
+		
 		try {
-			if(!checkImageMimeType(uploadFile[0].getInputStream())) {
-				log.info("이미지 파일 아님 @@");
+			if(!checkImageMimeType(uploadFile_header[0].getInputStream())) {
 				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-			
 			try {
-				if(service.saveImage(req.getRemoteUser(), uploadFile[0].getBytes())) {
-					log.info("#####################등록 성공");
+				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes())) {
 					return new ResponseEntity<String>("success", HttpStatus.OK);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return new ResponseEntity<String>(" ", HttpStatus.OK);
 	}
 	
+	//프로필 이미지 불러오기
 	@ResponseBody
 	@GetMapping("/get_profile_image")
 	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
@@ -158,13 +143,6 @@ public class AdminController {
        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -957,6 +935,7 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
+		//log.info("upload"+uploadFile);
 		String uploadFolder = "d:\\upload";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
@@ -1013,7 +992,6 @@ public class AdminController {
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req, HttpSession session) {
 		logging(req);
 		//log.info("notice 요청 -");
-		log.info("session@ : "+session.getAttribute("admin_branch"));
 		if(session.getAttribute("admin_branch")==null) {
 			AdminVO vo = service.selectOne(req.getRemoteUser());
 			

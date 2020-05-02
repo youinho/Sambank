@@ -138,7 +138,7 @@ $(function(){
 	
 	$("input[type='file']").change(function(){
 		
-		
+		console.log("업로드파일 change");
 		
 		//form 안의 데이터들을 key/value 형태로 만들 때 사용
 		let formData = new FormData();
@@ -168,7 +168,7 @@ $(function(){
 			type : 'post',
 			dataType : 'json',
 			success : function(result){
-				
+				console.log("result"+result)
 				showAttachList(result);
 				$("input[name='uploadFile']").val("");
 			}

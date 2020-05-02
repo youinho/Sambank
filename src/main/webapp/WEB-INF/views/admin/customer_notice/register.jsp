@@ -145,7 +145,6 @@ $(function(){
 	$("input[type='file']").change(function(){
 		
 		
-		
 		//form 안의 데이터들을 key/value 형태로 만들 때 사용
 		let formData = new FormData();
 		

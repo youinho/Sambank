@@ -37,7 +37,7 @@
 	a{
 		color:black;
 	}
-	#uploadFile{
+	#uploadFile_header{
 		display : none;
 	}
 </style>
@@ -71,11 +71,11 @@ let tk = "${_csrf.token}"
 $(function(){
 	$("#profile_image").click(function(e){
 		e.preventDefault();
-		$("#uploadFile").click();
+		$("#uploadFile_header").click();
 	})
 	
 	
-	$("input[type='file']").change(function(){
+	$("#uploadFile_header").change(function(){
 		
 		
 		
@@ -83,7 +83,7 @@ $(function(){
 		let formData = new FormData();
 		
 		//사용자가 첨부한 파일 목록 가져오기
-		let inputFiles = $("input[name='uploadFile']");
+		let inputFiles = $("#uploadFile_header");
 		
 		let files = inputFiles[0].files;
 		
@@ -92,7 +92,7 @@ $(function(){
 			if(!checkExtension(files[i].name, files[i].size)){
 				return false;
 			}
-			formData.append("uploadFile",files[i]);
+			formData.append("uploadFile_header",files[i]);
 		}
 		let change_success = false;
 		$.ajax({
@@ -114,7 +114,7 @@ $(function(){
 			}
 		})
 		if(change_success){
-			$("input[name='uploadFile']").val("");
+			$("#uploadFile_header").val("");
 			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>")
 			
 		}
@@ -354,7 +354,7 @@ $(function(){
         </ul>
       </div>
       <div class="custom-file">
-		<input type="file" class="custom-file-input" id="uploadFile" name="uploadFile">
+		<input type="file" class="custom-file-input" id="uploadFile_header" name="uploadFile_header">
 		
 	</div>
     </nav>
