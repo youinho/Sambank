@@ -36,9 +36,7 @@
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        
 		        <form:form name="f" action="${loginUrl}" method="POST">
-		            <c:if test="${param.error != null}"> 
-		            	<p>로그인이 거부되었습니다.</p> 
-		            </c:if> 
+		            
 		            <c:if test="${param.logout != null}"> 
 		            	<p>로그아웃 하였습니다.</p> 
 		            </c:if>

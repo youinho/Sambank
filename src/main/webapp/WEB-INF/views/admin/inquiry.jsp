@@ -59,8 +59,8 @@ $(function(){
 								<c:forEach items="${list }" var="vo">
 									<tr>
                                         <td class="inquiry_no align-middle"><c:out value="${vo.inquiry_no }"></c:out></td>
-                                        <td><a href="${vo.inquiry_no}" class="move align-middle"><c:out value="${vo.title }" ></c:out> </a></td>
-                                        <td class="align-middle"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updateDate }"/> </td>
+                                        <td class="align-middle"><a href="${vo.inquiry_no}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
+                                        <td class="align-middle"><fmt:formatDate pattern="MM-dd HH:mm" value="${vo.updateDate }"/> </td>
                                         <td class="align-middle">
                                         	<c:choose>
                                         		<c:when test="${vo.answer_name==null }">

@@ -470,4 +470,11 @@ create table default_profile_image(
     select profile_image from admintbl where name='호호호';
 insert into default_profile_image select profile_image from admintbl where name='호호호';
 commit;
+select * from admintbl;
+select * from customertbl;
+select * from logtbl order by log_no desc;
+select count(*) from logtbl;
+select sum(balance) from deposittbl;
+alter table logtbl add(parameter_names nvarchar2(1000));
+commit;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

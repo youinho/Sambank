@@ -96,8 +96,8 @@
 	
 	
 	<insert id="insertLog">
-		insert into logtbl(log_no, id, uri, local_name, local_addr, local_port, remote_addr, remote_port, admin_session)
-		values(seq_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session})
+		insert into logtbl(log_no, id, uri, local_name, local_addr, local_port, remote_addr, remote_port, admin_session, parameter_names)
+		values(seq_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session}, #{parameter_names})
 	</insert>
 	
 	
