@@ -65,8 +65,8 @@
 	</update>
 	
 	<insert id="insert_admin">
-		insert into admintbl(admin_no, auth, id, password, name, rank, branch, mobile, enabled)
-		values(seq_admin.nextVal, concat('ROLE_', #{group_id}), #{id}, #{password}, #{name}, #{rank}, #{branch}, #{mobile}, #{enabled})
+		insert into admintbl(admin_no, auth, id, password, name, rank, branch, mobile, enabled, profile_image)
+		values(seq_admin.nextVal, concat('ROLE_', #{group_id}), #{id}, #{password}, #{name}, #{rank}, #{branch}, #{mobile}, #{enabled}, (select profile_image from default_profile_image))
 	
 	</insert>
 	<insert id="insert_admin_group">
@@ -99,6 +99,23 @@
 		insert into logtbl(log_no, id, uri, local_name, local_addr, local_port, remote_addr, remote_port, admin_session)
 		values(seq_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session})
 	</insert>
+	
+	
+	
+	<!-- 프로필사진 테스트 -->
+	<insert id="saveImage">
+		update admintbl set profile_image=#{profile_image}
+		where id=#{id} 
+	
+	</insert>
+	
+	
+	<select id="get_profile_image" resultType="com.spring.domain.Profile_imageVO">
+		select profile_image from
+		admintbl where id=#{id}
+	</select>
+	
+	
 	
 	
 	

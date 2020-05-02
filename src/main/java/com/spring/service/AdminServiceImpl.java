@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
@@ -23,6 +24,7 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
+import com.spring.domain.Profile_imageVO;
 import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
 import com.spring.mapper.AdminNoticeMapper;
@@ -451,6 +453,20 @@ public class AdminServiceImpl implements AdminService {
 	public boolean insertLog(Admin_logVO vo) {
 
 		return adminMapper.insertLog(vo)==1;
+	}
+
+
+	@Override
+	public boolean saveImage(String id, byte[] profile_image) {
+
+		return adminMapper.saveImage(id, profile_image)==1;
+	}
+
+
+	@Override
+	public Profile_imageVO get_profile_image(String id) {
+
+		return adminMapper.get_profile_image(id);
 	}
 	
 }

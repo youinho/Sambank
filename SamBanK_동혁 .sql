@@ -453,7 +453,12 @@ where a.ano is null and cno<40000);
 drop table customer_groups;
 select * from admintbl;
 select * from customertbl;
-
+select seq_admin.nextVal from dual;
 commit;
+
+
+
+CREATE OR REPLACE DIRECTORY load_DIR AS 'D:/oracle/product/1014/dm/load';
+
 
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

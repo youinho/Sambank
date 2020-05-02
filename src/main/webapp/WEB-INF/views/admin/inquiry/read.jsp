@@ -189,7 +189,8 @@ function show_reply(){
 				
 				
 				
-				str += "<tr><td colspan='6' style='text-align:left'><div class='media text-muted pt-3'><img src='/resources/SB_files/SamBank Image Logo.png' alt='로고 이미지' style='width=32px;height:32px'><p class='media-body pb-3 mb-0 small lh-125 border-bottom border-gray'>";
+				//str += "<tr><td colspan='6' style='text-align:left'><div class='media text-muted pt-3'><img src='/resources/SB_files/SamBank Image Logo.png' alt='로고 이미지' style='width=32px;height:32px'><p class='media-body pb-3 mb-0 small lh-125 border-bottom border-gray'>";
+				str += "<tr><td colspan='6' style='text-align:left'><div class='media text-muted pt-3'><img src='/admin/get_profile_image?id="+replyList[i].answer_id+"' alt='로고 이미지' style='width=32px;height:32px'><p class='media-body pb-3 mb-0 small lh-125 border-bottom border-gray'>";
 			    str += "<strong class='d-block text-gray-dark' style='font-size:16px'>"+replyList[i].answer_branch+" "+replyList[i].answer_rank+" "+replyList[i].answer_name+"&nbsp&nbsp&nbsp<small>"+date.toISOString().slice(0, 10)+"  "+date.toTimeString().slice(0, 8)+"</small></strong>";
 			    str += ""+replyList[i].content.replace(/\n/gi, "<br>");    
 			    str += "</p></div></td></tr>";

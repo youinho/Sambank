@@ -1,7 +1,9 @@
 package com.spring.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -18,12 +20,14 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -89,6 +93,81 @@ public class AdminController {
 	
 	@Autowired
 	private InquiryService inquiry_service;
+	
+	private boolean checkImageMimeType(InputStream file) {
+
+		Tika tika = new Tika();
+		String mimeType="";
+		try {
+			mimeType = tika.detect(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+        log.debug("### MIME Type = {}", mimeType);
+ 
+        if (mimeType.startsWith("image")) {
+            return true;
+        } else {
+            return false;
+        }
+
+	}
+
+	
+	
+	
+	
+	@ResponseBody
+	@PostMapping("/save_profile_image")
+	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile, HttpServletRequest req){
+		log.info(" id : "+req.getRemoteUser()+"image : "+uploadFile);
+		log.info(" @@@@@@@@@@@@@@@@ : "+uploadFile[0]);
+		try {
+			if(!checkImageMimeType(uploadFile[0].getInputStream())) {
+				log.info("이미지 파일 아님 @@");
+				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			try {
+				if(service.saveImage(req.getRemoteUser(), uploadFile[0].getBytes())) {
+					log.info("#####################등록 성공");
+					return new ResponseEntity<String>("success", HttpStatus.OK);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<String>(" ", HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@GetMapping("/get_profile_image")
+	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
+	   if(id==null) {
+		   id = req.getRemoteUser();
+	   }
+       byte[] imageContent = service.get_profile_image(id).getProfile_image();
+       final HttpHeaders headers = new HttpHeaders();
+       headers.setContentType(MediaType.IMAGE_PNG);
+       return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//관리자_ 고객 공지 페이지
 	@GetMapping("/customer_notice")
@@ -937,6 +1016,7 @@ public class AdminController {
 		log.info("session@ : "+session.getAttribute("admin_branch"));
 		if(session.getAttribute("admin_branch")==null) {
 			AdminVO vo = service.selectOne(req.getRemoteUser());
+			
 			session.setAttribute("admin_branch", vo.getBranch());
 			session.setAttribute("admin_rank", vo.getRank());
 			session.setAttribute("admin_name", vo.getName());
@@ -1219,10 +1299,6 @@ public class AdminController {
 		//log.info("popup searchAD 요청");
 		return "/admin/popup/search_admin_popup";
 	}
-	
-	
-	
-	
 	
 	
 	

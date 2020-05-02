@@ -37,6 +37,9 @@
 	a{
 		color:black;
 	}
+	#uploadFile{
+		display : none;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
@@ -65,6 +68,84 @@ let tk = "${_csrf.token}"
 		}
 	})
 }) */
+$(function(){
+	$("#profile_image").click(function(e){
+		e.preventDefault();
+		$("#uploadFile").click();
+	})
+	
+	
+	$("input[type='file']").change(function(){
+		
+		
+		
+		//form 안의 데이터들을 key/value 형태로 만들 때 사용
+		let formData = new FormData();
+		
+		//사용자가 첨부한 파일 목록 가져오기
+		let inputFiles = $("input[name='uploadFile']");
+		
+		let files = inputFiles[0].files;
+		
+		//가져온 첨부파일 목록을 formData 객체 안에 추가하기
+		for(var i = 0; i < files.length; i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			formData.append("uploadFile",files[i]);
+		}
+		let change_success = false;
+		$.ajax({
+			url : '/admin/save_profile_image',
+			processData : false,
+			contentType : false,
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
+            async : false,
+			data : formData,
+			type : 'post',
+			dataType : 'json',
+			complete : function(result){
+				console.log(result);
+				change_success = true; 
+				
+			}
+		})
+		if(change_success){
+			$("input[name='uploadFile']").val("");
+			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>")
+			
+		}
+		
+		
+		
+		
+	})
+	
+	
+	//첨부파일의 크기와 종류 제한하기
+	function checkExtension(fileName, fileSize){
+		let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$");
+		let maxSize = 300000;
+		
+		if(fileSize > maxSize){
+			alert("파일 사이즈 초과")
+			return false;
+		}
+		if(!regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
+})
+
+
 </script>
 
 </head>
@@ -77,6 +158,15 @@ let tk = "${_csrf.token}"
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
   <ul class="navbar-nav px-3 mr-auto">
   	<li></li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li class="nav-item text-nowrap">
+	  	<a href="#" class="btn btn-outline-success" style="padding:0" id="profile_image">
+	  		
+  			<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>
+		  	
+	  	</a>
+  	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
@@ -263,6 +353,10 @@ let tk = "${_csrf.token}"
           </li>
         </ul>
       </div>
+      <div class="custom-file">
+		<input type="file" class="custom-file-input" id="uploadFile" name="uploadFile">
+		
+	</div>
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>

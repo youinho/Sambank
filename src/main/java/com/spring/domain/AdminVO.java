@@ -22,4 +22,6 @@ public class AdminVO {
 	
 	private String confirm_password;
 	private String group_id;
+	
+	//private byte[] profile_image;
 }
