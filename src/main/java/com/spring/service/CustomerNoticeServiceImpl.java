@@ -43,7 +43,7 @@ public class CustomerNoticeServiceImpl implements CustomerNoticeService {
 
 
 	@Override
-	public boolean notice_insert(Customer_noticeVO vo) {
+	public boolean notice_insert(Customer_noticeVO vo) { 
 		if(noticeMapper.insert(vo)!=1) {
 			return false;
 		}
