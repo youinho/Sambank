@@ -28,13 +28,16 @@ public class UserController {
 		return "Questions";
 	}
 	
+	
 	@GetMapping("/N")
 	public String Notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req ) {
 		
-		model.addAttribute("list",usc.listmap(cri));
-		model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
+		
+		model.addAttribute("list", usc.listmap(cri));
+		//model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
 		return "Notice";
 	}
+	
 	
 	
 	

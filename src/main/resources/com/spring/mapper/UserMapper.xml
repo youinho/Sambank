@@ -8,17 +8,11 @@
 	]]>
  -->
 	<select  id="listmap" resultType="com.spring.domain.Customer_noticeVO">
-		 <![CDATA[
-			select * from(
-				select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, type
+		 
+				select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, notice_type
 				from notice_board
-				where 
-				]]>
-				<include refid="criteria"></include>
-			<![CDATA[		
-				rownum <= #{pageNum}*#{amount})
-			where rn > (#{pageNum}-1)*#{amount}
-		]]>
+				where notice_bno > 0
+				order by notice_bno desc
 	</select>
 
 <!--  -->
