@@ -1,8 +1,13 @@
 package com.spring.controller;
 
 import java.io.File;
+<<<<<<< HEAD
 
+=======
+import java.io.FileInputStream;
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -17,14 +22,16 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -59,10 +66,13 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.Customer_noticeVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
+import com.spring.domain.InquiryVO;
+import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.InquiryService;
 import com.spring.service.SBValidator;
 
 
@@ -85,6 +95,62 @@ public class AdminController {
 	@Autowired
 	private CustomerNoticeService cn_service;
 	
+	@Autowired
+	private InquiryService inquiry_service;
+	
+	//프로필 이미지 이미지타입 확인
+	private boolean checkImageMimeType(InputStream file) {
+	
+		Tika tika = new Tika(); String mimeType=""; 
+		try { 
+			mimeType = tika.detect(file); 
+		} 
+		catch (IOException e) {
+			e.printStackTrace(); 
+		}
+			if (mimeType.startsWith("image")) { return true; } else { return false; }
+	
+	}
+	
+	//프로필 이미지 저장(DB저장)
+	@ResponseBody
+	@PostMapping("/save_profile_image")
+	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
+		
+		try {
+			if(!checkImageMimeType(uploadFile_header[0].getInputStream())) {
+				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			try {
+				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes())) {
+					return new ResponseEntity<String>("success", HttpStatus.OK);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<String>(" ", HttpStatus.OK);
+	}
+	
+	//프로필 이미지 불러오기
+	@ResponseBody
+	@GetMapping("/get_profile_image")
+	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
+	   if(id==null) {
+		   id = req.getRemoteUser();
+	   }
+       byte[] imageContent = service.get_profile_image(id).getProfile_image();
+       final HttpHeaders headers = new HttpHeaders();
+       headers.setContentType(MediaType.IMAGE_PNG);
+       return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+	}
+
+	
+	
+	
+	
 	//관리자_ 고객 공지 페이지
 	@GetMapping("/customer_notice")
 	public String admin_show_customer_notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
@@ -95,6 +161,106 @@ public class AdminController {
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		return "/admin/customer_notice";
 	}
+	
+	
+	@GetMapping("/inquiry")
+	public String admin_inquiry_get(String search,Model model, HttpServletRequest req) {
+		logging(req);
+		if(search==null) {
+			model.addAttribute("list", inquiry_service.getList());
+		}else {
+			model.addAttribute("list", inquiry_service.getList_by_answer(req.getRemoteUser()));
+		}
+		
+		return "/admin/inquiry";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/check_inquiry")
+	public ResponseEntity<String> inquiry_check(String inquiry_no, HttpServletRequest req){
+		logging(req);		
+		return new ResponseEntity<String>(req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")+"", HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/charge_inquiry", produces = "application/text; charset=utf8")
+	public ResponseEntity<String> charge_inquiry(String inquiry_no, HttpServletRequest req){
+		
+		if(inquiry_service.getRow(inquiry_no).getAnswer_id()==null) {
+			AdminVO admin = service.selectOne(req.getRemoteUser());
+			InquiryVO vo = new InquiryVO();
+			vo.setInquiry_no(inquiry_no);
+			vo.setAnswer_id(admin.getId());
+			vo.setAnswer_branch(admin.getBranch());
+			vo.setAnswer_rank(admin.getRank());
+			vo.setAnswer_name(admin.getName());
+			if(inquiry_service.charge_inquiry(vo)) {
+				log.info("name : "+vo.getAnswer_name());
+				return new ResponseEntity<String>(vo.getAnswer_name(), HttpStatus.OK);
+			}
+		}
+		return new ResponseEntity<String>("gg", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	
+	
+	@GetMapping("/inquiry/{inquiry_no}")
+	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
+		logging(req);
+		if(!req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")) {
+			return "redirect:/admin/inquiry";
+		}
+		//log.info("read 요청"+admin_bno);
+		try {
+			model.addAttribute("vo", inquiry_service.getRow(inquiry_no));
+		}catch (Exception e) {
+			return "redirect:/admin/inquiry";
+		}
+		return "/admin/inquiry/read";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/inquiry_get_reply")
+	public ResponseEntity<List<Inquiry_replyVO>> get_inquiry_reply(String inquiry_no, HttpServletRequest req){
+		logging(req);
+		List<Inquiry_replyVO> list  = inquiry_service.get_replyList(inquiry_no);
+		
+		
+		return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.OK);
+		
+	}
+	@ResponseBody
+	@PostMapping("/inquiry_register_reply")
+	public ResponseEntity<String> insert_inquiry_reply(Inquiry_replyVO vo, HttpServletRequest req){
+		logging(req);
+		AdminVO admin = service.selectOne(req.getRemoteUser());
+		vo.setAnswer_id(admin.getId());
+		vo.setAnswer_branch(admin.getBranch());
+		vo.setAnswer_rank(admin.getRank());
+		vo.setAnswer_name(admin.getName());
+		if(inquiry_service.insert_reply(vo)) {
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
+		
+	}
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -773,6 +939,7 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
+		//log.info("upload"+uploadFile);
 		String uploadFolder = "d:\\upload";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
@@ -826,10 +993,16 @@ public class AdminController {
 	
 	//사내 공지 페이지
 	@GetMapping("/notice")
-	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
+	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req, HttpSession session) {
 		logging(req);
 		//log.info("notice 요청 -");
-		
+		if(session.getAttribute("admin_branch")==null) {
+			AdminVO vo = service.selectOne(req.getRemoteUser());
+			
+			session.setAttribute("admin_branch", vo.getBranch());
+			session.setAttribute("admin_rank", vo.getRank());
+			session.setAttribute("admin_name", vo.getName());
+		}
 		model.addAttribute("list", service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, service.totalRows(cri)));
 		return "/admin/notice";
@@ -880,7 +1053,11 @@ public class AdminController {
 		logging(req);
 		//log.info("read 요청"+admin_bno);
 		try {
-			model.addAttribute("vo", service.notice_getRow(admin_bno));
+			Admin_noticeVO vo = service.notice_getRow(admin_bno);
+			AdminVO admin = service.selectOne(req.getRemoteUser());
+			vo.setBranch(admin.getBranch());
+			vo.setRank(admin.getRank());
+			model.addAttribute("vo", vo);
 		}catch (Exception e) {
 			return "redirect:/admin/notice";
 		}
@@ -893,14 +1070,14 @@ public class AdminController {
 		logging(req);
 		//log.info("삭제 요청");
 		// 권한확인
-		if(service.get_groupID(req.getRemoteUser())< service.get_groupID(id)) {
-			return "/notice/read/"+admin_bno;
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((service.notice_getRow(admin_bno).getId()))) {
+			return "redirect:/admin/notice/read/"+admin_bno;
 		}
 		//삭제
 		if(service.notice_delete(admin_bno)) {
 			return "redirect:/admin/notice";
 		}
-		return "/notice/read/"+admin_bno;
+		return "/admin/notice/read/"+admin_bno;
 	}
 	
 	//사내 공지 수정 페이지
@@ -908,6 +1085,11 @@ public class AdminController {
 	public String notice_modify(@RequestParam("bno") int admin_bno, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
 		//log.info("modify_get 요청");
+		
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((service.notice_getRow(admin_bno).getId()))) {
+			return "redirect:/admin/notice/read/"+admin_bno;
+		}
+		
 		model.addAttribute("vo", service.notice_getRow(admin_bno));
 		return "/admin/notice/modify";
 	}
@@ -1131,10 +1313,6 @@ public class AdminController {
 	
 	
 	
-	
-	
-	
-	
 	//첨부파일 다운로드
 //		@PostMapping("/notice/downloadFile")
 	@GetMapping("/customer_notice/downloadFile")
@@ -1275,7 +1453,7 @@ public class AdminController {
 		}
 		return "/admin/customer_notice/register";
 	}
-	//사내 공지 게시글 페이지 (빈 페이지)
+	//고객 공지 게시글 페이지 (빈 페이지)
 	@GetMapping("/customer_notice/read")
 	public String customer_notice_read(HttpServletRequest req) {
 		logging(req);
@@ -1283,7 +1461,7 @@ public class AdminController {
 		return "/admin/customer_notice/read";
 	}
 
-	//사내 공지 게시글 페이지
+	//고객 공지 게시글 페이지
 	@GetMapping("/customer_notice/read/{bno}")
 	public String customer_notice_view(@PathVariable("bno") int notice_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
@@ -1297,7 +1475,7 @@ public class AdminController {
 		return "/admin/customer_notice/read";
 	}
 	
-	//사내 공지 삭제
+	//고객 공지 삭제
 	@PostMapping("/customer_notice/delete")
 	public String customer_notice_delete(@RequestParam("bno") int notice_bno, String id,@ModelAttribute("cri") Criteria cri,  Model model, HttpServletRequest req) {
 		logging(req);
@@ -1313,7 +1491,7 @@ public class AdminController {
 		return "/customer_notice/read/"+notice_bno;
 	}
 	
-	//사내 공지 수정 페이지
+	//고객 공지 수정 페이지
 	@GetMapping("/customer_notice/modify")
 	public String customer_notice_modify(@RequestParam("bno") int notice_bno, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
@@ -1322,14 +1500,15 @@ public class AdminController {
 		return "/admin/customer_notice/modify";
 	}
 	
-	//사내 공지 수정
+	
+	//고객 공지 수정
 	@PostMapping("/customer_notice/modify")
 	public String notice_update(Customer_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		//log.info("modify_post 요청"+vo);
+		log.info("modify_post 요청"+vo);
 		if(cn_service.notice_update(vo)) {
 			rttr.addFlashAttribute("cri", cri);
-			return "redirect:/admin/customer_notice";
+			return "redirect:/admin/customer_notice/read/"+vo.getNotice_bno();
 		}else {
 			model.addAttribute("vo", vo);
 			return "/admin/customer_notice/modify";			

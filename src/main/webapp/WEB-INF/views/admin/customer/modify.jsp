@@ -95,15 +95,28 @@ function alert_reg(){
             
           </small>
           </div>
+          <!-- <input type="text" class="form-control" name="gender" id="gender" placeholder="예) 남"> -->
           <div class="input-group">
-	          <input type="text" class="form-control" name="gender" id="gender" placeholder="예) 남" readonly>
-	          <button class="btn btn-outline-secondary" type="button" id="gender_lock">
-				    	<svg class="bi bi-lock-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						  <rect width="11" height="9" x="2.5" y="7" rx="2"/>
-						  <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
-						</svg>
-				    </button>
-		    </div>
+			  <div class="input-group-prepend">
+			    <div class="input-group-text">
+			      <input type="radio" aria-label="Radio button for following text input" name="gender" id="male" value="남" checked>
+			    </div>
+			    
+			  </div>
+		  	  <input type="text" class="form-control" aria-label="Text input with radio button" readonly placeholder="남">
+		  	  <div class="input-group-prepend">
+			    <div class="input-group-text">
+			      <input type="radio" aria-label="Radio button for following text input" name="gender" id="female" value="여">
+			    </div>
+			  </div>
+		  	  <input type="text" class="form-control" aria-label="Text input with radio button" readonly placeholder="여">
+		  	  <button class="btn btn-outline-secondary" type="button" id="gender_lock">
+					    	<svg class="bi bi-lock-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <rect width="11" height="9" x="2.5" y="7" rx="2"/>
+							  <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+							</svg>
+					    </button>
+		</div>
         </div>
 		<div class="mb-3">
 		<div class="label">

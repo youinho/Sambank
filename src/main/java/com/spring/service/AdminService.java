@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
@@ -20,6 +21,7 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
+import com.spring.domain.Profile_imageVO;
 
 public interface AdminService {
 	public AdminVO selectOne(String id);
@@ -36,6 +38,9 @@ public interface AdminService {
 	public boolean insertLog(Admin_logVO vo);
 	
 	
+	public boolean saveImage(String id, byte[] profile_image);
+	
+	public Profile_imageVO get_profile_image(String id);
 	
 	
 	public boolean register_customer(CustomerVO vo);
@@ -96,4 +101,6 @@ public interface AdminService {
 	
 	public boolean update_card_password(CardVO vo);
 	public boolean update_cardInfo(CardVO vo);
+	
+
 }

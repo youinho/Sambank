@@ -381,11 +381,84 @@ commit;
 
 rollback;
 
+select * from admin_attach;
+
+alter table notice_board add(content2 clob);
+alter table notice_board add(type nvarchar2(30) not null);
+alter table notice_board modify(content clob);
+alter table notice_board rename column content2 to content;
+alter table notice_board drop column content3;
+alter table notice_board modify(type nvarchar2(20) default '공지사항');
+select * from notice_board;
+select * from notice_attach;
+
+select to_char(sysdate, 'yyyy-MM-dd HH:mm:ss') from dual;
+create sequence seq_inquiry;
+
+
+create table customer_inquiry(
+    inquiry_no number(10) not null,
+    customer_id nvarchar2(20) not null,
+    customer_name nvarchar2(20) not null,
+    title nvarchar2(1000),
+    content clob,
+    answer_id nvarchar2(20),
+    answer_branch nvarchar2(20),
+    answer_rank nvarchar2(20),
+    answer_name nvarchar2(20),
+    condition number(2) default 1 not null,
+    regdate date default sysdate,
+    updatedate date default sysdate
+);
+-- drop table customer_inquiry_reply;
+create table customer_inquiry_reply(
+    inquiry_reply_no number(10) not null,
+    inquiry_no number(10) not null,
+    answer_id nvarchar2(20),
+    answer_branch nvarchar2(20),
+    answer_rank nvarchar2(20),
+    answer_name nvarchar2(20),
+    content clob,
+    regdate date default sysdate
+    );
+    
+    
+delete from customer_inquiry;
+-- drop table customer_inquiry;
+insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
+commit;
+
+select * from customer_inquiry;
+select * from customer_inquiry_reply;
+update customer_inquiry set answer_id='sam', answer_branch='본사', answer_rank='사장', answer_name='김동혁' where inquiry_no=4;
+create sequence seq_inquiry_reply;
+-- drop sequence inquiry_reply_no;
+select * from admintbl;
+commit;
+select * from cardtbl;
+select * from logtbl order by log_no desc;
+select * from notice_board;
+alter table notice_board rename column type to notice_type;
+update admin_board
+		set title=#{title} and content=#{content} and updatedate=sysdate where admin_bno=#{admin_bno};
+select * from admin_board;
+select * from admintbl;
+select seq_admin.nextVal from dual;
+
+delete from customertbl
+where cno in (select cno from (select * from customertbl
+left join deposittbl
+on deposittbl.cno = customertbl.cno) a
+where a.ano is null and cno<40000);
+drop table customer_groups;
+select * from admintbl;
+select * from customertbl;
+select seq_admin.nextVal from dual;
+commit;
 
 
 
-
-
+CREATE OR REPLACE DIRECTORY load_DIR AS 'D:/oracle/product/1014/dm/load';
 
 
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

@@ -37,6 +37,9 @@
 	a{
 		color:black;
 	}
+	#uploadFile_header{
+		display : none;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
@@ -45,7 +48,7 @@
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
-$(function(){
+/* $(function(){
 	$.ajax({
 		url : "/admin/get_adminInfo",
 		type : "post",
@@ -64,7 +67,85 @@ $(function(){
 			
 		}
 	})
+}) */
+$(function(){
+	$("#profile_image").click(function(e){
+		e.preventDefault();
+		$("#uploadFile_header").click();
+	})
+	
+	
+	$("#uploadFile_header").change(function(){
+		
+		
+		
+		//form 안의 데이터들을 key/value 형태로 만들 때 사용
+		let formData = new FormData();
+		
+		//사용자가 첨부한 파일 목록 가져오기
+		let inputFiles = $("#uploadFile_header");
+		
+		let files = inputFiles[0].files;
+		
+		//가져온 첨부파일 목록을 formData 객체 안에 추가하기
+		for(var i = 0; i < files.length; i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			formData.append("uploadFile_header",files[i]);
+		}
+		let change_success = false;
+		$.ajax({
+			url : '/admin/save_profile_image',
+			processData : false,
+			contentType : false,
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
+            async : false,
+			data : formData,
+			type : 'post',
+			dataType : 'json',
+			complete : function(result){
+				console.log(result);
+				change_success = true; 
+				
+			}
+		})
+		if(change_success){
+			$("#uploadFile_header").val("");
+			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>")
+			
+		}
+		
+		
+		
+		
+	})
+	
+	
+	//첨부파일의 크기와 종류 제한하기
+	function checkExtension(fileName, fileSize){
+		let regex = new RegExp("(.*?)\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$");
+		let maxSize = 300000;
+		
+		if(fileSize > maxSize){
+			alert("파일 사이즈 초과")
+			return false;
+		}
+		if(!regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
 })
+
+
 </script>
 
 </head>
@@ -80,19 +161,31 @@ $(function(){
   </ul>
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
+	  	<a href="#" class="btn btn-outline-success" style="padding:0" id="profile_image">
+	  		
+  			<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>
+		  	
+	  	</a>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li class="nav-item text-nowrap">
 	  	<span class="navbar-text" id="admin_branch">
+	  	<strong><c:out value="${admin_branch }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_rank">
+  		<strong><c:out value="${admin_rank }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_name">
+  		<strong><c:out value="${admin_name }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
@@ -241,8 +334,29 @@ $(function(){
 			</a>
 			</div>
           </li>
+          
+          <li >
+            <!-- <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              Orders
+            </a> -->
+            <!-- 고객공지 -->
+            <div>
+            <a  href="/admin/inquiry" class="nav-link" id="inquiry_list">
+	            <svg class="bi bi-question-diamond" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				  <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 010-2.098L6.95.435zm1.4.7a.495.495 0 00-.7 0L1.134 7.65a.495.495 0 000 .7l6.516 6.516a.495.495 0 00.7 0l6.516-6.516a.495.495 0 000-.7L8.35 1.134z" clip-rule="evenodd"/>
+				  <path d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+				</svg>
+				고객 문의
+			</a>
+			</div>
+          </li>
         </ul>
       </div>
+      <div class="custom-file">
+		<input type="file" class="custom-file-input" id="uploadFile_header" name="uploadFile_header">
+		
+	</div>
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>

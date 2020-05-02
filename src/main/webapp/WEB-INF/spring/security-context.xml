@@ -21,7 +21,8 @@
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
-        <intercept-url pattern="/admin/login" access="permitAll" />  
+        <intercept-url pattern="/admin/login" access="permitAll" />
+        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />  
         <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />

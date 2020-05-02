@@ -4,6 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
+
 $(function(){
 	$("#manage").addClass("active");
 	
@@ -45,6 +46,8 @@ function alert_reg(){
 	
 	
 }
+
+
 </script>
 
 <style>
@@ -186,6 +189,7 @@ function alert_reg(){
 		</table>
 		<sec:csrfInput/>
 	</form>
+	
 </div>
 </div>
 		

@@ -16,11 +16,11 @@
 		<div class="input-group">
 		  <div class="input-group-prepend">
 		    <span class="input-group-text">제목</span>
-		    <select class="custom-select" id="type" name="type">
+		    <select class="custom-select" id="notice_type" name="notice_type">
 			    <option value="공지사항" selected>공지사항</option>
 			    <option value="새소식">새소식</option>
 			    <option value="이벤트" >이벤트</option>
-			    <option value="추가예정" >추가예정</option>
+			    <option value="자료실" >자료실</option>
 		    </select>
 		  </div>
 		  <input type="text" aria-label="제목" class="form-control" name="title" required>
@@ -143,7 +143,6 @@ $(function(){
 	
 	
 	$("input[type='file']").change(function(){
-		
 		
 		
 		//form 안의 데이터들을 key/value 형태로 만들 때 사용

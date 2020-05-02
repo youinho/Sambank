@@ -14,7 +14,7 @@ public class Customer_noticeVO {
 	private String writer;	//50
 	private Date regdate;
 	private Date updatedate;
-	private String type;
+	private String notice_type;
 	
 	
 	private String rank;

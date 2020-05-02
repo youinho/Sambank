@@ -98,7 +98,8 @@ function searchCS_callback(cno){
 				$("input[name='id']").val(vo.id);
 				$("input[name='name']").val(vo.name);
 				$("input[name='eng_name']").val(vo.eng_name);
-				$("input[name='gender']").val(vo.gender);
+				$("input[value!='"+vo.gender+"']").removeAttr("checked");
+				$("input[value='"+vo.gender+"']").prop("checked", true);
 				$("input[name='birth']").val(vo.birth);
 				$("input[name='address']").val(vo.address);
 				$("input[name='mobile']").val(vo.mobile);

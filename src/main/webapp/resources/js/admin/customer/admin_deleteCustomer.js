@@ -75,6 +75,7 @@ function searchCS_callback(cno){
 			
 			$("input[name='id']").val(vo.id);
 			$("#form_id").val(vo.id);
+			$("#form_name").val(vo.name);
 			
 		}
 		

@@ -3,6 +3,7 @@ package com.spring.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.domain.AdminVO;
 import com.spring.domain.Admin_groupVO;
@@ -10,6 +11,7 @@ import com.spring.domain.Admin_logVO;
 import com.spring.domain.Admin_registerVO;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Profile_imageVO;
 
 public interface AdminMapper {
 	public AdminVO selectOne(String id);
@@ -36,6 +38,7 @@ public interface AdminMapper {
 	
 	public int insertLog(Admin_logVO vo);
 	
+	public int saveImage(@Param("id") String id,@Param("profile_image") byte[] profile_image);
 	
-	
+	public Profile_imageVO get_profile_image(String id);
 }
