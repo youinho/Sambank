@@ -2,11 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.UserMapper">
 
-<select  id="select_by_cno" resultType="com.spring.domain.CustomerVO">
-	select * from customertbl
-	where cno=#{cno}
-</select>
 
+<!-- 
+	<![CDATA[
+	]]>
+ -->
+	<select  id="listmap" resultType="com.spring.domain.Customer_noticeVO">
+		 <![CDATA[
+			select * from(
+				select /*+INDEX_DESC(notice_board pk_notice_board)*/ rownum rn, notice_bno, title, writer, regdate, updatedate, type
+				from notice_board
+				where 
+				]]>
+				<include refid="criteria"></include>
+			<![CDATA[		
+				rownum <= #{pageNum}*#{amount})
+			where rn > (#{pageNum}-1)*#{amount}
+		]]>
+	</select>
+
+<!--  -->
+	<select id="getRow" resultType="com.spring.domain.Customer_noticeVO">
+		select * from notice_board
+		where notice_bno=#{notice_bno}
+	</select>
 
 
 

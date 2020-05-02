@@ -14,10 +14,10 @@ main{
 	margin-left: 300px;
 	margin-top: 50px;
 	font: bolder;
-}
-.table .thead-dark th {
-  color: inherit;
-  border-color: $table-border-color;
+	position: fixed;
+    left: 120px;
+	visited: color:#5a5a5a; text-decoration:none;}
+	a:hover {color:#fff; text-decoration:none;}
 }
 .tag_var{
 	WIDTH: 85%;
@@ -149,7 +149,7 @@ aside {
      
      
      
-     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" style="left:4%;">
+     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" >
 	<!-- 여기다가 작성하면됨 -->
      <div class="col-md-10 order-md-1">
       <h4 class="mb-3 title">고객 공지</h4>

@@ -43,10 +43,10 @@ public class HomeController {
 		return "header_Main";
 	}
 	
-	@GetMapping("/Q")
-	public String Questions() {
-		return "Questions";
-	}
+//	@GetMapping("/Q")
+//	public String Questions() {
+//		return "Questions";
+//	}
 	
 //	@GetMapping("/login")
 //	public String loginPage() {
