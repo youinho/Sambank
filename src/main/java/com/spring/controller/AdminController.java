@@ -1,19 +1,8 @@
 package com.spring.controller;
 
 import java.io.File;
-<<<<<<< HEAD
-//<<<<<<< HEAD
-//
-//=======
-=======
 
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 import java.io.FileInputStream;
-<<<<<<< HEAD
-//>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
-=======
-
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
