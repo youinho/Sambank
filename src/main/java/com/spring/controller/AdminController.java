@@ -1,11 +1,19 @@
 package com.spring.controller;
 
 import java.io.File;
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //
 //=======
+=======
+
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 import java.io.FileInputStream;
+<<<<<<< HEAD
 //>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
+=======
+
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -100,7 +108,6 @@ public class AdminController {
 	
 	//프로필 이미지 이미지타입 확인
 	private boolean checkImageMimeType(InputStream file) {
-	
 		Tika tika = new Tika(); String mimeType=""; 
 		try { 
 			mimeType = tika.detect(file); 
@@ -108,17 +115,20 @@ public class AdminController {
 		catch (IOException e) {
 			e.printStackTrace(); 
 		}
-			if (mimeType.startsWith("image")) { return true; } else { return false; }
-	
+			if (mimeType.startsWith("image")) {
+				return true; 
+			} else {
+				return false; 
+			}
 	}
 	
 	//프로필 이미지 저장(DB저장)
 	@ResponseBody
 	@PostMapping("/save_profile_image")
 	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
-		
+		logging(req);
 		try {
-			if(!checkImageMimeType(uploadFile_header[0].getInputStream())) {
+			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize()>300000) {
 				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			try {
@@ -138,6 +148,7 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("/get_profile_image")
 	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
+		logging(req);
 	   if(id==null) {
 		   id = req.getRemoteUser();
 	   }
@@ -147,22 +158,17 @@ public class AdminController {
        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 
-	
-	
-	
-	
 	//관리자_ 고객 공지 페이지
 	@GetMapping("/customer_notice")
 	public String admin_show_customer_notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
 		//log.info("notice 요청 -");
-		
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		return "/admin/customer_notice";
 	}
 	
-	
+	//문의 리스트
 	@GetMapping("/inquiry")
 	public String admin_inquiry_get(String search,Model model, HttpServletRequest req) {
 		logging(req);
@@ -171,11 +177,10 @@ public class AdminController {
 		}else {
 			model.addAttribute("list", inquiry_service.getList_by_answer(req.getRemoteUser()));
 		}
-		
 		return "/admin/inquiry";
 	}
 	
-	
+	//문의 담당자인지 확인
 	@ResponseBody
 	@PostMapping("/check_inquiry")
 	public ResponseEntity<String> inquiry_check(String inquiry_no, HttpServletRequest req){
@@ -183,10 +188,11 @@ public class AdminController {
 		return new ResponseEntity<String>(req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")+"", HttpStatus.OK);
 	}
 	
+	//문의 담당자 등록
 	@ResponseBody
 	@PostMapping(value="/charge_inquiry", produces = "application/text; charset=utf8")
 	public ResponseEntity<String> charge_inquiry(String inquiry_no, HttpServletRequest req){
-		
+		logging(req);
 		if(inquiry_service.getRow(inquiry_no).getAnswer_id()==null) {
 			AdminVO admin = service.selectOne(req.getRemoteUser());
 			InquiryVO vo = new InquiryVO();
@@ -203,8 +209,7 @@ public class AdminController {
 		return new ResponseEntity<String>("gg", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	
-	
+	//문의답변 보기
 	@GetMapping("/inquiry/{inquiry_no}")
 	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
 		logging(req);
@@ -220,17 +225,16 @@ public class AdminController {
 		return "/admin/inquiry/read";
 	}
 	
-	
+	//문의 답변 불러오기
 	@ResponseBody
 	@PostMapping("/inquiry_get_reply")
 	public ResponseEntity<List<Inquiry_replyVO>> get_inquiry_reply(String inquiry_no, HttpServletRequest req){
 		logging(req);
 		List<Inquiry_replyVO> list  = inquiry_service.get_replyList(inquiry_no);
-		
-		
 		return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.OK);
-		
 	}
+	
+	//문의 답변 등록
 	@ResponseBody
 	@PostMapping("/inquiry_register_reply")
 	public ResponseEntity<String> insert_inquiry_reply(Inquiry_replyVO vo, HttpServletRequest req){
@@ -243,29 +247,8 @@ public class AdminController {
 		if(inquiry_service.insert_reply(vo)) {
 			return new ResponseEntity<String>("success", HttpStatus.OK);
 		}
-		
 		return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
-		
 	}
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	// 자바스크립트 비활성화일 경우
 	@GetMapping("/noscript")
@@ -273,35 +256,40 @@ public class AdminController {
 		return "/errorpage/noscript";
 	}
 	
+	//로깅, 로그 남기기
 	private boolean logging(HttpServletRequest req) {
-		
 		Admin_logVO vo = new Admin_logVO();
+		String parameter_names="";
 		vo.setId(req.getRemoteUser());
 		if(vo.getId()==null) {
 			vo.setId("Anonymous");
 		}
-		vo.setUri(req.getRequestURI());
+		vo.setUri("["+req.getMethod()+"]"+req.getRequestURI());
 		vo.setLocal_name(req.getLocalName());
 		vo.setLocal_addr(req.getLocalAddr());
 		vo.setLocal_port(req.getLocalPort()+"");
 		vo.setRemote_addr(req.getRemoteAddr());
 		vo.setRemote_port(req.getRemotePort()+"");
-		vo.setAdmin_session((req.getSession()+"").substring(49));
-		log.info("log vo : "+vo);
+		vo.setAdmin_session(req.getRequestedSessionId());
+		//log.info("log vo : "+vo);
+		if(req.getParameterNames().hasMoreElements()) {
+			parameter_names=req.getParameterMap().keySet().toString();
+		}
+		vo.setParameter_names(parameter_names);
 		return service.insertLog(vo);
 	}
 	
-	
-	
-	
 	//admin -------------------------------
 	
+	//그룹 권한 불러오기(로그인한 관리자)
 	@ResponseBody
 	@PostMapping("/get_groupId")
 	public ResponseEntity<String> get_groupId(HttpServletRequest req){
 		logging(req);
 		return new ResponseEntity<String>(service.get_groupID(req.getRemoteUser())+"", HttpStatus.OK);
 	}
+	
+	//그룹 권한 불러오기(아이디로)
 	@ResponseBody
 	@PostMapping("/get_groupId_by_id")
 	public ResponseEntity<String> get_groupId_by_id(String id, HttpServletRequest req){
@@ -362,7 +350,7 @@ public class AdminController {
 		//log.info("return vo : "+vo);
 		return new ResponseEntity<AdminVO>(vo, HttpStatus.OK);
 	}
-	
+	//*** 테스트용
 	@GetMapping("/header")
 	public void header(HttpServletRequest req) {
 		logging(req);
@@ -446,13 +434,8 @@ public class AdminController {
 		return new ResponseEntity<String>("NO", HttpStatus.BAD_REQUEST);
 	}
 	
-	
-	
-	
-	
-	
-	
 	// account
+	
 	//계좌 내역 페이지
 	@GetMapping("/account/history")
 	public void account_history_get(HttpServletRequest req) {
@@ -639,7 +622,6 @@ public class AdminController {
 		return "redirect:/admin/account/create";
 	}
 	
-	
 	//계좌 개설 페이지
 	@GetMapping("/account/create")
 	public String create_account_get(HttpServletRequest req) {
@@ -647,6 +629,7 @@ public class AdminController {
 		//log.info("create_account_get 요청");
 		return "/admin/account/create";
 	}
+	
 	//계좌 상품 불러오기
 	@ResponseBody
 	@PostMapping("/account/getProduct")
@@ -658,6 +641,7 @@ public class AdminController {
 		}
 		return new ResponseEntity<List<ProductVO>>(list, HttpStatus.OK);
 	}
+	
 	//계좌 정보 불러오기
 	@ResponseBody
 	@PostMapping("/account/getAccInfo")
@@ -757,11 +741,12 @@ public class AdminController {
 	}
 	
 	// customer @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
 	//고객 등록
 	@PostMapping("/customer/register")
 	public String register_customer_post(CustomerVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		//log.info("register_customer_post vo : "+vo);
+		log.info("register_customer_post vo : "+vo);
 		boolean result = false;
 		if(vali.check_customer(vo)) {
 			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
@@ -809,7 +794,6 @@ public class AdminController {
 		if(list.isEmpty()) {
 			return new ResponseEntity<List<CustomerVO>>(HttpStatus.NOT_FOUND);
 		}
-		
 		return new ResponseEntity<List<CustomerVO>>(list, HttpStatus.OK);
 	}
 	
@@ -964,10 +948,8 @@ public class AdminController {
 				multipartFile.transferTo(pathFile);
 				attachList.add(attach);
 			} catch (IllegalStateException e) {
-	
 				e.printStackTrace();
 			} catch (IOException e) {
-	
 				e.printStackTrace();
 			}
 		}
@@ -997,8 +979,7 @@ public class AdminController {
 		logging(req);
 		//log.info("notice 요청 -");
 		if(session.getAttribute("admin_branch")==null) {
-			AdminVO vo = service.selectOne(req.getRemoteUser());
-			
+			AdminVO vo = service.selectOne(req.getRemoteUser());	
 			session.setAttribute("admin_branch", vo.getBranch());
 			session.setAttribute("admin_rank", vo.getRank());
 			session.setAttribute("admin_name", vo.getName());
@@ -1039,6 +1020,7 @@ public class AdminController {
 		}
 		return "/admin/notice/register";
 	}
+	
 	//사내 공지 게시글 페이지 (빈 페이지)
 	@GetMapping("/notice/read")
 	public String notice_read(HttpServletRequest req) {
@@ -1282,39 +1264,9 @@ public class AdminController {
 		return "/admin/popup/search_admin_popup";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// customer_notice
 	
 	//첨부파일 다운로드
-//		@PostMapping("/notice/downloadFile")
 	@GetMapping("/customer_notice/downloadFile")
 	@ResponseBody
 	public ResponseEntity<Resource> customer_download(AttachFileDTO dto, @RequestHeader("user-Agent") String userAgent, HttpServletRequest req){
@@ -1420,9 +1372,7 @@ public class AdminController {
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
-	
-	
-	
+	//고객 공지 등록 페이지
 	@GetMapping("/customer_notice/register")
 	public String customer_notice_register_get(HttpServletRequest req) {
 		logging(req);
@@ -1430,7 +1380,7 @@ public class AdminController {
 		return "/admin/customer_notice/register";
 	}
 	
-	
+	//고객 공지 등록
 	@PostMapping("/customer_notice/register")
 	public String notice_register(Customer_noticeVO vo, HttpServletRequest req, RedirectAttributes rttr) {
 		logging(req);
@@ -1453,6 +1403,7 @@ public class AdminController {
 		}
 		return "/admin/customer_notice/register";
 	}
+	
 	//고객 공지 게시글 페이지 (빈 페이지)
 	@GetMapping("/customer_notice/read")
 	public String customer_notice_read(HttpServletRequest req) {
@@ -1460,7 +1411,7 @@ public class AdminController {
 		//log.info("read 요청");
 		return "/admin/customer_notice/read";
 	}
-
+	
 	//고객 공지 게시글 페이지
 	@GetMapping("/customer_notice/read/{bno}")
 	public String customer_notice_view(@PathVariable("bno") int notice_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
@@ -1500,7 +1451,6 @@ public class AdminController {
 		return "/admin/customer_notice/modify";
 	}
 	
-	
 	//고객 공지 수정
 	@PostMapping("/customer_notice/modify")
 	public String notice_update(Customer_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr, HttpServletRequest req) {
@@ -1515,21 +1465,4 @@ public class AdminController {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-

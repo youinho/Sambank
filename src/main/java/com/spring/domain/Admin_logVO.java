@@ -15,4 +15,5 @@ public class Admin_logVO {
 	private String remote_addr;
 	private String remote_port;
 	private String admin_session;
+	private String parameter_names;
 }

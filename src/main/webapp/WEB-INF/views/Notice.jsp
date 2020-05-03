@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="header_Main.jsp" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +228,7 @@ aside {
 								<c:forEach items="${list }" var="vo">
 									<tr>
                                         <td class="bno"><c:out value="${vo.notice_bno }"></c:out></td>
-                                        <td class="type"><c:out value="${vo.type}"></c:out></td>
+                                        <td class="type"><c:out value="${vo.notice_type}"></c:out></td>
                                         <td><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
                                         
                                         <td><c:out value="${vo.writer }"></c:out></td>
