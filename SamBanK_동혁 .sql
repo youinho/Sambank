@@ -477,4 +477,9 @@ select count(*) from logtbl;
 select sum(balance) from deposittbl;
 alter table logtbl add(parameter_names nvarchar2(1000));
 commit;
+
+select * from admintbl where id='sam';
+alter table admintbl add(profile_image_type nvarchar2(10));
+update admintbl set profile_image_type='png';
+commit;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
