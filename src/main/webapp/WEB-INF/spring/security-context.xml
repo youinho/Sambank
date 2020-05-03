@@ -26,7 +26,10 @@
         <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/card/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
         <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
 		
         <form-login login-page="/admin/login" 

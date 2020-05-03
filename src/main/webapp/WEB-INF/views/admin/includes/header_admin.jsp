@@ -42,32 +42,31 @@
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
-/* $(function(){
+$(function(){
 	$.ajax({
 		url : "/admin/get_adminInfo",
 		type : "post",
 		beforeSend : function(xhr)
-        {   
-            xhr.setRequestHeader(hn, tk);
-        },
-        dataType : "text",
+	       {   
+	           xhr.setRequestHeader(hn, tk);
+	       },
+	       dataType : "text",
 		success : function(result){
 			let vo = JSON.parse(result); 
 			
 			$("#admin_branch").html("<strong>"+vo.branch+"</strong>");
 			$("#admin_rank").html("<strong>"+vo.rank+"</strong>");
 			$("#admin_name").html("<strong>"+vo.name+"</strong>");
-			
+			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>");
 			
 		}
 	})
-}) */
+})
 $(function(){
 	$("#profile_image").click(function(e){
 		e.preventDefault();
@@ -115,7 +114,7 @@ $(function(){
 		})
 		if(change_success){
 			$("#uploadFile_header").val("");
-			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>")
+			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>");
 			
 		}
 		
@@ -135,7 +134,7 @@ $(function(){
 			return false;
 		}
 		if(!regex.test(fileName)){
-			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+			alert("프로필 사진은 이미지 파일만 가능합니다.");
 			return false;
 		}
 		return true;
@@ -154,7 +153,7 @@ $(function(){
 
 
 
-    <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
+    <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow" style="height:50px">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
   <ul class="navbar-nav px-3 mr-auto">
   	<li></li>
@@ -163,29 +162,27 @@ $(function(){
   	<li class="nav-item text-nowrap">
 	  	<a href="#" class="btn btn-outline-success" style="padding:0" id="profile_image">
 	  		
-  			<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>
-		  	
 	  	</a>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
 	  	<span class="navbar-text" id="admin_branch">
-	  	<strong><c:out value="${admin_branch }"></c:out></strong>
+	  	<%-- <strong><c:out value="${admin_branch }"></c:out></strong> --%>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_rank">
-  		<strong><c:out value="${admin_rank }"></c:out></strong>
+  		<%-- <strong><c:out value="${admin_rank }"></c:out></strong> --%>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_name">
-  		<strong><c:out value="${admin_name }"></c:out></strong>
+  		<%-- <strong><c:out value="${admin_name }"></c:out></strong> --%>
 	    </span>
   	</li>
   </ul>

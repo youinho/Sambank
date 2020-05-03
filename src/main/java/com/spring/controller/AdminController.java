@@ -98,28 +98,29 @@ public class AdminController {
 	
 	//프로필 이미지 이미지타입 확인
 	private boolean checkImageMimeType(InputStream file) {
-		Tika tika = new Tika(); String mimeType=""; 
+		Tika tika = new Tika(); 
+		String mimeType=""; 
 		try { 
 			mimeType = tika.detect(file); 
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace(); 
 		}
-			if (mimeType.startsWith("image")) {
-				return true; 
-			} else {
-				return false; 
-			}
+		
+		if (mimeType.startsWith("image")) {
+			return true; 
+		} else {
+			return false; 
+		}
 	}
 	
-	//프로필 이미지 저장(DB저장)
+	//프로필 이미지 저장
 	@ResponseBody
 	@PostMapping("/save_profile_image")
 	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
 		logging(req);
 		try {
-			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize()>300000) {
-				return new ResponseEntity<String>("success", HttpStatus.INTERNAL_SERVER_ERROR);
+			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize() > 300000) {
+				return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			try {
 				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes())) {
@@ -333,7 +334,7 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/get_adminInfo")
 	public ResponseEntity<AdminVO> get_adminInfo(HttpServletRequest req){
-		logging(req);
+		//logging(req);
 		AdminVO vo = service.selectOne(req.getRemoteUser());
 		vo.setPassword("");
 		vo.setMobile("");
@@ -968,12 +969,12 @@ public class AdminController {
 	public String admin_show_main_page(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req, HttpSession session) {
 		logging(req);
 		//log.info("notice 요청 -");
-		if(session.getAttribute("admin_branch")==null) {
-			AdminVO vo = service.selectOne(req.getRemoteUser());	
-			session.setAttribute("admin_branch", vo.getBranch());
-			session.setAttribute("admin_rank", vo.getRank());
-			session.setAttribute("admin_name", vo.getName());
-		}
+//		if(session.getAttribute("admin_branch")==null) {
+//			AdminVO vo = service.selectOne(req.getRemoteUser());	
+//			session.setAttribute("admin_branch", vo.getBranch());
+//			session.setAttribute("admin_rank", vo.getRank());
+//			session.setAttribute("admin_name", vo.getName());
+//		}
 		model.addAttribute("list", service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, service.totalRows(cri)));
 		return "/admin/notice";

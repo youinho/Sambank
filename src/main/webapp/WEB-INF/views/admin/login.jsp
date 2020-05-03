@@ -36,7 +36,7 @@
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        
 		        <form:form name="f" action="${loginUrl}" method="POST">
-		            
+		            <p>아이디 : sam / 비밀번호 : 3333</p>
 		            <c:if test="${param.logout != null}"> 
 		            	<p>로그아웃 하였습니다.</p> 
 		            </c:if>

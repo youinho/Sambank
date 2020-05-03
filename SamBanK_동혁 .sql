@@ -472,7 +472,7 @@ insert into default_profile_image select profile_image from admintbl where name=
 commit;
 select * from admintbl;
 select * from customertbl;
-select * from logtbl order by log_no desc;
+select to_char(logdate, 'yyyy-mm-dd HH24:MI:SS') as time, id, uri  from logtbl order by log_no desc;
 select count(*) from logtbl;
 select sum(balance) from deposittbl;
 alter table logtbl add(parameter_names nvarchar2(1000));
