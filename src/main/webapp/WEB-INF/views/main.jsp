@@ -261,6 +261,33 @@ let tk = "${_csrf.token}"
 	</div>
 	 <!-- link var 끝 -->
 	
+	<!-- video 시작 -->	
+		<div class="video" style="margin-left:350px;">
+		    <video
+	      src="/resources/SB_files/video.mp4"
+	      controls
+	      width="400"
+	      height="500"
+	      autoplay
+	      muted
+	      loop
+	      style="box-sizing: content-box;width: -webkit-fill-available;"
+	    >
+	      <!--controls 은 창을 관리 하는 명령문
+	        widtn : 넓이
+	        height : 높이
+	        autoplay : 자동실행
+	        muted : 음소거
+	        loop : 반복
+	    -->
+	      <p>
+	        이 브라우저는 video 요소를 지원하지 않습니다.
+	      </p>
+
+    </video>
+		<!-- video 끝 -->
+	</div>
+		
 	
 	
 	
