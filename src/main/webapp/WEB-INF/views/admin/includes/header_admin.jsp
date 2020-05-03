@@ -63,6 +63,7 @@ $(function(){
 			$("#admin_rank").html("<strong>"+vo.rank+"</strong>");
 			$("#admin_name").html("<strong>"+vo.name+"</strong>");
 			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>");
+			//$("#profile_image").html("<img src='/resources/img/umb.gif' alt='로고 이미지' style='width=48px;height:48px'>");
 			
 		}
 	})
@@ -98,6 +99,7 @@ $(function(){
 			url : '/admin/save_profile_image',
 			processData : false,
 			contentType : false,
+			enctype:"multipart/form-data",
 			beforeSend : function(xhr)
             {   
                 xhr.setRequestHeader(hn, tk);

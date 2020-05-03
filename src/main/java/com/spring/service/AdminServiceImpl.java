@@ -457,9 +457,9 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public boolean saveImage(String id, byte[] profile_image) {
+	public boolean saveImage(String id, byte[] profile_image, String profile_image_type) {
 
-		return adminMapper.saveImage(id, profile_image)==1;
+		return adminMapper.saveImage(id, profile_image, profile_image_type)==1;
 	}
 
 

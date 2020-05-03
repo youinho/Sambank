@@ -104,14 +104,14 @@
 	
 	<!-- 프로필사진 테스트 -->
 	<insert id="saveImage">
-		update admintbl set profile_image=#{profile_image}
+		update admintbl set profile_image=#{profile_image}, profile_image_type=#{profile_image_type}
 		where id=#{id} 
 	
 	</insert>
 	
 	
 	<select id="get_profile_image" resultType="com.spring.domain.Profile_imageVO">
-		select profile_image from
+		select profile_image, profile_image_type from
 		admintbl where id=#{id}
 	</select>
 	

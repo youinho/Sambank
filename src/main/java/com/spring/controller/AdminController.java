@@ -2,7 +2,7 @@ package com.spring.controller;
 
 import java.io.File;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -67,6 +67,7 @@ import com.spring.domain.InquiryVO;
 import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
+import com.spring.domain.Profile_imageVO;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
 import com.spring.service.InquiryService;
@@ -104,7 +105,7 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace(); 
 		}
-		
+		log.info("mimetype : "+mimeType);
 		if (mimeType.startsWith("image")) {
 			return true; 
 		} else {
@@ -121,8 +122,12 @@ public class AdminController {
 			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize() > 300000) {
 				return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+			String file_name = uploadFile_header[0].getOriginalFilename(); 
+			String type = file_name.substring(file_name.lastIndexOf(".")+1);
+			
+			
 			try {
-				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes())) {
+				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes(), type)) {
 					return new ResponseEntity<String>("success", HttpStatus.OK);
 				}
 			} catch (IOException e) {
@@ -142,9 +147,18 @@ public class AdminController {
 	   if(id==null) {
 		   id = req.getRemoteUser();
 	   }
-       byte[] imageContent = service.get_profile_image(id).getProfile_image();
+	   Profile_imageVO vo = service.get_profile_image(id);
+       byte[] imageContent = vo.getProfile_image();
+       String profile_image_type = vo.getProfile_image_type(); 
        final HttpHeaders headers = new HttpHeaders();
-       headers.setContentType(MediaType.IMAGE_PNG);
+       
+       if(profile_image_type.equalsIgnoreCase("jpg") || profile_image_type.equalsIgnoreCase("jpeg")) {
+    	   headers.setContentType(MediaType.IMAGE_JPEG);
+       }else if(profile_image_type.equalsIgnoreCase("gif")) {
+    	   headers.setContentType(MediaType.IMAGE_GIF);
+       }else{
+    	   headers.setContentType(MediaType.IMAGE_PNG);
+       }
        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
 	}
 

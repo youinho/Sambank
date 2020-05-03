@@ -38,7 +38,7 @@ public interface AdminService {
 	public boolean insertLog(Admin_logVO vo);
 	
 	
-	public boolean saveImage(String id, byte[] profile_image);
+	public boolean saveImage(String id, byte[] profile_image, String profile_image_type);
 	
 	public Profile_imageVO get_profile_image(String id);
 	
