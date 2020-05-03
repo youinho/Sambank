@@ -107,18 +107,16 @@ $(function(){
             async : false,
 			data : formData,
 			type : 'post',
-			dataType : 'json',
-			complete : function(result){
-				console.log(result);
-				change_success = true; 
-				
+			dataType : 'text',
+			success : function(result){
+				console.log("success   "+result);
+				//change_success = true; 
+				$("#profile_image").html("<img src='/admin/get_profile_image' alt='profile_image' style='width=48px;height:48px'>");
+			},
+			error : function(){
+				alert("프로필 사진 변경에 실패했습니다.");
 			}
 		})
-		if(change_success){
-			$("#uploadFile_header").val("");
-			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>");
-			
-		}
 		
 		
 		

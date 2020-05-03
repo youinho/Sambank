@@ -119,6 +119,8 @@ public class AdminController {
 	public ResponseEntity<String> admin_saveImage(MultipartFile[] uploadFile_header, HttpServletRequest req){
 		logging(req);
 		try {
+			log.info("length : "+uploadFile_header.length);
+			log.info("tostring : "+uploadFile_header.toString());
 			if(!checkImageMimeType(uploadFile_header[0].getInputStream())||uploadFile_header[0].getSize() > 300000) {
 				return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -1451,6 +1453,9 @@ public class AdminController {
 	public String customer_notice_modify(@RequestParam("bno") int notice_bno, @ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
 		//log.info("modify_get 요청");
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((cn_service.notice_getRow(notice_bno).getId()))) {
+			return "redirect:/admin/customer_notice";
+		}
 		model.addAttribute("vo", cn_service.notice_getRow(notice_bno));
 		return "/admin/customer_notice/modify";
 	}
@@ -1459,6 +1464,9 @@ public class AdminController {
 	@PostMapping("/customer_notice/modify")
 	public String notice_update(Customer_noticeVO vo,@ModelAttribute("cri") Criteria cri, Model model, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
+		if(service.get_groupID(req.getRemoteUser()) < service.get_groupID((cn_service.notice_getRow(Integer.parseInt(vo.getNotice_bno())).getId()))) {
+			return "redirect:/admin/customer_notice";
+		}
 		log.info("modify_post 요청"+vo);
 		if(cn_service.notice_update(vo)) {
 			rttr.addFlashAttribute("cri", cri);
