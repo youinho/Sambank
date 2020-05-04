@@ -76,8 +76,8 @@ let tk = "${_csrf.token}"
 			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #b5fdba;" >
 			
 				<div id="Logo">  
-				  <strong><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></strong>
-				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"></a>
+				  <strong></strong>
+				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></a>
 				</div>
 				<!-- Logo 끝내는 부분 -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -263,14 +263,20 @@ let tk = "${_csrf.token}"
 			</ul>
 	</div>
 	 <!-- link var 끝 -->
-	
+	<div class="videoheader" style="margin-top: 30px; text-align: center; font-size: ">
+	<p style="
+    font-family: none;
+    font-size: xxx-large;
+    margin-bottom: auto;">SamBank CF 광고</p>
+	</div>
 	<!-- video 시작 -->	
-		<div class="video" style="margin-left:350px;">
+	<!-- style="margin-left:350px;" -->
+		<div class="video" >
 		    <video
 	      src="/resources/SB_files/video2.mp4"
 	      controls
-	      width="400"
-	      height="500"
+	      width="200"
+	      height="400"
 	      autoplay
 	      muted
 	      loop

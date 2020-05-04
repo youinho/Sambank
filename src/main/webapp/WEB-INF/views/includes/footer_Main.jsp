@@ -20,6 +20,7 @@ footer{
 .footer-inner.set-pc {
     text-align: center;
 }
+
     </style>
    </head>
 	<footer> 
