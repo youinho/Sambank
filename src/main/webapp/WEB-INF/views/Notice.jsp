@@ -18,11 +18,11 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
 main{
 	width : 70%;
 	position: relative;
-	margin-left: 300px;
+/* 	margin-left: 300px; */
 	margin-top: 50px;
 	font: bolder;
 	position: fixed;
-    left: 120px;
+/*     left: 120px; */
 }
 .tag_var{
 	WIDTH: 85%;
@@ -39,7 +39,7 @@ aside {
     /* margin-top:50px; */
     padding-bottom: 650px;
     box-sizing: border-box;
-    border: 1px dashed;
+    border: 1px solid;
     position: absolute;
     font-size: 35px;
     background-color: darkseagreen;

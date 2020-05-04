@@ -38,6 +38,11 @@ public class UserController {
 		return "Notice";
 	}
 	
+	@GetMapping("/N-1")
+	public String NEW() {
+		log.info("양식 게시판");	
+		return "N-test1";
+	}
 	@GetMapping("/U-1")
 	public String User_Set() {
 		log.info("문의사항 게시판");	
