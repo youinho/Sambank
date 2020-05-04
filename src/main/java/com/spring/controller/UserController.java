@@ -38,10 +38,20 @@ public class UserController {
 		return "Notice";
 	}
 	
-	@GetMapping("/N-1")
-	public String User_N_notice() {
+	@GetMapping("/U-1")
+	public String User_Set() {
 		log.info("문의사항 게시판");	
-		return "N-test1";
+		return "/user/UserSet";
+	}
+	@GetMapping("/U-2")
+	public String User_Update() {
+		log.info("문의사항 게시판");	
+		return "/user/UserUpdate";
+	}
+	@GetMapping("/U-3")
+	public String User_Delete() {
+		log.info("문의사항 게시판");	
+		return "/user/UserDelete";
 	}
 	
 	
