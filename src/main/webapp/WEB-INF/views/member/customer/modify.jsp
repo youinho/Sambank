@@ -138,11 +138,9 @@ form > div > div> button{
      	<a href="">고객관리</a>
      	<div class="dropdown-divider"></div>
      	<div class="aside_content">
-	     	<a href="">개인정보수정</a>
+	     	<a href="modify">개인정보수정</a>
 	     	<div class="dropdown-divider"></div>
-	     	<a href="">회원 탈퇴</a>
-	     	<div class="dropdown-divider"></div>
-	     	<a href="">추가 예정</a>
+	     	<a href="delete">회원 탈퇴</a>
 	     	<div class="dropdown-divider"></div>
      	</div>
      	</ul>
