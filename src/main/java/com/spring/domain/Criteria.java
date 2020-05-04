@@ -21,7 +21,7 @@ public class Criteria {
 	private String typeC;
 	private String typeW;
 	
-	private String notice_type;
+	private String notice_types;
 	
 	public Criteria() {
 		this(1,15);
@@ -37,7 +37,7 @@ public class Criteria {
 		return type==null?new String[] {} : type.split("");
 	}
 	public String[] getNotice_typeArr() {
-		return notice_type==null?new String[] {} : notice_type.split("");
+		return notice_types==null?new String[] {} : notice_types.split("");
 	}
 	
 	

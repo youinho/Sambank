@@ -134,7 +134,7 @@ $(function(){
 							  <input type="hidden" name="pageNum" value="${cri.pageNum }" />
 							  <input type="hidden" name="amount" value="${cri.amount }" />
 							  <input type="hidden" name="type" value="" />
-							  <input type="hidden" name="notice_type" value="${cri.notice_type }" />
+							  <input type="hidden" name="notice_types" value="${cri.notice_types }" />
 							  
 							  
 						  
@@ -210,7 +210,7 @@ $(function(){
 	<input type="hidden" name="amount" value="${cri.amount }" />
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
-	<input type="hidden" name="notice_type" value="${cri.notice_type }" />
+	<input type="hidden" name="notice_types" value="${cri.notice_types }" />
 	<%-- <sec:csrfInput/> --%>
 </form>
 <script>
@@ -312,7 +312,7 @@ $(function(){
 	
 	$(".notice_type_td > a").click(function(e){
 		e.preventDefault();
-		actionForm.find("input[name='notice_type']").val($(this).attr("href"));
+		actionForm.find("input[name='notice_types']").val($(this).attr("href"));
 		actionForm.submit();
 	})
 })
