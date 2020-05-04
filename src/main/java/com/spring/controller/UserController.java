@@ -11,6 +11,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.AttachFileDTO;
 import com.spring.domain.Criteria;
+import com.spring.domain.InquiryVO;
+import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
+import com.spring.domain.Profile_imageVO;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.InquiryService;
 import com.spring.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,11 +49,87 @@ public class UserController {
 	@Autowired
 	private CustomerNoticeService cn_service;
 	
-	@GetMapping("/Q")
-	public String User_Q_notice(Model model, @ModelAttribute("cri") Criteria cri) {
+	@Autowired
+	private InquiryService inquiry_service;
+	
+	
+	@GetMapping("/member/inquiry")
+	public String User_Q_notice(Model model, HttpServletRequest req) {
 		
-		return "/user/Questions/Questions";
+		model.addAttribute("list", inquiry_service.getList_by_customer(req.getRemoteUser()));
+		
+		
+		
+		
+		return "/member/inquiry/list";
 	}
+	
+	@GetMapping("/member/inquiry/register")
+	public String User_inquiry_register() {
+		
+		
+		
+		return "/member/inquiry/register";
+	}
+	
+	@PostMapping("/member/inquiry/register")
+	public String User_inquiry_register_post(InquiryVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+		vo.setCustomer_id(req.getRemoteUser());
+		vo.setCustomer_name(service.select_by_id(req.getRemoteUser()).getName());
+		if(inquiry_service.insert_inquiry(vo)) {
+			rttr.addFlashAttribute("registered", "true");
+		}else {
+			rttr.addFlashAttribute("registered", "false");
+		}
+		
+		
+		return "redirect:/member/inquiry";
+	}
+	
+	@GetMapping("/member/inquiry/{inquiry_no}")
+	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
+		
+		try {
+			Integer.parseInt(inquiry_no);
+		}catch(Exception e){
+			return "redirect:/member/inquiry";
+		}
+		
+		InquiryVO vo = inquiry_service.getRow(inquiry_no);
+		if(vo.getCustomer_id().equals(req.getRemoteUser())) {
+			model.addAttribute("vo", vo);
+			return "/member/inquiry/read";
+		}
+		return "redirect:/member/inquiry";
+		
+		
+	}
+	
+	
+	//문의 답변 불러오기
+	@ResponseBody
+	@PostMapping("/member/inquiry/inquiry_get_reply")
+	public ResponseEntity<List<Inquiry_replyVO>> get_inquiry_reply(String inquiry_no, HttpServletRequest req){
+		List<Inquiry_replyVO> list = null;
+		if(inquiry_service.getRow(inquiry_no).getCustomer_id().equals(req.getRemoteUser())) {
+			list  = inquiry_service.get_replyList(inquiry_no);			
+			return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.OK);
+		}
+		return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/F")
 	public String User_F_File(Model model, @ModelAttribute("cri") Criteria cri) {
@@ -92,7 +174,7 @@ public class UserController {
 	//고객 공지 read페이지
 	@GetMapping("/customer_notice/read/{bno}")
 	public String customer_notice_view(@PathVariable("bno") int notice_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
-		
+
 		//log.info("read 요청"+admin_bno);
 		try {
 			model.addAttribute("vo", cn_service.notice_getRow(notice_bno));
@@ -221,6 +303,43 @@ public class UserController {
 //		log.info("문의사항 게시판");	
 //		return "/user/UserDelete";
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//관리자 프로필 이미지 불러오기
+	@ResponseBody
+	@GetMapping("/member/inquiry/get_profile_image")
+	public ResponseEntity<byte[]> getByteImage(String id) {
+		final HttpHeaders headers = new HttpHeaders();
+		if(id==null) {
+			return new ResponseEntity<byte[]>(null, headers, HttpStatus.BAD_REQUEST);
+		}
+	    Profile_imageVO vo = service.get_profile_image(id);
+        byte[] imageContent = vo.getProfile_image();
+        String profile_image_type = vo.getProfile_image_type(); 
+        
+       
+        if(profile_image_type.equalsIgnoreCase("jpg") || profile_image_type.equalsIgnoreCase("jpeg")) {
+    	    headers.setContentType(MediaType.IMAGE_JPEG);
+        }else if(profile_image_type.equalsIgnoreCase("gif")) {
+    	    headers.setContentType(MediaType.IMAGE_GIF);
+        }else{
+    	    headers.setContentType(MediaType.IMAGE_PNG);
+        }
+        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+	}
 	
 	
 	

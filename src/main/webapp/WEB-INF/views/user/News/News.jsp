@@ -174,7 +174,7 @@ th, tr{
 <main>
 <!-- 여기다가 작성하면됨 -->
 <div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title"><a href="/admin/customer_notice" style="color:#000000"><c:out value="${title }"></c:out> </a></h4>
+      <h4 class="mb-3 title"><a href="/${cri.notice_types }" style="color:#000000"><c:out value="${title }"></c:out> </a></h4>
       <div class="row">
                 <!-- /.col-lg-12 -->
             </div>

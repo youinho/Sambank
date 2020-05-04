@@ -15,6 +15,7 @@
         
     <!-- 시큐리티 예외사항 -->
     <sec:http pattern="/admin/popup/jusopopup" security="none" />
+    
     <!-- 검사 URL -->
     
     
