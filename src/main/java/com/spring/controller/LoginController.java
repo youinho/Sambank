@@ -72,7 +72,7 @@ public class LoginController {
 		log.info("db:"+info);
 		session.setAttribute("info", info);
 		if(passwordEncoder.matches( pw,info.getPassword())) {
-			return "redirect:/main";
+			return "redirect:/";
 		}
 		return "/member/customerlogin";
 		

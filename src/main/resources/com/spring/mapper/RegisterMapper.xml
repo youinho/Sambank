@@ -5,8 +5,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="insertMember">
-		insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
-		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth}, 50, #{address}, #{mobile}, #{id}, #{password}, #{email}) 
+		insert into customertbl(cno, name, eng_name, gender, birth,  address, mobile, id, password, email) 
+		values(seq_customer.nextVal, #{name}, #{eng_name}, #{gender}, #{birth},  #{address}, #{mobile}, #{id}, #{password}, #{email}) 
 	</insert>
 
 	<!-- 중복 아이디 검사 -->

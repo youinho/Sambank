@@ -73,7 +73,7 @@
 		<session-management invalid-session-url="/customer/login?error">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
-        <csrf disabled="false"/>
+        <csrf disabled="true"/>
     </http>
     <!-- pattern : 적용할 URL -->
     <!-- hasRole('ROLE_USER') : customertbl 에 있는 authority 컬럼의 값이 ROLE_USER 이어야 허용 -->

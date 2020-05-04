@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,9 +52,10 @@ public class RegisterController {
 	public String step3(@ModelAttribute("vo") CustomerVO vo) {
 		//step2.jsp에서 회원가입정보 가져오기
 		log.info("회원가입요청"+vo);
-		
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+
 		if(service.registMember(vo)) {
-			return "redirect:/main";				
+			return "redirect:/";				
 		}else {
 			return "/register/step2";
 		}

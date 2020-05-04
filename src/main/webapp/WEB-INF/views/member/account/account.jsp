@@ -56,16 +56,7 @@
 							</tbody>												
 						</table>
 				     </div>
-				<!--     
-					 <div class="tab-pane fade" id="modify" role="tabpanel">
-						<jsp:include page="goods/book_modify.jsp"/>
-				     </div>
-				     <div class="tab-pane fade" id="insert" role="tabpanel">
-						<jsp:include page="goods/book_insert.jsp"/>
-				     </div>	
-				     <div class="tab-pane fade" id="search" role="tabpanel">
-						<jsp:include page="goods/book_search.jsp"/>
-				     </div>	
+			>	
 				   --> 		    
     			</div>
 			</div>
