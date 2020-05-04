@@ -38,6 +38,12 @@ public class UserController {
 		return "Notice";
 	}
 	
+	@GetMapping("/N-1")
+	public String User_N_notice() {
+		log.info("문의사항 게시판");	
+		return "N-test1";
+	}
+	
 	
 	
 	
