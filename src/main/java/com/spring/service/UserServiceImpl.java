@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Criteria;
+import com.spring.domain.CustomerVO;
 import com.spring.domain.Customer_noticeVO;
 import com.spring.mapper.UserMapper;
 
@@ -30,6 +31,12 @@ public class UserServiceImpl implements UserService {
 	public int totalRows(Criteria cri) {
 		// TODO Auto-generated method stub
 		return urm.getTotalCount(cri);
+	}
+
+	@Override
+	public CustomerVO select_user(String id) {
+		// TODO Auto-generated method stub
+		return urm.select_user(id);
 	}
 	
 	

@@ -26,7 +26,7 @@ footer{
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
 			    <!-- style="text-align: right;" -->
-			    <div class="col" ><a href="">대표 1588-9955 | 금융서비스 | LANGUAGE | 패밀리 사이트</a></div>
+			    <div class="col" ><a href="">대표 1588-9955 | 금융서비스 | LANGUAGE </a></div>
 			    <div class="col" style= "text-align: left;">
 			    	이미지 추가 예정
 			    </div>

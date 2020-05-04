@@ -37,7 +37,7 @@ aside {
     /* margin-top:50px; */
     padding-bottom: 650px;
     box-sizing: border-box;
-    border: 1px dashed;
+    border: 1px solid;
     position: absolute;
     font-size: 35px;
     background-color: darkseagreen;
@@ -82,31 +82,35 @@ aside {
 				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
 				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">이벤트</a></button>
 				  <!-- 2 -->
-				  <button type="button" class="btn btn-success" style="margin-left: 35px;" >문의사항</button>
-				  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="sr-only">Toggle Dropdown</span>
-				  </button>
-				  <div class="dropdown-menu">
-				    <a class="dropdown-item" href="#">문의사항</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">문의사항 작성</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">문의사항 취소</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
-				  </div>
+				  <div class="btn-group" style="margin-left: 25px;">
+					  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    문의 사항
+					  </button>
+					  <div class="dropdown-menu">
+					    <a class="dropdown-item" href="#">문의사항</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="#">문의사항 작성</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="#">문의사항 취소</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
+					  </div>
+					</div>
 				  <!-- 3 -->
-				  <button type="button" class="btn btn-success" style="margin-left: 35px;" >카드관련</button>
-				  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="sr-only">Toggle Dropdown</span>
-				  </button>
-				  <div class="dropdown-menu">
-				    <a class="dropdown-item" href="#">카드 신청</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">카드 취소</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">카드 결과 확인</a>
-				  </div>
+				  <div class="btn-group" style="margin-left: 25px;">
+					  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    카드 관련
+					  </button>
+					  <div class="dropdown-menu">
+					    <a class="dropdown-item" href="#">카드 신청</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="#">카드 취소</a>
+					    <div class="dropdown-divider"></div>
+					    <a class="dropdown-item" href="#">카드 결과 확인</a>
+					  </div>
+					</div>
+
+
 				</div>
      	 </div>
       
