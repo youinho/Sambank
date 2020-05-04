@@ -79,7 +79,6 @@ let tk = "${_csrf.token}"
 			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #b5fdba;" >
 			
 				<div id="Logo">  
-				  <strong></strong>
 				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></a>
 				</div>
 				<!-- Logo 끝내는 부분 -->
@@ -260,7 +259,7 @@ let tk = "${_csrf.token}"
 				<li><a href="/no">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
-				<li><a href="/Q">문의사항</a></li>
+				<li><a href="/member/inquiry">문의사항</a></li>
 				<li><a href="/login">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
