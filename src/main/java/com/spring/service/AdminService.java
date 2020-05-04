@@ -46,15 +46,20 @@ public interface AdminService {
 	public boolean register_customer(CustomerVO vo);
 	public List<DepositVO> get_deposit_list();
 	public CustomerVO select_by_cno(int cno);
+	public CustomerVO select_by_id(String id);
 	public List<CustomerVO> search_customer(String name, String birth, String mobile);
 	public boolean exists_deposit_ano(String ano);
 	public boolean checkId(String id);
 	
 	public boolean update_customer(CustomerVO vo);
 	public boolean delete_customer(CustomerVO vo);
+	public boolean customer_update_password(CustomerVO vo);
 	
 	public boolean check_deposit_password(DepositVO vo);
 	public boolean delete_deposit(DepositVO vo);
+	
+	
+	
 	
 	//notice
 	public List<Admin_noticeVO> notice_getList(Criteria cri);
@@ -82,7 +87,7 @@ public interface AdminService {
 
 	public boolean update_withdraw(DepositVO vo);
 	public boolean update_password(DepositVO vo);
-	public boolean check_customer_password(DepositVO vo);
+	public boolean check_customer_password(CustomerVO vo);
 	public DepositVO check_ano(String ano);
 	
 	public boolean deposit(Deposit_historyVO vo);

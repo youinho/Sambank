@@ -69,6 +69,7 @@ $(function(){
 		<input type="hidden" name="amount" value="${cri.amount }"/>
 		<input type="hidden" name="type" value="${cri.type }" />
 		<input type="hidden" name="keyword" value="${cri.keyword }" />
+		<input type="hidden" name="notice_type" value="${cri.notice_type }" />
 		<sec:csrfInput/>	
 	</form>
 	<div class="uploadResult">

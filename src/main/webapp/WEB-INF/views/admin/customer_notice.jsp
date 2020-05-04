@@ -91,7 +91,7 @@ $(function(){
 <body>
 	
 	<div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title">고객 공지</h4>
+      <h4 class="mb-3 title"><a href="/admin/customer_notice">고객 공지</a></h4>
       <div class="row">
                 <!-- /.col-lg-12 -->
             </div>
@@ -134,7 +134,7 @@ $(function(){
 							  <input type="hidden" name="pageNum" value="${cri.pageNum }" />
 							  <input type="hidden" name="amount" value="${cri.amount }" />
 							  <input type="hidden" name="type" value="" />
-							  
+							  <input type="hidden" name="notice_type" value="${cri.notice_type }" />
 							  
 							  
 						  
@@ -165,7 +165,7 @@ $(function(){
 								<c:forEach items="${list }" var="vo">
 									<tr>
                                         <td class="bno"><c:out value="${vo.notice_bno }"></c:out></td>
-                                        <td class="type"><c:out value="${vo.notice_type}"></c:out></td>
+                                        <td class="type notice_type_td"><a href="${vo.notice_type=='공지사항'?'A':'' }${vo.notice_type=='새소식'?'N':'' }${vo.notice_type=='이벤트'?'E':'' }${vo.notice_type=='자료실'?'F':'' }"><c:out value="${vo.notice_type}"></c:out></a></td>
                                         <td><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
                                         
                                         <td><c:out value="${vo.writer }"></c:out></td>
@@ -210,6 +210,7 @@ $(function(){
 	<input type="hidden" name="amount" value="${cri.amount }" />
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
+	<input type="hidden" name="notice_type" value="${cri.notice_type }" />
 	<%-- <sec:csrfInput/> --%>
 </form>
 <script>
@@ -309,9 +310,11 @@ $(function(){
 		actionForm.submit();
 	})
 	
-	
-	
-	
+	$(".notice_type_td > a").click(function(e){
+		e.preventDefault();
+		actionForm.find("input[name='notice_type']").val($(this).attr("href"));
+		actionForm.submit();
+	})
 })
 
 </script>

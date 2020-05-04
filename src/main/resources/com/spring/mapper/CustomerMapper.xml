@@ -8,6 +8,14 @@
 		select cno, name, eng_name, gender, birth, address, mobile, id, email from customertbl
 		where cno=#{cno}
 	</select>
+	
+<!-- id로 고객정보 -->
+	<select id="select_by_id" resultType="com.spring.domain.CustomerVO">
+		select cno, name, eng_name, gender, birth, address, mobile, id, email from customertbl
+		where id=#{id}
+	</select>
+	
+	
 
 <!-- cno로 고객정보 (이름, 계좌정보) -->
 	<select id="select_acc_info" resultType="com.spring.domain.Acc_info">
@@ -63,6 +71,12 @@
 		where id=#{id}
 	</select>
 
+
+<!-- 고객 비밀번호 변경 -->
+	<update id="update_password">
+		update customertbl set password=#{password}
+		where id=#{id}
+	</update>
 
 
 </mapper>

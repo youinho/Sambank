@@ -171,6 +171,7 @@ public class AdminController {
 		//log.info("notice 요청 -");
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
+		log.info("cri : @@"+cri);
 		return "/admin/customer_notice";
 	}
 	

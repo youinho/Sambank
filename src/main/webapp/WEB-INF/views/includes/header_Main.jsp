@@ -10,9 +10,14 @@
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <!-- <link rel="stylesheet" href="/resources/css/intro_2018.css" />     -->
 <!-- bootstrap js,jQuery link -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+let hn = "${_csrf.headerName}";
+let tk = "${_csrf.token}"
+</script>
 </head>
 <body>
 
@@ -37,7 +42,7 @@
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
 				          <a class="dropdown-item" href="#">프로필 관리</a>
-				          <a class="dropdown-item" href="#">개인정보수정</a>
+				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
 				      </li>
@@ -54,7 +59,7 @@
 				        <a class="nav-link" href="#">은행 소개</a>
 				      </li>
 				      <li class="nav-item active">
-				        <a class="nav-link" href="#">고객 센터</a>
+				        <a class="nav-link" href="/Q">고객 센터</a>
 				      </li>
 			  	</ul>
 			  </div>

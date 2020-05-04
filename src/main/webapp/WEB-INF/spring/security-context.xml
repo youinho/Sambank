@@ -62,15 +62,15 @@
 		
         <form-login login-page="/member/login_test" 
         			login-processing-url="/member/login_process"
-			        default-target-url="/member/test" 
-			        authentication-failure-url="/member/login_test?error" 
+			        default-target-url="/" 
+			        authentication-failure-url="/" 
 			        username-parameter="id" 
 			        password-parameter="password" /> 
         <logout invalidate-session="true"
         		logout-url="/member/logout" 
-        		logout-success-url="/member/login_test" />
+        		logout-success-url="/" />
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/member/login_test?error">
+		<session-management invalid-session-url="/">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>

@@ -239,7 +239,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public boolean check_customer_password(DepositVO vo) {
+	public boolean check_customer_password(CustomerVO vo) {
 
 		return passwordEncoder.matches(vo.getPassword(), customerMapper.get_password(vo.getPassword()));
 	}
@@ -467,6 +467,20 @@ public class AdminServiceImpl implements AdminService {
 	public Profile_imageVO get_profile_image(String id) {
 
 		return adminMapper.get_profile_image(id);
+	}
+
+
+	@Override
+	public CustomerVO select_by_id(String id) {
+
+		return customerMapper.select_by_id(id);
+	}
+
+
+	@Override
+	public boolean customer_update_password(CustomerVO vo) {
+
+		return customerMapper.update_password(vo)==1;
 	}
 	
 }

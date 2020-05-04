@@ -99,6 +99,9 @@ public class AccountController {
 
 	@GetMapping("/balance")
 	public void get_balance(ModelMap modelMap, HttpServletRequest req) {
+	
+	
+	
 		String ano="10235034475230";
 		String id = req.getRemoteUser();
 		
@@ -106,8 +109,6 @@ public class AccountController {
 		
 		modelMap.addAttribute("c_balance",c_balance);
 		log.info(c_balance+"");
-//		return "/member/balance"; 
 	}
-	
-}
 
+}

@@ -19,7 +19,7 @@ public class CustomerVO {
 	private Date createdate;					//회원가입 날짜
 	private Date updatedate;
 	
-	
+	private String confirm_password;
 	/*public boolean isPasswordEqualToConfirmPassword() {
 		return this.password.equals(passhint);
 	}*/

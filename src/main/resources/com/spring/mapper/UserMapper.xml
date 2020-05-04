@@ -26,10 +26,10 @@
 	</select>
 	<!-- 개인정보 관련 -->
 <!-- 개인정보 확인을위한 검색 -->	
-	<select id="" resultType="com.spring.domain.CustomerVO">
-	
-	
-	
+	<select id="select_user" resultType="com.spring.domain.CustomerVO">
+		select CNO,NAME,ENG_NAME,GENDER,BIRTH,ADDRESS,MOBILE,ID,PASSWORD,EMAIL,CREATEDATE,UPDATEDATE
+		from CUSTOMERTBL
+		where id=#{id}
 	</select>
 
 <!-- 동적 sql -->
