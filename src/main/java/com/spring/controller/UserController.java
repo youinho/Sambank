@@ -34,8 +34,24 @@ public class UserController {
 		
 		
 		model.addAttribute("list", usc.listmap(cri));
-		//model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
+		model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
 		return "Notice";
+	}
+	
+	@GetMapping("/U-1")
+	public String User_Set() {
+		log.info("문의사항 게시판");	
+		return "/user/UserSet";
+	}
+	@GetMapping("/U-2")
+	public String User_Update() {
+		log.info("문의사항 게시판");	
+		return "/user/UserUpdate";
+	}
+	@GetMapping("/U-3")
+	public String User_Delete() {
+		log.info("문의사항 게시판");	
+		return "/user/UserDelete";
 	}
 	
 	

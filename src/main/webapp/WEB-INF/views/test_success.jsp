@@ -36,7 +36,7 @@ let tk = "${_csrf.token}"			//토큰입니다.@@
 	로그인 성공했습니다.
 	F12를 눌러서 토큰을 확인
 	
-	<form:form action="${pageContext.request.contextPath}/customer/logout" method="POST">
+	<form:form action="${pageContext.request.contextPath}/member/logout" method="POST">
 		<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />
 	</form:form>
 	

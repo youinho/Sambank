@@ -36,7 +36,7 @@ let tk = "${_csrf.token}"
 	<div id="container">
 		<div class="row justify-content-md-center">
 			<div id="login" class="col-lg-3">
-				<c:url value="/customer/login_process" var="loginUrl" />
+				<c:url value="/member/login_process" var="loginUrl" />
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        <sec:authorize access="isAnonymous()">
 		        <form:form name="f" action="${loginUrl}" method="POST">
@@ -62,7 +62,7 @@ let tk = "${_csrf.token}"
 		        </form:form>
 		        </sec:authorize>
 		        <sec:authorize access="isAuthenticated()">
-			        <form:form action="${pageContext.request.contextPath}/customer/logout" method="POST">
+			        <form:form action="${pageContext.request.contextPath}/member/logout" method="POST">
 		      			<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />
 		      		</form:form>
 	      		</sec:authorize>

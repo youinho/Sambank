@@ -37,6 +37,7 @@ public class AccountController {
 	}
 
 	
+<<<<<<< HEAD
 	
 	
 	@PostMapping("/balance")
@@ -48,5 +49,12 @@ public class AccountController {
 		modelMap.addAttribute("c_blance",c_balance);
 //		return "/member/balance"; 
 	}
+=======
+//	@PostMapping("/account")
+//	public String accountList(/*HttpServletRequest req*/) {
+//		Deposit_historyVO dpVO = service.Deposit_hi(vo);
+//		return null;
+//	}
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 }
 
