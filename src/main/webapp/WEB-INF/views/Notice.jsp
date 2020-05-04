@@ -8,8 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <style>
-a:visited {color:#fff; text-decoration:none;}
+a:visited {color:black; text-decoration:none;}
+.asideHeader a:visited {color:#fff; text-decoration:none;}
+.tag_var a:visited {color:#fff; text-decoration:none;}
 a:hover {color:#5a5a5a; text-decoration:none;}
+a:link {color:#9e9e9e; text-decoration:none;}
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
+h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;}
 main{
 	width : 70%;
 	position: relative;
@@ -18,8 +23,6 @@ main{
 	font: bolder;
 	position: fixed;
     left: 120px;
-	visited: color:#5a5a5a; text-decoration:none;}
-	a:hover {color:#fff; text-decoration:none;}
 }
 .tag_var{
 	WIDTH: 85%;
@@ -40,6 +43,7 @@ aside {
     position: absolute;
     font-size: 35px;
     background-color: darkseagreen;
+   	visited {color:#9e9e9e; text-decoration:none;}
    }
 
 .aside_content{
@@ -57,7 +61,7 @@ aside {
 }
 
 </style>
-<title>SamBank 문의사항</title>
+<title>SamBank 공지사항</title>
 </head>
 <body>
 	<div id="title_imageo">  
@@ -125,10 +129,10 @@ aside {
      	<div class="asideHeader">
      	<ul>
      	<li>
-     	<a href="">문의사항</a>
+     	<a href="">공지사항</a>
      	<div class="dropdown-divider"></div>
      	</li>
-     	<div class="aside_content">
+     	<!-- <div class="aside_content">
      	 	<li>     	
 	     	<a href="">문의사항 작성</a>
 	     	<div class="dropdown-divider"></div>
@@ -141,7 +145,7 @@ aside {
 	     	<a href="">1:1 비공개 문의사항</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
-     	</div>
+     	</div> -->
      	</ul>
      	</div>
   	
@@ -396,3 +400,4 @@ $(function(){
 
 </body>
 </html>
+<%@include file="includes/footer_Main.jsp" %>

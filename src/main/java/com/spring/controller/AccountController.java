@@ -35,10 +35,10 @@ public class AccountController {
 	}
 
 	
-	@PostMapping("/account")
-	public String accountList(/*HttpServletRequest req*/) {
-		Deposit_historyVO dpVO = service.Deposit_hi(vo);
-		return null;
-	}
+//	@PostMapping("/account")
+//	public String accountList(/*HttpServletRequest req*/) {
+//		Deposit_historyVO dpVO = service.Deposit_hi(vo);
+//		return null;
+//	}
 }
 

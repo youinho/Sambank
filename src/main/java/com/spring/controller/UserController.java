@@ -34,7 +34,7 @@ public class UserController {
 		
 		
 		model.addAttribute("list", usc.listmap(cri));
-		//model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
+		model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
 		return "Notice";
 	}
 	
