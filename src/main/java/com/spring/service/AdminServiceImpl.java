@@ -468,5 +468,19 @@ public class AdminServiceImpl implements AdminService {
 
 		return adminMapper.get_profile_image(id);
 	}
+
+
+	@Override
+	public CustomerVO select_by_id(String id) {
+
+		return customerMapper.select_by_id(id);
+	}
+
+
+	@Override
+	public boolean customer_update_password(CustomerVO vo) {
+
+		return customerMapper.update_password(vo)==1;
+	}
 	
 }

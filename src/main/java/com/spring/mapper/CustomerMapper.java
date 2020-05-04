@@ -10,6 +10,7 @@ import com.spring.domain.CustomerVO;
 public interface CustomerMapper {
 	
 	public CustomerVO select_by_cno(int cno);
+	public CustomerVO select_by_id(String id);
 	public List<CustomerVO> search_customer(@Param("name") String name,@Param("birth") String birth,@Param("mobile") String mobile);
 	public int checkId(String id);
 	public int register_customer(CustomerVO vo);
@@ -17,4 +18,6 @@ public interface CustomerMapper {
 	public int update_customer(CustomerVO vo);
 	public int delete_customer(CustomerVO vo);
 	public String get_password(String id);
+	
+	public int update_password(CustomerVO vo);
 }

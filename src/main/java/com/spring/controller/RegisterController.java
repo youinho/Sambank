@@ -48,27 +48,5 @@ public class RegisterController {
 		return "/register/step2";
 	}
 	
-<<<<<<< HEAD
-	@PostMapping("/step3")
-	public String step3(@ModelAttribute("vo") CustomerVO vo) {
-		//step2.jsp에서 회원가입정보 가져오기
-		log.info("회원가입요청"+vo);
-		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
 
-		if(service.registMember(vo)) {
-			return "redirect:/";				
-		}else {
-			return "/register/step2";
-		}
-	}
-=======
-	
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
-	
-//	@GetMapping(value= {"/step2", "/step3"})
-//	public String handleStep2_3() {
-//		log.info("/step2, /step3 직접 요청");
-//		return "redirect:step1";
-//	}
-	
 }
