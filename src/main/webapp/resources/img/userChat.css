@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+* { -webkit-text-size-adjust:none; max-width:100%; }
+
+embed.hidden, object.hidden {
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+}
+
+html, body{	
+	width: 100%;	/* make the body expand to fill the visible window */
+	height: 100%;
+	overflow: hidden;	/* erase window level scrollbars */
+	font-size: 9pt;
+	font-family: "芥竟", sans-serif, Arial, Verdana,  "Lucida Grande", "Lucida Sans Unicode";
+	padding: 0;
+	margin: 0;
+}
+
+#chatLog {
+    position: absolute;
+    /*    box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;*/
+    overflow: auto;
+    background: #fafafa no-repeat right bottom;
+}
+
+#awayMessage {
+    border: 0px;
+    border-bottom: 1px solid #995;
+    padding: 3px;
+    margin: 0;
+    background: #ffc;
+    overflow: auto;
+    font-size: 90%;
+}
+
+#awayMessage a {
+    color: #336;
+    text-decoration: none;
+}
+
+#awayMessage a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+#chatNotice {
+    color: #666;
+    line-height: 140%;
+}
+
+.myChat {
+    padding-left: 20px;
+    line-height: 140%;
+    color: #888;
+}
+
+.myChat span{
+    color: #000;
+}
+.chat {
+    padding-left: 20px;
+    line-height: 140%;
+}
+
+#chatInput {
+    width: 100%;
+    color: #888;
+    position: absolute;
+    border: 0px;
+    padding: 5px 4px 4px 4px;
+    font-size: 12px;
+    border-top: 1px solid #668;
+}
+
+div.orange div#chatlog {
+    background-color: #FFF4D3;
+}
+
+div.orange input#chatInput {
+    background-color: #F6FBFD;
+    border-top: 1px solid #FFDA63;
+}
+
+div.white div#chatlog {
+    background-color: #ECECF0;
+}
+
+div.white input#chatInput {
+    background-color: #FBFDFE;
+    border-top: 1px solid #D7D7E0;
+}
+
+div.blue div#chatlog {
+    background-color: #EEF0F7;
+}
+
+div.blue input#chatInput {
+    background-color: #FFFFFF;
+    border-top: 1px solid #ACB4D8;
+}
+
+div.green div#chatlog {
+    background-color: #EBF7DC;
+}
+
+div.green input#chatInput {
+    background-color: #FFFFFF;
+    border-top: 1px solid #C9E285;
+}
+
+div.purple div#chatlog {
+    background-color: #F0EEF7;
+}
+
+div.purple input#chatInput {
+    background-color: #FFFFFF;
+    border-top: 1px solid #DFA8EA;
+}
+
+div.grey div#chatlog {
+    background-color: #F2F2F2;
+}
+
+div.grey input#chatInput {
+    background-color: #FFFFFF;
+    border-top: 1px solid #8E8E8E;
+}
