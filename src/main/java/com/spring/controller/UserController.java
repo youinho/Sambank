@@ -52,7 +52,7 @@ public class UserController {
 	@GetMapping("/F")
 	public String User_F_File(Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("자료실");	
-		cri.setNotice_types("E");
+		cri.setNotice_types("F");
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		model.addAttribute("title", "자료실");

@@ -257,11 +257,12 @@ $(function(){
 	// 게시글 내용 줄바꿈 적용;
 	$("#contentDiv").html($("#contentDiv").html().replace(/\n/gi, "<br>"));
 	
-	
+	let notice_types="${cri.notice_types}";
 
 	$("#go-list").click(function(){
 		//location.href="/board/list";
-		$("#myForm").attr("action","/N");
+		
+		$("#myForm").attr("action","/"+notice_types);
 		$("#myForm").find("input[name='bno']").remove();
 		$("#myForm").submit();
 		
@@ -298,7 +299,8 @@ $(function(){
 		}
 	})
 	
-	$("#fileBlock").on("click", "div", function(){
+	$("#fileBlock").on("click", "div", function(e){
+		e.preventDefault();
 		let li = $(this);
 		let fileName = encodeURIComponent(li.data("filename"));		
 		self.location="/customer_notice/downloadFile?fileName="+fileName+"&uuid="+li.data("uuid");

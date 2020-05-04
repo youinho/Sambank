@@ -225,7 +225,7 @@ th, tr{
 							  <input type="text" class="form-control" placeholder="검색어" aria-label="검색어 또는 글작성제목" aria-describedby="button-addon4" id="keyword" name="keyword">
 							  <div class="input-group-append" id="button-addon4"  >
 							    <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
-							    <button class="btn btn-outline-secondary" type="button" id="registerBtn" <sec:authorize access="!hasAnyRole('ROLE_10,ROLE_5')">disabled</sec:authorize> >글 등록</button>
+							    
 							  </div>
 							  
 							</div>

@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.service.CustomerNoticeService;
 import com.spring.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +26,24 @@ public class HomeController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private CustomerNoticeService cn_service;
 	
 	@GetMapping("/")
 	public String home(Model model) {
 		
+		int N = 3;	// 몇개 뽑을건지
+		Criteria cri = new Criteria(1, N);
+		cri.setNotice_types("A");
+		model.addAttribute("list_A", cn_service.notice_getList(cri));
+		cri.setNotice_types("N");
+		model.addAttribute("list_N", cn_service.notice_getList(cri));
+		cri.setNotice_types("E");
+		model.addAttribute("list_E", cn_service.notice_getList(cri));
+		cri.setNotice_types("F");
+		model.addAttribute("list_F", cn_service.notice_getList(cri));
+		
+		model.addAttribute("now", new Date().getTime());
 		log.info("main페이지");
 	
 		return "main";

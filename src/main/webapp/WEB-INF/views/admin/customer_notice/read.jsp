@@ -190,7 +190,8 @@ $(function(){
 		
 	})
 	
-	$("#fileBlock").on("click", "div", function(){
+	$("#fileBlock").on("click", "div", function(e){
+			e.preventDefault();
 			let li = $(this);
 			
 			let fileName = encodeURIComponent(li.data("filename"));
