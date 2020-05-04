@@ -15,6 +15,7 @@ tocplusTop1=1150;
 tocplusLeft=5;
 tocplusMinimizedImage='https://i.imgur.com/3dca7QT.png';
 tocplusHAlign='right';
+tocplusMinimized='true';
 tocplusWidth=180;
 tocplusHeight=150;
 tocplusUserName='고객님';
