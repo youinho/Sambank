@@ -62,7 +62,7 @@ $(function(){
 			$("#admin_branch").html("<strong>"+vo.branch+"</strong>");
 			$("#admin_rank").html("<strong>"+vo.rank+"</strong>");
 			$("#admin_name").html("<strong>"+vo.name+"</strong>");
-			$("#profile_image").html("<img src='/admin/get_profile_image' alt='로고 이미지' style='width=48px;height:48px'>");
+			$("#profile_image").html("<img src='/admin/get_profile_image' alt='프로필사진' style='width=48px;height:48px;margin:0;padding:0'>");
 			//$("#profile_image").html("<img src='/resources/img/umb.gif' alt='로고 이미지' style='width=48px;height:48px'>");
 			
 		}
@@ -160,7 +160,7 @@ $(function(){
   </ul>
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
-	  	<a href="#" class="btn btn-outline-success" style="padding:0" id="profile_image">
+	  	<a href="#" class="btn btn-outline-primary" style="padding:0;margin:0" id="profile_image">
 	  		
 	  	</a>
   	</li>
