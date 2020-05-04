@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <%@include file="../../includes/header_Main.jsp" %>
+
+<script>
+//let hn = "${_csrf.headerName}";
+//let tk = "${_csrf.token}"
+</script>
 <style>
 	form > div{
 		padding : 0;
@@ -18,8 +23,8 @@
 	}
 	
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin/customer/admin_registerCustomer_validate.js"></script>
+
+
 <script>
 
 
@@ -48,17 +53,14 @@ function alert_del(){
 			  <div class="input-group-prepend" style="width:15%">
 			    <p class="input-group-text text-center" style="width:100%"><strong>고객 정보</strong></p>
 			  </div>
-			  <input type="text"  class="form-control" id="cno" name="cno" placeholder="고객 번호" readonly>
-			  <input type="text"  class="form-control" id="id" name="id" placeholder="아이디" readonly>
-			  <input type="text"  class="form-control" id="name" name="name" placeholder="성함" readonly>
+			  
+			  <input type="text"  class="form-control" id="id" name="id" value="${vo.id }" readonly>
+			  <input type="text"  class="form-control" id="name" name="name" value="${vo.name }" readonly>
 			  <div class="input-group-append" style="width:18%">
 			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
 			    	<div role="separator" class="dropdown-divider"></div>
 			    </div>
-			  </div>
-			  <div class="input-group-append" style="width:18%">
-			    <button class="btn btn-outline-secondary" type="button" id="searchCS" style="width:100%">고객 검색</button>
 			  </div>
 			</div>
       
@@ -111,10 +113,6 @@ function alert_del(){
 		  <input type="password"  class="form-control" name="password" id="password">
 		    
 		  <input type="password"  class="form-control" name="confirm_password" id="confirm_password">
-		  
-		    <button class="btn btn-outline-primary" type="button" id="changePwdBtn">
-		    	비밀번호 변경
-		    </button>
 		  <div class="input-group-append">
 		  </div>
 		</div>
@@ -129,4 +127,4 @@ function alert_del(){
     </div>
     <div class="bottom">
     </div>
-<script src="/resources/js/admin/customer/admin_deleteCustomer.js"></script>
+<script src="/resources/js/member/customer/member_deleteCustomer.js"></script>

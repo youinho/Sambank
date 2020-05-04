@@ -239,7 +239,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public boolean check_customer_password(DepositVO vo) {
+	public boolean check_customer_password(CustomerVO vo) {
 
 		return passwordEncoder.matches(vo.getPassword(), customerMapper.get_password(vo.getPassword()));
 	}

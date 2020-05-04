@@ -87,7 +87,7 @@ public interface AdminService {
 
 	public boolean update_withdraw(DepositVO vo);
 	public boolean update_password(DepositVO vo);
-	public boolean check_customer_password(DepositVO vo);
+	public boolean check_customer_password(CustomerVO vo);
 	public DepositVO check_ano(String ano);
 	
 	public boolean deposit(Deposit_historyVO vo);

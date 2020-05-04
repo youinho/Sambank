@@ -2,85 +2,15 @@ $(function(){
 	alert_del();
 	history.replaceState({}, null, null);
 
-
-	
-	
-	
-	
-	$('input').keydown(function() {
-		  if (event.keyCode === 13) {
-		    event.preventDefault();
-		  };
-	});
-	
-	
-	
-	//팝업
-	
-	
-	//lock button
-	$("#names_lockU").click(function(e){
-		e.preventDefault();
-		$("#name").prop("readonly", !$("#name").prop("readonly"));
-		$("#eng_name").prop("readonly", !$("#eng_name").prop("readonly"));
-	})
-	
-	$("button[id$='lock']").click(function(e){
-		e.preventDefault();
-		let lock_name = $(this).attr("id").replace("_lock", "");
-		$("#"+lock_name).prop("readonly", !$("#"+lock_name).prop("readonly"));
-	})
-	
-	
-})
-
-
-function searchCS_callback(cno){
-	$("input[name='cno']").val(cno);
-	$("#register_customer")[0].reset();
-	
+	console.log("ooook")
 	$.ajax({
-		url : "/admin/customer/getCSInfo",
-		type : "post",
-		beforeSend : function(xhr)
-        {   
-            xhr.setRequestHeader(hn, tk);
-        },
-		data :{
-			cno : cno
-		},
-		dataType : "text",
-		success : function(result){
-			let vo = JSON.parse(result); 
-			if(vo == null){
-				return;
-			}
-			$("#form_cno").val(vo.cno);
-			
-			$("input[name='id']").val(vo.id);
-			$("#form_id").val(vo.id);
-			$("#form_name").val(vo.name);
-			
-		}
-		
-		
-		
-	
-		
-	})
-		
-	
-	
-	$.ajax({
-		url : "/admin/account/getAccInfo",
+		url : "/member/account/getAccInfo",
 		type : "post",
 		beforeSend : function(xhr)
         {   
 			xhr.setRequestHeader(hn, tk);
         },
-		data :{
-			cno : cno
-		},
+		data :{},
 		dataType : "text",
 		success : function(result){
 			
@@ -115,5 +45,36 @@ function searchCS_callback(cno){
 	
 		
 	})
-		
-}
+	
+	
+	
+	$('input').keydown(function() {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		  };
+	});
+	
+	
+	
+	//팝업
+	console.log("ooook2")
+	
+	//lock button
+	$("#names_lockU").click(function(e){
+		e.preventDefault();
+		$("#name").prop("readonly", !$("#name").prop("readonly"));
+		$("#eng_name").prop("readonly", !$("#eng_name").prop("readonly"));
+	})
+	
+	$("button[id$='lock']").click(function(e){
+		e.preventDefault();
+		let lock_name = $(this).attr("id").replace("_lock", "");
+		$("#"+lock_name).prop("readonly", !$("#"+lock_name).prop("readonly"));
+	})
+	
+	
+})
+
+
+
+	

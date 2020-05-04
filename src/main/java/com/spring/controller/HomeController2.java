@@ -2,6 +2,7 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,8 +148,49 @@ public class HomeController2 {
 	public void member_customer_delete_get(Model model, HttpServletRequest req) {
 		CustomerVO vo = service.select_by_id(req.getRemoteUser());
 		model.addAttribute("vo", vo);
-		List<Acc_info> list = service.select_acc_info(vo.getCno());
-		model.addAttribute("ano_list", list);
 		log.info("member customer delete get");
 	}
+	
+	
+	//고객 정보 삭제
+	@PostMapping("/member/customer/delete")
+	public String member_customer_delete_post(CustomerVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+		
+		if(vo.getPassword().equals(vo.getConfirm_password())) {
+			if(service.check_customer_password(vo)) {
+				if(service.delete_customer(vo)) {
+					rttr.addFlashAttribute("deleted", "success");
+					return "redirect:/";
+				}
+			}
+		}
+		rttr.addFlashAttribute("deleted", "failed");
+		return "redirect:/admin/customer/delete";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//계좌 정보 불러오기
+	@ResponseBody
+	@PostMapping("/member/account/getAccInfo")
+	public ResponseEntity<List<Acc_info>> get_accinfo(HttpServletRequest req){
+		log.info("member account getAccInfo");
+		List<Acc_info> list = service.select_acc_info(service.select_by_id(req.getRemoteUser()).getCno());
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<Acc_info>>(list, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<List<Acc_info>>(list, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
 }
