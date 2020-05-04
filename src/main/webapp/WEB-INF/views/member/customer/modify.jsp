@@ -142,8 +142,6 @@ form > div > div> button{
 	     	<div class="dropdown-divider"></div>
 	     	<a href="">회원 탈퇴</a>
 	     	<div class="dropdown-divider"></div>
-	     	<a href="">추가 예정</a>
-	     	<div class="dropdown-divider"></div>
      	</div>
      	</ul>
      	</div>
