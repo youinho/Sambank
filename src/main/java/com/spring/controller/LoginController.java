@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/member/*")
+
 
 
 public class LoginController {
@@ -42,7 +42,7 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@GetMapping("/customerlogin")
+	@GetMapping("/member/customerlogin")
 	public String registerGet(){		
 		
 		File file=new File("d://sam//1.txt");
@@ -54,14 +54,14 @@ public class LoginController {
 		}
 	}
 
-	@GetMapping("/downloadForm")
+	@GetMapping("/member/downloadForm")
 	public void download(){
 		log.info("download 요청");
 	}
 	
 
 	
-	@PostMapping("/customerlogin")
+	@PostMapping("/member/customerlogin")
 	public String loginPost(CustomerVO vo, HttpSession session) {
 		
 //		log.info("login "+vo);

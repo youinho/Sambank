@@ -57,6 +57,7 @@
 			  <div class="input-group-append" style="width:18%">
 			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
+			    
 			    	<div role="separator" class="dropdown-divider"></div>
 			    </div>
 			  </div>

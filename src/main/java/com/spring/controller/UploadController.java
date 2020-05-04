@@ -23,12 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value="/member/*",method = {RequestMethod.GET, RequestMethod.POST})
 public class UploadController {
 	//uploadForm 蹂댁뿬二쇨린
 	
 	//첨부파일 다운로드
-		@GetMapping("/download")
+		@GetMapping("/member/download")
 		@ResponseBody
 		public ResponseEntity<Resource> download(String fileName,@RequestHeader("user-Agent")String userAgent){
 			log.info("파일 다운로드 "+fileName);

@@ -113,4 +113,9 @@
 		select * from deposit_history where ano=#{ano} and depositdate between #{start_date} and #{end_date}
 		order by depositdate desc
 	</select>
+	
+	<!-- id로 cno가져오기 -->
+	<select id="get_cno" resultType="String">
+		select cno from customerTBL where id=#{id}
+	</select>
 </mapper>
