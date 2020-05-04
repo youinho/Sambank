@@ -26,6 +26,8 @@ let tk = "${_csrf.token}"
 
 <!-- 슬라이더 styles -->
 <style>
+  a:visited {color:#9e9e9e; text-decoration:none;}
+  a:hover {color:#5a5a5a; text-decoration:none;}
   .Swiper {
     position: relative;
     height: 400px;
@@ -265,14 +267,14 @@ let tk = "${_csrf.token}"
 	<!-- video 시작 -->	
 		<div class="video" style="margin-left:350px;">
 		    <video
-	      src="/resources/SB_files/video.mp4"
+	      src="/resources/SB_files/video2.mp4"
 	      controls
 	      width="400"
 	      height="500"
 	      autoplay
 	      muted
 	      loop
-	      style="box-sizing: content-box;width: -webkit-fill-available;"
+	      style="box-sizing: content-box;margin-top: 40px; width: -webkit-fill-available;"
 	    >
 	      <!--controls 은 창을 관리 하는 명령문
 	        widtn : 넓이
@@ -469,3 +471,4 @@ let tk = "${_csrf.token}"
 
 
 </html>
+<%@include file="includes/footer_Main.jsp" %>
