@@ -76,8 +76,8 @@ let tk = "${_csrf.token}"
 			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #b5fdba;" >
 			
 				<div id="Logo">  
-				  <strong><img src="/resources/SB_files/SamBank Image Logo.png" alt="로고 이미지"></strong>
-				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="#"></a>
+				  <strong><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></strong>
+				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"></a>
 				</div>
 				<!-- Logo 끝내는 부분 -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,7 @@ let tk = "${_csrf.token}"
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
 				          <a class="dropdown-item" href="#">프로필 관리</a>
-				          <a class="dropdown-item" href="#">개인정보수정</a>
+				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
 					</li>
@@ -254,12 +254,12 @@ let tk = "${_csrf.token}"
 				<li><a href="/member/account/balance" >빠른조회</a></li>
 			</ul>
 			<ul class="menu2">
-				<li><a href="">카드</a></li>
-				<li><a href="">보안센터</a></li>
-				<li><a href="">자료실</a></li>
-				<li><a href="">문의사항</a></li>
+				<li><a href="/no">공지사항</a></li>
+				<li><a href="/N">새소식</a></li>
+				<li><a href="/E">이벤트</a></li>
+				<li><a href="/Q">문의사항</a></li>
 				<li><a href="/login">로그인</a></li>
-				<li><a href="">추가예정</a></li>
+				<li><a href="">카드</a></li>
 			</ul>
 	</div>
 	 <!-- link var 끝 -->

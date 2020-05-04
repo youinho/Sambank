@@ -9,6 +9,7 @@
     <style>
 footer{
 	margin-top: 100px;
+	margin-left: 15%;
 }
 .footer {
   background: #fff;

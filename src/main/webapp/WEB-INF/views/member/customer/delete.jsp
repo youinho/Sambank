@@ -101,7 +101,7 @@ function alert_del(){
         <div class="collapse navbar-collapse" id="navbarnav">
       		<!-- Example split danger button -->
 				<div class="btn-group">
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">공지사항</a></button>
+				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/no">공지사항</a></button>
 				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">보안센터</a></button>
 				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">자료실</a></button>
 				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
@@ -112,13 +112,13 @@ function alert_del(){
 					    문의 사항
 					  </button>
 					  <div class="dropdown-menu">
-					    <a class="dropdown-item" href="#">문의사항</a>
+					    <a class="dropdown-item" href="/Q">문의사항</a>
 					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">문의사항 작성</a>
+					    <a class="dropdown-item" href="/Q">문의사항 작성</a>
 					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">문의사항 취소</a>
+					    <a class="dropdown-item" href="/Q">문의사항 취소</a>
 					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
+					    <a class="dropdown-item" href="/Q">1:1 비공개 문의사항</a>
 					  </div>
 					</div>
 				  <!-- 3 -->
@@ -158,9 +158,9 @@ function alert_del(){
      	<a href="">고객관리</a>
      	<div class="dropdown-divider"></div>
      	<div class="aside_content">
-	     	<a href="">개인정보수정</a>
+	     	<a href="modify">개인정보수정</a>
 	     	<div class="dropdown-divider"></div>
-	     	<a href="">회원 탈퇴</a>
+	     	<a href="delete">회원 탈퇴</a>
 	     	<div class="dropdown-divider"></div>
      	</div>
      	</ul>
@@ -262,5 +262,5 @@ function alert_del(){
         
 
 </body>
-</html>
 <%@include file="../../includes/footer_Main.jsp" %>
+</html>

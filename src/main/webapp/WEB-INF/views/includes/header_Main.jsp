@@ -42,7 +42,7 @@ let tk = "${_csrf.token}"
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
 				          <a class="dropdown-item" href="#">프로필 관리</a>
-				          <a class="dropdown-item" href="#">개인정보수정</a>
+				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
 				      </li>
@@ -59,7 +59,7 @@ let tk = "${_csrf.token}"
 				        <a class="nav-link" href="#">은행 소개</a>
 				      </li>
 				      <li class="nav-item active">
-				        <a class="nav-link" href="#">고객 센터</a>
+				        <a class="nav-link" href="/Q">고객 센터</a>
 				      </li>
 			  	</ul>
 			  </div>
