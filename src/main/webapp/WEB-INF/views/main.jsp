@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
+
+<script>
+let hn = "${_csrf.headerName}";
+let tk = "${_csrf.token}"
+</script>
 <!-- bootstrap js,jQuery link -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -256,6 +261,33 @@
 	</div>
 	 <!-- link var 끝 -->
 	
+	<!-- video 시작 -->	
+		<div class="video" style="margin-left:350px;">
+		    <video
+	      src="/resources/SB_files/video.mp4"
+	      controls
+	      width="400"
+	      height="500"
+	      autoplay
+	      muted
+	      loop
+	      style="box-sizing: content-box;width: -webkit-fill-available;"
+	    >
+	      <!--controls 은 창을 관리 하는 명령문
+	        widtn : 넓이
+	        height : 높이
+	        autoplay : 자동실행
+	        muted : 음소거
+	        loop : 반복
+	    -->
+	      <p>
+	        이 브라우저는 video 요소를 지원하지 않습니다.
+	      </p>
+
+    </video>
+		<!-- video 끝 -->
+	</div>
+		
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.spring.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface AccountMapper {
 	public int deposit_hist(Deposit_historyVO vo);
 	public int withdraw_hist(Deposit_historyVO vo);
 	public int updateBalance_after(Deposit_historyVO vo);
+	
+	public List<Deposit_historyVO> get_history(@Param("ano") String ano,@Param("start_date") Date start_date,@Param("end_date") Date end_date);
 }

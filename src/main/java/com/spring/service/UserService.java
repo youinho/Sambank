@@ -1,8 +1,19 @@
 package com.spring.service;
 
-import com.spring.domain.CustomerVO;
+import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.spring.domain.Criteria;
+import com.spring.domain.Customer_noticeVO;
+
+@Service
 public interface UserService {
-	public CustomerVO selectOne(CustomerVO vo);
+	
+	// 테이블에있는 리스트 출력내용 가져오기
+	public List<Customer_noticeVO> listmap(Criteria cri);
+	
+	//
+	public int totalRows(Criteria cri);
 	
 }

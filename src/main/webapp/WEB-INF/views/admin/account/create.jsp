@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
@@ -10,7 +10,7 @@ $(function(){
 })
 function alert_created(){
 	let created = "${created}";
-	console.log("alert_created"+created);
+	
 	if(created ==="" || history.state){
 		return;
 	}
@@ -27,7 +27,7 @@ function alert_created(){
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_createAccount_validate.js"></script>
+<script src="/resources/js/admin/account/admin_createAccount_validate.js"></script>
 
 <style>
 	.btn{
@@ -180,4 +180,4 @@ function alert_created(){
 
 
 	
-<script src="/resources/js/admin_createAccount.js"></script>
+<script src="/resources/js/admin/account/admin_createAccount.js"></script>

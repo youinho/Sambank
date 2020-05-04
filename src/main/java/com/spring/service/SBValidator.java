@@ -39,7 +39,7 @@ public class SBValidator {
 	
 	
 	
-	private boolean check(String reg, String value) {
+	public boolean check(String reg, String value) {
 		return Pattern.matches(reg, value);
 	}
 	

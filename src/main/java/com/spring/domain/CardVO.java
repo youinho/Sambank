@@ -18,4 +18,5 @@ public class CardVO {
 	private String password;
 	
 	private String confirm_password;
+	private String p_name;
 }

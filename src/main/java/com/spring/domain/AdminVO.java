@@ -14,6 +14,14 @@ public class AdminVO {
 	private String name;
 	private String rank;
 	private String branch;
-	private String phone;
+	private String mobile;
 	
+	private int enabled;
+	
+	private int authority;
+	
+	private String confirm_password;
+	private String group_id;
+	
+	//private byte[] profile_image;
 }

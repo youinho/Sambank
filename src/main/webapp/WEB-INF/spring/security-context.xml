@@ -14,19 +14,29 @@
         <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
         
     <!-- 시큐리티 예외사항 -->
-    <sec:http pattern="/popup/jusopopup" security="none" />
+    <sec:http pattern="/admin/popup/jusopopup" security="none" />
     <!-- 검사 URL -->
     
+    
+    <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
-    <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" >
-        <intercept-url pattern="/admin/login" access="permitAll" />  
-        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
-        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
-        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
-        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_5,ROLE_10')" />
-		<!-- <form-login />
-   		<logout /> -->
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
+        
+        <intercept-url pattern="/admin/login" access="permitAll" />
+        
+        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />  
+        <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/card/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+		
         <form-login login-page="/admin/login" 
+        			login-processing-url="/admin/login_process"
 			        default-target-url="/admin/notice" 
 			        authentication-failure-url="/admin/login?error" 
 			        username-parameter="id" 
@@ -38,15 +48,41 @@
 		<session-management invalid-session-url="/admin/login?error">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
-        <csrf disabled="true"/>
+        <csrf disabled="false"/>
     </http>
     
     
      <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="ds"/>
     </beans:bean>
- 
-  
+ 	<!--  -->
+	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/customer/**">
+        <intercept-url pattern="/customer/login_test" access="permitAll" />
+        <intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
+		
+        <form-login login-page="/customer/login_test" 
+        			login-processing-url="/customer/login_process"
+			        default-target-url="/customer/test" 
+			        authentication-failure-url="/customer/login_test?error" 
+			        username-parameter="id" 
+			        password-parameter="password" /> 
+        <logout invalidate-session="true"
+        		logout-url="/customer/logout" 
+        		logout-success-url="/customer/login_test" />
+       <access-denied-handler error-page="/errorpage/403" />
+		<session-management invalid-session-url="/customer/login?error">
+        	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
+    	</session-management>
+        <csrf disabled="false"/>
+    </http>
+    <!-- pattern : 적용할 URL -->
+    <!-- hasRole('ROLE_USER') : customertbl 에 있는 authority 컬럼의 값이 ROLE_USER 이어야 허용 -->
+    <!-- login-page : 로그인폼이 있는 주소 -->
+    <!-- login-processing-url : 로그인 폼의 Action을 이것으로 하고 submit 하면 로그인 프로세스 작동(post) -->
+    <!-- default-target-url : 로그인 성공하면 가게되는 주소인듯 -->
+    <!-- authentication-failure-url : 권한을 못얻었을 때 가게되는 주소인듯 -->
+    <!--  -->
+    <!-- logout-url : 이 주소로 요청하면 로그아웃 되는것 같음(반드시 post로 보내야함) -->
     
     
     <!--  provider (admin 페이지) -->
@@ -65,9 +101,8 @@
     <authentication-manager id="customer_auth">
         <authentication-provider>
             <jdbc-user-service data-source-ref="ds" role-prefix="" 
-            users-by-username-query="select id, password, enabled from admintbl where id = ?" 
-            authorities-by-username-query="select id, authority from admin_authorities where id = ?" 
-            group-authorities-by-username-query="select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = ? and g.id = ga.group_id and g.id = gm.group_id" />
+            users-by-username-query="select id, concat('{bcrypt}', password), enabled from customertbl where id = ?" 
+            authorities-by-username-query="select id, authority from customertbl where id = ?"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

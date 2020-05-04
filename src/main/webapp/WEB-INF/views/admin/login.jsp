@@ -30,15 +30,13 @@
 
 <body>
 	<div id="container">
-		<div class="row justify-content-md-center">
-			<div id="login" class="col-lg-3">
-				<c:url value="/login" var="loginUrl" />
+		<div class="row d-flex justify-content-start">
+			<div id="login" class="col-lg-6">
+				<c:url value="/admin/login_process" var="loginUrl" />
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
-		        <sec:authorize access="isAnonymous()">
+		        
 		        <form:form name="f" action="${loginUrl}" method="POST">
-		            <c:if test="${param.error != null}"> 
-		            	<p>로그인이 거부되었습니다.</p> 
-		            </c:if> 
+		            <p>아이디 : sam / 비밀번호 : 3333</p>
 		            <c:if test="${param.logout != null}"> 
 		            	<p>로그아웃 하였습니다.</p> 
 		            </c:if>
@@ -56,7 +54,7 @@
 		            </fieldset>
 		        <%-- </form> --%>
 		        </form:form>
-		        </sec:authorize>
+		        
 		        <sec:authorize access="isAuthenticated()">
 			        <form:form action="${pageContext.request.contextPath}/admin/logout" method="POST">
 		      			<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />

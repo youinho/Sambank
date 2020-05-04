@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_admin.jsp" %>
+<%@include file="includes/header_admin.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 <script>
 $(function(){
+	alert_registered();
+	history.replaceState({}, null, null);
+	
 	let go_check = true;
 	$("#inner-notice").addClass("active");
 	/* $("input[type='checkbox']").hover(function(e) {
@@ -17,15 +20,32 @@ $(function(){
 		go_check = true;
 	}) */
 	
+	function alert_registered(){
+		let registered = "${registered}";
+		
+		if(registered ==="" || history.state){
+			return;
+		}
+		
+		
+		if(registered != "" && registered != null){
+			if(registered=="true"){
+				alert("${admin_bno}"+"번 글이 등록되었습니다.");
+			}else if(registered=="false"){
+				alert("실패했습니다.");
+			}
+		}
+	}
+	
 	
 	
 	$(".checker").click(function(e){
 		e.preventDefault();
-		console.log(go_check)
+		
 		if(!go_check){
 			return;
 		}
-		console.log("go")
+		
 		if($("input[value='"+$(this).data("check")+"']").prop("checked")){
 			$("input[value='"+$(this).data("check")+"']").prop("checked", false);
 		}else{
@@ -61,6 +81,9 @@ $(function(){
 	}
 	.bno{
 		font-size:12px;
+	}
+	.panel-body{
+		margin-top:2px;
 	}
 	
 </style>
@@ -191,7 +214,7 @@ $(function(){
 	
 	let keywordType = "${cri.type}";
 	typeL = keywordType.split("");
-	console.log("typeL"+typeL)
+	
 	for(let i=0; i < typeL.length; i++){
 		$("input[value='"+typeL[i]+"']").prop("checked", true);
 	}
@@ -200,6 +223,22 @@ $(function(){
 	
 	
 	
+	
+	let groupId = 0;
+	$.ajax({
+		url : "/admin/get_groupId",
+		type : "post",
+		beforeSend : function(xhr)
+           {   
+               xhr.setRequestHeader(hn, tk);
+           },
+		data :{
+		},
+		dataType : "text",
+		success : function(result){
+			groupId = parseInt(result);
+		}
+	})
 	
 	
 	let actionForm = $("#actionForm");
@@ -214,6 +253,11 @@ $(function(){
 	
 	$("#registerBtn").click(function(e){
 		e.preventDefault();
+		if(groupId < 5){
+			alert("공지를 등록할 권한이 없습니다.");
+			return false;
+		}
+		
 		location.href = "/admin/notice/register";
 		
 		
@@ -254,7 +298,7 @@ $(function(){
 	})
 	$("a.move").click(function(e){
 		e.preventDefault();
-		console.log("move click")
+		
 		//	/board/list?pageNum=5&amount=20
 		//actionForm 안의 pageNum값과 amount 값 변경하기
 		

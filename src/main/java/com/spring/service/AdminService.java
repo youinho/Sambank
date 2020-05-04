@@ -1,26 +1,46 @@
 package com.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_groupVO;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.Admin_noticeVO;
 import com.spring.domain.Admin_registerVO;
+import com.spring.domain.AttachFileDTO;
 import com.spring.domain.CardVO;
+import com.spring.domain.Card_conditionVO;
 import com.spring.domain.Card_productVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
+import com.spring.domain.Profile_imageVO;
 
 public interface AdminService {
 	public AdminVO selectOne(String id);
 	
 	public boolean check_admin_password(AdminVO vo);
+	public List<AdminVO> get_admins(AdminVO vo);
+	public int get_groupID(String id);
+	public AdminVO get_adminInfo(String id);
+	public List<Admin_groupVO> get_groupList(String id);
+	public boolean admin_update_password(AdminVO vo);
+	public boolean admin_insert(AdminVO vo);
+	public boolean update_admin(AdminVO vo);
+	public boolean check_adminId(String id);
+	public boolean insertLog(Admin_logVO vo);
 	
+	
+	public boolean saveImage(String id, byte[] profile_image, String profile_image_type);
+	
+	public Profile_imageVO get_profile_image(String id);
 	
 	
 	public boolean register_customer(CustomerVO vo);
@@ -48,7 +68,8 @@ public interface AdminService {
 	
 	public boolean notice_update(Admin_noticeVO vo);
 	
-	
+	public List<AttachFileDTO> getAttachList(String admin_bno);
+	public AttachFileDTO get_oneFile(AttachFileDTO dto);
 	
 	//account
 	
@@ -67,6 +88,7 @@ public interface AdminService {
 	public boolean deposit(Deposit_historyVO vo);
 	public boolean withdraw(Deposit_historyVO vo);
 	
+	public List<Deposit_historyVO> get_history(String ano, Date start_date, Date end_date);
 	
 	
 	//card
@@ -74,4 +96,11 @@ public interface AdminService {
 	public int check_card_no(String card_no);
 	public List<CardVO> get_cardList_by_ano(String ano);
 	public boolean register_card(CardVO vo);
+	public CardVO get_cardInfo(String card_no);
+	public List<Card_conditionVO> get_condition();
+	
+	public boolean update_card_password(CardVO vo);
+	public boolean update_cardInfo(CardVO vo);
+	
+
 }

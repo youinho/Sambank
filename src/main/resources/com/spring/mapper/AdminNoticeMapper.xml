@@ -30,8 +30,12 @@
 
 
 	<insert id="insert">
+		
+		<selectKey keyProperty="admin_bno" order="BEFORE" resultType="String">
+			select seq_admin_board.nextVal from dual
+		</selectKey>
 		insert into admin_board(admin_bno, id, title, content, writer)
-		values(seq_admin_board.nextVal, #{id}, #{title}, #{content}, #{writer}) 
+		values(#{admin_bno}, #{id}, #{title}, #{content}, #{writer}) 
 	</insert>
 
 
@@ -45,20 +49,59 @@
 	</select>
 
 
-<!--  -->
+	<!--  -->
 	<delete id="delete">
 		delete from admin_board
 		where admin_bno=#{admin_bno}
 	</delete>
-
-
-
+	
 	<update id="update">
 		update admin_board
-		set title=#{title}, content=#{content}, updatedate=sysdate
-		where admin_bno=#{admin_bno}
-	
+		set title=#{title}, content=#{content} , updatedate=sysdate where admin_bno=#{admin_bno}
 	</update>
+
+
+
+
+	<insert id="insertFile"> <!-- 컬럼 전체 삽입 -->
+		insert into admin_attach(uuid, uploadPath, fileName, admin_bno) values(#{uuid}, #{uploadPath}, #{fileName}, #{admin_bno})	
+	</insert>
+	
+	<delete id="deleteFile">	<!-- uuid 값 일치 -->
+		delete from admin_attach where uuid=#{uuid}	
+	</delete>
+	
+	
+	<select id="selectFile" resultType="com.spring.domain.AttachFileDTO">	<!-- bno값 일치 -->
+		select * from admin_attach where admin_bno=#{admin_bno}
+	</select>
+	
+	<delete id="deleteAllFiles">
+			delete from admin_attach where admin_bno=#{admin_bno}
+	</delete>
+	
+	<!-- 어제 날짜의 첨부파일 목록 가져오기 -->
+	<select id="getOldFiles" resultType="com.spring.domain.AttachFileDTO">
+		select * from admin_attach
+		where uploadPath = to_char(sysdate-1,'yyyy\mm\dd')
+	
+	</select>
+
+	<!-- uuid, filename 파일찾기 -->
+	<select id="get_oneFile" resultType="com.spring.domain.AttachFileDTO">
+		select * from admin_attach
+		where uuid=#{uuid} and filename=#{fileName}
+	</select>
+
+
+
+
+
+
+
+
+
+
 
 
 

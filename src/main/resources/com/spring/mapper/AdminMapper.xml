@@ -28,12 +28,96 @@
 
 
 	
-
+	<!-- 관리자 목록 권한에따라 -->
+	<select id="search_admins" resultType="com.spring.domain.AdminVO">
+		<![CDATA[
+			select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, a.group_id
+			from (select * from admintbl where name like '%'||#{name}||'%' and branch like '%'||#{branch}||'%' and id like '%'||#{id}||'%') ad, admin_group_members, admin_groups, (select * from admin_group_authorities where SUBSTR(admin_group_authorities.authority, 6)<#{authority}) a
+			where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = a.group_id order by a.group_id desc
+		]]>
+	</select>
+	
+	<!-- 아이디로 그룹아이디 -->
+	<select id="get_groupID" resultType="int">
+		select group_id from admin_group_members where id=#{id}
+	</select>
+	
+	<!-- 관리자 정보 -->
+	<select id="get_adminInfo" resultType="com.spring.domain.AdminVO">
+		select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, admin_group_authorities.group_id, admin_groups.group_name
+		from (select * from admintbl where id=#{id}) ad, admin_group_members, admin_groups,admin_group_authorities
+		where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = admin_group_authorities.group_id
+	</select>
+	
+	<select id="get_groupList" resultType="com.spring.domain.Admin_groupVO">
+		<![CDATA[
+			select admin_groups.id, admin_groups.group_name from admin_groups
+			where admin_groups.id < to_number((select group_id from admin_group_members where admin_group_members.id=#{id}), '99')
+			order by id asc
+		]]>
+	</select>
+	
+	<!-- 관리자 비밀번호 변경 -->
+	<update id="admin_update_password">
+		update admintbl set password=#{password}
+		where id=#{id}
+	
+	</update>
+	
+	<insert id="insert_admin">
+		insert into admintbl(admin_no, auth, id, password, name, rank, branch, mobile, enabled, profile_image)
+		values(seq_admin.nextVal, concat('ROLE_', #{group_id}), #{id}, #{password}, #{name}, #{rank}, #{branch}, #{mobile}, #{enabled}, (select profile_image from default_profile_image))
+	
+	</insert>
+	<insert id="insert_admin_group">
+		insert into admin_group_members(group_id, id)
+		values(#{group_id}, #{id})
+		
+	</insert>
+	
+	
+	<update id="update_admin">
+		update admintbl set name=#{name}, branch=#{branch}, rank=#{rank}, enabled=#{enabled}, mobile=#{mobile}
+		where id=#{id}
+	
+	</update>
+	<update id="update_admin_member">
+		update admin_group_members set group_id=#{group_id}
+		where id=#{id}
+	</update>
+	
+	
+	
+	<!-- 중복 아이디 검사 -->
+	<select id="check_adminId" resultType="int">
+		select count(*) from admintbl
+		where id=#{id}
+	</select>
+	
+	
+	<insert id="insertLog">
+		insert into logtbl(log_no, id, uri, local_name, local_addr, local_port, remote_addr, remote_port, admin_session, parameter_names)
+		values(seq_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session}, #{parameter_names})
+	</insert>
+	
+	
+	
+	<!-- 프로필사진 테스트 -->
+	<insert id="saveImage">
+		update admintbl set profile_image=#{profile_image}, profile_image_type=#{profile_image_type}
+		where id=#{id} 
+	
+	</insert>
+	
+	
+	<select id="get_profile_image" resultType="com.spring.domain.Profile_imageVO">
+		select profile_image, profile_image_type from
+		admintbl where id=#{id}
+	</select>
 	
 	
 	
 	
 	
 	
-
 </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../../includes/header_admin.jsp" %>
+<%@include file="../includes/header_admin.jsp" %>
 <style>
 	form > div{
 		padding : 0;
@@ -19,7 +19,7 @@
 	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/admin_registerCustomer_validate.js"></script>
+<script src="/resources/js/admin/customer/admin_registerCustomer_validate.js"></script>
 <script>
 
 
@@ -50,6 +50,7 @@ function alert_del(){
 			  </div>
 			  <input type="text"  class="form-control" id="cno" name="cno" placeholder="고객 번호" readonly>
 			  <input type="text"  class="form-control" id="id" name="id" placeholder="아이디" readonly>
+			  <input type="text"  class="form-control" id="name" name="name" placeholder="성함" readonly>
 			  <div class="input-group-append" style="width:18%">
 			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
@@ -110,10 +111,11 @@ function alert_del(){
         <hr class="mb-4">
         <input type="hidden" name="cno" id="form_cno"/>
         <input type="hidden" name="id" id="form_id" />
+        <input type="hidden" name="name" id="form_name" />
         <sec:csrfInput/>
         <button class="btn btn-danger btn-lg btn-block" type="submit" id="submit" disabled>고객 정보 삭제</button>
       </form>
     </div>
     <div class="bottom">
     </div>
-<script src="/resources/js/admin_deleteCustomer.js"></script>
+<script src="/resources/js/admin/customer/admin_deleteCustomer.js"></script>
