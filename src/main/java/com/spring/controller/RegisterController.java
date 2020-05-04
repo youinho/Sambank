@@ -47,40 +47,12 @@ public class RegisterController {
 		return "/register/step2";
 	}
 	
-	@PostMapping("/step3")
-	public String step3(@ModelAttribute("vo") CustomerVO vo) {
-		//step2.jsp에서 회원가입정보 가져오기
-		log.info("회원가입요청"+vo);
-		
-		if(service.registMember(vo)) {
-			return "redirect:/main";				
-		}else {
-			return "/register/step2";
-		}
-	}
+	
 	
 //	@GetMapping(value= {"/step2", "/step3"})
 //	public String handleStep2_3() {
 //		log.info("/step2, /step3 직접 요청");
 //		return "redirect:step1";
 //	}
-	
-	
-	//중복아이디 검사
-	@ResponseBody
-	@PostMapping("/checkId")
-	public String checkId(String userid) {
-		log.info("중복 아이디 검사 "+userid);
-		
-		if(service.dupId(userid) != null) {
-			log.info("널 아님");
-			return "false";
-		}else {
-			log.info("널");
-			return "true";
-		}
-		
-		
-	}
 	
 }

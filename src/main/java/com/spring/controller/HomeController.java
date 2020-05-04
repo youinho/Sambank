@@ -80,14 +80,14 @@ public class HomeController {
 	
 	
 	
-	@GetMapping("/customer/login_test")	// 로그인 테스트 페이지
+	@GetMapping("/member/login_test")	// 로그인 테스트 페이지
 	public String customer_test_login() {
 		log.info("customer test_login 페이지 요청");
 		
 		
 		return "/test_login";
 	}
-	@GetMapping("/customer/test")	// 로그인 테스트 페이지
+	@GetMapping("/member/test")	// 로그인 테스트 페이지
 	public String login_test_success() {
 		log.info("로그인 성공");
 		

@@ -56,21 +56,21 @@
         <beans:property name="dataSource" ref="ds"/>
     </beans:bean>
  	<!--  -->
-	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/customer/**">
-        <intercept-url pattern="/customer/login_test" access="permitAll" />
-        <intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
+	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/member/**">
+        <intercept-url pattern="/member/login_test" access="permitAll" />
+        <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')" />
 		
-        <form-login login-page="/customer/login_test" 
-        			login-processing-url="/customer/login_process"
-			        default-target-url="/customer/test" 
-			        authentication-failure-url="/customer/login_test?error" 
+        <form-login login-page="/member/login_test" 
+        			login-processing-url="/member/login_process"
+			        default-target-url="/member/test" 
+			        authentication-failure-url="/member/login_test?error" 
 			        username-parameter="id" 
 			        password-parameter="password" /> 
         <logout invalidate-session="true"
-        		logout-url="/customer/logout" 
-        		logout-success-url="/customer/login_test" />
+        		logout-url="/member/logout" 
+        		logout-success-url="/member/login_test" />
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/customer/login?error">
+		<session-management invalid-session-url="/member/login_test?error">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>
