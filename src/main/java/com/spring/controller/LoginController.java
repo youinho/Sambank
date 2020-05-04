@@ -64,12 +64,12 @@ public class LoginController {
 	@PostMapping("/customerlogin")
 	public String loginPost(CustomerVO vo, HttpSession session) {
 		
-		log.info("login "+vo);
-		log.info("확인전 비밀번호"+vo.getPassword());
+//		log.info("login "+vo);
+//		log.info("확인전 비밀번호"+vo.getPassword());
 		CustomerVO info = service.customer_login(vo);
-		log.info("확인후 비밀번호"+info.getPassword());
+//		log.info("확인후 비밀번호"+info.getPassword());
 		String pw=vo.getPassword();
-		log.info("db�젙蹂� :"+info);
+		log.info("db:"+info);
 		session.setAttribute("info", info);
 		if(passwordEncoder.matches( pw,info.getPassword())) {
 			return "redirect:/main";
