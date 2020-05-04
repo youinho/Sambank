@@ -257,7 +257,7 @@ let tk = "${_csrf.token}"
 				<li><a href="">카드</a></li>
 				<li><a href="">보안센터</a></li>
 				<li><a href="">자료실</a></li>
-				<li><a href="">문의사항</a></li>
+				<li><a href="/Q">문의사항</a></li>
 				<li><a href="/login">로그인</a></li>
 				<li><a href="">추가예정</a></li>
 			</ul>

@@ -21,6 +21,7 @@ public class Criteria {
 	private String typeC;
 	private String typeW;
 	
+	private String notice_type;
 	
 	public Criteria() {
 		this(1,15);
@@ -29,12 +30,15 @@ public class Criteria {
 		
 		this.pageNum = pageNum;
 		this.amount = amount;
+		
 	}
 	
 	public String[] getTypeArr() {
 		return type==null?new String[] {} : type.split("");
 	}
-	
+	public String[] getNotice_typeArr() {
+		return notice_type==null?new String[] {} : notice_type.split("");
+	}
 	
 	
 	

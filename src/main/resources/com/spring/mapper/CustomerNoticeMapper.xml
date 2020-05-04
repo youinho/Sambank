@@ -126,12 +126,45 @@
 						<when test="type=='W'.toString()">
 							writer like '%'||#{keyword}||'%'
 						</when>
+						<when test="type=='A'.toString()">
+							notice_type='공지사항'
+						</when>
+						<when test="type=='N'.toString()">
+							notice_type='새소식'
+						</when>
+						<when test="type=='E'.toString()">
+							notice_type='이벤트'
+						</when>
+						<when test="type=='F'.toString()">
+							notice_type='자료실'
+						</when>
 					</choose>
 					
 				</trim>
 			
 			</foreach>
-		
+		</trim>
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach collection="notice_typeArr" item='type'>
+				<trim>
+					<choose>
+						<when test="type=='A'.toString()">
+							notice_type='공지사항'
+						</when>
+						<when test="type=='N'.toString()">
+							notice_type='새소식'
+						</when>
+						<when test="type=='E'.toString()">
+							notice_type='이벤트'
+						</when>
+						<when test="type=='F'.toString()">
+							notice_type='자료실'
+						</when>
+					</choose>
+					
+				</trim>
+			
+			</foreach>
 		</trim>
 	</sql>
 
