@@ -53,12 +53,6 @@ aside {
 .tag_var button {
 	color: #fff;
 }
-
-
-
-
-
-
 table{
 		text-align:center;
 	}
