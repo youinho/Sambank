@@ -34,6 +34,7 @@ $(function(){
 				start_date : $("input[name='start_date']").val(),
 				end_date : $("input[name='end_date']").val()
 			},
+			
 			dataType : "text",
 			success : function(result){
 				let list = JSON.parse(result);

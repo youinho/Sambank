@@ -36,13 +36,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/member/account/*")
+@RequestMapping(value="/member/account/*",method = {RequestMethod.GET, RequestMethod.POST})
 public class AccountController {
 	
 	@Autowired
 	private AccountService service;
 	@Autowired
-	private AdminService admin_sevice;
+	private AdminService admin_service;
 	
 	
 	@GetMapping("/account")
@@ -51,9 +51,9 @@ public class AccountController {
 		String id = req.getRemoteUser();
 
 		int cno=Integer.parseInt(service.getCno(id));
-		CustomerVO vo=admin_sevice.select_by_cno(cno);
+		CustomerVO vo=admin_service.select_by_cno(cno);
 		String name=vo.getName();
-		List<Acc_info> list = admin_sevice.select_acc_info(cno);
+		List<Acc_info> list = admin_service.select_acc_info(cno);
 		
 		modelMap.addAttribute("list",list);
 		modelMap.addAttribute("cno",cno);
@@ -67,7 +67,7 @@ public class AccountController {
 	@ResponseBody
 	@PostMapping("/account/customer_get_history")
 	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, HttpServletRequest req){
-		//log.info("get_history 요청 ano : "+ano);
+		log.info("get_history 요청 ano : "+ano);
 		//log.info("get_history 요청 sDates : "+start_date);
 		//log.info("get_history 요청 eDates : "+end_date);
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,13 +89,13 @@ public class AccountController {
 		}
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
-		list = admin_sevice.get_history(ano, start, end2);
+		list = admin_service.get_history(ano, start, end2);
 		//log.info("history : "+list);
 		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
 	}
 	
 
-
+	
 
 	@GetMapping("/balance")
 	public void get_balance(ModelMap modelMap, HttpServletRequest req) {

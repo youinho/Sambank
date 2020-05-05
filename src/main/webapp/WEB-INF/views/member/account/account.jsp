@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+   
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
@@ -69,7 +69,18 @@
 			
 		</tr>
 
-	
+		<tr>
+			<td>
+				<div class="input-group">
+				  <div class="input-group-prepend" style="width:15%">
+				    <span class="input-group-text" style="width:100%"><strong>상품/ 계좌</strong></span>
+				  </div>
+				  <input type="text" aria-label="p_name" class="form-control" name="p_name" readonly>
+				  <input type="text" aria-label="ano" class="form-control" name="ano" readonly>
+				  
+				</div>
+			</td>
+		</tr>
 		
 	
 		
@@ -94,18 +105,18 @@
 			</td>
 		</tr>
 		</table>	
-		
+		<sec:csrfInput/>
 	</form>
 	<table class="table table-striped table-bordered table-hover table-sm" id="historyTBL">
-		    <thead>
-		        <tr>
-		            <th scope="col" style='width: 20%'>년 월 일 시간</th>
-		            <th scope="col" style='width: 20%'>찾으신 금액</th>
-		            <th scope="col" style='width: 20%'>맡기신 금액</th>
-		            <th scope="col" style='width: 20%'>남 은 금 액</th>
-		            <th scope="col" style='width: 20%'>거래내용</th>
-		        </tr>									
-		    </thead>
+	    <thead>
+	        <tr>
+	            <th scope="col" style='width: 20%'>년 월 일 시간</th>
+	            <th scope="col" style='width: 20%'>찾으신 금액</th>
+	            <th scope="col" style='width: 20%'>맡기신 금액</th>
+	            <th scope="col" style='width: 20%'>남 은 금 액</th>
+	            <th scope="col" style='width: 20%'>거래내용</th>
+	        </tr>									
+	    </thead>
 		<tbody id="historyList">
 		    	
 		</tbody>
@@ -114,7 +125,7 @@
 </div>
 </div>
 		
-	<input type="hidden" name="ano">
+	
 <script>
 $(function(){
 	$("#histACC").addClass("active");
