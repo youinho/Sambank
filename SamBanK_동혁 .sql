@@ -482,4 +482,10 @@ select * from admintbl where id='sam';
 alter table admintbl add(profile_image_type nvarchar2(10));
 update admintbl set profile_image_type='png';
 commit;
+
+select * from customer_inquiry order by inquiry_no desc;
+select * from customer_inquiry_reply;
+
+select * from admintbl;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

@@ -126,8 +126,6 @@ public class AdminController {
 			}
 			String file_name = uploadFile_header[0].getOriginalFilename(); 
 			String type = file_name.substring(file_name.lastIndexOf(".")+1);
-			
-			
 			try {
 				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes(), type)) {
 					return new ResponseEntity<String>("success", HttpStatus.OK);
