@@ -493,7 +493,7 @@ public class AdminController {
 	@PostMapping("/account/check_ano")
 	public ResponseEntity<DepositVO> check_ano(String ano, HttpServletRequest req){
 		logging(req);
-		DepositVO vo = service.check_ano(ano);
+		DepositVO vo = service.check_ano( ano);
 		//log.info("check_ano vo : "+vo);
 		if(vo != null) {
 			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);

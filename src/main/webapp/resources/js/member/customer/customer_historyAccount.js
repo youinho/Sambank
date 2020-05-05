@@ -5,6 +5,8 @@ $(function(){
 		$("input[name='ano']").val($(this).text());
 	})
 	
+	
+	
 	$("#historyBtn").click(function(e){
 		e.preventDefault();
 		if($("input[name='ano']").val()==""){
@@ -28,11 +30,12 @@ $(function(){
 		$("#historyList").html("");
 		$.ajax({
 			url: "/member/account/account/customer_get_history",
+			type : "post",
 			beforeSend : function(xhr)
             {   
 				xhr.setRequestHeader(hn, tk);
             },
-			type : "post",
+			
 			
 			data : {
 				ano : $("input[name='ano']").val(),
@@ -68,8 +71,9 @@ $(function(){
 
 				
 			},
-			error : function(result){
-				alert("거래 내역을 조회하는데 실패했습니다.");
+			error : function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+//				alert("거래 내역을 조회하는데 실패했습니다.");
 			}
 		})
 		
@@ -84,6 +88,7 @@ $(function(){
 		
 		
 	})
+	
 	
 	
 		
