@@ -23,8 +23,7 @@ $(function(){
 		}
 		
 
-		let hn = "${_csrf.headerName}";
-		let tk = "${_csrf.token}"
+		
 		
 		
 		$("#historyList").html("");

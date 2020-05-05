@@ -127,6 +127,8 @@
 		
 	
 <script>
+let hn = "${_csrf.headerName}";
+let tk = "${_csrf.token}"
 $(function(){
 	$("#histACC").addClass("active");
 	let date = new Date();
