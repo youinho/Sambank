@@ -95,7 +95,7 @@ let tk = "${_csrf.token}"
 			  		
 			  		
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          로그인 관련창
+			          <c:out value="${name } 님"></c:out>
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>

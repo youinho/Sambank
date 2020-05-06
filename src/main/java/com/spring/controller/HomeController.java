@@ -3,6 +3,8 @@ package com.spring.controller;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ public class HomeController {
 	private CustomerNoticeService cn_service;
 	
 	@GetMapping("/")
-	public String home(Model model) {
+	public String home(Model model, HttpServletRequest req, HttpSession session) {
 		
 		int N = 3;	// 몇개 뽑을건지
 		Criteria cri = new Criteria(1, N);
@@ -45,7 +47,20 @@ public class HomeController {
 		
 		model.addAttribute("now", new Date().getTime());
 		log.info("main페이지");
-	
+		log.info("main id : "+req.getRemoteUser());
+		log.info("main name : "+session.getAttribute("name"));
+		if(req.getRemoteUser()!= null) {
+			if(session.getAttribute("name")==null) {
+				session.setAttribute("name", service.select_user(req.getRemoteUser()).getName());
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
 		return "main";
 	}
 	
