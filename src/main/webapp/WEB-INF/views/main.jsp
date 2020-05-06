@@ -90,7 +90,10 @@ let tk = "${_csrf.token}"
 			  <h2>${info.id }</h2>
 		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
 				<sec:authorize access="isAuthenticated()">
-			  		<li class="nav-item dropdown">
+			  		
+			  		<li class="nav-item dropdown active">
+			  		
+			  		
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          로그인 관련창
 			        </a>
@@ -98,7 +101,10 @@ let tk = "${_csrf.token}"
 				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
 				          <a class="dropdown-item" href="#">프로필 관리</a>
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
-				          <a class="dropdown-item" href="#">로그아웃</a>
+				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
+		      				
+		      				<a class="dropdown-item logout" href="#">로그아웃</a>
+		      			  </form:form>
 				        </div>
 					</li>
 				</sec:authorize>
@@ -107,9 +113,10 @@ let tk = "${_csrf.token}"
 					  <a class="nav-link" href="/register/step1">회원가입</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="/member/customerlogin">로그인</a>
+					  <a class="nav-link" href="/member/login_test">로그인</a>
 					</li>
 				</sec:authorize>
+				
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">개인</a>
 					</li>
@@ -258,7 +265,7 @@ let tk = "${_csrf.token}"
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
-				<li><a href="/login">로그인</a></li>
+				<li><a href="/member/login_test">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
 	</div>
@@ -424,7 +431,14 @@ let tk = "${_csrf.token}"
 
 	
 <script>
-
+$(function(){
+	$(".logout").click(function(e){
+		e.preventDefault();
+		$(".logout-form").submit();
+		
+		
+	})
+})
 
 </script>		
 </body>	

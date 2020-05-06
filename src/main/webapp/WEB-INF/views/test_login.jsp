@@ -76,12 +76,5 @@ let tk = "${_csrf.token}"
 	
 	
 	
-<script>
-$(function(){
-	if($("#go_home")!=null){
-		location.href = "/";
-	}
-})
-</script>	
 </body>
 </html>
