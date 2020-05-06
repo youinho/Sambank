@@ -257,14 +257,14 @@ let tk = "${_csrf.token}"
 			<ul class="menu1">
 				<li><a href="/member/account/account" class="q1">전체계좌조회</a></li>
 				<li><a href="" class="q2">계좌이체</a></li>
-				<li><a href="/member/account/balance" >빠른조회</a></li>
+				<li><a href="/member/account/balance" >잔액조회</a></li>
 			</ul>
 			<ul class="menu2">
 				<li><a href="/A">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
+				<li><a href="/F">자료실</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
-				<li><a href="/member/login_test">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
 	</div>

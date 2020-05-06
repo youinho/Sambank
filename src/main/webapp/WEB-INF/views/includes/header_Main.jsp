@@ -13,15 +13,16 @@
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <!-- <link rel="stylesheet" href="/resources/css/intro_2018.css" />     -->
+<!-- 웹폰트 -->
+<link href = "https://fonts.googleapis.com/css2?family=Do Hyeon&display=swap"rel = "stylesheet">
 <!-- bootstrap js,jQuery link -->
 <style>
 a:visited {color:black; text-decoration:none;}
 .asideHeader a:visited {color:#fff; text-decoration:none;}
 .tag_var a:visited {color:#fff; text-decoration:none;}
-a:hover {color:#5a5a5a; text-decoration:none;}
-a:link {color:#9e9e9e; text-decoration:none;}
-html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
-h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;}
+a:hover {color:black; text-decoration:none;}
+a:link {color:black; text-decoration:none;}
+
 main{
 	width : 70%;
 	position: relative;
@@ -45,10 +46,13 @@ aside {
     border: 7px solid;
     position: absolute;
     font-size: 35px;
+    text-align:center;
     background-color: #336633;
    	visited {color:#9e9e9e; text-decoration:none;}
    }
-
+.asideHeader{
+	margin-top: 40px;
+}
 .aside_content{
 	margin-top:30px;
 	margin-left: 50px;
@@ -169,11 +173,11 @@ let tk = "${_csrf.token}"
 	        <div class="collapse navbar-collapse" id="navbarnav">
 	      		<!-- Example split danger button -->
 					<div class="btn-group">
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">공지사항</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">보안센터</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">자료실</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">이벤트</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/A">공지사항</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/">보안센터</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/F">자료실</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/N">새소식</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/E">이벤트</a></button>
 					  <!-- 2 -->
 					  <div class="btn-group" style="margin-left: 25px;">
 						  <button type="button" class="btn btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -215,10 +219,9 @@ let tk = "${_csrf.token}"
 		
 	<!-- 어사이드 바 -->
      <aside>
-     	<div class="asideHeader">
+     	<div class="asideHeader"style="font-family: 'Do Hyeon', sans-serif;">
      	
-     	<a href="">어사이드바</a>
-     		<div class="dropdown-divider"></div>
+     	<a href="">빠른이동</a>
      	<div class="aside_content">
 			<a href="/A" data-title="공지사항"><c:out value="공지사항"></c:out> </a>
 			<div class="dropdown-divider"></div>
