@@ -256,7 +256,7 @@ let tk = "${_csrf.token}"
 				<li><a href="/member/account/balance" >빠른조회</a></li>
 			</ul>
 			<ul class="menu2">
-				<li><a href="/no">공지사항</a></li>
+				<li><a href="/A">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
