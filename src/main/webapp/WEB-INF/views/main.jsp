@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
-
+<!-- 웹폰트 -->
+<link href = "https://fonts.googleapis.com/css2?family=Do Hyeon&display=swap"rel = "stylesheet">
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
@@ -269,10 +270,10 @@ let tk = "${_csrf.token}"
 	</div>
 	 <!-- link var 끝 -->
 	<div class="videoheader" style="margin-top: 30px; text-align: center; font-size: ">
-	<p style="
-    font-family: none;
+	<a style="
+    font-family: 'Do Hyeon', sans-serif;
     font-size: xxx-large;
-    margin-bottom: auto;">SamBank CF 광고</p>
+    margin-bottom: auto;">SB은행 광고 프로모션</a>
 	</div>
 	<!-- video 시작 -->	
 	<!-- style="margin-left:350px;" -->
