@@ -98,8 +98,6 @@ let tk = "${_csrf.token}"
 			          로그인 관련창
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-				          <a class="dropdown-item" href="#">프로필 관리</a>
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
 				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
 		      				
@@ -118,16 +116,16 @@ let tk = "${_csrf.token}"
 				</sec:authorize>
 				
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">개인</a>
+					  <a class="nav-link" href="/">개인</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">기업</a>
+					  <a class="nav-link" href="/">기업</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">금융 상품</a>
+					  <a class="nav-link" href="/">금융 상품</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">은행 소개</a>
+					  <a class="nav-link" href="/">은행 소개</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">고객 센터</a>
