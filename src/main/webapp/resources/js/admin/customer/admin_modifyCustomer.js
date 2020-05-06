@@ -74,8 +74,6 @@ $(function(){
 
 function searchCS_callback(cno){
 		$("input[name='cno']").val(cno);
-		
-		
 		$.ajax({
 			url : "/admin/customer/getCSInfo",
 			type : "post",
@@ -94,7 +92,6 @@ function searchCS_callback(cno){
 					return;
 				}
 				$("#form_cno").val(vo.cno);
-				
 				$("input[name='id']").val(vo.id);
 				$("input[name='name']").val(vo.name);
 				$("input[name='eng_name']").val(vo.eng_name);
@@ -103,17 +100,8 @@ function searchCS_callback(cno){
 				$("input[name='birth']").val(vo.birth);
 				$("input[name='address']").val(vo.address);
 				$("input[name='mobile']").val(vo.mobile);
-				$("input[name='email']").val(vo.email);
-				
-				
-				
-				
+				$("input[name='email']").val(vo.email);	
 			}
-			
-			
-			
-		
-			
 		})
 			
 		

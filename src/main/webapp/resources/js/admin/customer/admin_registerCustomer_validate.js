@@ -134,7 +134,6 @@ $.validator.addMethod("mobile", function(value) {
 }, "정확한 전화번호를 입력해 주세요");
 $.validator.addMethod("checkId", function(value) {
 	let check = "";
-	
 	console.log("method");
 	$.ajax({
 		url:"/admin/customer/checkId",

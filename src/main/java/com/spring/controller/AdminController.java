@@ -126,8 +126,6 @@ public class AdminController {
 			}
 			String file_name = uploadFile_header[0].getOriginalFilename(); 
 			String type = file_name.substring(file_name.lastIndexOf(".")+1);
-			
-			
 			try {
 				if(service.saveImage(req.getRemoteUser(), uploadFile_header[0].getBytes(), type)) {
 					return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -145,7 +143,9 @@ public class AdminController {
 	@ResponseBody
 	@GetMapping("/get_profile_image")
 	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
-		logging(req);
+	   logging(req);
+	   log.info("get profile image id : "+id);
+	   log.info("get profile image req : "+req.getRemoteUser());
 	   if(id==null) {
 		   id = req.getRemoteUser();
 	   }
@@ -220,6 +220,13 @@ public class AdminController {
 	@GetMapping("/inquiry/{inquiry_no}")
 	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
 		logging(req);
+		try {
+			Integer.parseInt(inquiry_no);
+		}catch(Exception e){
+			return "redirect:/admin/inquiry";
+		}
+		
+		
 		if(!req.getRemoteUser().equals(inquiry_service.getRow(inquiry_no).getAnswer_id()+"")) {
 			return "redirect:/admin/inquiry";
 		}
@@ -486,7 +493,7 @@ public class AdminController {
 	@PostMapping("/account/check_ano")
 	public ResponseEntity<DepositVO> check_ano(String ano, HttpServletRequest req){
 		logging(req);
-		DepositVO vo = service.check_ano(ano);
+		DepositVO vo = service.check_ano( ano);
 		//log.info("check_ano vo : "+vo);
 		if(vo != null) {
 			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
@@ -1040,6 +1047,7 @@ public class AdminController {
 	@GetMapping("/notice/read/{bno}")
 	public String notice_view(@PathVariable("bno") int admin_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
 		logging(req);
+		
 		//log.info("read 요청"+admin_bno);
 		try {
 			Admin_noticeVO vo = service.notice_getRow(admin_bno);

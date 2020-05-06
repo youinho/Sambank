@@ -16,5 +16,8 @@ public interface InquiryService {
 	public List<Inquiry_replyVO> get_replyList(String inquiry_no);
 	public boolean insert_reply(Inquiry_replyVO vo);
 	
+	public List<InquiryVO> getList_by_customer(String customer_id);
 	
+	
+	public boolean insert_inquiry(InquiryVO vo);
 }

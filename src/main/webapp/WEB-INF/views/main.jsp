@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../views/admin/chat/chat.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -76,8 +79,7 @@ let tk = "${_csrf.token}"
 			<nav class="navbar navbar-expand-lg navbar navbar-light " style="background-color: #b5fdba;" >
 			
 				<div id="Logo">  
-				  <strong><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></strong>
-				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"></a>
+				  <a class="navbar-brand" src="/resources/SB_files/SamBank Image Logo.png" href="/"><img src="/resources/SB_files/SamBank Image Logo.png" href="/" alt="로고 이미지"></a>
 				</div>
 				<!-- Logo 끝내는 부분 -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -257,20 +259,26 @@ let tk = "${_csrf.token}"
 				<li><a href="/no">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
-				<li><a href="/Q">문의사항</a></li>
+				<li><a href="/member/inquiry">문의사항</a></li>
 				<li><a href="/login">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
 	</div>
 	 <!-- link var 끝 -->
-	
+	<div class="videoheader" style="margin-top: 30px; text-align: center; font-size: ">
+	<p style="
+    font-family: none;
+    font-size: xxx-large;
+    margin-bottom: auto;">SamBank CF 광고</p>
+	</div>
 	<!-- video 시작 -->	
-		<div class="video" style="margin-left:350px;">
+	<!-- style="margin-left:350px;" -->
+		<div class="video" >
 		    <video
 	      src="/resources/SB_files/video2.mp4"
 	      controls
-	      width="400"
-	      height="500"
+	      width="200"
+	      height="400"
 	      autoplay
 	      muted
 	      loop
@@ -302,34 +310,24 @@ let tk = "${_csrf.token}"
 		<div class="section">
 		<!-- 새소식 시작하는 부분 -->
 		<h2>새소식</h2>
+				<fmt:parseNumber value="${now}" integerOnly="true" var="now"></fmt:parseNumber>
 				<ul class="list-board">
 					<!-- 새소식 컨텐츠 - 1 -->
-					<li>
-						<a href="">
-							<span>코로나19 관련 해킹 등 피해예방 수칙 안내</span>
-                             <em> New </em>
-							<span>05.10</span>
-						</a>
-					</li>		
-					<!-- 새소식 컨텐츠 - 2 -->
-					<li>
-						<a href="">
-							<span>은행업무 이제 집에서 편하게 보세요! </span>
-                             <em> New </em>
-							<span>05.05</span>
-						</a>
-					</li>		
-					<!-- 새소식 컨텐츠 - 3 -->
-					<li>
-						<a href="">
-							<span>대구·경북지역 영업점 영업시간 변경 안내</span>
-                             <em>New </em>
-							<span>05.02</span>
-						</a>
-					</li>	
-					<!-- 새소식 컨텐츠 끝 -->
+					<c:forEach items="${list_N }" var="vo">
+						<li>
+							<a href="/customer_notice/read/${vo.notice_bno }?pageNum=1&amount=15&type=&keyword=&notice_types=N">
+								<span><c:out value="${vo.title }"></c:out> </span>
+								<c:if test="${(now-vo.updatedate.time)<86400*1000 }">
+									<em> New </em>
+								</c:if>
+								<span>
+								<fmt:formatDate pattern="MM.dd" value="${vo.updatedate }"/>
+								</span>
+							</a>
+						</li>
+					</c:forEach>
 				</ul>
-				<a href="" class="sub" title="새소식 바로가기">바로가기</a>
+				<a href="/N" class="sub" title="새소식 바로가기">바로가기</a>
 			</div>
 			<!-- 새 소식 끝나는 부분 -->
 
@@ -342,33 +340,22 @@ let tk = "${_csrf.token}"
 		<!-- 이벤트 시작하는 부분 -->
 		<h2>이벤트</h2>
 			<ul class="list-board">
-				<!-- 이벤트 컨텐츠 - 1 -->
-                <li>
-					<a href="">
-						<span>「Happy Home, Happy Money」 편하게 집에서 주택청약종합저축 신규가입하고 해피머니 받자!!</span>
-                             <em> New </em>
-						<span>05.06 ~ 05.30</span>
-					</a>
-				</li>
-				<!-- 이벤트 컨텐츠 - 2 -->
-                <li>
-					<a href="">
-						<span>앵콜! 내 경품 내가 고르는! KB오픈뱅킹 신규 가입 이벤트</span>
-                             <em> New </em>
-						<span>06.01 ~ 06.15</span>
-					</a>
-				</li>
-				<!-- 이벤트 컨텐츠 - 3 -->
-                <li>
-					<a href="">
-						<span>SB 대기시간 ‘제로(0)’ 프로젝트 “SB의 디지털서비스로 나의 시간을 혁신하다”</span>
-                             <em> New </em>
-						<span>05.27 ~ 06.30</span>
-					</a>
-				</li>
+				<c:forEach items="${list_E }" var="vo">
+						<li>
+							<a href="/customer_notice/read/${vo.notice_bno }?pageNum=1&amount=15&type=&keyword=&notice_types=E">
+								<span><c:out value="${vo.title }"></c:out> </span>
+								<c:if test="${(now-vo.updatedate.time)<86400*1000 }">
+									<em> New </em>
+								</c:if>
+								<span>
+								<fmt:formatDate pattern="MM.dd" value="${vo.updatedate }"/>
+								</span>
+							</a>
+						</li>
+					</c:forEach>
 			</ul>
 			<!-- 이벤트 컨텐츠 끝 -->
-			<a href="" class="sub" title="이벤트 바로가기">바로가기</a>
+			<a href="/E" class="sub" title="이벤트 바로가기">바로가기</a>
 		</div>
 		<!-- 이벤트 끝나는 부분 -->
 			
@@ -385,33 +372,22 @@ let tk = "${_csrf.token}"
 		<!-- ################################## -->		
 			<h2>공지사항</h2>
 			<ul class="list-board">
-				<!-- 공지사항 컨텐츠 - 1 -->
-					<li>
-						<a href="">
-							<span>공지사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>
-				<!-- 공지사항 컨텐츠 - 2 -->
-					<li>
-						<a href="">
-							<span>공지사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>		
-				<!-- 공지사항 컨텐츠 - 3 -->
-					<li>
-						<a href="">
-							<span>공지사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>				
+				<c:forEach items="${list_A }" var="vo">
+						<li>
+							<a href="/customer_notice/read/${vo.notice_bno }?pageNum=1&amount=15&type=&keyword=&notice_types=A">
+								<span><c:out value="${vo.title }"></c:out> </span>
+								<c:if test="${(now-vo.updatedate.time)<86400*1000 }">
+									<em> New </em>
+								</c:if>
+								<span>
+								<fmt:formatDate pattern="MM.dd" value="${vo.updatedate }"/>
+								</span>
+							</a>
+						</li>
+					</c:forEach>		
 			</ul>
 			<!-- 공지사항 컨텐츠 끝 -->
-			<a href="" class="sub" title="공지사항 바로가기">바로가기</a>
+			<a href="/A" class="sub" title="공지사항 바로가기">바로가기</a>
 		</div>
 		<!-- 공지사항 끝 부분 -->
 		
@@ -421,34 +397,23 @@ let tk = "${_csrf.token}"
 		<!-- ################################## -->
 		<!-- 추가사항 -->
 		<!-- ################################## -->		
-			<h2>추가사항</h2>
+			<h2>자료실</h2>
 			<ul class="list-board">
-				<!-- 추가사항 컨텐츠 - 1 -->
-					<li>
-						<a href="">
-							<span>추가사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>
-				<!-- 추가사항 컨텐츠 - 2 -->
-					<li>
-						<a href="">
-							<span>추가사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>		
-				<!-- 추가사항 컨텐츠 - 2 -->
-					<li>
-						<a href="">
-							<span>추가사항 관련 내용</span>
-							<!-- <em class="icon-new">[NEW]</em>-->
-							<span>날짜 부분</span>
-						</a>
-					</li>	
+				<c:forEach items="${list_F }" var="vo">
+						<li>
+							<a href="/customer_notice/read/${vo.notice_bno }?pageNum=1&amount=15&type=&keyword=&notice_types=F">
+								<span><c:out value="${vo.title }"></c:out> </span>
+								<c:if test="${(now-vo.updatedate.time)<86400*1000 }">
+									<em> New </em>
+								</c:if>
+								<span>
+								<fmt:formatDate pattern="MM.dd" value="${vo.updatedate }"/>
+								</span>
+							</a>
+						</li>
+					</c:forEach>
 			</ul>
-			<a href="" class="sub" title="추가사항 바로가기">바로가기</a>
+			<a href="/F" class="sub" title="추가사항 바로가기">바로가기</a>
 			<!-- 추가사항 컨텐츠 끝 -->
 		</div>
 		<!-- 추가사항 끝 부분 -->

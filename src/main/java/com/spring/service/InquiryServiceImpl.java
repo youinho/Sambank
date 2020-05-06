@@ -50,4 +50,16 @@ public class InquiryServiceImpl implements InquiryService {
 		return i_mapper.insert_reply(vo)==1;
 	}
 
+	@Override
+	public List<InquiryVO> getList_by_customer(String customer_id) {
+		
+		return i_mapper.getList_by_customer(customer_id);
+	}
+
+	@Override
+	public boolean insert_inquiry(InquiryVO vo) {
+
+		return i_mapper.insert_inquiry(vo)==1;
+	}
+
 }

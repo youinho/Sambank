@@ -19,4 +19,9 @@ public interface InquiryMapper {
 	public int insert_reply(Inquiry_replyVO vo);
 	
 	
+	public List<InquiryVO> getList_by_customer(String customer_id);
+	
+	public int insert_inquiry(InquiryVO vo);
+	
+	
 }

@@ -51,12 +51,11 @@ aside {
 }
 
 </style>
-<title>SamBank '<'관련항목 적기'>' </title>
+<title>SamBank < 이벤트 > </title>
 </head>
 <body>
-	<div id="title_imageo" style="margin-left: 3%">  
-	  <strong><img src="/resources/SB_files/title logo.png" alt="로고 이미지"></strong>
-	  <a class="navbar-brand" src="/resources/SB_files/title logo.png" href="#"></a>
+	<div id="title_imageo" style="margin-left: 3%">
+	  <a class="navbar-brand" src="/resources/SB_files/title logo.png" href="/"><img src="/resources/SB_files/title logo.png" alt="로고 이미지"></a>
 	</div>
 	
 	<br />
@@ -69,11 +68,11 @@ aside {
         <div class="collapse navbar-collapse" id="navbarnav">
       		<!-- Example split danger button -->
 				<div class="btn-group">
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">공지사항</a></button>
+				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/no">공지사항</a></button>
 				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">보안센터</a></button>
 				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">자료실</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">이벤트</a></button>
+				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/N">새소식</a></button>
+				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/E">이벤트</a></button>
 				  <!-- 2 -->
 				  <div class="btn-group" style="margin-left: 25px;">
 					  <button type="button" class="btn btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

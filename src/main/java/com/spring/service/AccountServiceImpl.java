@@ -16,4 +16,9 @@ public class AccountServiceImpl implements AccountService {
 		// TODO Auto-generated method stub
 		return mapper.get_balance(ano);
 	}
+	
+	@Override
+	public String getCno(String id) {
+		return mapper.get_cno(id);
+	}
 }

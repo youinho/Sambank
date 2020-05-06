@@ -72,7 +72,7 @@
 	<input type="hidden" name="amount" value="${cri.amount }"/>
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
-	<input type="hidden" name="notice_type" value="${cri.notice_type }" />
+	<input type="hidden" name="notice_types" value="${cri.notice_types }" />
 	<%-- <sec:csrfInput/> --%>	
 </form>
 <script>
@@ -190,7 +190,8 @@ $(function(){
 		
 	})
 	
-	$("#fileBlock").on("click", "div", function(){
+	$("#fileBlock").on("click", "div", function(e){
+			e.preventDefault();
 			let li = $(this);
 			
 			let fileName = encodeURIComponent(li.data("filename"));

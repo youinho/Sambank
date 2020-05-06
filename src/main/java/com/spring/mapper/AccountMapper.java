@@ -23,7 +23,7 @@ public interface AccountMapper {
 	public String get_password(String ano);
 	public int delete(DepositVO vo);
 	public long get_balance(String ano);		//금액은 long으로 할것
-	
+	public String get_cno(String id);	//id로 cno가져오기
 	public DepositVO check_ano(String ano);
 	
 	public int deposit_hist(Deposit_historyVO vo);

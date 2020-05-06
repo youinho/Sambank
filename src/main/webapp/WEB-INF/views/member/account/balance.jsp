@@ -16,10 +16,10 @@
 <body  style="background-color:#F5F5F5;">
 <div class="container" style="margin-top:40px">
 테스트<br>
-	
+	${c_balance }
 <form id="balance" method="get" action="">	
 	
-	${c_balance }
+	
 	<div class="form-group text-center">		
 		<button type="submit" class="btn btn-primary">뒤로가기</button>
 	  		
