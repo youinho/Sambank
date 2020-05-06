@@ -41,7 +41,7 @@ aside {
     /* padding: 10px; */
     /* margin: 10px; */
     /* margin-top:50px; */
-    padding-bottom: 650px;
+    /* padding-bottom: 650px; */
     box-sizing: border-box;
     border: 7px solid;
     position: absolute;
@@ -236,11 +236,12 @@ let tk = "${_csrf.token}"
 	     		<div class="dropdown-divider"></div>
 	     	</sec:authorize>
 	     	
+	     	
      	</div>
      	
      	
      	</div> 
-  	
+  		<img src="/resources/SB_files/aside2.png" style="margin-left: 57px; padding-top: 200px;"/>
      </aside>
 	
 		
