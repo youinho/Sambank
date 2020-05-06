@@ -493,4 +493,10 @@ select * from customer_inquiry_reply;
 
 select * from admintbl;
 
+select * from admintbl;
+update admintbl set profile_image_type='png' where profile_image_type is null;
+commit;
+
+select * from deposit_history order by hno desc;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

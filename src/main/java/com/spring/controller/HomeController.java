@@ -49,7 +49,10 @@ public class HomeController {
 		log.info("main페이지");
 		if(req.getRemoteUser()!= null) {
 			if(session.getAttribute("name")==null) {
-				session.setAttribute("name", service.select_user(req.getRemoteUser()).getName());
+				CustomerVO vo = service.select_user(req.getRemoteUser());
+				if(vo!=null) {
+					session.setAttribute("name", service.select_user(req.getRemoteUser()).getName());					
+				}
 				
 			}
 		}

@@ -248,6 +248,12 @@ let tk = "${_csrf.token}"
 $(function(){
 	let title = "${title}";
 	$("a[data-title='${title}']").addClass("activated");
+	
+	$(".logout").click(function(e){
+		e.preventDefault();
+		$(".logout-form").submit();
+	})
+	
 })
 
 </script>		
