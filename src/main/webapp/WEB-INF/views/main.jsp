@@ -88,9 +88,8 @@ let tk = "${_csrf.token}"
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			 <!--  nav bar 오른쪽 정렬 -->
 			  <h2>${info.id }</h2>
-			<c:choose>
-  			<c:when test="${!empty info }">
 		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
+				<sec:authorize access="isAuthenticated()">
 			  		<li class="nav-item dropdown">
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			          로그인 관련창
@@ -102,16 +101,15 @@ let tk = "${_csrf.token}"
 				          <a class="dropdown-item" href="#">로그아웃</a>
 				        </div>
 					</li>
-			</c:when>
-			<c:otherwise>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
 					  <a class="nav-link" href="/register/step1">회원가입</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="/member/customerlogin">로그인</a>
 					</li>
-			</c:otherwise>	
-			</c:choose>
+				</sec:authorize>
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">개인</a>
 					</li>

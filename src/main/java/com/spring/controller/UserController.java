@@ -321,8 +321,9 @@ public class UserController {
 	//관리자 프로필 이미지 불러오기
 	@ResponseBody
 	@GetMapping("/member/inquiry/get_profile_image")
-	public ResponseEntity<byte[]> getByteImage(String id) {
+	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
 		final HttpHeaders headers = new HttpHeaders();
+		
 		if(id==null) {
 			return new ResponseEntity<byte[]>(null, headers, HttpStatus.BAD_REQUEST);
 		}
