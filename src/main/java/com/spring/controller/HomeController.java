@@ -47,8 +47,6 @@ public class HomeController {
 		
 		model.addAttribute("now", new Date().getTime());
 		log.info("main페이지");
-		log.info("main id : "+req.getRemoteUser());
-		log.info("main name : "+session.getAttribute("name"));
 		if(req.getRemoteUser()!= null) {
 			if(session.getAttribute("name")==null) {
 				session.setAttribute("name", service.select_user(req.getRemoteUser()).getName());
