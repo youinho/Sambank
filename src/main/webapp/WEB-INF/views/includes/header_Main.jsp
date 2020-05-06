@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +28,7 @@ main{
 	margin-left: 300px;
 	margin-top: 50px;
 	font: bolder;
-	position: fixed;
+	/* position: fixed; */
     left: 120px;
 }
 [class^="sm"]{
@@ -54,7 +58,25 @@ aside {
 .tag_var button {
 	color: #fff;
 }
-
+table{
+		text-align:center;
+	}
+.move{
+	color:#000000;
+}
+th, tr{
+	font-size:14px;
+	font-weight:normal;
+}
+.bno{
+	font-size:12px;
+}
+.panel-body{
+	margin-top:2px;
+}
+a.activated{
+	color:#FFFFFF;
+}
 </style>
 
 
@@ -84,15 +106,31 @@ let tk = "${_csrf.token}"
 			  <!-- nav bar 오른쪽 정렬 -->
 		      	<ul class="navbar-nav ml-auto">
 				     <li class="nav-item dropdown">
-				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				          로그인 관련창
-				        </a>
+				        <sec:authorize access="isAuthenticated()">
+			  		
+			  		<li class="nav-item dropdown active">
+			  		
+			  		
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          <c:out value="${name } 님"></c:out>
+			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-				          <a class="dropdown-item" href="#">프로필 관리</a>
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
-				          <a class="dropdown-item" href="#">로그아웃</a>
+				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
+		      				
+		      				<a class="dropdown-item logout" href="#">로그아웃</a>
+		      			  </form:form>
 				        </div>
+					</li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					<li class="nav-item active">
+					  <a class="nav-link" href="/register/step1">회원가입</a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="/member/login_test">로그인</a>
+					</li>
+				</sec:authorize>
 				      </li>
 				      <li class="nav-item active">
 				        <a class="nav-link" href="#">개인 <span class="sr-only">(current)</span></a>
@@ -142,13 +180,9 @@ let tk = "${_csrf.token}"
 						    문의 사항
 						  </button>
 						  <div class="dropdown-menu">
-						    <a class="dropdown-item" href="#">문의사항</a>
+						    <a class="dropdown-item" href="/member/inquiry/register">문의사항 작성</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#">문의사항 작성</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#">문의사항 취소</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
+						    <a class="dropdown-item" href="/member/inquiry">1:1 비공개 문의사항</a>
 						  </div>
 						</div>
 					  <!-- 3 -->
@@ -182,22 +216,36 @@ let tk = "${_csrf.token}"
 	<!-- 어사이드 바 -->
      <aside>
      	<div class="asideHeader">
-     	<ul>
+     	
      	<a href="">어사이드바</a>
      		<div class="dropdown-divider"></div>
      	<div class="aside_content">
-	     	<a href="">공지사항,자료실,문의사항,새소식,이벤트</a>
-	     	<div class="dropdown-divider"></div>
-	     	<a href="">5가지들 넣어주시면되요</a>
-	     	<div class="dropdown-divider"></div>
-	     	<a href="">1:1 비공개 문의</a>
-	     	<div class="dropdown-divider"></div>
+			<a href="/A" data-title="공지사항"><c:out value="공지사항"></c:out> </a>
+			<div class="dropdown-divider"></div>
+			<a href="/N" data-title="새소식"><c:out value="새소식"></c:out> </a>
+			<div class="dropdown-divider"></div>
+			<a href="/E" data-title="이벤트"><c:out value="이벤트"></c:out> </a>
+			<div class="dropdown-divider"></div>
+			<a href="/F" data-title="자료실"><c:out value="자료실"></c:out> </a>
+			<div class="dropdown-divider"></div>
+	     	<sec:authorize access="isAuthenticated()">
+	     		<a href="/member/inquiry" data-title="1:1 문의">1:1 비공개 문의</a>
+	     		<div class="dropdown-divider"></div>
+	     	</sec:authorize>
+	     	
      	</div>
-     	</ul>
+     	
+     	
      	</div> 
   	
      </aside>
 	
 		
-		
+<script>
+$(function(){
+	let title = "${title}";
+	$("a[data-title='${title}']").addClass("activated");
+})
+
+</script>		
 </body>
