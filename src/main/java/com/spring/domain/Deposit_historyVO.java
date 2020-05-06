@@ -14,7 +14,7 @@ public class Deposit_historyVO {
 	private long balance;
 	private Date depositdate;
 	
-	
+	private String from_name;
 	
 	private long amount;
 }
