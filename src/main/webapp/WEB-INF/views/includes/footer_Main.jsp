@@ -30,8 +30,8 @@ footer{
 			    <!-- style="text-align: right;" -->
 			    <div class="col" ><a href="">대표 1588-9955 | 금융서비스 | LANGUAGE </a></div>
 			    <div class="col" style= "text-align: left;">
-<!-- 	  <a class="navbar-brand" src="/resources/SB_files/title logo.png" href="#"><img src="/resources/SB_files/title logo.png" alt="로고 이미지"></a>
-	  <a class="navbar-brand" src="/resources/SB_files/title logo.png" href="#"><img src="/resources/SB_files/title logo.png" alt="로고 이미지"></a> -->
+ 	  <img src="/resources/SB_files/fotter1.png" alt="로고 이미지">
+	<img src="/resources/SB_files/fotter2.png" alt="로고 이미지">
 			    </div>
 			    <div class="col"></div>
 			  </div>
