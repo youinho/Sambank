@@ -488,4 +488,12 @@ select * from customer_inquiry_reply;
 
 select * from admintbl;
 
+select * from deposittbl;
+commit;
+select id, password, profile_image, profile_image_type from admintbl;
+delete from admintbl where id = 'sam2';
+delete from admin_group_members where id = 'sam2';
+
+select * from customertbl where name='최규리';
+select * from deposit_history;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
