@@ -9,18 +9,21 @@
     <style>
 footer{
 	margin-top: 100px;
-	margin-left: 15%;
+	font-size: 12px;
+	/* margin-left: 15%; */
 }
 .footer {
   background: #fff;
   color: #black;
-  font-family:'HY견고딕';
-  font-size:5px;
+}
+.info{
+  font-family:'HY견고딕, 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;
 }
 .footer-inner.set-pc {
     text-align: center;
 }
-
+/* html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
+h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;} */
     </style>
    </head>
 	<footer> 
@@ -28,9 +31,10 @@ footer{
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
 			    <!-- style="text-align: right;" -->
-			    <div class="col" ><a href="">대표 1588-9955 | 금융서비스 | LANGUAGE </a></div>
+			    <div class="col" ><p style="margin-top: 15px;" >대표 1588-9955 | 금융서비스 | LANGUAGE </p></div>
 			    <div class="col" style= "text-align: left;">
-			    	이미지 추가 예정
+ 	  <img src="/resources/SB_files/fotter1.png" alt="로고 이미지">
+	<img src="/resources/SB_files/fotter2.png" alt="로고 이미지">
 			    </div>
 			    <div class="col"></div>
 			  </div>

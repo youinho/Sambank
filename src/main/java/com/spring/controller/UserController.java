@@ -57,7 +57,7 @@ public class UserController {
 	public String User_Q_notice(Model model, HttpServletRequest req) {
 		
 		model.addAttribute("list", inquiry_service.getList_by_customer(req.getRemoteUser()));
-		
+		model.addAttribute("title", "1:1 문의");
 		
 		
 		
@@ -65,17 +65,18 @@ public class UserController {
 	}
 	
 	@GetMapping("/member/inquiry/register")
-	public String User_inquiry_register() {
+	public String User_inquiry_register(Model model) {
 		
 		
-		
+		model.addAttribute("title", "1:1 문의");
 		return "/member/inquiry/register";
 	}
 	
 	@PostMapping("/member/inquiry/register")
-	public String User_inquiry_register_post(InquiryVO vo, HttpServletRequest req, RedirectAttributes rttr) {
+	public String User_inquiry_register_post(InquiryVO vo, HttpServletRequest req, RedirectAttributes rttr, Model model) {
 		vo.setCustomer_id(req.getRemoteUser());
 		vo.setCustomer_name(service.select_by_id(req.getRemoteUser()).getName());
+		model.addAttribute("title", "1:1 문의");
 		if(inquiry_service.insert_inquiry(vo)) {
 			rttr.addFlashAttribute("registered", "true");
 		}else {
@@ -138,7 +139,7 @@ public class UserController {
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		model.addAttribute("title", "자료실");
-		return "/user/News/News";
+		return "/user/notice/list";
 	}
 	@GetMapping("/N")
 	public String User_N_News(Model model, @ModelAttribute("cri") Criteria cri) {
@@ -147,7 +148,7 @@ public class UserController {
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		model.addAttribute("title", "새소식");
-		return "/user/News/News";
+		return "/user/notice/list";
 	}
 	
 	
@@ -158,7 +159,7 @@ public class UserController {
 		model.addAttribute("list", cn_service.notice_getList(cri));
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		model.addAttribute("title", "이벤트");
-		return "/user/News/News";
+		return "/user/notice/list";
 	}
 	@GetMapping("/A")
 	public String User_A_Announce(Model model, @ModelAttribute("cri") Criteria cri) {
@@ -168,7 +169,7 @@ public class UserController {
 		model.addAttribute("pageVO", new PageVO(cri, cn_service.totalRows(cri)));
 		model.addAttribute("title", "공지사항");
 		
-		return "/user/News/News";
+		return "/user/notice/list";
 	}
 	
 	//고객 공지 read페이지
@@ -321,8 +322,9 @@ public class UserController {
 	//관리자 프로필 이미지 불러오기
 	@ResponseBody
 	@GetMapping("/member/inquiry/get_profile_image")
-	public ResponseEntity<byte[]> getByteImage(String id) {
+	public ResponseEntity<byte[]> getByteImage(String id, HttpServletRequest req) {
 		final HttpHeaders headers = new HttpHeaders();
+		
 		if(id==null) {
 			return new ResponseEntity<byte[]>(null, headers, HttpStatus.BAD_REQUEST);
 		}

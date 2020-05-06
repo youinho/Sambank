@@ -30,6 +30,7 @@
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -62,16 +63,17 @@ let tk = "${_csrf.token}"
 		        </form:form>
 		        </sec:authorize>
 		        <sec:authorize access="isAuthenticated()">
+		        	
 			        <form:form action="${pageContext.request.contextPath}/member/logout" method="POST">
 		      			<input type="submit" class="btn btn-primary btn-block" value="로그아웃" />
 		      		</form:form>
+		      			<input type="hidden" name="" id=go_home />
 	      		</sec:authorize>
 		    </div>
 	    </div>
 	</div>
 	
 	
-	
-	
+
 </body>
 </html>

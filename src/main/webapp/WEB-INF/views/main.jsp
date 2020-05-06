@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
-
+<!-- 웹폰트 -->
+<link href = "https://fonts.googleapis.com/css2?family=Do Hyeon&display=swap"rel = "stylesheet">
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
@@ -88,41 +89,44 @@ let tk = "${_csrf.token}"
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			 <!--  nav bar 오른쪽 정렬 -->
 			  <h2>${info.id }</h2>
-			<c:choose>
-  			<c:when test="${!empty info }">
 		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
-			  		<li class="nav-item dropdown">
+				<sec:authorize access="isAuthenticated()">
+			  		
+			  		<li class="nav-item dropdown active">
+			  		
+			  		
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          로그인 관련창
+			          <c:out value="${name } 님"></c:out>
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-				          <a class="dropdown-item" href="#">프로필 관리</a>
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
-				          <a class="dropdown-item" href="#">로그아웃</a>
+				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
+		      				
+		      				<a class="dropdown-item logout" href="#">로그아웃</a>
+		      			  </form:form>
 				        </div>
 					</li>
-			</c:when>
-			<c:otherwise>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
 					  <a class="nav-link" href="/register/step1">회원가입</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="/member/customerlogin">로그인</a>
+					  <a class="nav-link" href="/member/login_test">로그인</a>
 					</li>
-			</c:otherwise>	
-			</c:choose>
+				</sec:authorize>
+				
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">개인</a>
-					</li>
-					<li class="nav-item active">
-					  <a class="nav-link" href="#">기업</a>
+					  <a class="nav-link" href="/">개인</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">금융 상품</a>
+					  <a class="nav-link" href="/">기업</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">은행 소개</a>
+					  <a class="nav-link" href="/">금융 상품</a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="/">은행 소개</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">고객 센터</a>
@@ -252,24 +256,29 @@ let tk = "${_csrf.token}"
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
 				<li><a href="/member/account/account" class="q1">전체계좌조회</a></li>
+<<<<<<< HEAD
 				<li><a href="/member/account/transfer" class="q2">계좌이체</a></li>
 				<li><a href="/member/account/balance" >빠른조회</a></li>
+=======
+				<li><a href="" class="q2">계좌이체</a></li>
+				<li><a href="/member/account/balance" >잔액조회</a></li>
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 			</ul>
 			<ul class="menu2">
-				<li><a href="/no">공지사항</a></li>
+				<li><a href="/A">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
+				<li><a href="/F">자료실</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
-				<li><a href="/login">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
 	</div>
 	 <!-- link var 끝 -->
 	<div class="videoheader" style="margin-top: 30px; text-align: center; font-size: ">
-	<p style="
-    font-family: none;
+	<a style="
+    font-family: 'Do Hyeon', sans-serif;
     font-size: xxx-large;
-    margin-bottom: auto;">SamBank CF 광고</p>
+    margin-bottom: auto;">SB은행 광고 프로모션</a>
 	</div>
 	<!-- video 시작 -->	
 	<!-- style="margin-left:350px;" -->
@@ -426,6 +435,14 @@ let tk = "${_csrf.token}"
 
 	
 <script>
+$(function(){
+	$(".logout").click(function(e){
+		e.preventDefault();
+		$(".logout-form").submit();
+		
+		
+	})
+})
 
 
 </script>		
