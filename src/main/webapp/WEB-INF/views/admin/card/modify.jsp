@@ -57,7 +57,7 @@ function alert_updated(){
 <div class="container">
 <div class="col-md-12">
 	<div class="col-md-12">
-		<h3 class="page-header title">신규 카드 등록</h3>
+		<h3 class="page-header title">카드 정보 수정</h3>
 	</div>
 	<form action="" method="post" id="modifyForm">
 		<table class="table" style="margin:0;padding:0;">

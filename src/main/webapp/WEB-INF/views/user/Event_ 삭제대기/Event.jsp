@@ -1,164 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="includes/header_Main.jsp" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@include file="../../includes/header_Main.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-a:visited {color:black; text-decoration:none;}
-.asideHeader a:visited {color:#fff; text-decoration:none;}
-.tag_var a:visited {color:#fff; text-decoration:none;}
-a:hover {color:#5a5a5a; text-decoration:none;}
-a:link {color:#9e9e9e; text-decoration:none;}
-html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
-h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;}
-main{
-	width : 70%;
-	position: relative;
-/* 	margin-left: 300px; */
-	margin-top: 50px;
-	font: bolder;
-	position: fixed;
-/*     left: 120px; */
-}
-.tag_var{
-	WIDTH: 85%;
-	margin-left: 100px;
-}
-[class^="sm"]{
-	border: 1px solid white;
-}
-aside {
-    width: 340px;
-    color: #ffff;
-    /* padding: 10px; */
-    /* margin: 10px; */
-    /* margin-top:50px; */
-    padding-bottom: 650px;
-    box-sizing: border-box;
-    border: 1px solid;
-    position: absolute;
-    font-size: 35px;
-    background-color: darkseagreen;
-   	visited {color:#9e9e9e; text-decoration:none;}
-   }
-
-.aside_content{
-	margin-top:30px;
-	margin-left: 50px;
-	font-size: 22px;
-	font: bolder;
-}
-.asideHeader li {
-    font-style: italic;
-    font-weight: bolder;
-    text-align: center;
-    margin-top: 25px;
-    margin-right: 20px;
-}
-
-</style>
-<title>SamBank 공지사항</title>
+<title>SamBank < MessagePage > </title>
 </head>
-<body>
-	<div id="title_imageo">  
-	  <strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="로고 이미지"></strong>
-	  <a class="navbar-brand" src="/resources/SB_files/visual_section16_tit01.png" href="#"></a>
-	</div>
-	
-	<br />
-	
-	
-	
-    <div class="tag_var">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="width: 88%;margin-left: 5%;">
-        <div class="collapse navbar-collapse" id="navbarnav">
-      		<!-- Example split danger button -->
-				<div class="btn-group">
-				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">공지사항</a></button>
-				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">보안센터</a></button>
-				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">자료실</a></button>
-				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
-				<button type="button" class="btn btn-success" role="button" style="margin-left: 15px;" ><a href="">이벤트</a></button>
-				  <!-- 2 -->
-				  <button type="button" class="btn btn-success" style="margin-left: 35px;" >문의사항</button>
-				  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="sr-only">Toggle Dropdown</span>
-				  </button>
-				  <div class="dropdown-menu">
-				    <a class="dropdown-item" href="#">문의사항</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">문의사항 작성</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">문의사항 취소</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
-				  </div>
-				  <!-- 3 -->
-				  <button type="button" class="btn btn-success" style="margin-left: 35px;" >카드관련</button>
-				  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    <span class="sr-only">Toggle Dropdown</span>
-				  </button>
-				  <div class="dropdown-menu">
-				    <a class="dropdown-item" href="#">카드 신청</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">카드 취소</a>
-				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item" href="#">카드 결과 확인</a>
-				  </div>
-				</div>
-     	 </div>
-      
-      
-      
-      
-
-      </nav>
-      <!--nav영역 종료-->
-     </div>
      
      
      
      
-     
-     
-     <aside>
-     	<div class="asideHeader">
-     	<ul>
-     	<li>
-     	<a href="">공지사항</a>
-     	<div class="dropdown-divider"></div>
-     	</li>
-     	<!-- <div class="aside_content">
-     	 	<li>     	
-	     	<a href="">문의사항 작성</a>
-	     	<div class="dropdown-divider"></div>
-	     	</li>
-	     	<li>     	
-	     	<a href="">문의사항 취소</a>
-	     	<div class="dropdown-divider"></div>
-	     	</li>
-	     	<li>     	
-	     	<a href="">1:1 비공개 문의사항</a>
-	     	<div class="dropdown-divider"></div>
-	     	</li>
-     	</div> -->
-     	</ul>
-     	</div>
-  	
-     </aside>
-     
-     
-     
-     
-     
-     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" >
-	<!-- 여기다가 작성하면됨 -->
-     <div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title">고객 공지</h4>
+     <main>
+	<div class="col-md-10 order-md-1">
+      <h4 class="mb-3 title"><a href="/${cri.notice_types }" style="color:#000000"><c:out value="${title }"></c:out> </a></h4>
       <div class="row">
                 <!-- /.col-lg-12 -->
             </div>
@@ -201,7 +56,7 @@ aside {
 							  <input type="hidden" name="pageNum" value="${cri.pageNum }" />
 							  <input type="hidden" name="amount" value="${cri.amount }" />
 							  <input type="hidden" name="type" value="" />
-							  
+							  <input type="hidden" name="notice_types" value="${cri.notice_types }" />
 							  
 							  
 						  
@@ -209,7 +64,7 @@ aside {
 							  <input type="text" class="form-control" placeholder="검색어" aria-label="검색어 또는 글작성제목" aria-describedby="button-addon4" id="keyword" name="keyword">
 							  <div class="input-group-append" id="button-addon4"  >
 							    <button class="btn btn-outline-secondary" type="button" id="searchBtn">검색</button>
-							    <button class="btn btn-outline-secondary" type="button" id="registerBtn" <sec:authorize access="!hasAnyRole('ROLE_10,ROLE_5')">disabled</sec:authorize> >글 등록</button>
+							    
 							  </div>
 							  
 							</div>
@@ -221,7 +76,7 @@ aside {
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th style="width:8%">글 번호</th>
+                                        <th style="width:8%">no</th>
                                         <th style="width:12%">분류</th>
                                         <th>제 목</th>
                                         <th style="width:15%">작성자</th>
@@ -232,7 +87,7 @@ aside {
 								<c:forEach items="${list }" var="vo">
 									<tr>
                                         <td class="bno"><c:out value="${vo.notice_bno }"></c:out></td>
-                                        <td class="type"><c:out value="${vo.notice_type}"></c:out></td>
+                                        <td class="type notice_type_td"><a href="${vo.notice_type=='공지사항'?'A':'' }${vo.notice_type=='새소식'?'N':'' }${vo.notice_type=='이벤트'?'E':'' }${vo.notice_type=='자료실'?'F':'' }"><c:out value="${vo.notice_type}"></c:out></a></td>
                                         <td><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
                                         
                                         <td><c:out value="${vo.writer }"></c:out></td>
@@ -272,15 +127,48 @@ aside {
                     </div>                   
                 </div>     
     </div>
-<form action="/admin/customer_notice" id="actionForm">
+<form action="/N" id="actionForm">
 	<input type="hidden" name="pageNum" value="${cri.pageNum }" />
 	<input type="hidden" name="amount" value="${cri.amount }" />
 	<input type="hidden" name="type" value="${cri.type }" />
 	<input type="hidden" name="keyword" value="${cri.keyword }" />
+	<input type="hidden" name="notice_types" value="${cri.notice_types }" />
 	<%-- <sec:csrfInput/> --%>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+     </main>
+
+
+		
+		
+		
 <script>
+
 $(function(){
+	$(".checker").click(function(e){
+		e.preventDefault();
+		
+		if(!go_check){
+			return;
+		}
+		
+		if($("input[value='"+$(this).data("check")+"']").prop("checked")){
+			$("input[value='"+$(this).data("check")+"']").prop("checked", false);
+		}else{
+			$("input[value='"+$(this).data("check")+"']").prop("checked", true);
+		}
+	})
+	
 	
 	let keywordType = "${cri.type}";
 	typeL = keywordType.split("");
@@ -294,23 +182,6 @@ $(function(){
 	
 	
 	
-	let groupId = 0;
-	$.ajax({
-		url : "/admin/get_groupId",
-		type : "post",
-		beforeSend : function(xhr)
-           {   
-               xhr.setRequestHeader(hn, tk);
-           },
-		data :{
-		},
-		dataType : "text",
-		success : function(result){
-			groupId = parseInt(result);
-		}
-	})
-	
-	
 	let actionForm = $("#actionForm");
 	$(".page-link").click(function(e){
 		e.preventDefault();
@@ -320,19 +191,6 @@ $(function(){
 		
 		actionForm.submit();
 	})
-	
-	$("#registerBtn").click(function(e){
-		e.preventDefault();
-		if(groupId < 5){
-			alert("공지를 등록할 권한이 없습니다.");
-			return false;
-		}
-		
-		location.href = "/admin/customer_notice/register";
-		
-		
-	})
-	
 	
 	
 	
@@ -372,32 +230,26 @@ $(function(){
 		//	/board/list?pageNum=5&amount=20
 		//actionForm 안의 pageNum값과 amount 값 변경하기
 		
-		actionForm.attr("action", "/admin/customer_notice/read/"+$(this).attr("href"));
+		actionForm.attr("action", "/customer_notice/read/"+$(this).attr("href"));
+		actionForm.submit();
+	})
+	
+	$(".notice_type_td > a").click(function(e){
+		e.preventDefault();
+		actionForm.find("input[name='notice_types']").val($(this).attr("href"));
 		actionForm.submit();
 	})
 	
 	
 	
-	
 })
 
+
+
+
 </script>
-     
-     
-     
-<!--      (게시글 작성 버튼)
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"style="margin-left: 100%;" >
-		  	작성
-		</button> -->
-
-     
-     </main>
-
-
-		
-		
         
 
 </body>
 </html>
-<%@include file="includes/footer_Main.jsp" %>
+<%@include file="../../includes/footer_Main.jsp" %>

@@ -59,7 +59,7 @@
 			    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
 			    	<c:forEach items="${list }" var="vo">
-			    		<a class='dropdown-item account-item' href='#'><c:out value="${vo.ano }"></c:out> </a>
+			    		<a class='dropdown-item account-item' href='#'><c:out value="${vo.ano}"></c:out> </a>
 		    		</c:forEach>
 			    </div>
 			  </div>
@@ -137,5 +137,5 @@ $(function(){
 	$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 })
 </script>
-
+<script src="/resources/js/member/customer/customer_anolist.js"></script>
 <script src="/resources/js/member/customer/customer_historyAccount.js"></script>

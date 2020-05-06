@@ -15,7 +15,8 @@
 <link rel="stylesheet" href="/resources/css/font.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018_content.css" />
 <link rel="stylesheet" href="/resources/css/intro_2018.css" />
-
+<!-- 웹폰트 -->
+<link href = "https://fonts.googleapis.com/css2?family=Do Hyeon&display=swap"rel = "stylesheet">
 <script>
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
@@ -33,7 +34,7 @@ let tk = "${_csrf.token}"
   a:hover {color:#5a5a5a; text-decoration:none;}
   .Swiper {
     position: relative;
-    height: 400px;
+    height: 500px;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 14px;
     margin: 0;
@@ -88,41 +89,44 @@ let tk = "${_csrf.token}"
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
 			 <!--  nav bar 오른쪽 정렬 -->
 			  <h2>${info.id }</h2>
-			<c:choose>
-  			<c:when test="${!empty info }">
 		      	<ul class="navbar-nav ml-auto" style="font-family:'견고딕';" >
-			  		<li class="nav-item dropdown">
+				<sec:authorize access="isAuthenticated()">
+			  		
+			  		<li class="nav-item dropdown active">
+			  		
+			  		
 			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			          로그인 관련창
+			          <c:out value="${name } 님"></c:out>
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-				          <a class="dropdown-item" href="#">로그인후 보여주기</a>
-				          <a class="dropdown-item" href="#">프로필 관리</a>
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
-				          <a class="dropdown-item" href="#">로그아웃</a>
+				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
+		      				
+		      				<a class="dropdown-item logout" href="#">로그아웃</a>
+		      			  </form:form>
 				        </div>
 					</li>
-			</c:when>
-			<c:otherwise>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
 					  <a class="nav-link" href="/register/step1">회원가입</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="/member/customerlogin">로그인</a>
+					  <a class="nav-link" href="/member/login_test">로그인</a>
 					</li>
-			</c:otherwise>	
-			</c:choose>
+				</sec:authorize>
+				
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">개인</a>
-					</li>
-					<li class="nav-item active">
-					  <a class="nav-link" href="#">기업</a>
+					  <a class="nav-link" href="/">개인</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">금융 상품</a>
+					  <a class="nav-link" href="/">기업</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">은행 소개</a>
+					  <a class="nav-link" href="/">금융 상품</a>
+					</li>
+					<li class="nav-item active">
+					  <a class="nav-link" href="/">은행 소개</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="#">고객 센터</a>
@@ -147,13 +151,15 @@ let tk = "${_csrf.token}"
 			    <div class="swiper-wrapper" >
 							<div class="swiper-slide"  >
 							<!--  컨텐츠 - 1 -->
-							<li >
+							<li>
 								<div>
-									<strong><img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스"></strong><br/><br/>
 									<span>
+									<!-- <img src="/resources/SB_files/visual_section16_tit01.png" alt="SB오픈뱅크 서비스">
 									<img src="/resources/SB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 SB뱅크 한 곳에서!" style="margin-top:20px;">
-									</span><br/>
-									<a href="" class="link" style="margin-left: 700px;">바로가기</a>
+									<a href="" class="link">바로가기</a>
+									<img src="/resources/SB_files/background.png" alt="" /> -->
+									<img src="/resources/SB_files/pull-2.png" alt="" />
+									</span>
 								</div>
 							</li>
 							</div>
@@ -161,11 +167,12 @@ let tk = "${_csrf.token}"
 							<!-- 컨텐츠 - 2 -->
 									<li class="wrap-visual.active2">
 									<div>
-										<strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong><br />
+										<!-- <strong><img src="/resources/SB_files/visual_section25_tit01.png" alt="통신비 계획이 다 있구나! 반값이라니!"></strong><br />
 										<span><img src="/resources/SB_files/visual_section25_tit02.png" alt="Liiv M LTE 무제한(11GB+) 22,000원!"
 										style="margin-top: 25px;margin-bottom: 25px;">
-										</span><br />
-										<a href="" class="link"style="margin-left: 600px;">바로가기</a>
+										<img src="/resources/SB_files/background2.png" alt="" /> -->
+										<img src="/resources/SB_files/background2.png" alt="" />
+										</span>
 									</div>
 									</li>
 							</div>
@@ -173,9 +180,10 @@ let tk = "${_csrf.token}"
 							<!-- 컨텐츠 - 3 -->
 									<li class="wrap-visual.active3">
 									<div>
-										<strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
+										<!-- <strong><img src="/resources/SB_files/visual_section10_tit01.png" alt="언제 어디서나 빠르고 쉽게 외환도 역시 SB!"></strong>
 										<span><img src="/resources/SB_files/visual_section10_tit02.png" alt="외화 환전 최대 90% 환율우대 (별도 통보시까지)"></span><br />
-										<a href="" class="link"style="margin-left: 500px;">바로가기</a>
+										<img src="/resources/SB_files/background3.png" alt="" /> -->
+										<img src="/resources/SB_files/background3.png" alt="" />
 									</div>
 									</li>
 							</div>
@@ -183,15 +191,12 @@ let tk = "${_csrf.token}"
 							<!-- 컨텐츠 - 4 -->
 									<li class="wrap-visual.active4">
 									<div>
-										<strong><img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서" 
-										style="margin-right: 200px;">
-										</strong><br />
-										<span><img src="/resources/SB_files/visual_section5_tit02.png"
-										style="margin-left: 500px;maring-bottom: 25px"
-										alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"
-										>
-										</span><br/><br />
-										<a href="" class="link" style="margin-left: 400px;" >바로가기</a>
+										<span>
+										<!-- <img src="/resources/SB_files/visual_section5_tit01.png" alt="SB모바일인증서" style="margin-right: 200px;">
+										<img src="/resources/SB_files/visual_section5_tit02.png"style="margin-left: 500px;
+										maring-bottom: 25px"alt="모든 금융거래의 시작&lt;br/&gt;이제는 평생, 쉽게, 안전하게 사용하세요!"> -->
+										<img src="/resources/SB_files/background4.png" alt="" />
+										</span>
 									</div>
 									</li>
 							</div>
@@ -199,16 +204,18 @@ let tk = "${_csrf.token}"
 							<!-- 컨텐츠 - 5 -->
 									<li class="wrap-visual.active5">
 									<div>
-										<strong><img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행"></strong>
-										<span><img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."
+										<span>
+										<!-- <img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."
 										style="margin-left: 100px;">
+										<img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행" -->>
+										<img src="/resources/SB_files/background5.png" alt="" />
 										</span>
 									</div>
 							</div>
 			    </div>
 			    <!-- Add Pagination -->
-			    <div class="swiper-pagination"></div>
-			    <!-- Add Arrows -->
+ 			    <div class="swiper-pagination"></div>
+			    Add Arrows
 			    <div class="swiper-button-next"></div>
 			    <div class="swiper-button-prev"></div>
 			  </div>
@@ -252,24 +259,25 @@ let tk = "${_csrf.token}"
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
 				<li><a href="/member/account/account" class="q1">전체계좌조회</a></li>
-				<li><a href="" class="q2">계좌이체</a></li>
+				<li><a href="/member/account/transfer" class="q2">계좌이체</a></li>
 				<li><a href="/member/account/balance" >빠른조회</a></li>
+				<li><a href="/member/account/balance" >잔액조회</a></li>
 			</ul>
 			<ul class="menu2">
-				<li><a href="/no">공지사항</a></li>
+				<li><a href="/A">공지사항</a></li>
 				<li><a href="/N">새소식</a></li>
 				<li><a href="/E">이벤트</a></li>
+				<li><a href="/F">자료실</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
-				<li><a href="/login">로그인</a></li>
 				<li><a href="">카드</a></li>
 			</ul>
 	</div>
 	 <!-- link var 끝 -->
 	<div class="videoheader" style="margin-top: 30px; text-align: center; font-size: ">
-	<p style="
-    font-family: none;
+	<a style="
+    font-family: 'Do Hyeon', sans-serif;
     font-size: xxx-large;
-    margin-bottom: auto;">SamBank CF 광고</p>
+    margin-bottom: auto;">SB은행 광고 프로모션</a>
 	</div>
 	<!-- video 시작 -->	
 	<!-- style="margin-left:350px;" -->
@@ -426,6 +434,14 @@ let tk = "${_csrf.token}"
 
 	
 <script>
+$(function(){
+	$(".logout").click(function(e){
+		e.preventDefault();
+		$(".logout-form").submit();
+		
+		
+	})
+})
 
 
 </script>		

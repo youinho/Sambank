@@ -310,7 +310,7 @@ on ad.id = admin_group_members.id;
 
 select * from admin_groups;
 
-
+select * from notice_board;
 select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, admin_group_authorities.group_id, admin_groups.group_name
 		from (select * from admintbl where id='sam') ad, admin_group_members, admin_groups,admin_group_authorities
 		where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = admin_group_authorities.group_id;
@@ -346,6 +346,8 @@ alter table admin_board rename column content to content3;
 alter table admin_board rename column content2 to content;
 commit;
 alter table admin_board modify(content3 nvarchar2(2000) default '임시');
+alter table admin_board modify(content3 nvarchar2(2500) default '임시');
+select * from admin_board;
 alter table admin_board modify(content clob default 'NULL');
 select * from deposit_history;
 select * from admin_board;
@@ -422,7 +424,7 @@ create table customer_inquiry_reply(
     regdate date default sysdate
     );
     
-    
+select * from customer_board;
 delete from customer_inquiry;
 -- drop table customer_inquiry;
 insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
@@ -483,11 +485,15 @@ alter table admintbl add(profile_image_type nvarchar2(10));
 update admintbl set profile_image_type='png';
 commit;
 
+select * from customertbl order by cno desc;
+
+
 select * from customer_inquiry order by inquiry_no desc;
 select * from customer_inquiry_reply;
 
 select * from admintbl;
 
+<<<<<<< HEAD
 select * from deposittbl;
 commit;
 select id, password, profile_image, profile_image_type from admintbl;
@@ -496,4 +502,12 @@ delete from admin_group_members where id = 'sam2';
 
 select * from customertbl where name='최규리';
 select * from deposit_history;
+=======
+select * from admintbl;
+update admintbl set profile_image_type='png' where profile_image_type is null;
+commit;
+
+select * from deposit_history order by hno desc;
+
+>>>>>>> branch 'master' of http://github.com/youinho/sambank
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

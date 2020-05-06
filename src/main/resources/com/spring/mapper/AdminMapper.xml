@@ -65,8 +65,8 @@
 	</update>
 	
 	<insert id="insert_admin">
-		insert into admintbl(admin_no, auth, id, password, name, rank, branch, mobile, enabled, profile_image)
-		values(seq_admin.nextVal, concat('ROLE_', #{group_id}), #{id}, #{password}, #{name}, #{rank}, #{branch}, #{mobile}, #{enabled}, (select profile_image from default_profile_image))
+		insert into admintbl(admin_no, auth, id, password, name, rank, branch, mobile, enabled, profile_image, profile_image_type)
+		values(seq_admin.nextVal, concat('ROLE_', #{group_id}), #{id}, #{password}, #{name}, #{rank}, #{branch}, #{mobile}, #{enabled}, (select profile_image from default_profile_image), 'png')
 	
 	</insert>
 	<insert id="insert_admin_group">

@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(value="/member/account/*",method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/member/account/*")
 public class AccountController {
 	
 	@Autowired
@@ -44,6 +44,32 @@ public class AccountController {
 	@Autowired
 	private AdminService admin_service;
 	
+	//둘중 하나는 지울거
+	//계좌 정보 불러오기
+	@ResponseBody
+	@PostMapping("/customer_get_depositInfo")
+	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
+		ano=ano.trim();
+		DepositVO vo = admin_service.get_deposit(ano);
+		
+		
+		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+		
+	}
+	
+	//계좌검색
+	@ResponseBody
+	@PostMapping("/transfer/check_ano")
+	public ResponseEntity<DepositVO> check_ano(String ano, HttpServletRequest req){
+	
+		DepositVO vo = admin_service.check_ano(ano);
+		//log.info("check_ano vo : "+vo);
+		if(vo != null) {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@GetMapping("/account")
 	public void account(ModelMap modelMap,HttpServletRequest req) {
@@ -54,12 +80,12 @@ public class AccountController {
 		CustomerVO vo=admin_service.select_by_cno(cno);
 		String name=vo.getName();
 		List<Acc_info> list = admin_service.select_acc_info(cno);
-		
+	
 		modelMap.addAttribute("list",list);
 		modelMap.addAttribute("cno",cno);
 		modelMap.addAttribute("name",name);
-		log.info(cno+"");
-		log.info(list+"");
+//		log.info(cno+"");
+//		log.info(list+"");
 	}
 
 	
@@ -89,26 +115,74 @@ public class AccountController {
 		}
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
+//		ano=ano.trim();
 		list = admin_service.get_history(ano, start, end2);
-		//log.info("history : "+list);
+		log.info("history : "+list);
 		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
 	}
 	
+	//계좌이체
+	@GetMapping("/transfer")
+	public void transfer_pre(ModelMap modelMap, HttpServletRequest req) {
+		String id = req.getRemoteUser();
+
+		int cno=Integer.parseInt(service.getCno(id));
+		CustomerVO vo=admin_service.select_by_cno(cno);
+		String name=vo.getName();
+		List<Acc_info> list = admin_service.select_acc_info(cno);
+	
+		modelMap.addAttribute("list",list);
+		modelMap.addAttribute("cno",cno);
+		modelMap.addAttribute("name",name);
+	
+//		log.info("계좌이체 준비완료");
+	}
 
 	
-
+	//계좌 이체
+	@PostMapping("/transfer")
+	public String transfer_action(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
+		log.info(vo+"");
+		
+		if(admin_service.withdraw(vo)) {
+			rttr.addFlashAttribute("success", "true");
+			rttr.addFlashAttribute("from_name", vo.getFrom_name());
+			rttr.addFlashAttribute("amount", vo.getAmount());
+			log.info("출금 성공");
+			Deposit_historyVO other_vo;
+			other_vo=vo;
+			other_vo.setAno(vo.getFrom_ano());
+			other_vo.setName(vo.getFrom_name());
+			if(admin_service.deposit(other_vo)) {
+				log.info("입금 성공");
+			}else {
+				
+				log.info("입금 실패");
+			}
+		}else {
+			rttr.addFlashAttribute("success", "false");
+			log.info("출금 실패");
+		}
+		
+		return "redirect:/member/account/transfer";
+	}
+	//계좌확인
 	@GetMapping("/balance")
 	public void get_balance(ModelMap modelMap, HttpServletRequest req) {
 	
-	
-	
-		String ano="10235034475230";
+		log.info("account 요청");
 		String id = req.getRemoteUser();
-		
-		long c_balance=service.balnce(ano);
-		
-		modelMap.addAttribute("c_balance",c_balance);
-		log.info(c_balance+"");
+
+		int cno=Integer.parseInt(service.getCno(id));
+		CustomerVO vo=admin_service.select_by_cno(cno);
+		String name=vo.getName();
+		List<Acc_info> list = admin_service.select_acc_info(cno);
+	
+		modelMap.addAttribute("list",list);
+		modelMap.addAttribute("cno",cno);
+		modelMap.addAttribute("name",name);
+	
 	}
 
+	
 }
