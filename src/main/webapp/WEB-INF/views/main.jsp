@@ -256,13 +256,9 @@ let tk = "${_csrf.token}"
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
 				<li><a href="/member/account/account" class="q1">전체계좌조회</a></li>
-<<<<<<< HEAD
 				<li><a href="/member/account/transfer" class="q2">계좌이체</a></li>
 				<li><a href="/member/account/balance" >빠른조회</a></li>
-=======
-				<li><a href="" class="q2">계좌이체</a></li>
 				<li><a href="/member/account/balance" >잔액조회</a></li>
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 			</ul>
 			<ul class="menu2">
 				<li><a href="/A">공지사항</a></li>
