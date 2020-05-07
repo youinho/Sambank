@@ -45,7 +45,7 @@ public class LoginController {
 	@GetMapping("/member/customerlogin")
 	public String registerGet(){		
 		
-		File file=new File("d://sam//1.txt");
+		File file=new File("c://sam//1.txt");
 		if (file.exists()) {
 			return "/member/customerlogin";
 		}

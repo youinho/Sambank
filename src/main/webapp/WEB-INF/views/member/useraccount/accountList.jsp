@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_Main.jsp" %>
+<%@include file="../../includes/header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 
@@ -55,12 +55,6 @@ aside {
 }
 
 </style>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css"> -->
 <title>SamBank 개인뱅킹-계좌조회 </title>
 </head>
 <body>
@@ -207,109 +201,82 @@ aside {
 
 </script>
 
-	<div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title">계좌	 신청</h4>
-      	<hr class="mb-4">
-      
+	<div class="col-md-9 order-md-1">
+      <h4 class="mb-3 title">계좌	 조회</h4>
+	<hr class="mb-4">
       <form class="needs-validation" novalidate="novalidate" method="post" id="register_customer">
       
-  
-   <table class="table table-bordered">
-  
-  <tbody>
-    <tr>
-      <th style="width: 10%; vertical-align: middle; text-align: center; ">성명</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="name" placeholder="예) 홍길동"></td>
-      <th style="width: 10%; vertical-align: middle; text-align: center; ">생년월일</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="birth" placeholder="예) 900101"></td>
-    </tr>
-    
-   
-   <tr>
-    <th style="vertical-align: middle; text-align: center;" >연락처</th>
-    <td colspan="4"><input type="text" class="form-control" name="phone" placeholder="예) 02-000-0000"></td>  
-    <th style="vertical-align: middle; text-align: center;" >전화번호</th>
-    <td colspan="4"><input type="text" class="form-control" name="mobile" placeholder="예) 010-0000-0000"></td>  
-   </tr>
-   
-   <tr>
-    <th style="vertical-align: middle; text-align: center;" >이메일</th>
-    <td colspan="7"><input type="email" class="form-control" name="email" placeholder="예) sambank@sambank.com"></td>  
-   </tr>
-   
-   <tr>
-    <th style="vertical-align: middle; text-align: center;" >주소</th>
-    <td colspan="7"><div class="mb-3">
-         <div class="label">
-          <label for="address"></label><button class="btn btn-outline-primary btn-sm" id="search_juso">주소 검색</button>
-          <small name="address">
-            
-          </small>
+        <div class="mb-3">
+       	 <div class="label d-flex justify-content-between">
+       	  <div class="col-12" style="margin-right: auto; position: relative; font-weight: bold; font-size: 20px;">
+	          <label for="balance">자산</label>
+	          <label for="total-balance" style="float: right; color:#336633;">가지고 있는 총 금액 원</label>
+          </div>
+          
          </div>
-         <input type="text" class="form-control" name="address" id="address" placeholder="예) 서울시 노원구 공릉동 444-2" readonly="">
-        </div></td>  
-   </tr>
-   
-   <tr>
-    <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
-    <td style="vertical-align: middle; text-align: center;" colspan="1">
-     <select name="account" class="form-control">
-      <option value="1">예금계좌</option>
-      <option value="2">적금계좌</option>
-      <option value="3">대출계좌</option>
-     </select>
-    </td>  
-   
-
-   
-    <th style="vertical-align: middle; text-align: center;">상품</th>
-    <td colspan="5" style="vertical-align: middle; text-align: center;">
-    <input type="checkbox"  name="product1" value="SamBanK-부자">SamBanK-부자 &nbsp;
-    <input type="checkbox"  name="product2" value="SamBanK-갑부">SamBanK-갑부 &nbsp;
-    <input type="checkbox"  name="product3" value="SamBanK-금돼지">SamBanK-금돼지 &nbsp;
-    </td>  
-   </tr>
-   
-   
-      
-   <tr>
-    <th style="vertical-align: middle; text-align: center;">방문지점</th>
-    <td colspan="7">
-    	<input type="text" class="form-control" name="branch" placeholder="예) 공릉지점">
-    </td>  
-   </tr>
-   
-   
-   <tr>
-    <th style="vertical-align: middle; text-align: center;">방문희망일시</th>
-    <td colspan="7" >
-    <div class='x' style="width:30%; vertical-align: middle;">
-    <div class="form-group">
-        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" value="05/05/2020">
-            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div>
+         
+	<hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
+		<div class="mb-3">
+		<div class="label d-flex justify-content-between">
+       	  <div class="col-12" style="width: 100%; background-color:#FBFBFB; font-weight: bold;">
+	          <label for="deposit">입출금</label>
+          </div>
         </div>
+        <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
+	          <label for="balance">xx 통장</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+          </div>
+        <div class="col-12" style="margin-right: auto; position: relative;">
+	          <label for="balance">통장 번호</label>
+	          <label for="total-balance" style="float: right;">통장상품명</label>
+        	</div>
+        </div>
+		<hr class="mb-4">
+		↑이런식으로 리스트
+		<hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
+		<div class="mb-3">
+		<div class="label d-flex justify-content-between">
+       	  <div class="col-12" style="width: 100%; background-color:#FBFBFB; font-weight: bold;">
+	          <label for="deposit">적금</label>
+          </div>
+        </div>
+        <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
+	          <label for="balance">xx 통장</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+          </div>
+        <div class="col-12" style="margin-right: auto; position: relative;">
+	          <label for="balance">통장 번호</label>
+	          <label for="total-balance" style="float: right;">통장상품명</label>
+        	</div>
+        </div>
+		<hr class="mb-4">
+        ↑이것도 이런식으로 리스트
+        <hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
+		<div class="mb-3">
+		<div class="label d-flex justify-content-between">
+       	  <div class="col-12" style="width: 100%; background-color:#FBFBFB; font-weight: bold;">
+	          <label for="deposit">대출?</label>
+          </div>
+        </div>
+        <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
+	          <label for="balance">xx 통장</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+          </div>
+        <div class="col-12" style="margin-right: auto; position: relative;">
+	          <label for="balance">통장 번호</label>
+	          <label for="total-balance" style="float: right;">통장상품명</label>
+        	</div>
+        </div>
+		<hr class="mb-4">
+        ↑이것도 이런식으로 리스트
+        <input type="hidden" name="_csrf" value="">
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">문의??</button>
+      </form>
     </div>
-	</div> 
-	</td>
-   </tr>
-   
-   
-   <tr>
-    <td colspan="10">
-    <input type="submit" class="btn btn-primary" value="신청">
-    <input type="reset" class="btn btn-danger" value="취소">
-    </td>
-   </tr>
-    </tbody>
-   
-  </table>
- </form>
- </div>
-	
-	</main>
+    <div class="bottom">
+    </div>
+<!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script> -->
+</div></main>
 
 
 		
@@ -318,25 +285,5 @@ aside {
 
 </body>
 </html>
-<%@include file="../includes/footer_Main.jsp" %>
+<%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/user/account/user_modifyAccount.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer.js"></script>
-<!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
- -->
- <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({ format: 'L'});
-        $('#datetimepicker2').datetimepicker({
-            format: 'L',
-            useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
-        
-    });
-    
-</script>
