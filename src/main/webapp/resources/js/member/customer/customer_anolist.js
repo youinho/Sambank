@@ -1,68 +1,15 @@
 
 $(function(){
-	
-
-	$("#check_ano").click(function(e){
-		e.preventDefault();
-		
-		$("input[name='name']").val("");
-		$("input[name='cno']").val("");
-		$("input[name='amount']").val("")
-		$("input[name='amount_korean']").val("")
-		
-		let form = $("#withdrawForm");
-		
-		
-		$.ajax({
-			url : "/member/account/transfer/check_ano",
-			type : "post",
-			beforeSend : function(xhr)
-            {   
-                xhr.setRequestHeader(hn, tk);
-            },
-			data :{
-				ano : $("#ano").val()
-			},
-			dataType : "text",
-			success : function(result){
-				var vo = JSON.parse(result);
-				$("input[name='cno']").val(vo.cno);
-				$("input[name='name']").val(vo.name);				
-				$("input[name='remain']").val(viewNumber(String(vo.balance)));
-				$("input[name='remain_korean']").val(viewKorean(String(vo.balance)));
-				
-			},
-			error: function(result){
-				alert("계좌와 일치하는 정보가 없습니다.");
-			}
-			
-			
-			
-		
-			
-		})
-		
-		
-	})
-	
-	
-	
-	
 	$("#ano-list").on("click",".account-item" ,function(){
 		
-		
-		
-		$("input[name='amount']").val("");
-		$("input[name='amount']").val("")
-		$("input[name='amount_korean']").val("")
-		
-		
-		
-		
+		$("input[name='ano']").val("");
+		$("input[name='max_withdraw']").val("");
+		$("input[name='balance']").val("");
+		console.log("aaaaa");
 		var ano = $(this).text();
 		
 		$.ajax({
-			url:"/member/account/customer_get_depositInfo",
+			url:"/member/useraccount/get_depositInfo",
 			type : "post",
 			beforeSend : function(xhr)
             {   
@@ -74,10 +21,10 @@ $(function(){
 			dataType : "text",
 			success : function(result){
 				var vo = JSON.parse(result);
-				$("input[name='p_name']").val(vo.p_name);
+//				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
-				
-				
+				$("input[name='max_withdraw']").val(vo.max_withdraw);
+				$("input[name='balance']").val(viewNumber(String(vo.balance)));
 			}
 		})
 		
@@ -87,6 +34,52 @@ $(function(){
 		
 		
 	})
+
+//	$("#check_ano3wq").click(function(e){
+//		
+//		e.preventDefault();
+//	
+//		
+//		let form = $("#withdrawForm");
+//		
+//		
+//		$.ajax({
+//			url : "/member/useraccount/get_row",
+//			type : "post",
+//			beforeSend : function(xhr)
+//            {   
+//                xhr.setRequestHeader(hn, tk);
+//            },
+//			data :{
+//				ano : $("#ano").val()
+//			},
+//			dataType : "text",
+//			success : function(result){
+//				var vo = JSON.parse(result);
+//				$("input[name='cno']").val(vo.cno);
+//				$("input[name='name']").val(vo.name);	
+//				$("input[name='max_withdraw']").val(vo.max_withdraw);
+//				$("input[name='balance']").val(viewNumber(String(vo.balance)));
+//				$("input[name='remain_korean']").val(viewKorean(String(vo.balance)));
+//				
+//			},
+//			error: function(result){
+//				alert("계좌와 일치하는 정보가 없습니다.");
+//			}
+//			
+//			
+//			
+//		
+//			
+//		})
+//		
+//		
+//	})
+//	
+//	
+	
+	
+
 	
 	
 	

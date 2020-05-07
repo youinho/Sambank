@@ -1,9 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_Main.jsp" %>
+<%@include file="../../includes/header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
-
+$(function(){
+	$("#withdraw").addClass("active");
+})
+function alert_success(){
+	let success = "${success}";
+	
+	if(success ==="" || history.state){
+		return;
+	}
+	
+	
+	if(success != "" && success != null){
+		if(success=="true"){
+			alert("${from_name}님에게 ${amount}원이 이체되었습니다.");
+		}else if(success=="false"){
+			alert("이체에 실패했습니다.");
+		}
+	}
+}
 </script>
 <!DOCTYPE html>
 <html>
@@ -204,25 +222,30 @@ aside {
 	<div class="col-md-9 order-md-1">
       <h4 class="mb-3 title">계좌	 이체</h4>
 	<hr class="mb-4">
-      <form class="needs-validation" novalidate="novalidate" method="post" id="register_customer">
+      <form action="" class="needs-validation" novalidate="novalidate" method="post" id="withdrawForm">
       
         <div class="mb-3">
        	 <div class="label d-flex justify-content-between">
        	  <div class="col-6" style="padding:0">
 	          <label for="accountNumber">출금 계좌번호</label>
           </div>
-          
+          	
          </div>
 		<div class="input-group">
-			<select class="account-select form-control" id="type" name="type">
-			    <option value="0" selected>-- 출금 계좌번호 --</option>
-			    <option value="1">계좌번호1</option>
-			    <option value="2">계좌번호2</option>
-			    <option value="3">계좌번호3</option>
-			</select>
+			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
+			    <div class="dropdown-menu" id="ano-list">
+			    	<c:forEach items="${list }" var="vo">
+			    		<a class='dropdown-item account-item' id="check_ano" href='#'><c:out value="${vo.ano}"></c:out> </a>
+		    		</c:forEach>
+			    </div>
+			    	  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" required>
+			    	  	    
+					 <input type="text" class="form-control valid" name="remain" id="remain" required >
+					 <button class="btn btn-outline-secondary" type="button" id="check_ano" style="width:10%">계좌잔액 확인</button>
 			</div>
         </div>
-        
+      
+			    		
 		
 		<div class="mb-3">
 		<div class="label d-flex justify-content-between">
@@ -246,7 +269,7 @@ aside {
             
           </small>
           </div>
-          <input type="text" class="form-control" name="" id="" placeholder="입금계좌번호(숫자만 입력)">
+          <input type="text" class="form-control" name="from_ano" id="from_ano" placeholder="입금계좌번호(숫자만 입력)">
         </div>
 		
         
@@ -265,7 +288,7 @@ aside {
 			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">+1만</button>
 			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">전액</button>
 		</div>
-			<input type="text" class="form-control" name="" id="" placeholder="입금계좌번호(숫자만 입력)">
+			<input type="text" class="form-control" name="amount" id="amount" placeholder="입금 금액">
         </div>
 		
         
@@ -277,17 +300,9 @@ aside {
             
           </small>
           </div>
-          <input type="text" class="form-control" name="" id="" placeholder="보내는 사람의 이름">
+          <input type="text" class="form-control" name="message" id="message" placeholder="미입력시 예금주명">
         </div>
-        <div class="mb-3">
-        <div class="label">
-          <label for="sendMessage">내 통장 표시</label>
-          <small name="sendMessage">
-            
-          </small>
-          </div>
-          <input type="text" class="form-control" name="" id="" placeholder="14자 이내">
-        </div>
+        
         
         <div class="mb-3">
 	        <div class="label d-flex justify-content-between">
@@ -295,9 +310,9 @@ aside {
 		          <label for="">비밀번호 입력</label>
 	          </div>
 	        </div>
-        <div class="input-group" style="width:100%">
-			  <div class="input-group-prepend col-6" style="width:45%">
-			    <p class="input-group-text" style="width:40%"><strong>비밀번호</strong> </p>
+        	<div class="input-group" style="width:100%">
+			  <div class="input-group-prepend col-6" style="width:35%">
+			    <p class="input-group-text" style="width:30%"><strong>비밀번호</strong> </p>
 			  <input type="password" class="form-control valid" name="password" id="password" readonly="" aria-invalid="false">
 			    <button class="btn btn-outline-secondary" type="button" id="passwordBtn">
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -305,25 +320,32 @@ aside {
 					</svg>
 			    </button>
 			  </div>
-			  <div class="input-group-prepend col-6" style="width:45%">
-  			    <p class="input-group-text" style="width:40%"><strong>비밀번호 확인</strong> </p>
+			  <div class="input-group-prepend col-6" style="width:35%">
+  			    <p class="input-group-text" style="width:30%"><strong>비밀번호 확인</strong> </p>
 			  <input type="password" class="form-control valid" name="confirm_password" id="confirm_password" readonly="">
 			  <button class="btn btn-outline-secondary" type="button" id="confirm_passwordBtn">
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"></path>
 					</svg>
 			    </button>
+			   
 			  </div>
+			  <div class="input-group-prepend col-6" style="width:20%">
+			 	 <button class="btn btn-secondary" type="button"  id="changePwdBtn">
+			    	비밀번호 확인
+			    </button>
+			    </div>
 			  <div class="input-group-append">
 			  </div>
 			</div>        
 			</div>
-        
+        	 
         
         <hr class="mb-4">
         
         <input type="hidden" name="_csrf" value="">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">이체</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
+     	<sec:csrfInput/>
       </form>
     </div>
     <div class="bottom">
@@ -334,9 +356,13 @@ aside {
 
 		
 		
-        
-
+       
+ 
 </body>
 </html>
-<%@include file="../includes/footer_Main.jsp" %>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>
+<script>
+</script>
+<%@include file="../../includes/footer_Main.jsp" %>
+<script src="/resources/js/member/customer/customer_anolist.js"></script>
+<script src="/resources/js/member/customer/customer_transfer.js"></script>
+

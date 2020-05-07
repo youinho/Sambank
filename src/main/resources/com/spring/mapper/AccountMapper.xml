@@ -75,10 +75,10 @@
 	</select>
 	
 	
-	<!-- ano로 고객이름, cno, ano -->
+	<!-- ano로 고객이름, cno, ano balance,max_withdraw -->
 	<select id="check_ano" resultType="com.spring.domain.DepositVO">
-		select customertbl.name, d.cno, d.ano, d.balance 
-		from (select cno, ano, balance from deposittbl where ano = #{ano}) d
+		select customertbl.name, d.cno, d.ano, d.balance, d.max_withdraw
+		from (select cno, ano, balance, max_withdraw from deposittbl where ano = #{ano}) d
 		join customertbl
 		on customertbl.cno = d.cno
 	</select>
