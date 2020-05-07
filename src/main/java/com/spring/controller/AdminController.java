@@ -898,7 +898,7 @@ public class AdminController {
 		}
 		//log.info("data :"+data);
 		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("d:\\upload\\"+fileName);
+		Resource resource = new FileSystemResource("c:\\upload\\"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
@@ -938,7 +938,7 @@ public class AdminController {
 	public ResponseEntity<List<AttachFileDTO>> uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
 		//log.info("upload"+uploadFile);
-		String uploadFolder = "d:\\upload";
+		String uploadFolder = "c:\\upload";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -978,7 +978,7 @@ public class AdminController {
 		//log.info("파일 삭제 : ");
 		File file = null;
 		try {
-			String file_p = "d:\\upload\\"+URLDecoder.decode(fileName, "utf-8");
+			String file_p = "c:\\upload\\"+URLDecoder.decode(fileName, "utf-8");
 			file = new File(file_p);
 			file.delete();
 		} catch (UnsupportedEncodingException e) {
@@ -1297,7 +1297,7 @@ public class AdminController {
 		}
 		//log.info("data :"+data);
 		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("d:\\upload_customer\\"+fileName);
+		Resource resource = new FileSystemResource("c:\\upload_customer\\"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
@@ -1336,7 +1336,7 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> customer_uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
-		String uploadFolder = "d:\\upload_customer";
+		String uploadFolder = "c:\\upload_customer";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -1378,7 +1378,7 @@ public class AdminController {
 		//log.info("파일 삭제 : ");
 		File file = null;
 		try {
-			String file_p = "d:\\upload_customer\\"+URLDecoder.decode(fileName, "utf-8");
+			String file_p = "c:\\upload_customer\\"+URLDecoder.decode(fileName, "utf-8");
 			file = new File(file_p);
 			file.delete();
 		} catch (UnsupportedEncodingException e) {

@@ -209,7 +209,7 @@ public class UserController {
 		}
 		//log.info("data :"+data);
 		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("d:\\upload_customer\\"+fileName);
+		Resource resource = new FileSystemResource("c:\\upload_customer\\"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
