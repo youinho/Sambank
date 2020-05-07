@@ -20,6 +20,11 @@ public class CustomerVO {
 	private Date updatedate;
 	
 	private String confirm_password;
+	
+	
+	private int failed_login_count;
+	
+	private int enabled;
 	/*public boolean isPasswordEqualToConfirmPassword() {
 		return this.password.equals(passhint);
 	}*/

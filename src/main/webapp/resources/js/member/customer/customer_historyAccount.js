@@ -18,14 +18,14 @@ $(function(){
 			$("input[name='end_date']").focus();
 			return false;
 		}
-		
+		console.log("버튼눌림");
 
 		
 		
 		
 		$("#historyList").html("");
 		$.ajax({
-			url: "/member/account/account/customer_get_history",
+			url: "/member/useraccount/depositList/customer_get_history",
 			type : "post",
 			beforeSend : function(xhr)
             {   
@@ -48,14 +48,17 @@ $(function(){
 				
 				let str = "";
 				for(let i = 0; i < list.length; i++){
-					if(i>100){
+					if(i>5){
 						break;
 					}
 					let date = new Date(list[i].depositdate);
-					if (list[i].from_ano==null){
-						message=list[i].name;
+					if (list[i].message==null){
+						if(list[i].from_name==null)	
+							text=list[i].name;	
+						else
+							text=list[i].from_name;
 					}else{
-						message=list[i].from_ano;
+						text=list[i].from_message;
 					}
 					
 					str += "<tr>";
@@ -63,7 +66,7 @@ $(function(){
 					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
-					str += "<td>"+message+"</td>";
+					str += "<td>"+text+"</td>";
 					str += "</tr>";
 					
 				}
@@ -80,21 +83,78 @@ $(function(){
 		
 	})
 	
-	
-	
-	
-
-		
-		
-		
-	
-		
-		
-	
-	
-})
 
 
+	
+		
 		
 	
+		
+
+	
+
+
+// $(document).ready(function() {
+	 
+	
+	let date = new Date();
+	
+	
+	$("#today").button().on("click", function() {
+		let date = new Date();
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+
+		alert("오늘 버튼을 누르셨습니다.");
+	})
+	
+	$("#week").button().on("click", function() {
+		let date = new Date();
+		date.setDate(date.getDate()-6);
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+		
+		alert("이번주 버튼을 누르셨습니다.");
+	})
+	
+	$("#1-month").button().on("click", function() {
+		let date = new Date();
+		date.setMonth(date.getMonth()-1);
+		date.setDate(date.getDate()+1);
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+
+		alert("한달전 버튼을 누르셨습니다.");
+	})
+	
+	$("#3-month").button().on("click", function() {
+		let date = new Date();
+		date.setMonth(date.getMonth()-3);
+		date.setDate(date.getDate()+1);
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+
+		alert("세달전 버튼을 누르셨습니다.");
+	})
+	
+	$("#6-month").button().on("click", function() {
+		let date = new Date();
+		date.setMonth(date.getMonth()-6);
+		date.setDate(date.getDate()+1);
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+
+		alert("육개월전 버튼을 누르셨습니다.");
+	})
+	
+	$("#12-month").button().on("click", function() {
+		let date = new Date();
+		date.setMonth(date.getMonth()-12);
+		date.setDate(date.getDate()+1);
+		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+
+		alert("1년전 버튼을 누르셨습니다.");
+	})
+	
+	
+	
+	
+ })
+		
+
 

@@ -41,4 +41,13 @@ public interface AdminMapper {
 	public int saveImage(@Param("id") String id,@Param("profile_image") byte[] profile_image,@Param("profile_image_type") String profile_image_type);
 	
 	public Profile_imageVO get_profile_image(String id);
+	
+	
+	
+	//로그인 실패 카운트
+	public int update_login_failure_count(String id);
+	public int init_login_failure_count(String id);
+	public int check_login_failure_count(String id);
+	
+	public int set_disabled(String id);
 }

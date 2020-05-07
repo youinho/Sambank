@@ -10,54 +10,63 @@
         
         
         <!-- <beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl"> <beans:property name="dataSource" ref="dataSource"/> </beans:bean> -->
-
+		<beans:bean id="admin_loginFailureHandler" class="security.Admin_LoginFailureHandler">
+			<beans:property name="defaultFailureUrl" value="/admin/login?error=failed"/>
+		</beans:bean>
+		<beans:bean id="admin_loginSuccessHandler" class="security.Admin_LoginSuccessHandler"/>
+		<beans:bean id="customer_loginFailureHandler" class="security.Customer_LoginFailureHandler">
+			<beans:property name="defaultFailureUrl" value="/member/login_test?error=failed"/>
+		</beans:bean>
+		<beans:bean id="customer_loginSuccessHandler" class="security.Customer_LoginSuccessHandler"/>
         <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+        	
         
     <!-- 시큐리티 예외사항 -->
     <sec:http pattern="/admin/popup/jusopopup" security="none" />
     
     <!-- 검사 URL -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/">
-    	<intercept-url pattern="/" access="permitAll"  />
+    	<intercept-url pattern="/" access="permitAll"   />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/A">
-    	<intercept-url pattern="/A" access="permitAll"  />
+    	<intercept-url pattern="/A" access="permitAll"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/N">
-    	<intercept-url pattern="/N" access="permitAll"  />
+    	<intercept-url pattern="/N" access="permitAll"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/E">
-    	<intercept-url pattern="/E" access="permitAll"  />
+    	<intercept-url pattern="/E" access="permitAll"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/F">
-    	<intercept-url pattern="/F" access="permitAll"  />
+    	<intercept-url pattern="/F" access="permitAll"    />
     </http>
-    
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
         <intercept-url pattern="/admin/login" access="permitAll" />
-        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />  
-        <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"  />  
+        <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"  />
         <intercept-url pattern="/admin/card/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
         <form-login login-page="/admin/login" 
         			login-processing-url="/admin/login_process"
 			        default-target-url="/admin/notice" 
-			        authentication-failure-url="/admin/login?error" 
+			         
 			        username-parameter="id" 
-			        password-parameter="password" /> 
+			        password-parameter="password"
+			        authentication-failure-handler-ref="admin_loginFailureHandler"
+			        authentication-success-handler-ref="admin_loginSuccessHandler" /> 
         <logout invalidate-session="true"
         		logout-url="/admin/logout" 
-        		logout-success-url="/admin/login" />
+        		logout-success-url="/admin/login?logout"/>
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/admin/login?error">
+		<session-management invalid-session-url="/admin/login?logout">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>
@@ -69,20 +78,22 @@
     </beans:bean>
  	<!--  -->
 	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/member/**">
-        <intercept-url pattern="/member/login_test" access="permitAll" />
-        <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/member/login_test" access="permitAll"  />
+        <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')"  />
 		
         <form-login login-page="/member/login_test" 
         			login-processing-url="/member/login_process"
 			        default-target-url="/" 
-			        authentication-failure-url="/" 
+			        
 			        username-parameter="id" 
-			        password-parameter="password" /> 
+			        password-parameter="password"
+			        authentication-failure-handler-ref="customer_loginFailureHandler"
+			        authentication-success-handler-ref="customer_loginSuccessHandler" /> 
         <logout invalidate-session="true"
         		logout-url="/member/logout" 
-        		logout-success-url="/" />
+        		logout-success-url="/?logout" />
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/">
+		<session-management invalid-session-url="/?logout">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>

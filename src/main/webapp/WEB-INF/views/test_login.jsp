@@ -41,12 +41,19 @@ let tk = "${_csrf.token}"
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        <sec:authorize access="isAnonymous()">
 		        <form:form name="f" action="${loginUrl}" method="POST">
-		            <c:if test="${param.error != null}"> 
-		            	<p>로그인이 거부되었습니다.</p> 
-		            </c:if> 
 		            <c:if test="${param.logout != null}"> 
-		            	<p>로그아웃 하였습니다.</p> 
+		            	<p><small style="color:blue">로그아웃 하였습니다.</small></p> 
 		            </c:if>
+		            <c:if test="${id == 'not_found'}"> 
+		            	<p><small style="color:red">아이디를 찾을 수 없습니다.</small></p> 
+		            </c:if>
+		            <c:if test="${param.error == 'failed' && enabled!='false' && id != 'not_found'}"> 
+		            	<p><small style="color:red">로그인에 실패했습니다. 5회 연속 실패할 경우 계정이 비활성화 됩니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
+		            </c:if> 
+		            <c:if test="${enabled == 'false'}"> 
+		            	<p><small style="color:red"><c:out value="계정이 비활성화 상태입니다. 관리자에게 문의해주세요."></c:out></small></p> 
+		            </c:if> 
+		            
 		            <fieldset>
 		                <legend style="text-align: center">삼뱅크 테스트 로그인 페이지 !</legend><br>
 		                <div class="form-group">
