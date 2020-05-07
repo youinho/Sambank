@@ -10,6 +10,15 @@
 <head>
 <meta charset="UTF-8">
 <title>SamBank < 문의사항 > </title>
+
+<style>
+/* footer{
+	/* <img src="/resources/SB_files/pull-1.png" style="position: fixed;bottom: 10px; right:10px"/> */
+	background-image: url("/resources/SB_files/pull-1.png");
+	background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
+	background-position: bottom right; /* 수평 : left,center,right  수직 : top, center, bottom */
+} */
+</style>
 </head>
 <body>
 
