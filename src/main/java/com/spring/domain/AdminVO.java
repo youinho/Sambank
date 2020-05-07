@@ -23,5 +23,6 @@ public class AdminVO {
 	private String confirm_password;
 	private String group_id;
 	
+	private int failed_login_count;
 	//private byte[] profile_image;
 }

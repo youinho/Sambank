@@ -35,7 +35,22 @@ public interface AdminService {
 	public boolean admin_insert(AdminVO vo);
 	public boolean update_admin(AdminVO vo);
 	public boolean check_adminId(String id);
+	
+	//로그인 실패 카운트
+	public boolean update_login_failure_count(String id);
+	public boolean init_login_failure_count(String id);
+	public int check_login_failure_count(String id);
+	public boolean set_disabled(String id);
+	//----
+	
+	
 	public boolean insertLog(Admin_logVO vo);
+	
+	
+	
+	
+	
+	
 	
 	
 	public boolean saveImage(String id, byte[] profile_image, String profile_image_type);

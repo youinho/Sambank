@@ -38,8 +38,17 @@
 		        <form:form name="f" action="${loginUrl}" method="POST">
 		            <p>아이디 : sam / 비밀번호 : 3333</p>
 		            <c:if test="${param.logout != null}"> 
-		            	<p>로그아웃 하였습니다.</p> 
+		            	<p><small style="color:blue">로그아웃 하였습니다.</small></p> 
 		            </c:if>
+		            <c:if test="${id == 'not_found'}"> 
+		            	<p><small style="color:red">아이디를 찾을 수 없습니다.</small></p> 
+		            </c:if>
+		            <c:if test="${param.error == 'failed' && enabled!='false'&& id != 'not_found'}"> 
+		            	<p><small style="color:red">로그인에 실패했습니다. 5회 연속 실패할 경우 계정이 비활성화 됩니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
+		            </c:if> 
+		            <c:if test="${enabled == 'false'}"> 
+		            	<p><small style="color:red"><c:out value="계정이 비활성화 상태입니다. 상위 관리자에게 문의해주세요."></c:out></small></p> 
+		            </c:if> 
 		            <fieldset>
 		                <legend style="text-align: center">Sambank Admin Login Page</legend><br>
 		                <div class="form-group">
