@@ -86,6 +86,9 @@ public class UserAccountController {
 	}
 	
 	//계좌 이체
+	
+	
+	
 	@PostMapping("/deposit")
 	public String transfer_action(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		log.info("이체 진행중 "+ vo);
@@ -216,7 +219,7 @@ public class UserAccountController {
 			return new ResponseEntity<String>("true", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
-		}
+	}
 		
 	/*
 	 * @GetMapping("/popup/jusopopup") public String juso_popup(HttpServletRequest

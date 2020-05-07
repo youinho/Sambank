@@ -343,7 +343,6 @@ aside {
         
         <hr class="mb-4">
         
-        <input type="hidden" name="_csrf" value="">
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
      	<sec:csrfInput/>
       </form>
@@ -352,7 +351,6 @@ aside {
     </div>
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script> -->
 </div></main>
-
 
 		
 		

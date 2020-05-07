@@ -67,15 +67,16 @@ $(function(){
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
 		if($("input[name='remain']").val() == ""){
-			alert("잔액을 확인해 주세요.")
+			alert("잔액을 확인해 주세요.");
 			return false;
 		}
 		
 		if((parseInt($("input[name='remain']").val())-parseInt($("input[name='amount']").val()))<0){
-			alert("출금액을 다시 확인해주세요.")
+			alert("출금액을 다시 확인해주세요.");
 			return false;
 		}
-		$("#withdrawForm").submit();
+		//$("#withdrawForm").attr("action", "/member/useraccount/deposit");
+		$("#aaaform").submit();
 	})
 	
 	

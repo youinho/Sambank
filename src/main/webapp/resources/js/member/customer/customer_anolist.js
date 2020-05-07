@@ -1,7 +1,7 @@
 
 $(function(){
-	$("#ano-list").on("click",".account-item" ,function(){
-		
+	$("#ano-list").on("click",".account-item" ,function(e){
+		e.preventDefault();
 		$("input[name='ano']").val("");
 		$("input[name='max_withdraw']").val("");
 		$("input[name='balance']").val("");
@@ -24,7 +24,7 @@ $(function(){
 //				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
 				$("input[name='max_withdraw']").val(vo.max_withdraw);
-				$("input[name='balance']").val(viewNumber(String(vo.balance)));
+				$("input[name='remain']").val(viewNumber(vo.balance+""));
 			}
 		})
 		
