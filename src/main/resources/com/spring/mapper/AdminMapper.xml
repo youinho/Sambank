@@ -118,6 +118,21 @@
 	
 	
 	
-	
+	<update id="update_login_failure_count">
+		update admintbl set failed_login_count=failed_login_count+1
+		where id=#{id}
+	</update>
+	<update id="init_login_failure_count">
+		update admintbl set failed_login_count=0
+		where id=#{id}
+	</update>
+	<select id="check_login_failure_count" resultType="int">
+		select failed_login_count from admintbl
+		where id=#{id}
+	</select>
+	<update id="set_disabled">
+		update admintbl set enabled=0
+		where id=#{id}
+	</update>
 	
 </mapper>

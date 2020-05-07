@@ -493,6 +493,15 @@ select * from customer_inquiry_reply;
 
 select * from admintbl;
 
+select * from admintbl;
+update admintbl set profile_image_type='png' where profile_image_type is null;
+commit;
+select * from logtbl;
+select * from deposit_history order by hno desc;
+select * from logtbl order by log_no desc;
+delete from logtbl where log_no>40000;
+delete from logtbl;
+commit;
 
 select * from deposittbl;
 commit;
@@ -503,7 +512,4 @@ delete from admin_group_members where id = 'sam2';
 select * from customertbl where name='최규리';
 select * from deposit_history;
 
-
-;
-dele
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

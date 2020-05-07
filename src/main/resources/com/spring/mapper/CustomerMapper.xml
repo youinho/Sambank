@@ -11,7 +11,7 @@
 	
 <!-- id로 고객정보 -->
 	<select id="select_by_id" resultType="com.spring.domain.CustomerVO">
-		select cno, name, eng_name, gender, birth, address, mobile, id, email from customertbl
+		select cno, name, eng_name, gender, birth, address, mobile, id, email, enabled from customertbl
 		where id=#{id}
 	</select>
 	
@@ -77,6 +77,25 @@
 		update customertbl set password=#{password}
 		where id=#{id}
 	</update>
+	
+	
+	<update id="update_login_failure_count">
+		update customertbl set failed_login_count=failed_login_count+1
+		where id=#{id}
+	</update>
+	<update id="init_login_failure_count">
+		update customertbl set failed_login_count=0
+		where id=#{id}
+	</update>
+	<select id="check_login_failure_count" resultType="int">
+		select failed_login_count from customertbl
+		where id=#{id}
+	</select>
+	<update id="set_disabled">
+		update customertbl set enabled=0
+		where id=#{id}
+	</update>
+	
 
 
 </mapper>

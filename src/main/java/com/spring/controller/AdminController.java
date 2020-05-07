@@ -295,6 +295,9 @@ public class AdminController {
 	
 	//admin -------------------------------
 	
+	
+	
+	
 	//그룹 권한 불러오기(로그인한 관리자)
 	@ResponseBody
 	@PostMapping("/get_groupId")

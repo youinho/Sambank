@@ -482,5 +482,32 @@ public class AdminServiceImpl implements AdminService {
 
 		return customerMapper.update_password(vo)==1;
 	}
+
+
+	@Override
+	public boolean update_login_failure_count(String id) {
+
+		return adminMapper.update_login_failure_count(id)==1;
+	}
+
+
+	@Override
+	public boolean init_login_failure_count(String id) {
+
+		return adminMapper.init_login_failure_count(id)==1;
+	}
+
+
+	@Override
+	public int check_login_failure_count(String id) {
+
+		return adminMapper.check_login_failure_count(id);
+	}
 	
+	
+	@Override
+	public boolean set_disabled(String id) {
+	
+		return adminMapper.set_disabled(id)==1;
+	}
 }

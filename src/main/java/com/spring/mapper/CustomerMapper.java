@@ -20,4 +20,11 @@ public interface CustomerMapper {
 	public String get_password(String id);
 	
 	public int update_password(CustomerVO vo);
+	
+	
+	public int update_login_failure_count(String id);
+	public int init_login_failure_count(String id);
+	public int check_login_failure_count(String id);
+	
+	public int set_disabled(String id);
 }
