@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../includes/header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
+
 <script>
 
 </script>
@@ -133,23 +137,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -214,21 +218,26 @@ aside {
           
          </div>
 		<div class="input-group">
-			<select class="account-select form-control mb-3" id="type" name="type">
-			    <option value="0" selected>-- 보유 계좌번호 --</option>
-			    <option value="1">계좌번호1</option>
-			    <option value="2">계좌번호2</option>
-			    <option value="3">계좌번호3</option>
-			</select>
+		
+			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
+			    <div class="dropdown-menu" id="ano-list">
+			    	<c:forEach items="${list }" var="vo">
+			    		<a class='dropdown-item account-item' id="check_ano" href='#'><c:out value="${vo.ano}"></c:out> </a>
+		    		</c:forEach>
+			    </div>
+  		    <div class="input-group" style="width:100%">
+			    <p class="input-group-text" style="width:45%"><strong>선택 계좌</strong> </p>
+			  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" aria-invalid="false">
+			  </div>
 			<div class="input-group" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:45%">
 			    <p class="input-group-text" style="width:40%"><strong>잔액</strong> </p>
-			  <input type="text" class="form-control valid" name="balance" id="balance" readonly="" aria-invalid="false">
+			  <input type="text" class="form-control valid" name="balance" id="balance" readonly="ano" aria-invalid="false">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:45%">
   			    <p class="input-group-text" style="width:40%"><strong>출금가능금액</strong> </p>
-			  <input type="text" class="form-control valid" name="maxBalance" id="maxBalance" readonly="">
+			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly="ano" aria-invalid="false">
 			  
 			  </div>
 			  <div class="input-group-append">
@@ -247,12 +256,12 @@ aside {
         	</div>
 	
         	<div class="search-list" style="width:100%;">
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">당일</button>
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">일주일</button>
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">1개월</button>
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">3개월</button>
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">6개월</button>
-				<button class="btn btn-outline-secondary" type="button" style="width:14.8%">12개월</button>
+				<button class="btn btn-outline-secondary" type="button" id="today" style="width:14.8%"  >당일</button>
+				<button class="btn btn-outline-secondary" type="button" id="week" style="width:14.8%">일주일</button>
+				<button class="btn btn-outline-secondary" type="button" id="1-month" style="width:14.8%">1개월</button>
+				<button class="btn btn-outline-secondary" type="button" id="3-month" style="width:14.8%">3개월</button>
+				<button class="btn btn-outline-secondary" type="button" id="6-month" style="width:14.8%">6개월</button>
+				<button class="btn btn-outline-secondary" type="button" id="12-month" style="width:14.8%">12개월</button>
 			</div>
         </div>
         <hr class="mb-3">
@@ -265,10 +274,10 @@ aside {
           </div>
           
          </div>
-      		<div class="deposit-date col-9" style="width:100%">
-         	 	<input type="text" name="" id="" placeholder="시작날짜입력" style="width:20%">~
-         	 	<input type="text" name="" id="" placeholder="끝날짜입력" style="width:20%">
-         	 	<button class="btn btn-success" type="submit" id="submit" style="width:10%">검색</button>
+      		<div class="input-group" style="width:100%">
+         	 	<input type="date"  class="form-control" name="start_date" id="start_date" style="width:20%">~
+         	 	<input type="date"  class="form-control" name="end_date" id="end_date" style="width:20%">
+         	 	<button class="btn btn-success" type="submit" id="historyBtn" style="width:10%">검색</button>
           	</div>
         </div>
 		<hr class="mb-3">
@@ -293,7 +302,21 @@ aside {
 			</div>     
         
         <hr class="mb-4">
-        리스트 출력
+	       <table class="table table-striped table-bordered table-hover table-sm" id="historyTBL">
+		    <thead>
+		        <tr>
+		            <th scope="col" style='width: 20%'>년 월 일 시간</th>
+		            <th scope="col" style='width: 20%'>찾으신 금액</th>
+		            <th scope="col" style='width: 20%'>맡기신 금액</th>
+		            <th scope="col" style='width: 20%'>남 은 금 액</th>
+		            <th scope="col" style='width: 20%'>거래내용</th>
+		        </tr>									
+		    </thead>
+			<tbody id="historyList">
+			    	
+			</tbody>
+			
+			</table>
         <hr class="mb-4">
         
         <input type="hidden" name="_csrf" value="">
@@ -306,11 +329,25 @@ aside {
 </div></main>
 
 
-		
+ <input type="hidden" name="ano" id="ano" value="${vo.ano}">		
 		
         
+<script>
+console.log(ano );
+console.log(max_withdraw );
+$(function(){
+	$("#histACC").addClass("active");
+	let date = new Date();
+	$("input[name='end_date']").val(date.toISOString().slice(0, 10));
+	date.setMonth(date.getMonth()-6);
+	$("input[name='start_date']").val(date.toISOString().slice(0, 10));
+})
 
+
+</script>
 </body>
 </html>
 <%@include file="../../includes/footer_Main.jsp" %>
+<script src="/resources/js/member/customer/customer_anolist.js"></script>
+<script src="/resources/js/member/customer/customer_historyAccount.js"></script>
 <script src="/resources/js/user/account/user_modifyAccount.js"></script>

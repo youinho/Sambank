@@ -15,7 +15,7 @@
 
 $(function(){
 	$("#withdraw").addClass("active");
-})
+})finp
 function alert_success(){
 	let success = "${success}";
 	
