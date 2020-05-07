@@ -235,12 +235,12 @@ aside {
 			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
 			    	<c:forEach items="${list }" var="vo">
-			    		<a class='dropdown-item account-item' id="check_ano" href='#'><c:out value="${vo.ano}"></c:out> </a>
+			    		<a class='dropdown-item account-item'  href='#'><c:out value="${vo.ano}"></c:out> </a>
 		    		</c:forEach>
 			    </div>
-			    	  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" required>
+			    	  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" >
 			    	  	    
-					 <input type="text" class="form-control valid" name="remain" id="remain" required >
+					 <input type="text" class="form-control valid" name="remain" id="remain"  readonly>
 					 <button class="btn btn-outline-secondary" type="button" id="check_ano" style="width:10%">계좌잔액 확인</button>
 			</div>
         </div>
@@ -269,7 +269,7 @@ aside {
             
           </small>
           </div>
-          <input type="text" class="form-control" name="from_ano" id="from_ano" placeholder="입금계좌번호(숫자만 입력)">
+          <input type="text" class="form-control" name="from_ano" id="from_ano" placeholder="입금계좌번호(숫자만 입력)" required>
         </div>
 		
         
@@ -277,18 +277,18 @@ aside {
         <div class="mb-3">
 		<div class="label d-flex justify-content-between">
        	  <div class="col-6" style="padding:0">
-	          <label for="">이체금액</label>
+	          <label for="">이체금액</label> 	
           </div>
         </div>
          
         <div class="balance mb-3" style="width:100%">
-			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">+100만</button>
-			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">+10만</button>
-			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">+5만</button>
-			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">+1만</button>
-			<button class="btn btn-secondary" type="button" style="width:18%" onclick="">전액</button>
+			<button class="btn btn-secondary" type="button" style="width:18%" id="M100">+100만</button>
+			<button class="btn btn-secondary" type="button" style="width:18%" id="M10">+10만</button>
+			<button class="btn btn-secondary" type="button" style="width:18%" id="M5">+5만</button>
+			<button class="btn btn-secondary" type="button" style="width:18%" id="M1">+1만</button>
+			<button class="btn btn-secondary" type="button" style="width:18%" id="MAll">전액</button>
 		</div>
-			<input type="text" class="form-control" name="amount" id="amount" placeholder="입금 금액">
+			<input type="text" class="form-control" name="amount" id="amount" placeholder="입금 금액" required>
         </div>
 		
         
@@ -322,7 +322,7 @@ aside {
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:35%">
   			    <p class="input-group-text" style="width:30%"><strong>비밀번호 확인</strong> </p>
-			  <input type="password" class="form-control valid" name="confirm_password" id="confirm_password" readonly="">
+			  <input type="password" class="form-control valid" name="confirm_password" id="confirm_password" readonly=""required>
 			  <button class="btn btn-outline-secondary" type="button" id="confirm_passwordBtn">
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"></path>
@@ -343,6 +343,8 @@ aside {
         
         <hr class="mb-4">
         
+
+     
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
      	<sec:csrfInput/>
       </form>
@@ -353,7 +355,7 @@ aside {
 </div></main>
 
 		
-		
+		  <input type="hidden"  class="form-control" id="hidden_balance" name="hidden_balance" >		
        
  
 </body>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -66,7 +67,7 @@ public class UserAccountController {
 	public ResponseEntity<DepositVO> get_row(String ano, HttpServletRequest req){
 	
 		DepositVO vo = account_service.get_row(ano);
-//		log.info(vo.getMax_withdraw()+"");
+		log.info("hi"+vo.getMax_withdraw()+"");
 		if(vo != null) {
 			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
 		}else {
@@ -91,17 +92,23 @@ public class UserAccountController {
 	
 	@PostMapping("/deposit")
 	public String transfer_action(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
-		log.info("이체 진행중 "+ vo);
 		
+		log.info("이체 진행중 "+ vo);
+		String name=admin_service.check_ano(vo.getAno()).getName();
+		vo.setName(name);
 		if(admin_service.withdraw(vo)) {
+			
 			rttr.addFlashAttribute("success", "true");
-			rttr.addFlashAttribute("from_name", vo.getFrom_name());
+			
 			rttr.addFlashAttribute("amount", vo.getAmount());
 			log.info("출금 성공");
 			Deposit_historyVO other_vo;
 			other_vo=vo;
 			other_vo.setAno(vo.getFrom_ano());
 			other_vo.setName(vo.getFrom_name());
+			String other_name=admin_service.check_ano(other_vo.getAno()).getName();
+			vo.setName(other_name);
+			rttr.addFlashAttribute("from_name", other_vo.getName());
 			if(admin_service.deposit(other_vo)) {
 				log.info("입금 성공");
 			}else {
