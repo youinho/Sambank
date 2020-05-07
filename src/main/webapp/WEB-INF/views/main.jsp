@@ -48,8 +48,6 @@ let tk = "${_csrf.token}"
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    
-
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -67,6 +65,12 @@ let tk = "${_csrf.token}"
   .swiper-slide.swiper-slide-active {
     background-color: #b5fdba;
   }
+  div#Main{
+  	background-image: url("/resources/SB_files/pull-2.png");
+	background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
+	background-position: left; /* 수평 : left,center,right  수직 : top, center, bottom */
+  }
+  
 </style>
 
 
@@ -158,7 +162,7 @@ let tk = "${_csrf.token}"
 									<img src="/resources/SB_files/visual_section16_tit02.png" alt="나의 모든 금융생활을 SB뱅크 한 곳에서!" style="margin-top:20px;">
 									<a href="" class="link">바로가기</a>
 									<img src="/resources/SB_files/background.png" alt="" /> -->
-									<img src="/resources/SB_files/pull-2.png" alt="" />
+									<img src="/resources/SB_files/background1.png" alt="" />
 									</span>
 								</div>
 							</li>

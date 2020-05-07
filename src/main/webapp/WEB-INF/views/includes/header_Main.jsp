@@ -219,7 +219,7 @@ let tk = "${_csrf.token}"
 		
 	<!-- 어사이드 바 -->
      <aside>
-     	<div class="asideHeader"style="font-family: 'Do Hyeon', sans-serif;">
+     	<div class="asideHeader"style="font-family: 'Do Hyeon', sans-serif; margin-bottom: 500px;">
      	
      	<a href="">빠른이동</a>
      	<div class="aside_content">
@@ -241,7 +241,7 @@ let tk = "${_csrf.token}"
      	
      	
      	</div> 
-  		<img src="/resources/SB_files/aside2.png" style="margin-left: 57px; padding-top: 200px;"/>
+<!--   		<img src="/resources/SB_files/aside2.png" style="margin-left: 57px; padding-top: 200px;"/> -->
      </aside>
 	
 		

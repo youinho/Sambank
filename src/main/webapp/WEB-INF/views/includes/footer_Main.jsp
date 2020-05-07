@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
     </style>
    </head>
 	<footer> 
-	<div class="line" style="text-align: center;position: fixed; margin-left: 900px;">
+	<div class="line" style="text-align: center;">
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
 			    <!-- style="text-align: right;" -->
@@ -70,7 +70,5 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                      </select>
                   <!-- </div> --> 
               </div>
-              <!-- style="margin-left: 57px; padding-top: 200px;" -->
-            <img src="/resources/SB_files/pull-1.png" style="position: fixed; margin-left: 900px; bottom: 50px;"   />
          </div> <!-- footer END -->
  	</footer>
