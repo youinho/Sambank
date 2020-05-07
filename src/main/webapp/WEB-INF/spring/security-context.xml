@@ -32,7 +32,6 @@
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/F">
     	<intercept-url pattern="/F" access="permitAll"  />
     </http>
-    
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
