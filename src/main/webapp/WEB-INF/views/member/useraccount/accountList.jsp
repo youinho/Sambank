@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../includes/header_Main.jsp" %>
+<%@include file="../../includes/header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 
@@ -285,5 +285,5 @@ aside {
 
 </body>
 </html>
-<%@include file="../includes/footer_Main.jsp" %>
+<%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/user/account/user_modifyAccount.js"></script>
