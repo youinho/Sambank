@@ -27,21 +27,20 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
     </style>
    </head>
 	<footer> 
-	<div class="line" style="text-align: center;" >
+	<div class="line" style="text-align: center;position: fixed; margin-left: 900px;">
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
 			    <!-- style="text-align: right;" -->
 			    <div class="col" ><p style="margin-top: 15px;" >대표 1588-9955 | 금융서비스 | LANGUAGE </p></div>
 			    <div class="col" style= "text-align: left;">
- 	  <img src="/resources/SB_files/fotter1.png" alt="로고 이미지">
-	<img src="/resources/SB_files/fotter2.png" alt="로고 이미지">
+			 	<img src="/resources/SB_files/fotter1.png" alt="로고 이미지">
+				<img src="/resources/SB_files/fotter2.png" alt="로고 이미지">
 			    </div>
-			    <div class="col"></div>
 			  </div>
 	</div>
 	<br />
       <div class="footer">
-         <div class="footer-inner set-pc">
+         <div class="footer-inner set-pc" >
              <div class="info">
                  <p class="phone">SB카드 상담센터 1588-9955, 1599-9955 (해외지역 82-2-6958-9000)&nbsp;&nbsp;|&nbsp;금융서비스
                      1577-9000&nbsp;&nbsp;|&nbsp;카드 간편신청 1599-0200</p>
@@ -71,5 +70,7 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                      </select>
                   <!-- </div> --> 
               </div>
+              <!-- style="margin-left: 57px; padding-top: 200px;" -->
+            <img src="/resources/SB_files/pull-1.png" style="position: fixed; margin-left: 900px; bottom: 50px;"   />
          </div> <!-- footer END -->
  	</footer>

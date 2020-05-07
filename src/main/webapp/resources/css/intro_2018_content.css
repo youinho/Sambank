@@ -15,7 +15,7 @@
 /*--------------------------------------------------------------------------------
 	# 컨텐츠 : 빠른메뉴
 ---------------------------------------------------------------------------------*/
-.main-con1 {overflow:hidden;width:980px;height:80px;margin:-40px auto 0;background:#ffa428;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
+.main-con1 {overflow:hidden;width:1040px;height:80px;margin:-40px auto 0;background:#ffa428;box-shadow:0 15px 30px 0 rgba(0,0,0,0.1);z-index:1;}
 .main-con1 ul {float:left;display:block;overflow:hidden;height:40px;padding:20px 10px;box-sizing: content-box;}
 .main-con1 ul.menu1{padding:19px 10px 21px;}
 .main-con1 ul li {float:left;}

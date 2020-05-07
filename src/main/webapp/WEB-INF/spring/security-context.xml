@@ -18,34 +18,34 @@
     
     <!-- 검사 URL -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/">
-    	<intercept-url pattern="/" access="permitAll"  />
+    	<intercept-url pattern="/" access="permitAll"   requires-channel="https" />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/A">
-    	<intercept-url pattern="/A" access="permitAll"  />
+    	<intercept-url pattern="/A" access="permitAll"  requires-channel="https"  />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/N">
-    	<intercept-url pattern="/N" access="permitAll"  />
+    	<intercept-url pattern="/N" access="permitAll"  requires-channel="https"  />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/E">
-    	<intercept-url pattern="/E" access="permitAll"  />
+    	<intercept-url pattern="/E" access="permitAll"   requires-channel="https" />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/F">
-    	<intercept-url pattern="/F" access="permitAll"  />
+    	<intercept-url pattern="/F" access="permitAll"   requires-channel="https" />
     </http>
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
         <intercept-url pattern="/admin/login" access="permitAll" />
-        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />  
-        <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/card/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
-        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" />
+        <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https" />  
+        <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/card/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/customer/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/customer_notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/customer_notice/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/account/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')" requires-channel="https"  />
         <form-login login-page="/admin/login" 
         			login-processing-url="/admin/login_process"
 			        default-target-url="/admin/notice" 
@@ -68,8 +68,8 @@
     </beans:bean>
  	<!--  -->
 	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/member/**">
-        <intercept-url pattern="/member/login_test" access="permitAll" />
-        <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/member/login_test" access="permitAll"  requires-channel="https" />
+        <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')"  requires-channel="https" />
 		
         <form-login login-page="/member/login_test" 
         			login-processing-url="/member/login_process"
