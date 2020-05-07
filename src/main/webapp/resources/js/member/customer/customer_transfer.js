@@ -66,12 +66,12 @@ $(function(){
 	
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
-		if($("input[name='remain']").val() == ""){
+		if($("input[name='hidden_balance']").val() == ""){
 			alert("잔액을 확인해 주세요.")
 			return false;
 		}
 		
-		if((parseInt($("input[name='remain']").val())-parseInt($("input[name='amount']").val()))<0){
+		if((parseInt($("input[name='hidden_balance']").val())-parseInt($("input[name='amount']").val()))<0){
 			alert("출금액을 다시 확인해주세요.")
 			return false;
 		}
@@ -158,4 +158,35 @@ function input_password(password, wInput){
 }
 
 
+
+
+$("#M100").button().on("click", function() {
+	$("input[name='amount']").val(1000000);
+
+	alert("백만원");
+})
+
+$("#M10").button().on("click", function() {
+	$("input[name='amount']").val(100000);
+
+	alert("십만원");
+})
+
+$("#M5").button().on("click", function() {
+	$("input[name='amount']").val(50000);
+
+	alert("오만원");
+})
+
+$("#M1").button().on("click", function() {
+	$("input[name='amount']").val(10000);
+
+	alert("만원");
+})
+
+$("#MAll").button().on("click", function() {
+	$("input[name='amount']").val($("input[name='hidden_balance']").val());
+
+	alert("전액");
+})
 
