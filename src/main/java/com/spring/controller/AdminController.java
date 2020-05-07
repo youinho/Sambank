@@ -329,7 +329,7 @@ public class AdminController {
 		if(vo.getId()==null) {
 			vo.setId("");
 		}
-		vo.setAuthority(service.get_groupID(req.getRemoteUser()));
+		vo.setAuth_level(service.get_groupID(req.getRemoteUser()));
 		List<AdminVO> list = service.get_admins(vo);
 		if(list.size()==0) {
 			return new ResponseEntity<List<AdminVO>>(list, HttpStatus.NOT_FOUND);

@@ -17,11 +17,13 @@ public class AdminVO {
 	private String mobile;
 	
 	private int enabled;
-	
-	private int authority;
+	private String authority;
 	
 	private String confirm_password;
 	private String group_id;
+	private String group_name;
+	
+	private int auth_level;
 	
 	private int failed_login_count;
 	//private byte[] profile_image;

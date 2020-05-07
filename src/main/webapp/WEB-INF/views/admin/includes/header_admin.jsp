@@ -48,7 +48,7 @@
 let hn = "${_csrf.headerName}";
 let tk = "${_csrf.token}"
 $(function(){
-	$.ajax({
+	/* $.ajax({
 		url : "/admin/get_adminInfo",
 		type : "post",
 		beforeSend : function(xhr)
@@ -63,10 +63,10 @@ $(function(){
 			$("#admin_rank").html("<strong>"+vo.rank+"</strong>");
 			$("#admin_name").html("<strong>"+vo.name+"</strong>");
 			$("#profile_image").html("<img src='/admin/get_profile_image' alt='프로필사진' style='width=48px;height:48px;margin:0;padding:0'>");
-			//$("#profile_image").html("<img src='/resources/img/umb.gif' alt='로고 이미지' style='width=48px;height:48px'>");
+			
 			
 		}
-	})
+	}) */
 })
 $(function(){
 	$("#profile_image").click(function(e){
@@ -161,28 +161,28 @@ $(function(){
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
 	  	<a href="#" class="btn btn-outline-primary" style="padding:0;margin:0" id="profile_image">
-	  		
+	  		<img src='/admin/get_profile_image' alt='프로필사진' style='width=48px;height:48px;margin:0;padding:0'>
 	  	</a>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li class="nav-item text-nowrap">
 	  	<span class="navbar-text" id="admin_branch">
-	  	<%-- <strong><c:out value="${admin_branch }"></c:out></strong> --%>
+	  	<strong><c:out value="${branch }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_rank">
-  		<%-- <strong><c:out value="${admin_rank }"></c:out></strong> --%>
+  		<strong><c:out value="${rank }"></c:out></strong>
 	    </span>
   	</li>
   </ul>
   <ul class="navbar-nav px-3">
   	<li>
   		<span class="navbar-text" id="admin_name">
-  		<%-- <strong><c:out value="${admin_name }"></c:out></strong> --%>
+  		<strong><c:out value="${name }"></c:out></strong>
 	    </span>
   	</li>
   </ul>

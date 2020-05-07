@@ -11,16 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
-import com.spring.domain.AdminVO;
-import com.spring.domain.CustomerVO;
-import com.spring.service.AdminService;
 import com.spring.service.CustomerService;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Customer_LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-	@Autowired
-	private AdminService adminService;
 	
 	@Autowired
 	private CustomerService customerService;
