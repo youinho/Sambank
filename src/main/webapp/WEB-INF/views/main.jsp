@@ -104,6 +104,7 @@ let tk = "${_csrf.token}"
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
+				          <a class="dropdown-item" href="/member/customer/delete">회원탈퇴</a>
 				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
 		      				
 		      				<a class="dropdown-item logout" href="#">로그아웃</a>
