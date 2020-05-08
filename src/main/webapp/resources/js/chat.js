@@ -79,7 +79,7 @@ function _T$rb(){_T$Ya("TocplusWindow","visible",1);_T$db();}
 function _T$sb(e){var ev=nn6?e:event;_T$Qa();if(_T$Na==ev.clientX&&_T$Oa==ev.clientY){_T$rb();}}
 function showNoFloatTocplus(){_T$rb();}
 function _T$Za(){var lc='<img src="'+_T$na+'" style="border:none"/>';if(!_T$fa){lc='<a href="javascript:showNoFloatTocplus();">'+lc+'</a>';}
-_T$Ha.innerHTML='<div id="TpTbw" style="'+_T$Ga+'border:none; position:absolute; top:10px; left:70px;">'+lc+'</div>';if(_T$fa){_T$hb(_T$sb,"pointer");}}
+_T$Ha.innerHTML='<div id="TpTbw" style="'+_T$Ga+'border:none; position:absolute; top:10px; left:41px;">'+lc+'</div>';if(_T$fa){_T$hb(_T$sb,"pointer");}}
 function _T$db(){var mc=_T$mb("TocplusWindow");if(mc.length==0&&_T$ma){closeTocplusWindow();return;}
 if(userId.substring(0,4)=='test'){_T$ob();}
 else if(mc=="invisible"){_T$Za();}
