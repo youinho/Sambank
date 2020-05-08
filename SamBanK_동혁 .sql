@@ -513,11 +513,6 @@ select * from customertbl where name='최규리';
 select * from deposit_history;
 select * from customertbl;
 
-<<<<<<< HEAD
-delete from admin_attach;
-delete from customer_attach;
-commit;
-=======
 alter table admintbl rename column authority to authority_del;
 alter table admin_board rename column content2 to content;
 select * from admintbl;
@@ -539,9 +534,8 @@ insert into locked_customer(id) values('sam');
 select * from locked_customer;
 (select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%') ad ;
 (select admin_group_members.group_id, authority, id from admin_group_members join admin_group_authorities on admin_group_members.group_id=admin_group_authorities.group_id where admin_group_members.group_id < 10) ;
->>>>>>> branch 'master' of http://github.com/youinho/sambank
 
-<<<<<<< HEAD
+
 select * from customertbl order by cno desc;
 select * from deposittbl;
 delete from customertbl where cno=19946;
@@ -569,6 +563,6 @@ select * from admintbl where id='sam';
 select * from customertbl where id='rlaehdgur1';
 
 select * from customertbl where id = 'rlaehdgur11';
-=======
->>>>>>> branch 'master' of http://github.com/youinho/sambank
+
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
