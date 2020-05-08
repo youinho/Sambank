@@ -68,11 +68,10 @@ public class UserAccountController {
 	
 		DepositVO vo = account_service.get_row(ano);
 		log.info("hi"+vo.getMax_withdraw()+"");
-		if(vo != null) {
-			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
-		}else {
-			return new ResponseEntity<DepositVO>(vo, HttpStatus.BAD_REQUEST);
-		}
+		
+		return new ResponseEntity<DepositVO>(vo, vo!=null?HttpStatus.OK:HttpStatus.BAD_REQUEST);
+		
+		
 	}
 		
 	@GetMapping("/deposit")

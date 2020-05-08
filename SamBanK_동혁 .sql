@@ -607,4 +607,10 @@ select * from customer_inquiry where inquiry_no=25;
 select * from customer_inquiry
 		where expired=0 and answer_id is null
 		order by updatedate asc;
+        
+select * from logtbl order by log_no desc;
+select * from customertbl where id='rlaehdgur1';
+select * from logtbl order by log_no desc;
+delete from logtbl;
+commit;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

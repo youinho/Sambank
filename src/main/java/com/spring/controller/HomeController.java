@@ -47,39 +47,24 @@ public class HomeController {
 		
 		model.addAttribute("now", new Date().getTime());
 		log.info("main페이지");
-		
-		
-		
-		
-		
-		
-		
 		return "main";
 	}
 	
 	//testpage
-	@GetMapping("/ft")
-	public String GuideHeader() {
-		return "footer_Main";
-	}
-	
-	@GetMapping("/hd")
-	public String newmain() {
-		return "header_Main";
-	}
+//	@GetMapping("/ft")
+//	public String GuideHeader() {
+//		return "footer_Main";
+//	}
+//	
+//	@GetMapping("/hd")
+//	public String newmain() {
+//		return "header_Main";
+//	}
 	
 //	@GetMapping("/Q")
 //	public String Questions() {
 //		return "Questions";
 //	}
-	
-	@GetMapping("/L")
-	public String loginPage() {
-		
-		
-		return "user/NewLogin";
-	}
-	
 	
 //	@PostMapping("/login")
 //	public void user_login_post(CustomerVO vo) {
@@ -107,9 +92,6 @@ public class HomeController {
 	
 	@GetMapping("/member/login")	// 로그인 테스트 페이지
 	public String customer_test_login() {
-		log.info("customer test_login 페이지 요청");
-		
-		
 		return "/login";
 	}
 	

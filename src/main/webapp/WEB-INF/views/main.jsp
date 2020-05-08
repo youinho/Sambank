@@ -440,6 +440,11 @@ let tk = "${_csrf.token}"
 	
 <script>
 $(function(){
+	alert_reg();
+	history.replaceState({}, null, null);
+	
+	
+	
 	$(".logout").click(function(e){
 		e.preventDefault();
 		$(".logout-form").submit();
@@ -447,7 +452,18 @@ $(function(){
 		
 	})
 })
-
+function alert_reg(){
+	let registered = "${registered}";
+	if(registered ==='' || history.state){
+		return;
+	}
+	
+	if(registered === "success"){
+		alert("${name}"+" 고객님의 등록이 완료되었습니다.");
+	}else if(registered === "failed"){
+		alert("등록에 실패했습니다.");
+	}
+}
 
 </script>		
 </body>	

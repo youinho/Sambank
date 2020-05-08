@@ -39,7 +39,8 @@ main{
 	border: 1px solid white;
 }
 aside {
-    width: 340px;
+    min-width:240px;
+    width: 20%;
     color: #ffff;
     /* padding: 10px; */
     /* margin: 10px; */
