@@ -12,20 +12,20 @@
 /* tocplusBgImage='123';
 tocplusAwayImage='132'; */
 tocplusTop=1150;
-tocplusTop1=1150;
-tocplusLeft=5;
-tocplusMinimizedImage='https://i.imgur.com/3dca7QT.png';
+/* tocplusTop1=1150; */
+tocplusLeft=1;
+tocplusMinimizedImage='https://i.imgur.com/0nEhPSn.png';
 tocplusHAlign='right';
 tocplusMinimized='true';
 tocplusWidth=180;
 tocplusHeight=150;
 <c:choose>
-<c:when test="${name != null}">tocplusUserName='<c:out value="${name }님"></c:out>';</c:when>
+<c:when test="${name != null}">tocplusUserName='<c:out value="${name}(${id})님"></c:out>';</c:when>
 <c:when test="${name == null}">tocplusUserName='<c:out value="고객님"></c:out>';</c:when>
 </c:choose>
 
 
-tocplusFrameColor='#b5fdba';
+tocplusFrameColor='#ffa428';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 /*document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=sambank' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
