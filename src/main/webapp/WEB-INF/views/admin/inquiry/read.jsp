@@ -8,6 +8,12 @@
 $(function(){
 	$("#inquiry_list").addClass("active");
 	
+	let inquiry_condition = "${vo.condition}"
+		
+	if(inquiry_condition==="0"){
+		$("#content").css("display","none");
+	}
+	
 	// 담당자인지 아닌지 확인, 아닐경우 목록으로 이동
 	$.ajax({
 		url : "/admin/check_inquiry",

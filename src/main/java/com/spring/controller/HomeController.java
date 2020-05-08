@@ -47,15 +47,7 @@ public class HomeController {
 		
 		model.addAttribute("now", new Date().getTime());
 		log.info("main페이지");
-		if(req.getRemoteUser()!= null) {
-			if(session.getAttribute("name")==null) {
-				CustomerVO vo = service.select_user(req.getRemoteUser());
-				if(vo!=null) {
-					session.setAttribute("name", service.select_user(req.getRemoteUser()).getName());					
-				}
-				
-			}
-		}
+		
 		
 		
 		
@@ -81,12 +73,12 @@ public class HomeController {
 //		return "Questions";
 //	}
 	
-//	@GetMapping("/login")
-//	public String loginPage() {
-//		
-//		
-//		return "user/login";
-//	}
+	@GetMapping("/L")
+	public String loginPage() {
+		
+		
+		return "user/NewLogin";
+	}
 	
 	
 //	@PostMapping("/login")

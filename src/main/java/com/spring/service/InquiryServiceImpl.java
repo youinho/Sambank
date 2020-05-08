@@ -62,4 +62,17 @@ public class InquiryServiceImpl implements InquiryService {
 		return i_mapper.insert_inquiry(vo)==1;
 	}
 
+	@Override
+	public boolean update_expdate(InquiryVO vo) {
+
+		return i_mapper.update_expdate(vo)==1;
+	}
+
+
+	@Override
+	public int set_expired() {
+
+		return i_mapper.set_expired();
+	}
+
 }

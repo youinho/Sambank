@@ -38,16 +38,17 @@ public class Admin_UserDetails implements UserDetails {
 	private String group_id;
 	
 	private int failed_login_count;
-	
 	ArrayList<GrantedAuthority> auth_arr = new ArrayList<GrantedAuthority>();
 	
 	
-	
+	@Autowired
+	private AdminService adminService;
 	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
+		log.info("@@@@@@서비스 확인 : "+adminService);
 		
         
 		return auth_arr;

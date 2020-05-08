@@ -96,11 +96,32 @@
 		where id=#{id}
 	</update>
 	
+	<update id="set_enabled">
+		update customertbl set enabled=1
+		where id=#{id}
+	</update>
 	
 	<!-- security_get customer -->
 	<select id="security_get_customer" resultType="security.Customer_UserDetails">
 		select * from customertbl
 		where id=#{id}
+	</select>
+
+	<insert id="insert_locked_customer">
+		insert into locked_customer(id)
+		values(#{id})
+	</insert>
+	
+	<delete id="delete_locked_customer">
+		delete from locked_customer
+		where id=#{id}
+	</delete>
+	
+	<select id="select_to_unlock" resultType="com.spring.domain.CustomerVO">
+		<![CDATA[
+			select id from locked_customer
+			where unlockdate < sysdate
+		]]>
 	</select>
 
 </mapper>

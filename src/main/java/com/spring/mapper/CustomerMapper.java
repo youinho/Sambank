@@ -31,4 +31,10 @@ public interface CustomerMapper {
 	public int set_disabled(String id);
 	
 	public Customer_UserDetails security_get_customer(String id);
+	
+	public int insert_locked_customer(String id);
+	public int delete_locked_customer(String id);
+	public int set_enabled(String id);
+	public List<CustomerVO> select_to_unlock();
+	
 }

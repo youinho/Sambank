@@ -42,7 +42,7 @@
                                     <tr>
                                         <th style="width:10%">no</th>
                                         <th>제 목</th>
-                                        <th style="width:15%">수정일</th>
+                                        <th style="width:15%">등록일</th>
                                         <th style="width:15%">담당자</th>
                                     </tr>									
                                 </thead>
@@ -51,7 +51,7 @@
 									<tr>
                                         <td class="inquiry_no align-middle"><c:out value="${vo.inquiry_no }"></c:out></td>
                                         <td class="align-middle"><a href="${vo.inquiry_no}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
-                                        <td class="align-middle"><fmt:formatDate pattern="MM-dd HH:mm" value="${vo.updateDate }"/> </td>
+                                        <td class="align-middle"><fmt:formatDate pattern="MM-dd HH:mm" value="${vo.regDate }"/> </td>
                                         <td class="align-middle">
                                         	<c:choose>
                                         		<c:when test="${vo.answer_name==null }">

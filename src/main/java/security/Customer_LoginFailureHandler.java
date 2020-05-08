@@ -57,8 +57,7 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 				customerService.update_login_failure_count(id);
 				int failed_count = customerService.check_login_failure_count(id); 
 				if(failed_count>=5) {
-					customerService.set_disabled(id);
-					customerService.init_login_failure_count(id);
+					customerService.lock_customer(id);
 				}
 				session.setAttribute("failed_login_count", failed_count);
 			}
