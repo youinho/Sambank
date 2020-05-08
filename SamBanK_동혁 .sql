@@ -529,7 +529,7 @@ create table locked_customer(
     id nvarchar2(20) not null references customertbl(id),
     unlockdate date default sysdate+1
 );
-    
+select * from logtbl order by remote_addr desc;
 insert into locked_customer(id) values('sam');
 select * from locked_customer;
 (select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%') ad ;
