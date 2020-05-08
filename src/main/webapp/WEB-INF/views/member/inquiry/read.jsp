@@ -75,7 +75,7 @@
 	</div>
 	<div class="d-flex justify-content-end">
 		<div class="btn-group outline-dark" role="group" aria-label="Basic example">
-			
+			<button class="btn btn-outline-success btn-sm" type="button" id="completeBtn">문의 종료</button>
 			<button class="btn btn-outline-primary btn-sm" type="button" id="go-list">목록</button>
 		</div>
 	</div>	
@@ -94,11 +94,48 @@
 $(function(){
 	$("#contentDiv").html($("#contentDiv").html().replace(/\n/gi, "<br>"));
 	
+	let inquiry_condition = "${vo.condition}";
+	if(inquiry_condition==="0"){
+		$("#completeBtn").html("종료된 문의");
+		
+		$("#completeBtn").prop("disabled", true);
+	}
+	
+	
 	show_reply();
 
 	$("#go-list").click(function(e){
 		e.preventDefault();
 		location.href="/member/inquiry";
+	})
+	
+	$("#completeBtn").click(function(){
+		if(inquiry_condition==="0"){
+			alert("이미 종료된 문의입니다.");
+			return false;
+		}
+		$.ajax({
+			url : "/member/inquiry/set_inquiry_complete",
+			type : "post",
+			beforeSend : function(xhr)
+	           {   
+	               xhr.setRequestHeader(hn, tk);
+	           },
+			data :{
+				inquiry_no:"${vo.inquiry_no}"
+			},
+			dataType : "text",
+			success : function(result){
+				if(result==="success"){
+					alert("문의가 종료되었습니다. 14일 이후에 문의내역이 파기됩니다.")
+				}
+				
+				$("#completeBtn").html("종료된 문의");
+				$("#completeBtn").prop("disabled", true);
+				
+			}
+		})
+		
 	})
 })
 function show_reply(){
@@ -118,6 +155,7 @@ function show_reply(){
 			
 			
 			if(replyList.length <= 0){
+				$("#completeBtn").css("display","none");
 				return false;
 			}
 			$("tr[class!='ori']").remove();
@@ -132,15 +170,21 @@ function show_reply(){
 			    str += ""+replyList[i].content.replace(/\n/gi, "<br>");    
 			    str += "</p></div></td></tr>";
 		
-		
+				
 				
 			}
+			
+			
 			
 			$("#inquiry_table").append(str);			
 			
 			
 		}
 	})
+	
+	
+	
+	
 }
 </script>        
 

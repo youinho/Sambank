@@ -20,4 +20,7 @@ public interface InquiryService {
 	
 	
 	public boolean insert_inquiry(InquiryVO vo);
+	
+	public boolean update_expdate(InquiryVO vo);
+	public int set_expired();
 }

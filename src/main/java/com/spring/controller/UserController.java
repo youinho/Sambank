@@ -121,7 +121,15 @@ public class UserController {
 		return new ResponseEntity<List<Inquiry_replyVO>>(list, HttpStatus.BAD_REQUEST);
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/member/inquiry/set_inquiry_complete")
+	public ResponseEntity<String> set_inquiry_complete(InquiryVO vo, HttpServletRequest req){
+		vo.setCustomer_id(req.getRemoteUser());
+		if(inquiry_service.update_expdate(vo)) {
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+	}
 	
 	
 	

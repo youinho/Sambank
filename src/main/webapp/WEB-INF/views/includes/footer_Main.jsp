@@ -27,6 +27,22 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
     </style>
    </head>
 	<footer> 
+	<div class="toast d-inline-flex justify-content-start" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="15000" id="idCard_Y" style="z-index:2147483647;position:fixed;right:50px;bottom:50px;width:400px;height:220px">         
+		  <div class="toast-header">
+		    <!-- <img src="" class="rounded mr-2" alt="..."> -->
+		    
+		    <img src='/member/inquiry/get_profile_image?id=kdh9752' alt='profile_image' style='width:100px;height:100px;padding-right:10px;padding-left:5px'>
+		    
+		  </div>
+		  <div class="toast-body">
+		    Hello, world! This is a toast message.
+		  </div>
+		  <div style="height:100%">
+			  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			      <span aria-hidden="true">&times;</span>
+			  </button>
+		  </div>
+		</div>
 	<div class="line" style="text-align: center;">
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
@@ -61,14 +77,30 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                  <br/>
                      <!-- onchange="if(this.value) location.href=(this.value);" -->
                   <!-- <div class="select_team" style="float:right; background-color: #acaeb9;" > -->
-                     <select>
-                         <option value="">조 원 소 개</option>
-                         <option value="">유 인 호 </option>
-                         <option value="">김 동 혁</option>
-                         <option value="">이 다 형</option>
-                         <option value="">박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
+                     <select id="select_idCard">
+                         <option value="0">조 원 소 개</option>
+                         <option value="Y">유 인 호 </option>
+                         <option value="K">김 동 혁</option>
+                         <option value="L">이 다 형</option>
+                         <option value="P">박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
                      </select>
                   <!-- </div> --> 
               </div>
          </div> <!-- footer END -->
+         
  	</footer>
+<script>
+$(function(){
+	$("#select_idCard").change(function(){
+		if($(this).val()==="0"){
+			$("#idCard").toast('hide');
+			return false;
+		}else{
+			$("#idCard_Y").toast('show');
+			console.log("ggggg");
+		}
+		
+		
+	})
+})
+</script>

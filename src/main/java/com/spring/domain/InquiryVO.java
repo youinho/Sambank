@@ -17,4 +17,7 @@ public class InquiryVO {
 	private String condition;
 	private Date regDate;
 	private Date updateDate;
+	
+	private Date expdate;
+	private int expired;
 }

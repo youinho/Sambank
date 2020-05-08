@@ -26,24 +26,24 @@
     
     <!-- 검사 URL -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/">
-    	<intercept-url pattern="/" access="permitAll"   />
+    	<intercept-url pattern="/" access="isAnonymous()||hasRole('ROLE_USER')"   />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/A">
-    	<intercept-url pattern="/A" access="permitAll"    />
+    	<intercept-url pattern="/A" access="isAnonymous()||hasRole('ROLE_USER')"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/N">
-    	<intercept-url pattern="/N" access="permitAll"    />
+    	<intercept-url pattern="/N" access="isAnonymous()||hasRole('ROLE_USER')"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/E">
-    	<intercept-url pattern="/E" access="permitAll"    />
+    	<intercept-url pattern="/E" access="isAnonymous()||hasRole('ROLE_USER')"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/F">
-    	<intercept-url pattern="/F" access="permitAll"    />
+    	<intercept-url pattern="/F" access="isAnonymous()||hasRole('ROLE_USER')"    />
     </http>
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="admin_auth" pattern="/admin/**">
-        <intercept-url pattern="/admin/login" access="permitAll" />
+        <intercept-url pattern="/admin/login" access="isAnonymous()||hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"/>
         <intercept-url pattern="/admin/inquiry" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"  />  
         <intercept-url pattern="/admin/manage" access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')"   />
         <intercept-url pattern="/admin/notice" access="hasAnyRole('ROLE_1,ROLE_3,ROLE_5,ROLE_7,ROLE_10')"   />
@@ -78,7 +78,7 @@
     </beans:bean>
  	<!--  -->
 	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/member/**">
-        <intercept-url pattern="/member/login_test" access="permitAll"  />
+        <intercept-url pattern="/member/login_test" access="isAnonymous()||hasRole('ROLE_USER')"  />
         <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')"  />
 		
         <form-login login-page="/member/login_test" 

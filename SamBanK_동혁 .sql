@@ -297,7 +297,10 @@ where ad.id = admin_group_members.id and admin_group_members.group_id=admin_grou
 
 select * from admintbl;
 
-
+select * from (select * from customer_inquiry
+		where expired=0 and answer_id is null
+		order by updatedate asc) s
+where rownum<10;
 select substr(authority, 6) from admin_group_authorities;
 
 select group_id from admin_group_members where id='sam';
@@ -526,7 +529,7 @@ select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.g
 where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = a.group_id order by a.group_id desc;
 drop table locked_customer;
 create table locked_customer(
-    id nvarchar2(20) not null references customertbl(id),
+    id nvarchar2(20) not null references customertbl(id) on delete cascade,
     unlockdate date default sysdate+1
 );
     
@@ -564,5 +567,44 @@ select * from customertbl where id='rlaehdgur1';
 
 select * from customertbl where id = 'rlaehdgur11';
 
+select * from admintbl order by admin_no desc;
 
--- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
+select * from customertbl;
+update admintbl set enabled=1 where id='sam';
+commit;
+select id from locked_customer
+		where unlockdate < sysdate;
+select * from locked_customer;
+insert into locked_customer values('rlaehdgur1', sysdate);
+insert into locked_customer values('rlaehdgur2', sysdate);
+insert into locked_customer values('xtdwuz07c6lr', sysdate);
+commit;
+select * from customertbl;
+delete from locked_customer;
+delete from customertbl where id='xtdwuz07c6lr';
+
+select * from customer_inquiry
+		where condition != 0 or (condition=0 and expdate > sysdate)
+		order by updatedate asc;
+update customer_inquiry set condition=0 where inquiry_no=15;
+commit;
+update customer_inquiry set expdate=sysdate+10;
+alter table customer_inquiry add(expdate date);
+alter table customer_inquiry modify(expdate date default sysdate);
+alter table customer_inquiry add(expired number(1));
+alter table customer_inquiry modify(expired number(1) default 0);
+select * from customer_inquiry
+		where expired=0
+		order by updatedate asc;
+update customer_inquiry set expired=0;
+commit;
+select * from customer_inquiry
+		where customer_id='rlaehdgur1' and expired=0
+		order by regdate desc;
+
+select * from customer_inquiry where inquiry_no=25;
+
+select * from customer_inquiry
+		where expired=0 and answer_id is null
+		order by updatedate asc;
+-- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

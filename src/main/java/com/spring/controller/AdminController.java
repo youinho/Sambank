@@ -284,7 +284,11 @@ public class AdminController {
 		vo.setLocal_port(req.getLocalPort()+"");
 		vo.setRemote_addr(req.getRemoteAddr());
 		vo.setRemote_port(req.getRemotePort()+"");
-		vo.setAdmin_session(req.getRequestedSessionId());
+		if(req.getRequestedSessionId()!=null) {
+			vo.setAdmin_session(req.getRequestedSessionId());
+		}else {
+			vo.setAdmin_session("");
+		}
 		//log.info("log vo : "+vo);
 		if(req.getParameterNames().hasMoreElements()) {
 			parameter_names=req.getParameterMap().keySet().toString();

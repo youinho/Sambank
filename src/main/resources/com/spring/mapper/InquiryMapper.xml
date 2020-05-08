@@ -4,22 +4,25 @@
 
 	<!-- 전체 리스트 -->
 	<select id="getList" resultType="com.spring.domain.InquiryVO">
-		select * from customer_inquiry
-		where condition != 0
-		order by updatedate asc
+		<![CDATA[
+		select * from (select * from customer_inquiry
+		where expired=0 and answer_id is null
+		order by updatedate asc) s
+		where rownum<50
+		]]>
 	</select>
 
 	<!-- 리스트 by answer_id -->
 	<select id="getList_by_answer" resultType="com.spring.domain.InquiryVO">
 		select * from customer_inquiry
-		where condition != 0 and answer_id=#{answer_id}
+		where expired=0 and answer_id=#{answer_id}
 		order by updatedate asc
 	</select>
 
 	<!-- 글 번호로 정보 -->
 	<select id="getRow" resultType="com.spring.domain.InquiryVO">
 		select * from customer_inquiry
-		where inquiry_no=#{inquiry_no}
+		where inquiry_no=#{inquiry_no} and expired=0
 	</select>
 	
 	
@@ -52,7 +55,7 @@
 	<!-- 고객 id로 리스트 -->
 	<select id="getList_by_customer" resultType="com.spring.domain.InquiryVO">
 		select * from customer_inquiry
-		where customer_id=#{customer_id}
+		where customer_id=#{customer_id} and expired=0
 		order by regdate desc
 	
 	</select>
@@ -63,5 +66,17 @@
 		values(seq_inquiry.nextVal, #{customer_id}, #{customer_name}, #{title}, #{content})
 	</insert>
 
-
+	<update id="update_expdate">
+		update customer_inquiry set expdate=sysdate+14, condition=0
+		where customer_id=#{customer_id} and inquiry_no=#{inquiry_no}
+	</update>
+	
+	
+	<update id="set_expired">
+		<![CDATA[
+			update customer_inquiry set expired=1
+			where expdate < sysdate
+		]]>
+	</update>
+	
 </mapper>

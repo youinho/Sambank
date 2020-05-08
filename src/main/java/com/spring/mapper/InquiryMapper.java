@@ -23,5 +23,7 @@ public interface InquiryMapper {
 	
 	public int insert_inquiry(InquiryVO vo);
 	
+	public int update_expdate(InquiryVO vo);
+	public int set_expired();
 	
 }
