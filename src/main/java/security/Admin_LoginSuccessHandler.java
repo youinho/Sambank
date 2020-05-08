@@ -26,7 +26,6 @@ public class Admin_LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
 			Authentication authentication) throws IOException, ServletException {
 		
 		String id = request.getParameter("id");
-		log.info("로그인 성공 핸들러 id : "+id);
 		adminService.init_login_failure_count(id);
 		HttpSession session = request.getSession();
 		AdminVO vo = adminService.selectOne(id);
