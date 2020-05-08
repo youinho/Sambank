@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,12 @@ tocplusHAlign='right';
 tocplusMinimized='true';
 tocplusWidth=180;
 tocplusHeight=150;
-tocplusUserName='고객님';
+<c:choose>
+<c:when test="${name != null}">tocplusUserName='<c:out value="${name }님"></c:out>';</c:when>
+<c:when test="${name == null}">tocplusUserName='<c:out value="고객님"></c:out>';</c:when>
+</c:choose>
+
+
 tocplusFrameColor='#b5fdba';
 tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
