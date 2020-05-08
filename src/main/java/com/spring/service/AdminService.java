@@ -23,6 +23,8 @@ import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 import com.spring.domain.Profile_imageVO;
 
+import security.Admin_UserDetails;
+
 public interface AdminService {
 	public AdminVO selectOne(String id);
 	
@@ -35,7 +37,10 @@ public interface AdminService {
 	public boolean admin_insert(AdminVO vo);
 	public boolean update_admin(AdminVO vo);
 	public boolean check_adminId(String id);
+	public AdminVO get_authority(String id);
+	public AdminVO get_group_authority(String id);
 	
+	public Admin_UserDetails security_get_admin(String id);
 	//로그인 실패 카운트
 	public boolean update_login_failure_count(String id);
 	public boolean init_login_failure_count(String id);

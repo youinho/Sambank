@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mapper.CustomerMapper;
+
+import security.Customer_UserDetails;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -33,6 +35,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public boolean set_disabled(String id) {
 
 		return customerMapper.set_disabled(id)==1;
+	}
+
+	@Override
+	public Customer_UserDetails security_get_customer(String id) {
+
+		return customerMapper.security_get_customer(id);
 	}
 
 }

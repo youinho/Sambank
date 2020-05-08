@@ -243,7 +243,9 @@ $(function(){
 	
 	$(".notice_type_td > a").click(function(e){
 		e.preventDefault();
-		actionForm.find("input[name='notice_types']").val($(this).attr("href"));
+		//actionForm.find("input[name='notice_types']").val($(this).attr("href"));
+		//console.log(actionForm.find("input[name='notice_types']").val());
+		actionForm.attr("action", "/"+$(this).attr("href"))
 		actionForm.submit();
 	})
 	

@@ -13,6 +13,8 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Profile_imageVO;
 
+import security.Admin_UserDetails;
+
 public interface AdminMapper {
 	public AdminVO selectOne(String id);
 	
@@ -50,4 +52,9 @@ public interface AdminMapper {
 	public int check_login_failure_count(String id);
 	
 	public int set_disabled(String id);
+	
+	
+	public AdminVO get_group_authority(String id);
+	public AdminVO get_authority(String id);
+	public Admin_UserDetails security_get_admin(String id);
 }

@@ -36,7 +36,7 @@
 		        <%-- <form action="/admin/login" method="POST" class="post-form"> --%>
 		        
 		        <form:form name="f" action="${loginUrl}" method="POST">
-		            <p>아이디 : sam / 비밀번호 : 3333</p>
+		            
 		            <c:if test="${param.logout != null}"> 
 		            	<p><small style="color:blue">로그아웃 하였습니다.</small></p> 
 		            </c:if>
@@ -62,6 +62,17 @@
 		                <input type="submit" class="btn btn-primary btn-block" value="로그인" />
 		            </fieldset>
 		        <%-- </form> --%>
+				<p>아이디 : tester1 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester2 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester3 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester4 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester5 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester6 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester7 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester8 / 비밀번호 : qwe123!@#</p>
+				<p>아이디 : tester9 / 비밀번호 : qwe123!@#</p>		        
+
+		        
 		        </form:form>
 		        
 		        <sec:authorize access="isAuthenticated()">
