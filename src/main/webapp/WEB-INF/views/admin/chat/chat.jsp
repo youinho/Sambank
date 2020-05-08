@@ -11,9 +11,9 @@
 <script type="text/javascript">
 /* tocplusBgImage='123';
 tocplusAwayImage='132'; */
-tocplusTop=1150;
+tocplusTop=300;
 /* tocplusTop1=1150; */
-tocplusLeft=1;
+tocplusLeft=20;
 tocplusMinimizedImage='https://i.imgur.com/0nEhPSn.png';
 tocplusHAlign='right';
 tocplusMinimized='true';
