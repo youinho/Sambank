@@ -81,12 +81,12 @@ public class HomeController {
 //		return "Questions";
 //	}
 	
-//	@GetMapping("/login")
-//	public String loginPage() {
-//		
-//		
-//		return "user/login";
-//	}
+	@GetMapping("/L")
+	public String loginPage() {
+		
+		
+		return "user/NewLogin";
+	}
 	
 	
 //	@PostMapping("/login")
