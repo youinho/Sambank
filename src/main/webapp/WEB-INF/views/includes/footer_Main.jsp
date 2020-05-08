@@ -27,11 +27,11 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
     </style>
    </head>
 	<footer> 
-	<div class="toast d-inline-flex justify-content-start" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="15000" id="idCard_Y" style="z-index:2147483647;position:fixed;right:50px;bottom:50px;width:400px;height:220px">         
+	<div class="toast d-inline-flex justify-content-start" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="idCard_Y" style="z-index:2147483647;position:fixed;right:50px;bottom:50px;width:400px;height:220px">         
 		  <div class="toast-header">
 		    <!-- <img src="" class="rounded mr-2" alt="..."> -->
 		    
-		    <img src='/member/inquiry/get_profile_image?id=kdh9752' alt='profile_image' style='width:100px;height:100px;padding-right:10px;padding-left:5px'>
+		    <img src='/resources/img/umb.gif' alt='profile_image' style='width:100px;height:100px;padding-right:10px;padding-left:5px'>
 		    
 		  </div>
 		  <div class="toast-body">
