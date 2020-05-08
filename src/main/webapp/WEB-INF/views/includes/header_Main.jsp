@@ -104,7 +104,7 @@ let tk = "${_csrf.token}"
 		<!-- style="background-color: #fbebba;" -->
 			<nav class="navbar navbar-expand-lg navbar navbar-light" >
 			<div id="Logo">  
-			  <a class="navbar-brand" src="/resources/KB_files/SamBank Image Logo.png" href="/"><img src="/resources/KB_files/SamBank Image Logo.png" alt="로고 이미지" ></a>
+			  <a class="navbar-brand" src="/resources/KB_files/SamBank Image Logo.png" href="/"><img src="/resources/SB_files/SamBank_Image_Logo.png" alt="로고 이미지" ></a>
 			</div>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>

@@ -97,9 +97,11 @@ public class UserController {
 		}
 		
 		InquiryVO vo = inquiry_service.getRow(inquiry_no);
-		if(vo.getCustomer_id().equals(req.getRemoteUser())) {
-			model.addAttribute("vo", vo);
-			return "/member/inquiry/read";
+		if(vo!=null) {
+			if(vo.getCustomer_id().equals(req.getRemoteUser())) {
+				model.addAttribute("vo", vo);
+				return "/member/inquiry/read";
+			}
 		}
 		return "redirect:/member/inquiry";
 		
