@@ -503,7 +503,35 @@ delete from admin_group_members where id = 'sam2';
 select * from customertbl where name='최규리';
 select * from deposit_history;
 
+delete from admin_attach;
+delete from customer_attach;
+commit;
 
-;
-dele
+select * from customertbl order by cno desc;
+select * from deposittbl;
+delete from customertbl where cno=19946;
+commit;
+select * from deposittbl where ano=10135034475205;
+
+select * from deposittbl;
+
+select * from customertbl where name='김동혁';
+update customertbl set enabled=0 where id='rlaehdgur1';
+commit;
+
+alter table customertbl add(failed_login_count number(1) default 0);
+alter table admintbl add(failed_login_count number(1) default 0);
+update customertbl set failed_login_count=0;
+update admintbl set failed_login_count=0;
+commit;
+update admintbl set failed_login_count=failed_login_count+1
+		where id='sam';
+select * from admintbl where id='sam';
+commit;
+select * from deposittbl;
+select * from admintbl where id='sam';
+
+select * from customertbl where id='rlaehdgur1';
+
+select * from customertbl where id = 'rlaehdgur11';
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
