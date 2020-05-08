@@ -23,6 +23,10 @@ public class ErrorPageController {
 	public void error_403() {
 		log.info("403");
 	}
+	@GetMapping("/405")
+	public void error_405() {
+		log.info("405");
+	}
 	@GetMapping("/500")
 	public void error_500() {
 		log.info("500");

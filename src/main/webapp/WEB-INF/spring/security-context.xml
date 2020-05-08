@@ -15,7 +15,7 @@
 		</beans:bean>
 		<beans:bean id="admin_loginSuccessHandler" class="security.Admin_LoginSuccessHandler"/>
 		<beans:bean id="customer_loginFailureHandler" class="security.Customer_LoginFailureHandler">
-			<beans:property name="defaultFailureUrl" value="/member/login_test?error=failed"/>
+			<beans:property name="defaultFailureUrl" value="/member/login?error=failed"/>
 		</beans:bean>
 		<beans:bean id="customer_loginSuccessHandler" class="security.Customer_LoginSuccessHandler"/>
         <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
@@ -78,10 +78,10 @@
     </beans:bean>
  	<!--  -->
 	<http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/member/**">
-        <intercept-url pattern="/member/login_test" access="isAnonymous()||hasRole('ROLE_USER')"  />
+        <intercept-url pattern="/member/login" access="isAnonymous()||hasRole('ROLE_USER')"  />
         <intercept-url pattern="/member/**" access="hasRole('ROLE_USER')"  />
 		
-        <form-login login-page="/member/login_test" 
+        <form-login login-page="/member/login" 
         			login-processing-url="/member/login_process"
 			        default-target-url="/" 
 			        

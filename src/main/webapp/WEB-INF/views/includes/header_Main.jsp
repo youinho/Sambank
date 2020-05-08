@@ -136,7 +136,7 @@ let tk = "${_csrf.token}"
 					  <a class="nav-link" href="/register/step1">회원가입</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="/member/login_test">로그인</a>
+					  <a class="nav-link" href="/member/login">로그인</a>
 					</li>
 				</sec:authorize>
 				      </li>

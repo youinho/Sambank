@@ -1,25 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-<!------ Include the above in your HEAD tag ---------->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sambank Login</title>
 <!--Bootsrap 4 CDN-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <!--Fontawesome CDN-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!--Custom styles-->
 <link rel="stylesheet" type="text/css" href="styles.css">
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 <style>
 /* Made with love by Mutiullah Samim*/
 
@@ -114,6 +112,19 @@ margin-left: 4px;
 .card-footer a  {
 color: #fff;
 }
+#error_card{
+	background-image: none;
+	display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid yellow;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
 </style>
 
 </head>
@@ -133,20 +144,9 @@ color: #fff;
 			<div class="card-body">
 				<sec:authorize access="isAnonymous()">
 					<c:url value="/member/login_process" var="loginUrl" />
-					<form name="f" action="${loginUrl}" method="POST">
+					<form:form name="f" action="${loginUrl}" method="POST" id="loginForm">
 						
-						<c:if test="${param.logout != null}"> 
-			            	<p><small style="color:blue">로그아웃 하였습니다.</small></p> 
-			            </c:if>
-			            <c:if test="${id == 'not_found'}"> 
-			            	<p><small style="color:red">아이디를 찾을 수 없습니다.</small></p> 
-			            </c:if>
-			            <c:if test="${param.error == 'failed' && enabled!='false' && id != 'not_found'}"> 
-			            	<p><small style="color:red">로그인에 실패했습니다. 5회 연속 실패할 경우 계정이 비활성화 됩니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
-			            </c:if> 
-			            <c:if test="${enabled == 'false'}"> 
-			            	<p><small style="color:red"><c:out value="계정이 비활성화 상태입니다. 관리자에게 문의해주세요."></c:out></small></p> 
-			            </c:if> 
+						
 						<div class="input-group form-group">
 							<!-- <div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -160,13 +160,10 @@ color: #fff;
 							</div> -->
 							<input type="password" class="form-control" placeholder="password" name="password" id="password">
 						</div>
-						<div class="row align-items-center remember">
-							<input type="checkbox">로그인 기록
-						</div>
 						<div class="form-group">
-							<input type="submit" value="로그인" class="btn float-right">
+							<input type="submit" value="로그인" class="btn float-right" id="loginBtn">
 						</div>
-					</form>
+					</form:form>
 				</sec:authorize>
 			</div>
 			<div class="card-footer" style=" color: #fff">
@@ -187,16 +184,70 @@ color: #fff;
 			        	<a href="#" id="logoutBtn"><c:out value="로그아웃"></c:out> </a>
 		      		</form:form>
 		      		</div>
-	      			<input type="hidden" name="" id=go_home />
 	      		</sec:authorize>
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class="toast col-3 btn btn-outline-warning fixed-top" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="error_card" style="z-index:2147483647;background-color:#ffffff;margin:auto;white-space:normal;display:none">
+  <div class="toast-header">
+  	<p style="font-size:1.2em;color:#000000"><strong>알림</strong></p>    
+  </div>
+  <div class="toast-body" style="text-align:left">
+	<c:if test="${param.logout != null}"> 
+		<p><small style="color:blue">로그아웃 하였습니다.</small></p> 
+	</c:if>
+	<c:if test="${id == 'not_found'}"> 
+		<p><small style="color:red">아이디를 찾을 수 없습니다.</small></p> 
+	</c:if>
+	<c:if test="${param.error == 'failed' && enabled!='false' && id != 'not_found'}"> 
+		<p><small style="color:red">로그인에 실패했습니다.<br> 5회 연속 실패할 경우 계정이 비활성화 되며<br> 24시간 이후에 접속할 수 있습니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
+	</c:if> 
+	<c:if test="${enabled == 'false'}"> 
+		<p><small style="color:red">계정이 비활성화 상태입니다.<br>관리자에게 문의해주세요.</small></p>
+	</c:if> 
+  </div>
+</div>
+
 <script>
 $(function(){
+	let param_logout = "${param.logout != null}";
+	let param_id = "${id}";
+	let param_error = "${param.error}";
+	let param_enabled = "${enabled}";
+	let param_count = "${failed_login_count }";
+	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false"){
+		$("#error_card").css("display","inline-block");
+		$("#error_card").toast("show");
+		console.log("ook");
+	}
+
+	
+	$("#loginBtn").click(function(e){
+		e.preventDefault();
+		if($("#id").val()=="" || $("#id").val()==null){
+			$(".toast-body").html("<p><small style='color:red'>아이디를 입력해주세요.</small></p>");
+			$("#error_card").css("display","inline-block");
+			$("#error_card").toast("show");
+			return false;
+		}
+		if($("#password").val()==""||$("#password").val()==null){
+			$(".toast-body").html("<p><small style='color:red'>비밀번호를 입력해주세요.</small></p>");
+			$("#error_card").css("display","inline-block");
+			$("#error_card").toast("show");
+			return false;
+		}
+		$("#loginForm").submit();
+	})
+	
+	
 	$("#logoutBtn").click(function(e){
 		e.preventDefault();
+		
+		
+		
+		
 		$("#logoutForm").submit();
 		
 	})
@@ -205,3 +256,7 @@ $(function(){
 </script>
 </body>
 </html>
+<%
+	session.removeAttribute("id");
+	session.removeAttribute("enabled");
+%>

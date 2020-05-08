@@ -105,20 +105,21 @@ public class HomeController {
 	
 	
 	
-	@GetMapping("/member/login_test")	// 로그인 테스트 페이지
+	@GetMapping("/member/login")	// 로그인 테스트 페이지
 	public String customer_test_login() {
 		log.info("customer test_login 페이지 요청");
 		
 		
-		return "/test_login";
+		return "/login";
 	}
-	@GetMapping("/member/test")	// 로그인 테스트 페이지
-	public String login_test_success() {
-		log.info("로그인 성공");
-		
-		
-		return "/test_success";
-	}
+	
+//	@GetMapping("/member/test")	// 로그인 테스트 페이지
+//	public String login_test_success() {
+//		log.info("로그인 성공");
+//		
+//		
+//		return "/test_success";
+//	}
 	
 
 }
