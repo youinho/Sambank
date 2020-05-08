@@ -88,7 +88,7 @@
 
 
 
-
+<%@include file="../includes/footer_Main.jsp" %>
 </main>
 
 
@@ -164,4 +164,3 @@ $(function(){
 
 </body>
 </html>
-<%@include file="../includes/footer_Main.jsp" %>

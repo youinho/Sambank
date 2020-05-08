@@ -62,16 +62,17 @@
 		                <input type="submit" class="btn btn-primary btn-block" value="로그인" />
 		            </fieldset>
 		        <%-- </form> --%>
-				<p>아이디 : tester1 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester2 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester3 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester4 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester5 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester6 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester7 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester8 / 비밀번호 : qwe123!@#</p>
-				<p>아이디 : tester9 / 비밀번호 : qwe123!@#</p>		        
-
+		        <div style="color:#ffffff">
+					<p>아이디 : tester1 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester2 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester3 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester4 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester5 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester6 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester7 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester8 / 비밀번호 : qwe123!@#</p>
+					<p>아이디 : tester9 / 비밀번호 : qwe123!@#</p>		        
+				</div>
 		        
 		        </form:form>
 		        

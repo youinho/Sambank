@@ -212,7 +212,7 @@ let tk = "${_csrf.token}"
 										<span>
 										<!-- <img src="/resources/SB_files/visual_section18_tit021.png" alt="일상의 쉼표가 필요한 순간, SB은행과 함께 하세요."
 										style="margin-left: 100px;">
-										<img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행" -->>
+										<img src="/resources/SB_files/visual_section18_tit01.png" alt="늘 곁에, 더 가까이 SB은행" -->
 										<img src="/resources/SB_files/background5.png" alt="" />
 										</span>
 									</div>

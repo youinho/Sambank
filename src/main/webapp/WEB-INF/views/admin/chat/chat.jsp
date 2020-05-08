@@ -24,7 +24,9 @@ tocplusFloatingWindow=true;
 var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 /*document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=sambank' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
  */
-document.write(unescape("%"+"3Cscript src='" + tocplusHost + "localhost:8080/chatLoader.do?userId=sambank' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+/* document.write(unescape("%"+"3Cscript src='" + tocplusHost + "localhost:8080/chatLoader.do?userId=sambank' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+ */
+ document.write(unescape("%"+"3Cscript src='" + tocplusHost + "13.209.89.134:8080/chatLoader.do?userId=sambank' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
  /* <div id="tocplusWindow" style="z-index: 2147483647; position: absolute; top: 930.4px; left: 1318px;"><div id="TpTbw" style="border: none; position: absolute; top: 140px; cursor: pointer;"><img src="https://i.imgur.com/3dca7QT.png" style="border:none"></div></div>
  */ </script>
 </body>
