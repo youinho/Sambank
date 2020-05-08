@@ -31,6 +31,8 @@ import com.spring.mapper.AdminNoticeMapper;
 import com.spring.mapper.CardMapper;
 import com.spring.mapper.CustomerMapper;
 
+import security.Admin_UserDetails;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
@@ -509,5 +511,25 @@ public class AdminServiceImpl implements AdminService {
 	public boolean set_disabled(String id) {
 	
 		return adminMapper.set_disabled(id)==1;
+	}
+
+
+	@Override
+	public AdminVO get_group_authority(String id) {
+		
+		return adminMapper.get_group_authority(id);
+	}
+
+
+	@Override
+	public Admin_UserDetails security_get_admin(String id) {
+
+		return adminMapper.security_get_admin(id);
+	}
+	
+	@Override
+	public AdminVO get_authority(String id) {
+	
+		return adminMapper.get_authority(id);
 	}
 }

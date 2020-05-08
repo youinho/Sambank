@@ -17,11 +17,14 @@
 <link href = "https://fonts.googleapis.com/css2?family=Do Hyeon&display=swap"rel = "stylesheet">
 <!-- bootstrap js,jQuery link -->
 <style>
-a:visited {color:black; text-decoration:none;}
 .asideHeader a:visited {color:#fff; text-decoration:none;}
-.tag_var a:visited {color:#fff; text-decoration:none;}
 a:hover {color:black; text-decoration:none;}
-a:link {color:black; text-decoration:none;}
+
+/*
+.tag_var a:visited {color:#fff; text-decoration:none;}
+a:link {color:black; text-decoration:none;} 
+*/
+a:visited {color:black; text-decoration:none;}
 
 main{
 	width : 70%;
@@ -120,6 +123,7 @@ let tk = "${_csrf.token}"
 			        </a>
 				        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				          <a class="dropdown-item" href="/member/customer/modify">개인정보수정</a>
+				          <a class="dropdown-item" href="/member/customer/delete">회원탈퇴</a>
 				          <form:form action="${pageContext.request.contextPath}/member/logout" method="POST" class="logout-form">
 		      				
 		      				<a class="dropdown-item logout" href="#">로그아웃</a>
@@ -173,14 +177,14 @@ let tk = "${_csrf.token}"
 	        <div class="collapse navbar-collapse" id="navbarnav">
 	      		<!-- Example split danger button -->
 					<div class="btn-group">
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/A">공지사항</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/">보안센터</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/F">자료실</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/N">새소식</a></button>
-					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/E">이벤트</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/A" style="color: #fff">공지사항</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/" style="color: #fff">보안센터</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/F" style="color: #fff">자료실</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/N" style="color: #fff">새소식</a></button>
+					<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="/E" style="color: #fff">이벤트</a></button>
 					  <!-- 2 -->
 					  <div class="btn-group" style="margin-left: 25px;">
-						  <button type="button" class="btn btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						    문의 사항
 						  </button>
 						  <div class="dropdown-menu">

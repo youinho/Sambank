@@ -493,6 +493,15 @@ select * from customer_inquiry_reply;
 
 select * from admintbl;
 
+select * from admintbl;
+update admintbl set profile_image_type='png' where profile_image_type is null;
+commit;
+select * from logtbl;
+select * from deposit_history order by hno desc;
+select * from logtbl order by log_no desc;
+delete from logtbl where log_no>40000;
+delete from logtbl;
+commit;
 
 select * from deposittbl;
 commit;
@@ -502,11 +511,37 @@ delete from admin_group_members where id = 'sam2';
 
 select * from customertbl where name='최규리';
 select * from deposit_history;
+select * from customertbl;
 
+<<<<<<< HEAD
 delete from admin_attach;
 delete from customer_attach;
 commit;
+=======
+alter table admintbl rename column authority to authority_del;
+alter table admin_board rename column content2 to content;
+select * from admintbl;
+select SUBSTR(admin_group_authorities.authority, 6) from admin_group_authorities;
+select * from admin_group_members;
+select * from admin_group_authorities where SUBSTR(admin_group_authorities.authority, 6)<'5';
+select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%';
+select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, a.group_id from 
+(select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%') ad, admin_group_members, admin_groups, 
+(select * from admin_group_authorities where SUBSTR(admin_group_authorities.authority, 6)<'5') a 
+where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = a.group_id order by a.group_id desc;
+drop table locked_customer;
+create table locked_customer(
+    id nvarchar2(20) not null references customertbl(id),
+    unlockdate date default sysdate+1
+);
+    
+insert into locked_customer(id) values('sam');
+select * from locked_customer;
+(select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%') ad ;
+(select admin_group_members.group_id, authority, id from admin_group_members join admin_group_authorities on admin_group_members.group_id=admin_group_authorities.group_id where admin_group_members.group_id < 10) ;
+>>>>>>> branch 'master' of http://github.com/youinho/sambank
 
+<<<<<<< HEAD
 select * from customertbl order by cno desc;
 select * from deposittbl;
 delete from customertbl where cno=19946;
@@ -534,4 +569,6 @@ select * from admintbl where id='sam';
 select * from customertbl where id='rlaehdgur1';
 
 select * from customertbl where id = 'rlaehdgur11';
+=======
+>>>>>>> branch 'master' of http://github.com/youinho/sambank
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystore" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

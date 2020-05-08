@@ -32,7 +32,7 @@
 	<select id="search_admins" resultType="com.spring.domain.AdminVO">
 		<![CDATA[
 			select ad.id, ad.rank, ad.branch, ad.mobile, ad.enabled, ad.name, admin_groups.group_name, a.group_id
-			from (select * from admintbl where name like '%'||#{name}||'%' and branch like '%'||#{branch}||'%' and id like '%'||#{id}||'%') ad, admin_group_members, admin_groups, (select * from admin_group_authorities where SUBSTR(admin_group_authorities.authority, 6)<#{authority}) a
+			from (select * from admintbl where name like '%'||#{name}||'%' and branch like '%'||#{branch}||'%' and id like '%'||#{id}||'%') ad, admin_group_members, admin_groups, (select * from admin_group_authorities where SUBSTR(admin_group_authorities.authority, 6)<#{auth_level}) a
 			where ad.id = admin_group_members.id and admin_group_members.group_id=admin_groups.id and admin_groups.id = a.group_id order by a.group_id desc
 		]]>
 	</select>
@@ -135,4 +135,20 @@
 		where id=#{id}
 	</update>
 	
+	
+	
+	
+	
+	<!-- 관리자 권한 불러오기 -->
+	<select id="get_group_authority" resultType="com.spring.domain.AdminVO">
+		select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = #{id} and g.id = ga.group_id and g.id = gm.group_id
+	</select>
+	
+	<select id="get_authority" resultType="com.spring.domain.AdminVO">
+		select id, authority from admin_authorities where id = #{id}
+	</select>
+	
+	<select id="security_get_admin" resultType="security.Admin_UserDetails">
+		select * from admintbl where id = #{id}
+	</select>
 </mapper>

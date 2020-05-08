@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SamBank '<'관련항목 적기'>' </title>
+<title>SamBank < 문의사항 작성 > </title>
 </head>
 <body>
 

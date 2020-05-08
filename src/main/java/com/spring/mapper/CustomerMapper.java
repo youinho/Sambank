@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.domain.Acc_info;
 import com.spring.domain.CustomerVO;
 
+import security.Customer_UserDetails;
+
 public interface CustomerMapper {
 	
 	public CustomerVO select_by_cno(int cno);
@@ -27,4 +29,6 @@ public interface CustomerMapper {
 	public int check_login_failure_count(String id);
 	
 	public int set_disabled(String id);
+	
+	public Customer_UserDetails security_get_customer(String id);
 }

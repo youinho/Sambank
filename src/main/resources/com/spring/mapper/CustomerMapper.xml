@@ -96,6 +96,11 @@
 		where id=#{id}
 	</update>
 	
-
+	
+	<!-- security_get customer -->
+	<select id="security_get_customer" resultType="security.Customer_UserDetails">
+		select * from customertbl
+		where id=#{id}
+	</select>
 
 </mapper>
