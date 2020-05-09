@@ -139,23 +139,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -202,7 +202,8 @@ aside {
 	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer_validate.js"></script>
+<!--  <script src="/resources/js/member/customer/customer_request_validate.js"></script>
+-->
 <script>
 
 </script>
@@ -211,7 +212,7 @@ aside {
       <h4 class="mb-3 title">계좌	 신청</h4>
       	<hr class="mb-4">
       
-      <form class="needs-validation" novalidate="novalidate" method="post" id="register_customer">
+      <form class="needs-validation" novalidate="novalidate" method="post" id="customer_request">
       
   
    <table class="table table-bordered">
@@ -219,22 +220,22 @@ aside {
   <tbody>
     <tr>
       <th style="width: 10%; vertical-align: middle; text-align: center; ">성명</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="name" placeholder="예) 홍길동"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="name" name="name" placeholder="예) 홍길동"></td>
       <th style="width: 10%; vertical-align: middle; text-align: center; ">생년월일</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="birth" placeholder="예) 900101"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="birth" name="birth" placeholder="예) 900101"></td>
     </tr>
     
    
    <tr>
-    <th style="vertical-align: middle; text-align: center;" >연락처</th>
-    <td colspan="4"><input type="text" class="form-control" name="phone" placeholder="예) 02-000-0000"></td>  
+    <th style="vertical-align: middle; text-align: center;" >영어이름</th>
+    <td colspan="4"><input type="text" class="form-control" id="eng_name" name="eng_name" placeholder="예) Hong Gil Dong"></td>  
     <th style="vertical-align: middle; text-align: center;" >전화번호</th>
-    <td colspan="4"><input type="text" class="form-control" name="mobile" placeholder="예) 010-0000-0000"></td>  
+    <td colspan="4"><input type="text" class="form-control" id="mobile" name="mobile" placeholder="예) 010-0000-0000"></td>  
    </tr>
    
    <tr>
     <th style="vertical-align: middle; text-align: center;" >이메일</th>
-    <td colspan="7"><input type="email" class="form-control" name="email" placeholder="예) sambank@sambank.com"></td>  
+    <td colspan="7"><input type="email" class="form-control" id="email" name="email" placeholder="예) sambank@sambank.com"></td>  
    </tr>
    
    <tr>
@@ -253,29 +254,29 @@ aside {
    <tr>
     <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
     <td style="vertical-align: middle; text-align: center;" colspan="1">
-     <select name="account" class="form-control">
+     <select name="account" id="account" class="form-control" >
       <option value="1">예금계좌</option>
       <option value="2">적금계좌</option>
       <option value="3">대출계좌</option>
      </select>
     </td>  
-   
+   <input type="hidden" id="type" name="type">
 
    
     <th style="vertical-align: middle; text-align: center;">상품</th>
     <td colspan="5" style="vertical-align: middle; text-align: center;">
-    <input type="checkbox"  name="product1" value="SamBanK-부자">SamBanK-부자 &nbsp;
-    <input type="checkbox"  name="product2" value="SamBanK-갑부">SamBanK-갑부 &nbsp;
-    <input type="checkbox"  name="product3" value="SamBanK-금돼지">SamBanK-금돼지 &nbsp;
+    <input type="radio"  name="product1" value="01" >SamBanK-부자 &nbsp;
+    <input type="radio"  name="product1" value="02">SamBanK-갑부 &nbsp;
+    <input type="radio"  name="product1" value="03">SamBanK-금돼지 &nbsp;
     </td>  
    </tr>
-   
+   <input type="hidden" id="product" name="product">
    
       
    <tr>
     <th style="vertical-align: middle; text-align: center;">방문지점</th>
     <td colspan="7">
-    	<input type="text" class="form-control" name="branch" placeholder="예) 공릉지점">
+    	<input type="text" class="form-control" id="visitAddress" name="visitAddress" placeholder="예) 공릉지점">
     </td>  
    </tr>
    
@@ -286,7 +287,7 @@ aside {
     <div class='x' style="width:30%; vertical-align: middle;">
     <div class="form-group">
         <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" value="05/05/2020">
+            <input type="text" class="form-control datetimepicker-input" id="visitdate" data-target="#datetimepicker1" value="05/05/2020">
             <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
             </div>
@@ -299,8 +300,10 @@ aside {
    
    <tr>
     <td colspan="10">
-    <input type="submit" class="btn btn-primary" value="신청">
+    <input type="submit" class="btn btn-primary" id="submitID" value="신청">
+    <sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
+  
     </td>
    </tr>
     </tbody>
@@ -319,10 +322,9 @@ aside {
 </body>
 </html>
 <%@include file="../../includes/footer_Main.jsp" %>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer.js"></script>
-<!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
- -->
+<script src="/resources/js/member/customer/customer_request.js"></script>
+<script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
+ 
  <script type="text/javascript">
     $(function () {
         $('#datetimepicker1').datetimepicker({ format: 'L'});

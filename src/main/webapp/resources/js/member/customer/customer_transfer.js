@@ -66,19 +66,16 @@ $(function(){
 	
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
-
 		if($("input[name='hidden_balance']").val() == ""){
 			alert("잔액을 확인해 주세요.")
 			return false;
 		}
 		
-
 		if((parseInt($("input[name='hidden_balance']").val())-parseInt($("input[name='amount']").val()))<0){
 			alert("출금액을 다시 확인해주세요.")
 			return false;
 		}
-		//$("#withdrawForm").attr("action", "/member/useraccount/deposit");
-		$("#aaaform").submit();
+		$("#withdrawForm").submit();
 	})
 	
 	

@@ -26,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.domain.Acc_info;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.PageVO;
+import com.spring.domain.ProductVO;
 import com.spring.service.AccountService;
 import com.spring.service.AdminService;
 import com.spring.service.UserService;
@@ -54,9 +56,10 @@ public class UserAccountController {
 	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
 		ano=ano.trim();
 		log.info("계좌확인중");
+		
 		DepositVO vo = admin_service.get_deposit(ano);
-		
-		
+		log.info(vo+"");
+		log.info("선택된 계좌번호 :"+vo.getAno());
 		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
 		
 	}
@@ -67,11 +70,12 @@ public class UserAccountController {
 	public ResponseEntity<DepositVO> get_row(String ano, HttpServletRequest req){
 	
 		DepositVO vo = account_service.get_row(ano);
-		log.info("hi"+vo.getMax_withdraw()+"");
 		
-		return new ResponseEntity<DepositVO>(vo, vo!=null?HttpStatus.OK:HttpStatus.BAD_REQUEST);
-		
-		
+		if(vo != null) {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<DepositVO>(vo, HttpStatus.BAD_REQUEST);
+		}
 	}
 		
 	@GetMapping("/deposit")
@@ -86,9 +90,6 @@ public class UserAccountController {
 	}
 	
 	//계좌 이체
-	
-	
-	
 	@PostMapping("/deposit")
 	public String transfer_action(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		
@@ -167,26 +168,78 @@ public class UserAccountController {
 	}
 	
 	@GetMapping("/accountCreate")
-	public String accountCreate() {
+	public void accountCreate() {
 		log.info("계좌신청");	
-		return "useraccount/accountCreate";
+//		return "useraccount/accountCreate";
+	}
+	
+	@PostMapping("/accountCreate")
+	public String insertCreateRequest(Customer_requestVO vo, RedirectAttributes rttr,HttpServletRequest req){
+		String id = req.getRemoteUser();
+		vo.setId(id);
+		
+		log.info("입력중"+vo.getName());
+		log.info("type"+vo.getType());
+		log.info("product"+vo.getProduct());
+		log.info("방문일자 "+vo.getVisitDate());
+		account_service.create_customer_request(vo);
+//		if(account_service.create_customer_request(vo)) {
+//			
+//		}
+//		else {
+//			
+//		}
+		return "redirect:/member/useraccount/accountCreate";
 	}
 	
 	@GetMapping("/accountDelete")
-	public String accountDelete() {
+	public String accountDelete(Model modelMap,HttpServletRequest req) {
+		String id = req.getRemoteUser();
+		int cno=Integer.parseInt(account_service.getCno(id));
+		List<DepositVO> list=account_service.cnoDeposit(cno);
+		modelMap.addAttribute("list",list);
 		log.info("계좌삭제신청");	
-		return "useraccount/accountDelete";
+		return "/member/useraccount/accountDelete";
 	}
 	
 	@GetMapping("/accountList")
-	public String accountList() {
+	public void accountList(Model modelMap,HttpServletRequest req) {
+		String id = req.getRemoteUser();
+		int cno=Integer.parseInt(account_service.getCno(id));
+		List<DepositVO> list=account_service.cnoDeposit(cno);
+		
+		long sumBalance=account_service.cnoSumBalnce(cno);
+		modelMap.addAttribute("list",list);
+		modelMap.addAttribute("sumBalance",sumBalance);
 		log.info("계좌목록");	
-		return "useraccount/accountList";
+//		return "useraccount/accountList";
 	}
 
+	//계좌 상품 불러오기
+	@ResponseBody
+	@PostMapping("/getProduct")
+	public ResponseEntity<List<ProductVO>> getProduct(int type, HttpServletRequest req){
+		
+		List<ProductVO> list = admin_service.acc_getProduct(type);
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<ProductVO>>(list, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<List<ProductVO>>(list, HttpStatus.OK);
+	}
 	
+//주소 검색 팝업
+	@GetMapping("/jusopopup")
+	public String juso_popup(HttpServletRequest req) {
+		
+		log.info("jusopopup 요청");
+		return "/member/useraccount/jusopopup";
+	}
+	@PostMapping("/jusopopup")
+	public String juso_popup_post(HttpServletRequest req) {
 	
-	
+		log.info("jusopopup_post 요청");
+		return "/member/useraccount/jusopopup";
+	}
 	//비밀번호 입력 팝업
 	@GetMapping("/passpopup")
 	public String passpopup(Model model, HttpServletRequest req) {
@@ -225,7 +278,7 @@ public class UserAccountController {
 			return new ResponseEntity<String>("true", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
-	}
+		}
 		
 	/*
 	 * @GetMapping("/popup/jusopopup") public String juso_popup(HttpServletRequest

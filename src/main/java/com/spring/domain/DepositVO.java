@@ -11,7 +11,7 @@ public class DepositVO {
 	private int product;
 	private String password;
 	private long balance;
-	private int card_apply;
+	private char card_apply;
 	private String card_no;
 	private long day_withdraw;
 	private long max_withdraw;
