@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>Sambank Admin Login</title>
 <!--Bootsrap 4 CDN-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,7 +16,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 <!--Custom styles-->
 <link rel="stylesheet" type="text/css" href="styles.css">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <style>
@@ -160,8 +163,9 @@ color: #fff;
 							<input type="password" class="form-control" placeholder="password" name="password" id="password">
 						</div>
 						<div class="form-group">
-							<input type="submit" value="로그인" class="btn float-right" id="loginBtn">
+							<input type="submit" value="로그인" class="btn float-right login_btn" id="loginBtn">
 						</div>
+						<input type="hidden" id="Captcha_res" name="Captcha_res" value="${capcha_res }"/>
 					</form:form>
 				</sec:authorize>
 			</div>
@@ -178,7 +182,7 @@ color: #fff;
 	</div>
 </div>
 
-<div class="toast col-3 btn btn-outline-warning fixed-top" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="error_card" style="z-index:2147483647;background-color:#ffffff;margin:auto;white-space:normal;display:none">
+<div class="toast col-3 btn btn-outline-warning fixed-top position-fixed" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="error_card" style="z-index:2147483647;background-color:#ffffff;margin:auto;white-space:normal;display:none">
   <div class="toast-header">
   	<p style="font-size:1.2em;color:#000000"><strong>알림</strong></p>    
   </div>
@@ -197,6 +201,8 @@ color: #fff;
 	</c:if> 
   </div>
 </div>
+<c:set var="reCAPTCHA_site_key" value="6LenvvQUAAAAAF-uMCecO_OEpuneIjZavJrRhYb2" />
+<script src="https://www.google.com/recaptcha/api.js?render=${reCAPTCHA_site_key}"></script>
 
 <script>
 $(function(){
@@ -205,10 +211,11 @@ $(function(){
 	let param_error = "${param.error}";
 	let param_enabled = "${enabled}";
 	let param_count = "${failed_login_count }";
+	let param_count_total = "${failed_login_count_total }";
+	let cap_token = "";
 	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false"){
 		$("#error_card").css("display","inline-block");
 		$("#error_card").toast("show");
-		console.log("ook");
 	}
 
 	
@@ -226,6 +233,31 @@ $(function(){
 			$("#error_card").toast("show");
 			return false;
 		}
+		if($("#Captcha_res").val()==="false"){
+			return false;
+		}
+		if(cap_token===""){
+			alert("오류가 발생했습니다. 나중에 다시 시도해 주세요.")
+			return false;
+		}
+		$.ajax({
+			url : '/check_recapcha',
+			dataType : 'text',
+			data :{
+				token : cap_token
+			},
+			async : false,
+			type : 'post',
+			success : function(result){
+				if(result==="false"){
+					$("#Captcha_res").val("false");
+				}
+			}
+		
+		})
+		if($("#Captcha_res").val()==="false"){
+			return false;
+		}
 		$("#loginForm").submit();
 	})
 	
@@ -239,6 +271,11 @@ $(function(){
 		$("#logoutForm").submit();
 		
 	})
+	grecaptcha.ready(function() {
+	    grecaptcha.execute('${reCAPTCHA_site_key}', {action: 'login'}).then(function(token) {
+	  	 cap_token=token;
+	    });
+	});
 })
 
 </script>

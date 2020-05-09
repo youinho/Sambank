@@ -1,19 +1,31 @@
 package com.spring.controller;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.service.CustomerNoticeService;
@@ -89,11 +101,84 @@ public class HomeController {
 	
 	
 	
-	
-	@GetMapping("/member/login")	// 로그인 테스트 페이지
-	public String customer_test_login() {
+	// 고객 로그인 페이지
+	@GetMapping("/member/login")	
+	public String customer_test_login(HttpServletRequest req) {
 		return "/login";
 	}
+
+	//recapcha
+	
+	@ResponseBody
+	@PostMapping("/check_recapcha")
+	public ResponseEntity<String> check_recapcha(String token, HttpServletRequest req) {
+		log.info("check recapcha"+token);
+		
+		
+		
+		String targetURL = "https://www.google.com/recaptcha/api/siteverify";
+
+		URL url;
+		HttpURLConnection connection = null;
+		boolean isSuccess = false;
+		String params = "";
+		String jsonData = "";
+		String secretKey = "6LenvvQUAAAAALdARp0IiPOdoNRnkmTg4zBv3fT7";
+		String remoteip = req.getRemoteAddr();
+		
+		try {
+			params = "secret=" + secretKey + "&response=" + token + "&remoteip=" + remoteip;
+
+			// Create connection
+			url = new URL(targetURL);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setUseCaches(false);
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+
+			// Send request
+			DataOutputStream os = new DataOutputStream(connection.getOutputStream());
+		    os.writeBytes(params);
+			os.flush();
+			os.close();
+
+			// Get Response
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			StringBuffer sb = new StringBuffer();
+
+			while ((jsonData = br.readLine()) != null) {
+				sb.append(jsonData);
+			}
+			JSONParser parser = new JSONParser();
+			Object resvObj = parser.parse(sb.toString());
+			JSONObject jsonObj = (JSONObject) resvObj;
+			log.info("get success : "+jsonObj.get("success"));
+			isSuccess = (boolean) jsonObj.get("success");
+			if(!isSuccess) {
+				System.out.println("reCaptcha error  : " + jsonObj.get("error-codes").toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.disconnect();
+			}
+		}
+		
+		if(!isSuccess) {
+			req.getSession().setAttribute("capcha_res", "false");
+		}
+		
+		log.info("capcha_ res : "+isSuccess);
+		
+		return new ResponseEntity<String>(isSuccess?"true":"false", HttpStatus.OK);
+	}
+	
+	
+	
+	
 	
 //	@GetMapping("/member/test")	// 로그인 테스트 페이지
 //	public String login_test_success() {

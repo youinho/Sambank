@@ -624,4 +624,6 @@ commit;
 
 select * from logtbl order by log_no desc;
 
+select id, to_char(unlockdate, 'YYYY-MM-DD HH24:MI') from locked_customer;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

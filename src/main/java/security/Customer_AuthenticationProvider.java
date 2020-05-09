@@ -23,11 +23,10 @@ public class Customer_AuthenticationProvider implements AuthenticationProvider {
 		String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
         
-        log.info("provider !!@ "+username+password);
         Customer_UserDetails user = (Customer_UserDetails) customer_UserDetailService.loadUserByUsername(username);
         
         if(!passwordEncoder.matches(password, user.getPassword())) {
-        	log.info("password not match");
+        
             throw new BadCredentialsException(username);
         }
         

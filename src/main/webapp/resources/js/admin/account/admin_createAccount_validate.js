@@ -98,6 +98,9 @@ $.validator.addMethod("validWD",function(value){
 	var regWD=/^[0-9]{1,12}$/;
 	return regWD.test(value);
 },"한도 형식이 맞지않습니다.");
+$.validator.addMethod("matchProduct",function(value){
+	return value.startsWith($("$product").val());
+},"상품과 계좌번호가 일치하지 않습니다.");
 
 
 

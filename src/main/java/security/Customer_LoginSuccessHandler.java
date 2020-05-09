@@ -31,7 +31,7 @@ public class Customer_LoginSuccessHandler extends SimpleUrlAuthenticationSuccess
 		
 		String id = request.getParameter("id");
 		HttpSession session = request.getSession();
-		log.info("로그인 성공 핸들러 id : "+id);
+		
 		customerService.init_login_failure_count(id);
 		if(id!= null) {
 			if(session.getAttribute("name")==null) {
