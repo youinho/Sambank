@@ -65,11 +65,12 @@
 			        password-parameter="password"
 			        authentication-failure-handler-ref="admin_loginFailureHandler"
 			        authentication-success-handler-ref="admin_loginSuccessHandler" /> 
-        <logout invalidate-session="true"
+        <logout invalidate-session="false"
+        		delete-cookies="JSESSIONID"
         		logout-url="/admin/logout" 
         		logout-success-url="/admin/login?logout"/>
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/admin/login?logout">
+		<session-management invalid-session-url="/admin/login?invalid">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>
