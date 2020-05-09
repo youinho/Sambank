@@ -15,11 +15,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style type="text/css" media="screen">
-        @import url(resources/img/userChat.css);
+        @import url(https://sambank/resources/img/userChat.css);
     </style>
     <script type="text/javascript" src="http://kr03.tocplus007.com/api/autocomplete.do?userId=sambank"></script>
     <script type="text/javascript">
-    var chatServerUrl = "http://localhost:8080/";
+    var chatServerUrl = "https://sambank.net/";
 </script>
 </head>
 <body style="background-color: #FFFFFF; color: #222222; " >

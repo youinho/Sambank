@@ -32,7 +32,7 @@
         var enableViewLink =false;
         var mainServerUrl = "https://tocplus.co.kr";
         var chatServerUrl = "kr03.tocplus007.com";
-        var tocdocEmbededUrl = "http://localhost:8080/";
+        var tocdocEmbededUrl = "https://sambank.net/";
         var typingMessage = "대화를 입력중입니다.";
         var tid = "1588406245287";
         var mobile = false;
