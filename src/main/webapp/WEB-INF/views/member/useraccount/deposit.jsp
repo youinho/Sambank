@@ -151,23 +151,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -343,7 +343,6 @@ aside {
         
         <hr class="mb-4">
         
-
      
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
      	<sec:csrfInput/>
@@ -353,6 +352,7 @@ aside {
     </div>
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script> -->
 </div></main>
+
 
 		
 		  <input type="hidden"  class="form-control" id="hidden_balance" name="hidden_balance" >		

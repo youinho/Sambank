@@ -13,13 +13,21 @@
 		values(#{cno}, #{ano}, #{type}, #{product}, #{password}, 0, #{day_withdraw}, #{max_withdraw}, #{branch})
 	</insert>
 	
+	<insert id="create_customer_request">
+		insert into customer_request(cr_no, name, eng_name, birth, address, mobile, id, email, type, product, visitAddress)
+		values(seq_customer_request.nextVal, #{name}, #{eng_name}, #{birth}, #{address}, #{mobile}, #{id}, #{email}, #{type}, #{product}, #{visitAddress})
+	</insert>
 	
 	<select id="get_deposit_list" resultType="com.spring.domain.DepositVO">
 		select * from deposittbl where dno > 0 order by dno desc
 
 	</select>
 
-
+	<!-- cno로 deposittbl 가져오기 -->
+	<select id="cno_deposit" resultType="com.spring.domain.DepositVO">
+		select d.*,p.p_name from deposittbl d,producttbl p where cno=#{cno} and p.product=d.product
+	</select>
+	
 	<!-- 상품 조회 -->
 	<select id="getProduct" resultType="com.spring.domain.ProductVO">
 		select product, p_name from producttbl
@@ -39,7 +47,7 @@
         on d.ano=h.ano
 		
 	</select>
-
+	
 
 	<!-- 계좌 정보 수정 (max, day withdraw) -->
 	<update id="update_withdraw">
@@ -118,4 +126,11 @@
 	<select id="get_cno" resultType="String">
 		select cno from customerTBL where id=#{id}
 	</select>
+	
+	<!-- 고객별 balance 금액 가져오기 -->
+	<select id="cno_sumBalance" resultType="long">
+		select sum(balance) from deposittbl where cno=#{cno}
+	</select>
+	
+	
 </mapper>

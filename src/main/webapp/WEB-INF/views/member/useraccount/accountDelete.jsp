@@ -139,23 +139,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -217,46 +217,51 @@ aside {
    <table class="table table-bordered">
   
   <tbody>
+  	 <tr>
+    <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
+    <td style="vertical-align: middle; text-align: center;" colspan="5">
+     <select name="account" id="account" class="form-control" >
+      
+      <c:forEach items="${list }" var="vo">
+      	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
+      </c:forEach>
+     </select>
+    </td> 
+     
     <tr>
       <th colspan="1" style="width: 10%; vertical-align: middle; text-align: center; ">성명</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="name" placeholder="예) 홍길동"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="name" name="name" placeholder="예) 홍길동"></td>
       <th colspan="1" style="width: 10%; vertical-align: middle; text-align: center; ">생년월일</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="birth" placeholder="예) 900101"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="birth" name="birth" placeholder="예) 900101"></td>
     </tr>
    
    
    
          
-   <tr>
-    <th colspan="1" style="vertical-align: middle; text-align: center;">계좌 종류</th>
-    <td colspan="2" style="vertical-align: middle; text-align: center;">
-     <select name="account" class="form-control">
-      <option value="1">예금계좌</option>
-      <option value="2">적금계좌</option>
-      <option value="3">대출계좌</option>
-     </select>
-    </td>  
+  
    
 
    
     <th colspan="2" style="vertical-align: middle; text-align: center;">상품</th>
-    <td colspan="5" style="vertical-align: middle; text-align: center;">
-    <input type="checkbox"  name="product1" value="SamBanK-부자">SamBanK-부자 &nbsp;
-    <input type="checkbox"  name="product2" value="SamBanK-갑부">SamBanK-갑부 &nbsp;
-    <input type="checkbox"  name="product3" value="SamBanK-금돼지">SamBanK-금돼지 &nbsp;
-    </td>  
+      <td colspan="3" style="vertical-align: middle; text-align: center;">
+      <input type="hidden" class="form-control" name="type" readonly>
+    	 <input type="text" class="form-control" name="type_text" readonly>
+    	</td>
+    <td colspan="3" style="vertical-align: middle; text-align: center;">
+	    <input type="text" class="form-control" name="p_name" readonly>
+     </td>  
    </tr>
    
    <tr>
     <th colspan="1" style="vertical-align: middle; text-align: center;" >계좌번호</th>
-    <td colspan="9"><input type="account-number" class="form-control" name="" placeholder="예) 계좌번호"></td>  
+    <td colspan="9"><input type="account-number" class="form-control" name="ano"readonly></td>  
    </tr>
       
     <tr>
       <th colspan="1" style="vertical-align: middle; text-align: center; ">계좌정보</th>
       <td colspan="4"><input type="text" class="form-control" name="name" placeholder="최근 거래일"></td>
       <th colspan="1" style="vertical-align: middle; text-align: center; ">잔여예금</th>
-      <td colspan="4"><input type="text" class="form-control" name="birth" placeholder=""></td>
+      <td colspan="4"><input type="text" class="form-control" name="balance" readonly></td>
     </tr>
     
     
@@ -306,8 +311,7 @@ aside {
 </body>
 </html>
 <%@include file="../../includes/footer_Main.jsp" %>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer.js"></script>
+<script src="/resources/js/member/customer/customer_delete_request.js"></script>
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
  -->
  <script type="text/javascript">
