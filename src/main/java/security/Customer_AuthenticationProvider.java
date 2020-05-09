@@ -34,6 +34,12 @@ public class Customer_AuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException(username);
         }
         
+        if(!user.isAccountNonLocked()) {
+            throw new BadCredentialsException(username);
+        }
+        
+        
+        
         return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
 
 		

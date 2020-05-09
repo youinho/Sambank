@@ -124,4 +124,26 @@
 		]]>
 	</select>
 
+
+	<update id="insert_verifyKey">
+		update customertbl set verifyKey=#{verifyKey}
+		where id=#{id}
+	</update>
+	
+	<update id="set_verified">
+		update customertbl set verified=1
+		where id=#{id} and verifyKey=#{verifyKey}
+	</update>
+
+	<update id="reset_sendCount">
+		update customertbl set sendcount=0
+		where sendcount>0
+	</update>
+	
+	<update id="update_sendCount">
+		update customertbl set sendcount=sendcount+1
+		where id=#{id}
+	</update>
+
+
 </mapper>

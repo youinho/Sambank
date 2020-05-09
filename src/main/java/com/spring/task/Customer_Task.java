@@ -35,4 +35,11 @@ public class Customer_Task {
 	public void set_expired() {
 		inquiryService.set_expired();
 	}
+	
+	//매 정각마다 sendcount 초기화
+	@Scheduled(cron="0 0 * * * *")
+	public void reset_sendcount() {
+		customerService.reset_sendcount();
+	}
+	
 }

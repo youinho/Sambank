@@ -21,6 +21,13 @@ public interface CustomerMapper {
 	public int delete_customer(CustomerVO vo);
 	public String get_password(String id);
 	
+	public int insert_verifyKey(CustomerVO vo);
+	public int set_verified(CustomerVO vo);
+	
+	public int update_sendCount(String id);
+	public int reset_sendcount();
+	
+	
 	public int update_password(CustomerVO vo);
 	
 	

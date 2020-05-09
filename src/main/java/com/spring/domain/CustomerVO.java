@@ -18,12 +18,13 @@ public class CustomerVO {
 	private String email;						//이메일
 	private Date createdate;					//회원가입 날짜
 	private Date updatedate;
-	
+	private String verifyKey;
+	private int verified;
 	private String confirm_password;
 	
 	
 	private int failed_login_count;
-	
+	private int sendCount;
 	private int enabled;
 	/*public boolean isPasswordEqualToConfirmPassword() {
 		return this.password.equals(passhint);

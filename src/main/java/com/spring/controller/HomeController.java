@@ -17,6 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.CustomerService;
 import com.spring.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +46,15 @@ public class HomeController {
 	
 	@Autowired
 	private CustomerNoticeService cn_service;
+	
+	@Autowired
+	private CustomerService customerService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@GetMapping("/")
 	public String home(Model model, HttpServletRequest req, HttpSession session) {
@@ -175,6 +188,42 @@ public class HomeController {
 		
 		return new ResponseEntity<String>(isSuccess?"true":"false", HttpStatus.OK);
 	}
+	
+	
+	
+	@GetMapping("/verify_email")
+	public String verify_email(CustomerVO vo, RedirectAttributes rttr) {
+		
+		
+		if(customerService.set_verified(vo)) {
+			rttr.addFlashAttribute("registered", "verified");
+			return "redirect:/";
+		}
+		rttr.addFlashAttribute("registered", "verify_failed");
+		return "redirect:/";
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/resend_verify")
+	public ResponseEntity<String> resend_verify(String id, String password){
+		
+		CustomerVO vo = adminService.select_by_id(id);
+		if(vo==null) {
+			return new ResponseEntity<String>("not_found", HttpStatus.OK);
+		}
+		if(!passwordEncoder.matches(password, customerService.get_password(vo.getId()))) {
+			return new ResponseEntity<String>("failed", HttpStatus.OK);
+		}
+		if(vo.getSendCount()>10) {
+			return new ResponseEntity<String>("muchsend", HttpStatus.OK);
+		}
+		if(adminService.send_verify_mail(vo)) {
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("error", HttpStatus.OK);
+	}
+	
 	
 	
 	

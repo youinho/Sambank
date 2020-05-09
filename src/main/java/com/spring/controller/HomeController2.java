@@ -69,6 +69,7 @@ public class HomeController2 {
 		}
 		if(result) {
 			rttr.addFlashAttribute("registered", "success");
+			rttr.addFlashAttribute("email", vo.getEmail());
 			rttr.addFlashAttribute("name", vo.getName());
 		}else {
 			rttr.addFlashAttribute("registered", "failed");
@@ -98,7 +99,7 @@ public class HomeController2 {
 	}
 	
 	
-	//관리자 비밀번호 수정
+	//고객 비밀번호 수정
 	@PostMapping("/member/customer_update_password")
 	@ResponseBody
 	public ResponseEntity<String> admin_update_password(CustomerVO vo, HttpServletRequest req){

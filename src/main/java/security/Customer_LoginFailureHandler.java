@@ -40,7 +40,7 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 		session.removeAttribute("id");
 		session.removeAttribute("failed_login_count");
 		session.removeAttribute("enabled");
-		
+		session.removeAttribute("verified");
 		
 		String id = request.getParameter("id");
 		CustomerVO vo = adminService.select_by_id(id); 
@@ -52,7 +52,7 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 		
 			if(vo.getEnabled()!=1) {
 				session.setAttribute("enabled", "false");
-			}else {
+			}else if(vo.getEnabled()==0 && vo.getVerified()==1) {
 				
 				customerService.update_login_failure_count(id);
 				int failed_count = customerService.check_login_failure_count(id); 
@@ -60,6 +60,9 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 					customerService.lock_customer(id);
 				}
 				session.setAttribute("failed_login_count", failed_count);
+			}else if(vo.getVerified()==0) {
+				session.setAttribute("verified", "false");
+				session.setAttribute("email", vo.getEmail());
 			}
 		}
 		session.setAttribute("failed_login_count_total", session.getAttribute("failed_login_count_total")==null?1:(Integer.parseInt(""+session.getAttribute("failed_login_count_total"))+1)+"");

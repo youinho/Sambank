@@ -2,6 +2,7 @@ package com.spring.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,6 +26,8 @@ import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 import com.spring.domain.Profile_imageVO;
+import com.spring.email.Email;
+import com.spring.email.EmailSender;
 import com.spring.mapper.AccountMapper;
 import com.spring.mapper.AdminMapper;
 import com.spring.mapper.AdminNoticeMapper;
@@ -53,6 +56,11 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private CardMapper cardMapper;
 	
+
+	@Autowired
+	private EmailSender emailSender;
+	
+	
 	@Override
 	public AdminVO selectOne(String id) {
 	
@@ -66,11 +74,15 @@ public class AdminServiceImpl implements AdminService {
 		return accountMapper.create_deposit(vo)==1;
 	}
 
-
+	@Transactional
 	@Override
 	public boolean register_customer(CustomerVO vo) {
-
-		return customerMapper.register_customer(vo)==1;
+		if(customerMapper.register_customer(vo)==1) {
+			return send_verify_mail(vo);
+		}
+		
+		
+		return false;
 	}
 
 
@@ -532,4 +544,44 @@ public class AdminServiceImpl implements AdminService {
 	
 		return adminMapper.get_authority(id);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public boolean send_verify_mail(CustomerVO vo) {
+		
+		Email email = new Email();
+		String key = UUID.randomUUID().toString();
+		vo.setVerifyKey(key);
+		if(customerMapper.insert_verifyKey(vo)==1) {
+			
+			String link = "https://sambank.net/verify_email?id="+vo.getId()+"&verifyKey="+key;
+			String content = "";
+			content += vo.getName()+" 님의 가입을 진심으로 감사드립니다.\n";
+			content += "이 메일을 받으셨다면 아래의 링크를 클릭하여\n";
+			content += "이메일 인증을 완료할 수 있습니다.\n";
+			content += link+"";
+			
+			email.setSubject("SamBank Email Verification - 삼뱅크 이메일 인증 ");
+			email.setContent(content);
+			email.setReceiver(vo.getEmail());
+			try {
+				emailSender.SendEmail(email);
+				customerMapper.update_sendCount(vo.getId());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	
 }

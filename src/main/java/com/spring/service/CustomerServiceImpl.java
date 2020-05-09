@@ -98,4 +98,34 @@ public class CustomerServiceImpl implements CustomerService {
 		return false;
 	}
 
+	@Override
+	public boolean insert_verifyKey(CustomerVO vo) {
+
+		return customerMapper.insert_verifyKey(vo)==1;
+	}
+
+	@Override
+	public boolean set_verified(CustomerVO vo) {
+
+		return customerMapper.set_verified(vo)==1;
+	}
+
+	@Override
+	public boolean update_sendcount(String id) {
+
+		return customerMapper.update_sendCount(id)==1;
+	}
+
+	@Override
+	public boolean reset_sendcount() {
+
+		return customerMapper.reset_sendcount()>0;
+	}
+
+	@Override
+	public String get_password(String id) {
+
+		return customerMapper.get_password(id);
+	}
+
 }

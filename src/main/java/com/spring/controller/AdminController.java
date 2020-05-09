@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -68,8 +69,11 @@ import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
 import com.spring.domain.Profile_imageVO;
+import com.spring.email.Email;
+import com.spring.email.EmailSender;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.CustomerService;
 import com.spring.service.InquiryService;
 import com.spring.service.SBValidator;
 
@@ -98,6 +102,8 @@ public class AdminController {
 	
 	@Autowired
 	private InquiryService inquiry_service;
+	
+	
 	
 	//프로필 이미지 이미지타입 확인
 	private boolean checkImageMimeType(InputStream file) {
@@ -781,6 +787,11 @@ public class AdminController {
 		if(result) {
 			rttr.addFlashAttribute("registered", "success");
 			rttr.addFlashAttribute("name", vo.getName());
+			
+			
+			
+			
+			
 		}else {
 			rttr.addFlashAttribute("registered", "failed");
 		}
@@ -1040,6 +1051,11 @@ public class AdminController {
 		if(service.notice_insert(vo)) {
 			rttr.addFlashAttribute("registered", "true");
 			rttr.addFlashAttribute("admin_bno", vo.getAdmin_bno());
+			
+			
+			
+			
+			
 			return "redirect:/admin/notice";
 		}
 		return "/admin/notice/register";

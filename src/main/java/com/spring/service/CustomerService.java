@@ -18,6 +18,8 @@ public interface CustomerService {
 	
 	public Customer_UserDetails security_get_customer(String id);
 	
+	public String get_password(String id);
+	
 	public boolean insert_locked_customer(String id);
 	public boolean delete_locked_customer(String id);
 	public boolean set_enabled(String id);
@@ -26,4 +28,11 @@ public interface CustomerService {
 	
 	public boolean unlock_customer(String id);
 	public boolean lock_customer(String id);
+	
+	
+	public boolean insert_verifyKey(CustomerVO vo);
+	public boolean set_verified(CustomerVO vo);
+	
+	public boolean update_sendcount(String id);
+	public boolean reset_sendcount();
 }

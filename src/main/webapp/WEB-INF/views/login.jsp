@@ -127,6 +127,14 @@ color: #fff;
     line-height: 1.5;
     border-radius: .25rem;
 }
+#sambankBtn{
+	color:#ffffff;
+	text-decoration: none;
+	font-size:0.8em;
+}
+#sambankBtn:hover{
+	color:#ffffff;
+}
 </style>
 
 </head>
@@ -135,7 +143,7 @@ color: #fff;
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
-				<h3>로그인</h3>
+				<h3>로그인 <a href="/" id="sambankBtn">SamBank </a></h3>
 				<!-- <div class="d-flex justify-content-end social_icon"> -->
 <!--                소셜네트워크 아이콘
  					<span><i class="fab fa-facebook-square"></i></span>
@@ -162,9 +170,15 @@ color: #fff;
 							</div> -->
 							<input type="password" class="form-control" placeholder="password" name="password" id="password">
 						</div>
+						
 						<div class="form-group">
 							<input type="submit" value="로그인" class="btn float-right login_btn" id="loginBtn">
 						</div>
+						<c:if test="${verified == 'false'}"> 
+							<div class="form-group">
+								<input type="button" value="인증메일 재전송" class="btn float-right btn-primary" id="resendBtn">
+							</div>
+						</c:if>
 						<input type="hidden" id="Captcha_res" name="Captcha_res" value="${capcha_res }"/>
 					</form:form>
 				</sec:authorize>
@@ -204,11 +218,14 @@ color: #fff;
 	<c:if test="${id == 'not_found'}"> 
 		<p><small style="color:red">아이디를 찾을 수 없습니다.</small></p> 
 	</c:if>
-	<c:if test="${param.error == 'failed' && enabled!='false' && id != 'not_found'}"> 
+	<c:if test="${param.error == 'failed' && enabled!='false' && id != 'not_found' && verified != 'false'}"> 
 		<p><small style="color:red">로그인에 실패했습니다.<br> 5회 연속 실패할 경우 계정이 비활성화 되며<br> 24시간 이후에 접속할 수 있습니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
 	</c:if> 
 	<c:if test="${enabled == 'false'}"> 
 		<p><small style="color:red">계정이 비활성화 상태입니다.<br>관리자에게 문의해주세요.</small></p>
+	</c:if> 
+	<c:if test="${verified == 'false'}"> 
+		<p><small style="color:red"><c:out value="${email }"></c:out> 이메일로 인증코드를 보내드렸습니다. 이메일 인증이 완료되면 로그인이 활성화됩니다. </small></p>
 	</c:if> 
   </div>
 </div>
@@ -223,8 +240,10 @@ $(function(){
 	let param_enabled = "${enabled}";
 	let param_count = "${failed_login_count }";
 	let param_count_total = "${failed_login_count_total }";
+	let param_verified = "${verified}";
 	let cap_token = "";
-	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false"){
+	let sended = "";
+	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false" || param_verified==="false"){
 		$("#error_card").css("display","inline-block");
 		$("#error_card").toast("show");
 	}
@@ -277,11 +296,71 @@ $(function(){
 		e.preventDefault();
 		
 		
-		
-		
 		$("#logoutForm").submit();
 		
 	})
+	
+	
+	$("#resendBtn").click(function(e){
+		e.preventDefault();
+		if($("#id").val()=="" || $("#id").val()==null){
+			$(".toast-body").html("<p><small style='color:red'>아이디를 입력해주세요.</small></p>");
+			$("#error_card").css("display","inline-block");
+			$("#error_card").toast("show");
+			return false;
+		}
+		if($("#password").val()==""||$("#password").val()==null){
+			$(".toast-body").html("<p><small style='color:red'>비밀번호를 입력해주세요.</small></p>");
+			$("#error_card").css("display","inline-block");
+			$("#error_card").toast("show");
+			return false;
+		}
+		if(sended === "progress"){
+			alert("요청을 처리중입니다. 잠시만 기다려 주세요.");
+			return false;
+		}
+		if(sended === "true"){
+			alert("요청이 이미 완료되었습니다.");
+			return false;
+		}
+		
+		
+		
+		sended = "progress";
+		$.ajax({
+			url : '/resend_verify',
+			dataType : 'text',
+			data :{
+				id : $("#id").val(),
+				password : $("#password").val()
+			},
+			async : false,
+			type : 'post',
+			success : function(result){
+				sended = "true";
+				if(result === "success"){
+					alert("${email} 메일로 인증코드를 전송했습니다.");
+				}else if(result === "muchsend"){
+					alert("너무 많은 요청으로 거절되었습니다. 잠시 후 다시시도하세요.")
+				}else if(result === "failed" || result === "not_found"){
+					alert("아이디와 비밀번호가 일치하지 않습니다.");
+				}else{
+					alert("요청이 실패했습니다.");
+				}
+				
+			}
+		
+		})
+		
+		
+		
+		
+	})
+	
+	
+	
+	
+	
 	grecaptcha.ready(function() {
 	    grecaptcha.execute('${reCAPTCHA_site_key}', {action: 'login'}).then(function(token) {
 	  	 cap_token=token;
@@ -295,4 +374,6 @@ $(function(){
 <%
 	session.removeAttribute("id");
 	session.removeAttribute("enabled");
+	session.removeAttribute("capcha_res");
+	session.removeAttribute("verified");
 %>
