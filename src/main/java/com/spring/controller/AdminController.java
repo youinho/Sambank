@@ -81,6 +81,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping(value="/admin/*")
 public class AdminController {
+	
+	//public final String lin_folder = 
+	
 	@Autowired
 	private AdminService service;
 	
@@ -904,8 +907,8 @@ public class AdminController {
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
 		//log.info("data :"+data);
-		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("c:\\upload\\"+fileName);
+		String fileName = data.getUploadPath()+"/"+data.getUuid()+"_"+data.getFileName();
+		Resource resource = new FileSystemResource("/home/ec2-user/upload/"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
@@ -945,7 +948,7 @@ public class AdminController {
 	public ResponseEntity<List<AttachFileDTO>> uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
 		//log.info("upload"+uploadFile);
-		String uploadFolder = "c:\\upload";
+		String uploadFolder = "/home/ec2-user/upload";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -985,7 +988,7 @@ public class AdminController {
 		//log.info("파일 삭제 : ");
 		File file = null;
 		try {
-			String file_p = "c:\\upload\\"+URLDecoder.decode(fileName, "utf-8");
+			String file_p = "/home/ec2-user/upload/"+URLDecoder.decode(fileName, "utf-8");
 			file = new File(file_p);
 			file.delete();
 		} catch (UnsupportedEncodingException e) {
@@ -1105,7 +1108,7 @@ public class AdminController {
 		//log.info("modify_post 요청"+vo);
 		if(service.notice_update(vo)) {
 			rttr.addFlashAttribute("cri", cri);
-			return "redirect:/admin/notice";
+			return "redirect:/admin/notice/read/"+vo.getAdmin_bno();
 		}else {
 			model.addAttribute("vo", vo);
 			return "/admin/notice/modify";			
@@ -1303,8 +1306,8 @@ public class AdminController {
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
 		//log.info("data :"+data);
-		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("c:\\upload_customer\\"+fileName);
+		String fileName = data.getUploadPath()+"/"+data.getUuid()+"_"+data.getFileName();
+		Resource resource = new FileSystemResource("/home/ec2-user/upload_customer/"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
@@ -1343,7 +1346,7 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> customer_uploadPost(MultipartFile[] uploadFile, HttpServletRequest req) {
 		logging(req);
-		String uploadFolder = "c:\\upload_customer";
+		String uploadFolder = "/home/ec2-user/upload_customer";
 		String uploadFileName = null;
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -1385,7 +1388,7 @@ public class AdminController {
 		//log.info("파일 삭제 : ");
 		File file = null;
 		try {
-			String file_p = "c:\\upload_customer\\"+URLDecoder.decode(fileName, "utf-8");
+			String file_p = "/home/ec2-user/upload_customer/"+URLDecoder.decode(fileName, "utf-8");
 			file = new File(file_p);
 			file.delete();
 		} catch (UnsupportedEncodingException e) {

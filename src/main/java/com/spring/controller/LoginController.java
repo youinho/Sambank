@@ -42,17 +42,17 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@GetMapping("/member/customerlogin")
-	public String registerGet(){		
-		
-		File file=new File("c://sam//1.txt");
-		if (file.exists()) {
-			return "/member/customerlogin";
-		}
-		else {
-			return "/member/downloadForm";
-		}
-	}
+//	@GetMapping("/member/customerlogin")
+//	public String registerGet(){		
+//		
+//		File file=new File("c://sam//1.txt");
+//		if (file.exists()) {
+//			return "/member/customerlogin";
+//		}
+//		else {
+//			return "/member/downloadForm";
+//		}
+//	}
 
 	@GetMapping("/member/downloadForm")
 	public void download(){

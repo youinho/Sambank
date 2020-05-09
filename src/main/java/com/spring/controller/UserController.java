@@ -218,8 +218,8 @@ public class UserController {
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
 		//log.info("data :"+data);
-		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("c:\\upload_customer\\"+fileName);
+		String fileName = data.getUploadPath()+"/"+data.getUuid()+"_"+data.getFileName();
+		Resource resource = new FileSystemResource("/home/ec2-user/upload_customer/"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}

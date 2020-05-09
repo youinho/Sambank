@@ -168,9 +168,9 @@ public class AdminServiceImpl implements AdminService {
 		boolean modifyresult = noticeMapper.update(vo)==1;
 		
 		
+		noticeMapper.deleteAllFiles(vo.getAdmin_bno());
 		if(vo.getAttachList() != null) {
 			if(modifyresult && vo.getAttachList().size() > 0) {
-				noticeMapper.deleteAllFiles(vo.getAdmin_bno());
 				for(AttachFileDTO dto : vo.getAttachList()) {
 					dto.setAdmin_bno(vo.getAdmin_bno());
 					noticeMapper.insertFile(dto);
