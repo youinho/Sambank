@@ -23,18 +23,18 @@ public class Admin_AuthenticationProvider implements AuthenticationProvider {
 		String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
         
-        log.info("provider !!@ "+username+password);
+        
         Admin_UserDetails user = (Admin_UserDetails) admin_UserDetailService.loadUserByUsername(username);
-        log.info("Bbbbbbbbbbbbbbbbbbbbbbbbbbb"+user);
+        
         if(!passwordEncoder.matches(password, user.getPassword())) {
-        	log.info("password not match");
+        
             throw new BadCredentialsException(username);
         }
         
         if(!user.isEnabled()) {
             throw new BadCredentialsException(username);
         }
-        log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        
         return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
 
 		

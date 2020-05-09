@@ -41,10 +41,10 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 		session.removeAttribute("failed_login_count");
 		session.removeAttribute("enabled");
 		
-		log.info("로그인 실패 핸들러 id : "+request.getParameter("id"));
+		
 		String id = request.getParameter("id");
 		CustomerVO vo = adminService.select_by_id(id); 
-		log.info("vo : "+vo);
+		
 		if(vo==null) {
 			session.setAttribute("id", "not_found");
 		}else {
@@ -62,7 +62,7 @@ public class Customer_LoginFailureHandler extends SimpleUrlAuthenticationFailure
 				session.setAttribute("failed_login_count", failed_count);
 			}
 		}
-		
+		session.setAttribute("failed_login_count_total", session.getAttribute("failed_login_count_total")==null?1:(Integer.parseInt(""+session.getAttribute("failed_login_count_total"))+1)+"");
 		
 		
 		
