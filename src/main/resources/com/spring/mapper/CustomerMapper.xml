@@ -11,7 +11,7 @@
 	
 <!-- id로 고객정보 -->
 	<select id="select_by_id" resultType="com.spring.domain.CustomerVO">
-		select cno, name, eng_name, gender, birth, address, mobile, id, email, enabled from customertbl
+		select cno, name, eng_name, gender, birth, address, mobile, id, email, enabled, verified, sendcount from customertbl
 		where id=#{id}
 	</select>
 	

@@ -222,7 +222,7 @@ color: #fff;
 		<p><small style="color:red">로그인에 실패했습니다.<br> 5회 연속 실패할 경우 계정이 비활성화 되며<br> 24시간 이후에 접속할 수 있습니다. 현재 : <strong><c:out value="${failed_login_count } 회"></c:out></strong></small></p> 
 	</c:if> 
 	<c:if test="${enabled == 'false'}"> 
-		<p><small style="color:red">계정이 비활성화 상태입니다.<br>관리자에게 문의해주세요.</small></p>
+		<p><small style="color:red">계정이 비활성화 상태입니다.<br>24시간 뒤에 접속해 주세요.</small></p>
 	</c:if> 
 	<c:if test="${verified == 'false'}"> 
 		<p><small style="color:red"><c:out value="${email }"></c:out> 이메일로 인증코드를 보내드렸습니다. 이메일 인증이 완료되면 로그인이 활성화됩니다. </small></p>
@@ -264,6 +264,9 @@ $(function(){
 			return false;
 		}
 		if($("#Captcha_res").val()==="false"){
+			$(".toast-body").html("<p><small style='color:red'>비 정상적인 요청으로 차단되었습니다.<br>브라우저를 닫고 다시 접속해 주세요.</small></p>");
+			$("#error_card").css("display","inline-block");
+			$("#error_card").toast("show");
 			return false;
 		}
 		if(cap_token===""){
@@ -315,18 +318,16 @@ $(function(){
 			$("#error_card").toast("show");
 			return false;
 		}
-		if(sended === "progress"){
-			alert("요청을 처리중입니다. 잠시만 기다려 주세요.");
-			return false;
-		}
+		
 		if(sended === "true"){
 			alert("요청이 이미 완료되었습니다.");
 			return false;
 		}
 		
+		$(".toast-body").html("<p><small style='color:blue'>요청을 처리중입니다.<br>잠시만 기다려 주세요.</small></p>");
+		$("#error_card").css("display","inline-block");
+		$("#error_card").toast("show");
 		
-		
-		sended = "progress";
 		$.ajax({
 			url : '/resend_verify',
 			dataType : 'text',
@@ -376,4 +377,5 @@ $(function(){
 	session.removeAttribute("enabled");
 	session.removeAttribute("capcha_res");
 	session.removeAttribute("verified");
+	session.removeAttribute("failed_login_count");
 %>
