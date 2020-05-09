@@ -119,7 +119,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean reset_sendcount() {
 
-		return customerMapper.reset_sendcount()>0;
+		return customerMapper.reset_sendCount()>0;
 	}
 
 	@Override

@@ -203,7 +203,6 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
-	
 	@ResponseBody
 	@PostMapping("/resend_verify")
 	public ResponseEntity<String> resend_verify(String id, String password){

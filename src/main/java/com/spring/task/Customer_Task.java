@@ -20,24 +20,24 @@ public class Customer_Task {
 	private InquiryService inquiryService;
 	
 	//매 정각마다 고객 로그인 잠금 해제
-	@Scheduled(cron="0 0 * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void unlock_customer() {
 		List<CustomerVO> list = customerService.select_to_unlock();
 		if(list.size()==0) {
 			return;
 		}
-		list.forEach(vo -> customerService.set_enabled(vo.getId()));
+		list.forEach(vo -> customerService.unlock_customer(vo.getId()));
 	}
 	
 	
 	//매 정각마다 문의사항 expired
-	@Scheduled(cron="0 0 * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void set_expired() {
 		inquiryService.set_expired();
 	}
 	
 	//매 정각마다 sendcount 초기화
-	@Scheduled(cron="0 0 * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void reset_sendcount() {
 		customerService.reset_sendcount();
 	}

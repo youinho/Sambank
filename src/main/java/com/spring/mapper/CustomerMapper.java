@@ -25,7 +25,7 @@ public interface CustomerMapper {
 	public int set_verified(CustomerVO vo);
 	
 	public int update_sendCount(String id);
-	public int reset_sendcount();
+	public int reset_sendCount();
 	
 	
 	public int update_password(CustomerVO vo);

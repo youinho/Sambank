@@ -637,4 +637,7 @@ alter table customertbl add(sendcount number(10) default 0);
 commit;
 update customertbl set verified=1;
 select * from customertbl order by cno desc;
+
+select * from customer_inquiry where expdate<sysdate;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
