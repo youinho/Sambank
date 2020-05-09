@@ -618,4 +618,10 @@ select * from notice_attach order by notice_bno desc;
 
 delete from notice_attach where notice_bno=108;
 rollback;
+select * from logtbl order by log_no;
+delete from logtbl;
+commit;
+
+select * from logtbl order by log_no desc;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

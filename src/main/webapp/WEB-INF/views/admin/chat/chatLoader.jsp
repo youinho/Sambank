@@ -1,9 +1,9 @@
 //<meta charset='utf-8' />
 //<!--
 var userId = 'sambank';
-var mainServerUrl = 'http://localhost:8080/';
+var mainServerUrl = 'https://sambank.net/';
 var appRoot = 'http://kr03.tocplus007.com:80';
-var appRoot1 = 'http://localhost:8080/';
+var appRoot1 = 'https://sambank.net/';
 var userCreated = 1588131729000;
 var wrongHost = false;
 var managerAway=false;
