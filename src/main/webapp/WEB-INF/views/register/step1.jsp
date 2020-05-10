@@ -41,7 +41,7 @@ $(function(){
 </head>
 <body>
 <div class="container">
-<form action="step2" method="post">	
+<form action="register" method="post">	
 	<div class="form-group">
 	    <label for="textarea1" id="textarea1" style="font-size:18px;">회원가입약관</label>
 	    <textarea class="form-control" id="textarea1" rows="20">

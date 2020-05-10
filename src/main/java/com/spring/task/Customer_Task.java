@@ -26,7 +26,7 @@ public class Customer_Task {
 		if(list.size()==0) {
 			return;
 		}
-		list.forEach(vo -> customerService.set_enabled(vo.getId()));
+		list.forEach(vo -> customerService.unlock_customer(vo.getId()));
 	}
 	
 	
@@ -35,4 +35,11 @@ public class Customer_Task {
 	public void set_expired() {
 		inquiryService.set_expired();
 	}
+	
+	//매 정각마다 sendcount 초기화
+	@Scheduled(cron="0 0 * * * *")
+	public void reset_sendcount() {
+		customerService.reset_sendcount();
+	}
+	
 }

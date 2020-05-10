@@ -70,7 +70,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </head>
 <body  style="background-color:#F5F5F5;">
 <div class="container" style="margin-top:40px">
-<form id="register_customer" method="post" action="step3">	
+<form id="register_customer" method="post" action="register2">	
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">			

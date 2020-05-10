@@ -55,6 +55,7 @@ public class Admin_LoginFailureHandler extends SimpleUrlAuthenticationFailureHan
 				if(failed_count>=5) {
 					adminService.set_disabled(id);
 					adminService.init_login_failure_count(id);
+					session.setAttribute("enabled", "false");
 				}
 				session.setAttribute("failed_login_count", failed_count);
 			}

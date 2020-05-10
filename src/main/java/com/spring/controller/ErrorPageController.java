@@ -14,25 +14,25 @@ public class ErrorPageController {
 	
 	
 	// error
-	@GetMapping("/404")
+	@RequestMapping("/404")
 	public String error_404() {
 		log.info("404 요청");
 		return "/errorpage/404";
 	}
-	@GetMapping("/403")
+	@RequestMapping("/403")
 	public void error_403() {
 		log.info("403");
 	}
-	@GetMapping("/405")
+	@RequestMapping("/405")
 	public void error_405() {
 		log.info("405");
 	}
-	@GetMapping("/500")
+	@RequestMapping("/500")
 	public void error_500() {
 		log.info("500");
 	}
 	
-	@GetMapping("/expired")
+	@RequestMapping("/expired")
 	public void expired() {
 		log.info("expired");
 	}

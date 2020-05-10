@@ -41,7 +41,23 @@
     	<intercept-url pattern="/F" access="isAnonymous()||hasRole('ROLE_USER')"    />
     </http>
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/register/**">
-    	<intercept-url pattern="/register/**" access="isAnonymous()||hasRole('ROLE_USER')"    />
+    	<intercept-url pattern="/register/**" access="isAnonymous()"    />
+    </http>
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/findpass">
+    	<intercept-url pattern="/findpass" access="isAnonymous()"    />
+    </http>
+    
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/verify_email">
+    	<intercept-url pattern="/verify_email" access="isAnonymous()"    />
+    </http>
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/check_recapcha">
+    	<intercept-url pattern="/check_recapcha" access="isAnonymous()"    />
+    </http>
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/resend_verify">
+    	<intercept-url pattern="/resend_verify" access="isAnonymous()"    />
+    </http>
+    <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/send_tmpPass">
+    	<intercept-url pattern="/send_tmpPass" access="isAnonymous()"    />
     </http>
     <!-- requires-channel="https" -->
     <!-- admin페이지 인터셉터, 로그인관리 -->
@@ -65,11 +81,12 @@
 			        password-parameter="password"
 			        authentication-failure-handler-ref="admin_loginFailureHandler"
 			        authentication-success-handler-ref="admin_loginSuccessHandler" /> 
-        <logout invalidate-session="true"
+        <logout invalidate-session="false"
+        		delete-cookies="JSESSIONID"
         		logout-url="/admin/logout" 
         		logout-success-url="/admin/login?logout"/>
        <access-denied-handler error-page="/errorpage/403" />
-		<session-management invalid-session-url="/admin/login?logout">
+		<session-management invalid-session-url="/admin/login?invalid">
         	<concurrency-control max-sessions="1" expired-url="/errorpage/expired"/>
     	</session-management>
         <csrf disabled="false"/>

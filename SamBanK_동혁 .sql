@@ -626,4 +626,28 @@ select * from logtbl order by log_no desc;
 
 select id, to_char(unlockdate, 'YYYY-MM-DD HH24:MI') from locked_customer;
 
+
+select * from producttbl;
+
+alter table customertbl add(verifykey nvarchar2(1000));
+alter table customertbl add(verified number(1));
+alter table customertbl modify(verified number(1) default 0);
+alter table customertbl add(sendcount number(10) default 0);
+
+commit;
+update customertbl set verified=1;
+select * from customertbl order by cno desc;
+
+select * from customer_inquiry where expdate<sysdate;
+
+
+select * from customertbl where id='rlaehdgur115';
+select * from locked_customer;
+
+select * from cardtbl;
+select * from admin_attach;
+delete from admin_attach;
+commit;
+delete from notice_attach;
+commit;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

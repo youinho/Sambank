@@ -114,7 +114,7 @@ let tk = "${_csrf.token}"
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
-					  <a class="nav-link" href="/register/step1">회원가입</a>
+					  <a class="nav-link" href="/register/agree">회원가입</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="/member/login">로그인</a>
@@ -459,9 +459,13 @@ function alert_reg(){
 	}
 	
 	if(registered === "success"){
-		alert("${name}"+" 고객님의 등록이 완료되었습니다.");
+		alert("${name}"+" 고객님의 이메일(${email})로 인증코드를 보내드렸습니다.<br>이메일을 인증하시면 로그인이 활성화됩니다.");
 	}else if(registered === "failed"){
 		alert("등록에 실패했습니다.");
+	}else if(registered === "verified"){
+		alert("이메일 인증이 완료되었습니다.");
+	}else if(registered === "verify_failed"){
+		alert("이메일 인증에 실패했습니다.")
 	}
 }
 
