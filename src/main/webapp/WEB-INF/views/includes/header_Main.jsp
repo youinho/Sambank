@@ -134,7 +134,7 @@ let tk = "${_csrf.token}"
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
-					  <a class="nav-link" href="/register/step1">회원가입</a>
+					  <a class="nav-link" href="/register/agree">회원가입</a>
 					</li>
 					<li class="nav-item active">
 					  <a class="nav-link" href="/member/login">로그인</a>

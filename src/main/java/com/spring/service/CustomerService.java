@@ -20,6 +20,9 @@ public interface CustomerService {
 	
 	public String get_password(String id);
 	
+	public boolean send_tmpPassword(CustomerVO vo);
+	
+	
 	public boolean insert_locked_customer(String id);
 	public boolean delete_locked_customer(String id);
 	public boolean set_enabled(String id);

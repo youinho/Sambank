@@ -53,30 +53,7 @@ public class HomeController2 {
 	}
 	
 	
-	@PostMapping("/register/step3")
-	public String step3(CustomerVO vo, RedirectAttributes rttr) {
-		//step2.jsp에서 회원가입정보 가져오기
-		log.info("회원가입요청"+vo);
-		
-		
-		
-		boolean result = false;
-		if(vali.check_customer(vo)) {
-			vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-			result = service.register_customer(vo);
-		}else {
-			//log.info("validate 결과 : "+result);
-		}
-		if(result) {
-			rttr.addFlashAttribute("registered", "success");
-			rttr.addFlashAttribute("email", vo.getEmail());
-			rttr.addFlashAttribute("name", vo.getName());
-		}else {
-			rttr.addFlashAttribute("registered", "failed");
-			return "/register/step2";
-		}
-		return "redirect:/";
-	}
+	
 	//주소 검색 팝업
 	@GetMapping("/popup/jusopopup")
 	public String juso_popup(HttpServletRequest req) {

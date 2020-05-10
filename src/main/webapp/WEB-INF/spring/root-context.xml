@@ -59,7 +59,7 @@
                 <prop key="mail.smtp.auth">true</prop>
                 <prop key="mail.smtps.ssl.checkserveridentity">true</prop> 
                 <prop key="mail.smtps.ssl.trust">*</prop>
-				<prop key="mail.debug">true</prop>
+				<prop key="mail.debug">false</prop>
 				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
             </props>
         </property>

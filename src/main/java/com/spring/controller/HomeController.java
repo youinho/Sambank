@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.JsonParser;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.email.Email;
+import com.spring.email.EmailSender;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
 import com.spring.service.CustomerService;
@@ -55,6 +58,7 @@ public class HomeController {
 	
 	@Autowired
 	private AdminService adminService;
+	
 	
 	@GetMapping("/")
 	public String home(Model model, HttpServletRequest req, HttpSession session) {
@@ -225,6 +229,26 @@ public class HomeController {
 	
 	
 	
+	@GetMapping("/findpass")
+	public String findpass_get() {
+		
+		return "/findpass";
+	}
+	
+	@ResponseBody
+	@PostMapping("/send_tmpPass")
+	public ResponseEntity<String> send_tmpPass_post(CustomerVO vo){
+		
+		return new ResponseEntity<String>(customerService.send_tmpPassword(vo)?"Success":"failed", HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -235,6 +259,16 @@ public class HomeController {
 //		
 //		return "/test_success";
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

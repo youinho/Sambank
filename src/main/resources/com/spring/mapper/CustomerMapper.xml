@@ -131,7 +131,7 @@
 	</update>
 	
 	<update id="set_verified">
-		update customertbl set verified=1
+		update customertbl set verified=1, verifyKey=''
 		where id=#{id} and verifyKey=#{verifyKey}
 	</update>
 
@@ -145,5 +145,7 @@
 		where id=#{id}
 	</update>
 
+
+	
 
 </mapper>
