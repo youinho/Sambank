@@ -24,7 +24,8 @@ $(function(){
 //				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
 				$("input[name='max_withdraw']").val(vo.max_withdraw);
-				$("input[name='balance']").val(viewRest(String(vo.balance)));
+				$("input[name='balance_rest']").val(viewRest(String(vo.balance)));
+				$("input[name='balance']").val(vo.balance);
 			}
 		})
 		
@@ -35,51 +36,51 @@ $(function(){
 		
 	})
 
-	$("#check_ano").click(function(e){
-		
-		e.preventDefault();
-		//링크누르면 막는기능
-		console.log("bbb");
-		let form = $("#withdrawForm");
-		
-		
-		$.ajax({
-			url : "/member/useraccount/get_row",
-			type : "post",
-			beforeSend : function(xhr)
-            {   
-                xhr.setRequestHeader(hn, tk);
-            },
-			data :{
-				ano : $("#ano").val()
-			},
-			dataType : "text",
-			success : function(result){
-				var vo = JSON.parse(result);
-				$("input[name='cno']").val(vo.cno);
-				$("input[name='name']").val(vo.name);	
-				$("input[name='max_withdraw']").val(vo.max_withdraw);
-				$("input[name='remain']").val(viewRest(String(vo.balance)));
-				$("input[name='balance']").val(viewRest(String(vo.balance)));
-				$("input[name='hidden_balance']").val(vo.balance);
-				$("input[name='remain_korean']").val(viewKorean(String(vo.balance)));
-				
-			},
-			error: function(result){
-				alert("계좌와 일치하는 정보가 없습니다.");
-			}
-			
-			
-			
-		
-			
-		})
-		
-		
-	})
-	
-	
-	
+//	$("#check_ano").click(function(e){
+//		
+//		e.preventDefault();
+//		//링크누르면 막는기능
+//		console.log("bbb");
+//		let form = $("#withdrawForm");
+//		
+//		
+//		$.ajax({
+//			url : "/member/useraccount/get_row",
+//			type : "post",
+//			beforeSend : function(xhr)
+//            {   
+//                xhr.setRequestHeader(hn, tk);
+//            },
+//			data :{
+//				ano : $("#ano").val()
+//			},
+//			dataType : "text",
+//			success : function(result){
+//				var vo = JSON.parse(result);
+//				$("input[name='cno']").val(vo.cno);
+//				$("input[name='name']").val(vo.name);	
+//				$("input[name='max_withdraw']").val(vo.max_withdraw);
+//				$("input[name='remain']").val(viewRest(String(vo.balance)));
+//				$("input[name='balance']").val(viewRest(String(vo.balance)));
+//				$("input[name='hidden_balance']").val(vo.balance);
+//				$("input[name='remain_korean']").val(viewKorean(String(vo.balance)));
+//				
+//			},
+//			error: function(result){
+//				alert("계좌와 일치하는 정보가 없습니다.");
+//			}
+//			
+//			
+//			
+//		
+//			
+//		})
+//		
+//		
+//	})
+//	
+//	
+//	
 	
 
 	

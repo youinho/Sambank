@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.domain.Acc_info;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
+import com.spring.domain.Customer_delete_requestVO;
 import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
@@ -77,7 +78,14 @@ public class UserAccountController {
 			return new ResponseEntity<DepositVO>(vo, HttpStatus.BAD_REQUEST);
 		}
 	}
-		
+	//계좌 존재 유뮤 확인
+	@ResponseBody
+	@PostMapping("/exists_deposit_ano")
+	public boolean exists_deposit_ano(String ano, HttpServletRequest req){
+	
+		return admin_service.exists_deposit_ano(ano);
+}
+	
 	@GetMapping("/deposit")
 	public void deposit(Model modelMap,HttpServletRequest req) {
 		log.info("계좌이체");	
@@ -112,7 +120,6 @@ public class UserAccountController {
 			if(admin_service.deposit(other_vo)) {
 				log.info("입금 성공");
 			}else {
-				
 				log.info("입금 실패");
 			}
 		}else {
@@ -191,15 +198,47 @@ public class UserAccountController {
 //		}
 		return "redirect:/member/useraccount/accountCreate";
 	}
-	
+
+	//계좌삭제 신청
 	@GetMapping("/accountDelete")
 	public String accountDelete(Model modelMap,HttpServletRequest req) {
 		String id = req.getRemoteUser();
 		int cno=Integer.parseInt(account_service.getCno(id));
-		List<DepositVO> list=account_service.cnoDeposit(cno);
+		CustomerVO vo=admin_service.select_by_cno(cno);
+		List<Acc_info> list = admin_service.select_acc_info(cno);
 		modelMap.addAttribute("list",list);
 		log.info("계좌삭제신청");	
 		return "/member/useraccount/accountDelete";
+	}
+	
+	@PostMapping("/accountDelete")
+	public String insertCreateDRequest(Customer_delete_requestVO vo, RedirectAttributes rttr,HttpServletRequest req){
+		String id = req.getRemoteUser();
+		vo.setId(id);
+		log.info("vo"+vo);
+		log.info("입력중"+vo.getName());
+		log.info("type"+vo.getType());
+	
+		account_service.create_customer_D_request(vo);
+//		if(account_service.create_customer_request(vo)) {
+//			
+//		}
+//		else {
+//			
+//		}
+		return "redirect:/member/useraccount/accountCreate";
+	}
+	@ResponseBody
+	@PostMapping("/get_deposit_customerInfo")
+	public ResponseEntity<Customer_delete_requestVO> get_deposit_customerInfo(String ano, HttpServletRequest req){
+		ano=ano.trim();
+		log.info("계좌확인중");
+		
+		Customer_delete_requestVO vo = account_service.ano_deposit_customer(ano);
+		log.info(vo+"");
+		log.info("선택된 계좌번호 :"+vo.getAno());
+		return new ResponseEntity<Customer_delete_requestVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+		
 	}
 	
 	@GetMapping("/accountList")
@@ -246,7 +285,7 @@ public class UserAccountController {
 		//logging(req);
 		//log.info("passpopup 요청");
 		model.addAttribute("wInput", "password");
-		return "member/useraccount/passpopup";
+		return "member/useraccount/passpopup2";
 	}
 
 	
@@ -261,12 +300,12 @@ public class UserAccountController {
 	//계좌 비밀번호 확인
 	@ResponseBody
 	@PostMapping("/check_password")
-	public ResponseEntity<String> check_account_password(DepositVO vo, @RequestParam("confirm_password") String confirm_password, HttpServletRequest req){
+	public ResponseEntity<String> check_account_password(DepositVO vo, @RequestParam("password") String password, HttpServletRequest req){
 		log.info("비번확인중");
 		log.info("ano "+vo.getAno());
 		if(vo.getPassword()==null)
 			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
-		if(!vo.getPassword().equals(confirm_password)||vo.getPassword().length()!=4) {
+		if(!vo.getPassword().equals(password)||vo.getPassword().length()!=4) {
 			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
 		}
 		try {

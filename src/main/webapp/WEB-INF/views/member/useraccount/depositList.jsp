@@ -350,4 +350,3 @@ $(function(){
 <%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/member/customer/customer_anolist.js"></script>
 <script src="/resources/js/member/customer/customer_historyAccount.js"></script>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>

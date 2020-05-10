@@ -1,112 +1,29 @@
-$(function(){
+$(function (){
 	
 	alert_success();
 	history.replaceState({}, null, null);
 	
-	$("input[name='amount']").change(function(){
-		if($(this).val() == "" || isNaN($(this).val())){
-			return;
-		}
-		$("input[name='amount_korean']").val(viewKorean($(this).val().trim()));
-	})
-	$("input[name='remain']").change(function(){
-		
-		$("input[name='remain_korean']").val(viewKorean($(this).val().trim()));
-	})
-//	$("#check_from_ano").click(function(e){
-//		e.preventDefault();
-//		
-//		
-//		$("input[name='from_name']").val("")
-//		let form = $("#withdrawForm");
-//		
-//		
-//		$.ajax({
-//			url : "/member/account/transfer/check_ano",
-//			type : "post",
-//			beforeSend : function(xhr)
-//            {   
-//                xhr.setRequestHeader(hn, tk);
-//            },
-//			data :{
-//				ano : $("#from_ano").val()
-//			},
-//			dataType : "text",
-//			success : function(result){
-//				var vo = JSON.parse(result);
-//			
-//				$("input[name='from_name']").val(vo.name);				
-//				
-//			},
-//			error: function(result){
-//				alert("계좌와 일치하는 정보가 없습니다.");
-//			}
-//			
-//			
-//			
-//		
-//			
-//		})
-//		
-//		
-//	})
 	
-	
-	
-	
-
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	$("#submitBtn").click(function(e){
+	$("#submitBtn").click(function (e){
 		e.preventDefault();
-		if($("input[name='hidden_balance']").val() == ""){
+		let form = $("#depositForm");
+		console.log($("input[name='balance']").val());
+		if($("input[name='balance']").val() == ""){
 			alert("잔액을 확인해 주세요.")
 			return false;
 		}
 		
-		if((parseInt($("input[name='hidden_balance']").val())-parseInt($("input[name='amount']").val()))<0){
-			alert("출금액을 다시 확인해주세요.")
+		if((parseInt($("input[name='balance']").val())-parseInt($("input[name='amount']").val()))<0){
+			alert("출금액을 다시 확인해주세요.");
 			return false;
 		}
-		$("#withdrawForm").submit();
-	})
-	
-	
-	
-	
-	
-	
-	
-	//팝업
-	
-	
-	$("#passwordBtn").click(function(e){
-		e.preventDefault();
-		popup_password("passpopup");
-	})
-	
-	$("#confirm_passwordBtn").click(function(e){
-		e.preventDefault();
-		popup_password("passpopup_c");
-	})
-	$("#changePwdBtn").click(function(e){
-		e.preventDefault();
-		
 		if($("input[name='ano']").val()==""){
 			$("input[name='ano']").focus();
 			return false;
 		}
-		if($("input[name='password']").val() !== $("input[name='confirm_password']").val()){
-			alert("비밀번호가 일치하지 않습니다.");
-			$("input[name='password']").val("");
-			$("input[name='confirm_password']").val("");
+		
+		if($("input[name='amount']").val()==""){
+			$("input[name='amount']").focus();
 			return false;
 		}
 		
@@ -116,7 +33,9 @@ $(function(){
 		}else if(!isNaN("input[name='password']")){
 			alert("비밀번호는 숫자만 입력가능합니다.");
 			return false;
+			
 		}
+		var ajax_password_result = true;
 		$.ajax({
 			url: "/member/useraccount/check_password",
 			type : "post",
@@ -124,10 +43,11 @@ $(function(){
 	        {   
 				xhr.setRequestHeader(hn, tk);
 	        },
+	        async:false,
 			data : {
 				ano : $("input[name='ano']").val(),
 				password : $("input[name='password']").val(),
-				confirm_password : $("input[name='confirm_password']").val()
+				confirm_password : $("input[name='password']").val()
 			},
 			dataType : "text",
 			success : function(result){
@@ -137,18 +57,119 @@ $(function(){
 			error : function(result){
 				alert("비밀번호 일치하지 않습니다.");
 				$("input[name='password']").val("");
-				$("input[name='confirm_password']").val("");
+				ajax_password_result = false;
+				return false;
+				
 			}
 		})
+
+	    var ajax_ano_result=true;
+//		$("#from_anoCheckBtn").click(function(e){
+//		e.preventDefault();
 		
+		$.ajax({
+			url: "/member/useraccount/exists_deposit_ano",
+			type : "post",
+			beforeSend : function(xhr)
+	        {   
+				xhr.setRequestHeader(hn, tk);
+	        },
+			data : {
+				ano : $("input[name='from_ano']").val(),
+			},
+			async:false,
+			dataType : "text",
+			success : function(result){
+				console.log(result);
+				if(result=="true")
+					alert("계좌가 확인되었습니다.");
+				else{
+					alert("보낼 계좌가 존재하지 않습니다.");
+					$("input[name='from_ano']").val("");
+					return false;
+					ajax_ano_result = false;
+				}
+					
+			},
+			error : function(result){
+				alert("보낼 계좌가 존재하지 않습니다.");
+				$("input[name='from_ano']").val("");
+				return false;
+				ajax_ano_result = false;
+			}
+		})
+		if(ajax_password_result&&ajax_ano_result)
+			return true;
+		else
+			return false;
+		$("#depositForm").submit();
+			
+	})
 	
 
-
+	
+	
+})	
+	//팝업
+	
+		
+	$("#passwordBtn").click(function(e){
+		e.preventDefault();
+		popup_password("passpopup");
 	})
 
-})
+//	$("#confirm_passwordBtn").click(function(e){
+//		e.preventDefault();
+//		popup_password("passpopup_c");
+//	})
+//	$("#changePwdBtn").click(function(e){
+//		e.preventDefault();
+//		
+//		if($("input[name='ano']").val()==""){
+//			$("input[name='ano']").focus();
+//			return false;
+//		}
+//		
+//		
+//		if($("input[name='password']").val().length !== 4){
+//			alert("4자리의 비밀번호를 입력해 주세요");
+//			return false;
+//		}else if(!isNaN("input[name='password']")){
+//			alert("비밀번호는 숫자만 입력가능합니다.");
+//			return false;
+//		}
+//		$.ajax({
+//			url: "/member/useraccount/check_password",
+//			type : "post",
+//			beforeSend : function(xhr)
+//	        {   
+//				xhr.setRequestHeader(hn, tk);
+//	        },
+//			data : {
+//				ano : $("input[name='ano']").val(),
+//				password : $("input[name='password']").val(),
+//				confirm_password : $("input[name='confirm_password']").val()
+//			},
+//			dataType : "text",
+//			success : function(result){
+//				alert("비밀번호가 확인되었습니다."+result);
+//				
+//			},
+//			error : function(result){
+//				alert("비밀번호 일치하지 않습니다.");
+//				$("input[name='password']").val("");
+//				$("input[name='confirm_password']").val("");
+//			}
+//		})
+//		
+//	
+//
+//
+//	})
+//
+//})
 function popup_password(wInput){
-	var pass = window.open("/member/useraccount/"+wInput,"input_passowrd","width=370,height=220, scrollbars=yes, resizable=yes");
+	var pass = window.open("/member/useraccount/"+wInput,"input_passowrd","width=500,height=320, scrollbars=yes, resizable=yes");
 }
 
 function input_password(password, wInput){
