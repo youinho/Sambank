@@ -205,6 +205,12 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
+	@Override
+	public boolean delete_by_id(String id) {
+
+		return customerMapper.delete_by_id(id)==1;
+	}
+
 	
 	
 	

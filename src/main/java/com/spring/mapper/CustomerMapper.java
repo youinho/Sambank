@@ -27,7 +27,7 @@ public interface CustomerMapper {
 	public int update_sendCount(String id);
 	public int reset_sendCount();
 	
-	
+	public int delete_by_id(String id);
 	public int update_password(CustomerVO vo);
 	
 	

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.CustomerVO;
 import com.spring.service.AdminService;
+import com.spring.service.CustomerService;
 import com.spring.service.RegisterService;
 import com.spring.service.SBValidator;
 
@@ -35,6 +36,9 @@ public class RegisterController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 	@GetMapping("/agree")
 	public String step1() {
 		log.info("step1 요청");
@@ -53,6 +57,7 @@ public class RegisterController {
 		
 		return "/register/step2";
 	}
+	
 	
 	@PostMapping("/register2")
 	public String step3(CustomerVO vo, RedirectAttributes rttr) {
@@ -73,6 +78,7 @@ public class RegisterController {
 			rttr.addFlashAttribute("email", vo.getEmail());
 			rttr.addFlashAttribute("name", vo.getName());
 		}else {
+			customerService.delete_by_id(vo.getId());
 			rttr.addFlashAttribute("registered", "failed");
 			return "/register/step2";
 		}

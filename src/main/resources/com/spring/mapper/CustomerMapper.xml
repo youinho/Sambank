@@ -146,6 +146,11 @@
 	</update>
 
 
+	<!-- 고객정보 삭제 -->
+	<delete id="delete_by_id">
+		delete from customertbl
+		where id=#{id}
+	</delete>
 	
 
 </mapper>
