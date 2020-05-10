@@ -242,6 +242,8 @@ $(function(){
 	let param_verified = "${verified}";
 	let cap_token = "";
 	let sended = "";
+	let hn = "${_csrf.headerName}";
+	let tk = "${_csrf.token}"
 	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false" || param_verified==="false"){
 		$("#error_card").css("display","inline-block");
 		$("#error_card").toast("show");
@@ -278,6 +280,10 @@ $(function(){
 			data :{
 				token : cap_token
 			},
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
 			async : false,
 			type : 'post',
 			success : function(result){
@@ -333,11 +339,16 @@ $(function(){
 				id : $("#id").val(),
 				password : $("#password").val()
 			},
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
 			async : false,
 			type : 'post',
 			success : function(result){
-				sended = "true";
+				
 				if(result === "success"){
+					sended = "true";
 					alert("${email} 메일로 인증코드를 전송했습니다.");
 				}else if(result === "muchsend"){
 					alert("너무 많은 요청으로 거절되었습니다. 잠시 후 다시시도하세요.")

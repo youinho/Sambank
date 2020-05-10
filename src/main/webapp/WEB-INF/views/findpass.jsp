@@ -198,7 +198,8 @@ color: #fff;
 <script>
 $(function(){
 	let cap_token = "";
-
+	let hn = "${_csrf.headerName}";
+	let tk = "${_csrf.token}"
 	
 	$("#findBtn").click(function(e){
 		e.preventDefault();
@@ -231,6 +232,10 @@ $(function(){
 				data :{
 					token : cap_token
 				},
+				beforeSend : function(xhr)
+	            {   
+	                xhr.setRequestHeader(hn, tk);
+	            },
 				async : false,
 				type : 'post',
 				success : function(result){
@@ -250,7 +255,6 @@ $(function(){
 		}
 		
 		//임시비밀번호 발급
-		console.log("true 발급시작");
 		$.ajax({
 			url : '/send_tmpPass',
 			dataType : 'text',
@@ -258,6 +262,10 @@ $(function(){
 				email : $("#email").val(),
 				id : $("#id").val()
 			},
+			beforeSend : function(xhr)
+            {   
+                xhr.setRequestHeader(hn, tk);
+            },
 			async : false,
 			type : 'post',
 			success : function(result){
