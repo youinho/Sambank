@@ -2,9 +2,7 @@
 $(function(){
 	$("#customer_request").validate({
 		errorPlacement:function(error,element){ 
-			$(element).closest("form")
-			.find("small[name='"+element.attr("id")+"']")
-			.append(error);
+		
 			},
 		rules:{
 			name:{

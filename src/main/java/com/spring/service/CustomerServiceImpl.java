@@ -8,9 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.domain.CardVO;
 import com.spring.domain.CustomerVO;
 import com.spring.email.Email;
 import com.spring.email.EmailSender;
+import com.spring.mapper.CardMapper;
 import com.spring.mapper.CustomerMapper;
 
 import security.Customer_UserDetails;
@@ -22,7 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
 	private CustomerMapper customerMapper;
-	
+	@Autowired
+	private CardMapper cardMapper;
 	
 
 	@Autowired
@@ -210,6 +213,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 		return customerMapper.delete_by_id(id)==1;
 	}
+
+	@Override
+	public boolean request_card(CardVO vo) {
+
+		return cardMapper.request_card(vo)==1;
+	}
+
+	
 
 	
 	

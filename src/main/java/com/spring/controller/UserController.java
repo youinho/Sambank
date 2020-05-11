@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +24,18 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.domain.Acc_info;
 import com.spring.domain.AttachFileDTO;
+import com.spring.domain.CardVO;
 import com.spring.domain.Criteria;
+import com.spring.domain.DepositVO;
 import com.spring.domain.InquiryVO;
 import com.spring.domain.Inquiry_replyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.Profile_imageVO;
 import com.spring.service.AdminService;
 import com.spring.service.CustomerNoticeService;
+import com.spring.service.CustomerService;
 import com.spring.service.InquiryService;
 import com.spring.service.UserService;
 
@@ -51,7 +56,11 @@ public class UserController {
 	
 	@Autowired
 	private InquiryService inquiry_service;
+	@Autowired
+	private CustomerService customerService;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("/member/inquiry")
 	public String User_Q_notice(Model model, HttpServletRequest req) {
@@ -355,5 +364,74 @@ public class UserController {
 	
 	
 	
+	
+	
+	
+	
+	@GetMapping("/member/card/request")
+	public String card_request_get(Model model, HttpServletRequest req) {
+		String id = req.getRemoteUser();
+		
+		 
+		model.addAttribute("list", service.get_card_product());
+		
+		return "/member/card/request";
+	}
+	@ResponseBody
+	@PostMapping("/member/card/request")
+	public ResponseEntity<String> card_request_post(CardVO vo, RedirectAttributes rttr) {
+		String card_no = "";
+		while(true) {
+			card_no = vo.getC_type() + "";
+			for(int i = 0; i < 13; i++) 
+				card_no += (int)(Math.random()*10);
+			if(service.check_card_no(card_no)==0)
+				break;
+		}
+		String security_key = ""+(int)(Math.random()*10);
+		security_key += (int)(Math.random()*10);
+		security_key += (int)(Math.random()*10);
+		vo.setSecurity_key(security_key);
+		vo.setCard_no(card_no);
+		vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+		if(customerService.request_card(vo)) {
+			return new ResponseEntity<String>("true", HttpStatus.OK);
+		}else {
+			
+			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	
+	
+	
+	@ResponseBody
+	@PostMapping("/member/card/getAccInfo")
+	public ResponseEntity<List<Acc_info>> get_accinfo( HttpServletRequest req){
+		
+		List<Acc_info> list = service.select_acc_info(service.select_by_id(req.getRemoteUser()).getCno());
+		if(list.isEmpty()) {
+			return new ResponseEntity<List<Acc_info>>(list, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<List<Acc_info>>(list, HttpStatus.OK);
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/member/card/get_cardList")
+	public ResponseEntity<List<CardVO>> get_cardList(String ano, HttpServletRequest req){
+		List<CardVO> list = service.get_cardList_by_ano(ano);
+		return new ResponseEntity<List<CardVO>>(list, HttpStatus.OK);
+	}
+	
+	
+	@ResponseBody
+	@PostMapping("/member/card/get_depositInfo")
+	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
+		DepositVO vo = service.get_deposit(ano);
+		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+		
+	}
 	
 }

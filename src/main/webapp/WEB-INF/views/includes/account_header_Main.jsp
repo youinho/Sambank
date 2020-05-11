@@ -57,17 +57,14 @@ aside {
 .asideHeader{
 	margin-top: 40px;
 }
+.asideHeader a{
+	color: #fff;
+}
 .aside_content{
 	margin-top:30px;
 	margin-left: 50px;
 	font-size: 22px;
 	font: bolder;
-}
-.panel-body a {
-	color: black;
-}
-.aside_content a {
-    color: #fff;
 }
 .tag_var button {
 	color: #fff;
@@ -160,7 +157,7 @@ let tk = "${_csrf.token}"
 				        <a class="nav-link" href="#">은행 소개</a>
 				      </li>
 				      <li class="nav-item active">
-				        <a class="nav-link" href="/member/inquiry">고객 센터</a>
+				        <a class="nav-link" href="/Q">고객 센터</a>
 				      </li>
 			  	</ul>
 			  </div>
@@ -206,11 +203,11 @@ let tk = "${_csrf.token}"
 						    카드 관련
 						  </button>
 						  <div class="dropdown-menu">
-						    <a class="dropdown-item" href="/member/card/request">카드 신청</a>
+						    <a class="dropdown-item" href="#">카드 신청</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="/member/card/request">카드 취소</a>
+						    <a class="dropdown-item" href="#">카드 취소</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="/member/card/request">카드 결과 확인</a>
+						    <a class="dropdown-item" href="#">카드 결과 확인</a>
 						  </div>
 						</div>
 
@@ -232,20 +229,19 @@ let tk = "${_csrf.token}"
      <aside>
      	<div class="asideHeader"style="font-family: 'Do Hyeon', sans-serif; margin-bottom: 500px;">
      	
-     	<a href="">빠른이동</a>
+     	<a href="">개인뱅킹</a>
      	<div class="aside_content">
-			<a href="/A" data-title="공지사항"><c:out value="공지사항"></c:out> </a>
+			<a href="deposit" data-title="계좌이체"><c:out value="계좌이체"></c:out> </a>
 			<div class="dropdown-divider"></div>
-			<a href="/N" data-title="새소식"><c:out value="새소식"></c:out> </a>
+			<a href="depositList" data-title="입출금내역"><c:out value="입출금내역"></c:out> </a>
 			<div class="dropdown-divider"></div>
-			<a href="/E" data-title="이벤트"><c:out value="이벤트"></c:out> </a>
+			<a href="accountList" data-title="계좌조회"><c:out value="계좌조회"></c:out> </a>
 			<div class="dropdown-divider"></div>
-			<a href="/F" data-title="자료실"><c:out value="자료실"></c:out> </a>
+			<a href="accountCreate" data-title="계좌신청"><c:out value="계좌신청"></c:out> </a>
 			<div class="dropdown-divider"></div>
-	     	<sec:authorize access="isAuthenticated()">
-	     		<a href="/member/inquiry" data-title="1:1 문의">1:1 비공개 문의</a>
-	     		<div class="dropdown-divider"></div>
-	     	</sec:authorize>
+			<a href="accountDelete" data-title="계좌삭제신청"><c:out value="계좌삭제신청"></c:out> </a>
+			<div class="dropdown-divider"></div>
+	     	
 	     	
 	     	
      	</div>

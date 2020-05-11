@@ -19,4 +19,6 @@ public class CardVO {
 	
 	private String confirm_password;
 	private String p_name;
+	private String product;
+	private String branch;
 }

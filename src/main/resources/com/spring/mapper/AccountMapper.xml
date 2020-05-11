@@ -18,6 +18,10 @@
 		values(seq_customer_request.nextVal, #{name}, #{eng_name}, #{birth}, #{address}, #{mobile}, #{id}, #{email}, #{type}, #{product}, #{visitAddress})
 	</insert>
 	
+	<insert id="create_customer_D_request">
+		insert into customer_D_request(cdr_no, name, birth, type, p_name, ano, password)
+		values(seq_customer_D_request.nextVal, #{name}, #{birth}, #{type}, #{p_name}, #{ano}, #{password})
+	</insert>
 	<select id="get_deposit_list" resultType="com.spring.domain.DepositVO">
 		select * from deposittbl where dno > 0 order by dno desc
 
@@ -34,7 +38,17 @@
 		where round(product/100)=#{type}
 	
 	</select>
-
+	
+	<!-- ano로 depostbl,customertbl 정보가져오기 -->
+	<select id="ano_deposit_customer" resultType="com.spring.domain.Customer_delete_requestVO">
+		select c.name,c.birth ,d.type,(select p.p_name from producttbl p where p.product=d.product)p_name,d.ano ,d.createDate ,d.balance ,d.password
+		from customertbl c, deposittbl d 
+		where c.cno=(select deposittbl.cno 
+          			from  deposittbl  
+           			where ano=#{ano}) 
+		and c.cno=d.cno
+		and d.ano=#{ano}
+	</select>
 	<!-- ano로 계좌정보 -->
 	<select id="getRow" resultType="com.spring.domain.DepositVO">
 		<!-- select a.ano, producttbl.p_name, a.day_withdraw, a.max_withdraw, a.balance from (select * from deposittbl where ano=#{ano}) a

@@ -126,6 +126,7 @@ public interface AdminService {
 	
 	public boolean update_card_password(CardVO vo);
 	public boolean update_cardInfo(CardVO vo);
-	
+	public List<CardVO> select_card_requested();
+	public boolean set_card_request(String card_no);
 
 }
