@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../../includes/header_Main.jsp" %>
+<%@include file="../../includes/account_header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 
@@ -10,8 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-a:visited {color:black; text-decoration:none;}
-.asideHeader a:visited {color:#fff; text-decoration:none;}
+/* a:visited {color:black; text-decoration:none;}
 .tag_var a:visited {color:#fff; text-decoration:none;}
 a:hover {color:#5a5a5a; text-decoration:none;}
 a:link {color:#9e9e9e; text-decoration:none;}
@@ -29,31 +28,11 @@ main{
 [class^="sm"]{
 	border: 1px solid white;
 }
-aside {
-    width: 340px;
-    color: #ffff;
-    /* padding: 10px; */
-    /* margin: 10px; */
-    /* margin-top:50px; */
-    padding-bottom: 650px;
-    box-sizing: border-box;
-    border: 7px solid;
-    position: absolute;
-    font-size: 35px;
-    background-color: #336633;
-   	visited {color:#9e9e9e; text-decoration:none;}
-   }
 
-.aside_content{
-	margin-top:30px;
-	margin-left: 50px;
-	font-size: 22px;
-	font: bolder;
-}
 .tag_var button {
 	color: #fff;
 }
-
+ */
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
@@ -66,7 +45,7 @@ aside {
 <body>
 	
      
-     
+  <!--    
      <aside>
      	<div class="asideHeader">
      	<ul>
@@ -100,7 +79,7 @@ aside {
      	</div>
   	
      </aside>
-     
+      -->
      
      
      
@@ -159,7 +138,7 @@ aside {
 
     <td style="vertical-align: middle; text-align: center;" colspan="10">
      <select name="account" id="account"  class="form-control" placeholder="입금 금액">
-   		<option value="계좌선택" hidden>계좌선택</option>	
+   		<option value="계좌선택" hidden>계좌 선택</option>	
       <c:forEach items="${list }" var="vo">
 
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
@@ -223,9 +202,11 @@ aside {
       
    <tr>
     <td colspan="10">
+    
     <input type="submit" class="btn btn-primary" id="submitBtn" value="신청">
    	<sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
+    
     </td>
    </tr>
     </tbody>

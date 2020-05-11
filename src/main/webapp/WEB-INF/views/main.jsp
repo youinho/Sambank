@@ -70,7 +70,6 @@ let tk = "${_csrf.token}"
 	background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
 	background-position: left; /* 수평 : left,center,right  수직 : top, center, bottom */
   }
-  
 </style>
 
 
@@ -134,10 +133,7 @@ let tk = "${_csrf.token}"
 					  <a class="nav-link" href="/">은행 소개</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="#">고객 센터</a>
-					</li>
-					<li class="nav-item active">
-					  <a class="nav-link" href="#">추가 예정</a>
+					  <a class="nav-link" href="/member/inquiry">고객 센터</a>
 					</li>
 			  	</ul>
 			  </div>
@@ -263,10 +259,11 @@ let tk = "${_csrf.token}"
 		<!-- 빠른메뉴 -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
-				<li><a href="/member/useraccount/accountList" class="q1">전체계좌조회</a></li>
-				<li><a href="/member/useraccount/deposit" class="q2">계좌이체</a></li>
-				<li><a href="/member/account/" >계좌 신청</a></li>
-				<li><a href="/member/useraccount/balance" >잔액조회</a></li>
+				<li><a href="/member/useraccount/deposit" class="q1">계좌 이체</a></li>
+				<li><a href="/member/useraccount/depositList" class="q2">입출금내역</a></li>
+				<li><a href="/member/useraccount/accountList" >계좌 조회</a></li>
+				<li><a href="/member/useraccount/accountCreate" >계좌 신청</a></li>
+				<li><a href="/member/useraccount/accountDelete" >계좌 삭제 신청</a></li>
 			</ul>
 			<ul class="menu2">
 				<li><a href="/A">공지사항</a></li>
@@ -274,7 +271,7 @@ let tk = "${_csrf.token}"
 				<li><a href="/E">이벤트</a></li>
 				<li><a href="/F">자료실</a></li>
 				<li><a href="/member/inquiry">문의사항</a></li>
-				<li><a href="">카드</a></li>
+				<li><a href="/member/card/request">카드</a></li>
 			</ul>
 	</div>
 	 <!-- link var 끝 -->

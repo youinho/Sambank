@@ -30,7 +30,7 @@ $("aside").remove();
 </style>
 
 
-<div class="container">
+<div class="container" style="margin-top: 50px;">
 <div class="col-md-12">
 	<div class="col-md-12">
 		<h3 class="page-header title">신규 카드 신청</h3>
