@@ -156,16 +156,12 @@ aside {
   <tbody>
   	 <tr>
     <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
-<<<<<<< HEAD
-    <td style="vertical-align: middle; text-align: center;" colspan="5">
-     <select name="account" id="account"  class="form-control" >
-  	  <c:forEach items="${list }" var="vo">
-=======
+
     <td style="vertical-align: middle; text-align: center;" colspan="10">
      <select name="account" id="account"  class="form-control" placeholder="입금 금액">
    		<option value="계좌선택" hidden>계좌선택</option>	
       <c:forEach items="${list }" var="vo">
->>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
+
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
       </c:forEach>
      </select>
