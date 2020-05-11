@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.CardVO;
 import com.spring.domain.CustomerVO;
 
 import security.Customer_UserDetails;
@@ -38,4 +39,9 @@ public interface CustomerService {
 	
 	public boolean update_sendcount(String id);
 	public boolean reset_sendcount();
+	
+	public boolean request_card(CardVO vo);
+	
+	
+	
 }

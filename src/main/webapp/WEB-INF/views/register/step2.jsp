@@ -14,6 +14,7 @@
 <script src="/resources/js/member/customer/member_registerCustomer_validate.js"></script>
 <script>
 	$(function(){
+		let sended = "false";
 		$("aside").remove();
 		$("input[value='남']").prop("checked", true);
 	
@@ -34,10 +35,24 @@
 			goPopup();
 		})
 		
+		$('input').keydown(function() {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+		});
 		
-		
-		
-		
+		$("#submitBtn").click(function(e){
+			e.preventDefault();
+			if(sended==="false"){
+				sended = "true";
+				$("#register_customer").submit();
+			}else{
+				alert("이미 처리된 요청입니다.");
+			}
+				
+			
+			
+		})		
 		
 		
 		
@@ -149,7 +164,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</div>
 	
 	<div class="form-group text-center">		
-		<button type="submit" class="btn btn-primary">입력</button>
+		<button type="submit" class="btn btn-primary" id="submitBtn">입력</button>
 	    <button type="reset" class="btn btn-secondary">취소</button>		
 	</div>	
 	<input type="hidden" name="gender" value="남" />	

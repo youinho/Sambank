@@ -18,4 +18,7 @@ public interface CardMapper {
 	
 	public int update_password(CardVO vo);
 	public int update_cardInfo(CardVO vo);
+	public int request_card(CardVO vo);
+	public List<CardVO> select_card_requested();
+	public int set_request(String card_no);
 }

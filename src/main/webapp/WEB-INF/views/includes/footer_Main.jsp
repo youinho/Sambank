@@ -25,7 +25,7 @@ footer{
 div[id^='idCard']{
 	z-index:2147483647;
 	position:fixed;
-	right:50px;
+	right:-1000px;
 	bottom:50px;
 	max-width:450px;
 	width:450px;
@@ -138,7 +138,7 @@ $(function(){
 			$("#card_img").attr("src", img);
 			$("#card_name").html(name);
 			$("#card_work").html(work);
-			
+			$("#idCard").css("right", "50px")
 			$("#idCard").toast('show');
 			console.log("ggggg");
 		}
@@ -147,6 +147,7 @@ $(function(){
 	})
 	$(".close").click(function(){
 		$("#idCard").toast('hide');
+		$("#idCard").css("right", "-1000px");
 	})
 })
 </script>

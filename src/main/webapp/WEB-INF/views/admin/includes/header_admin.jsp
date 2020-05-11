@@ -293,6 +293,9 @@ $(function(){
                                 <li>
                                     <a href="/admin/card/modify" class="nav-link child" id="modCard">카드 정보 수정</a>
                                 </li>
+                                <li>
+                                    <a href="/admin/card/requested" class="nav-link child" id="reqCard">카드 신청 현황</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
             

@@ -52,7 +52,7 @@
         
         <property name="defaultEncoding" value="utf-8"/>
         <property name="username" value="ucceoum@gmail.com" />
-        <property name="password" value="" />
+        <property name="password" value="xhylspfonolsazbg" />
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.starttls.enable">true</prop>

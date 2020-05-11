@@ -1,5 +1,3 @@
-
-
 -- 추가
 
 insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
@@ -651,5 +649,14 @@ delete from admin_attach;
 commit;
 delete from notice_attach;
 commit;
+alter table cardtbl add(request number(1) default 0);
+alter table cardtbl add(branch nvarchar2(100));
+update cardtbl set request=0;
+commit;
+
+select * from (select cardtbl.*, rownum rn from cardtbl
+		where request=1 
+		order by createdate asc) a
+        where a.rn < 50;
 
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

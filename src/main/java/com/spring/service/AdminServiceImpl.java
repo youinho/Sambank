@@ -582,6 +582,17 @@ public class AdminServiceImpl implements AdminService {
 		return false;
 	}
 	
-	
+	@Override
+	public List<CardVO> select_card_requested() {
+
+		return cardMapper.select_card_requested();
+	}
+
+
+	@Override
+	public boolean set_card_request(String card_no) {
+
+		return cardMapper.set_request(card_no)==1;
+	}
 	
 }
