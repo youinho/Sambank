@@ -263,10 +263,10 @@ let tk = "${_csrf.token}"
 		<!-- 빠른메뉴 -->
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->	
 			<ul class="menu1">
-				<li><a href="/member/account/account" class="q1">전체계좌조회</a></li>
-				<li><a href="/member/account/transfer" class="q2">계좌이체</a></li>
-				<li><a href="/member/account/balance" >빠른조회</a></li>
-				<li><a href="/member/account/balance" >잔액조회</a></li>
+				<li><a href="/member/useraccount/accountList" class="q1">전체계좌조회</a></li>
+				<li><a href="/member/useraccount/deposit" class="q2">계좌이체</a></li>
+				<li><a href="/member/account/" >계좌 신청</a></li>
+				<li><a href="/member/useraccount/balance" >잔액조회</a></li>
 			</ul>
 			<ul class="menu2">
 				<li><a href="/A">공지사항</a></li>

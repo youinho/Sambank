@@ -221,8 +221,7 @@ aside {
     <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
     <td style="vertical-align: middle; text-align: center;" colspan="5">
      <select name="account" id="account"  class="form-control" >
-  		<option value="계좌선택">계좌선택</option>
-      <c:forEach items="${list }" var="vo">
+  	  <c:forEach items="${list }" var="vo">
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
       </c:forEach>
      </select>
