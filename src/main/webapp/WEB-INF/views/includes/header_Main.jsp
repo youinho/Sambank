@@ -63,6 +63,12 @@ aside {
 	font-size: 22px;
 	font: bolder;
 }
+.panel-body a {
+	color: black;
+}
+.aside_content a {
+    color: #fff;
+}
 .tag_var button {
 	color: #fff;
 }

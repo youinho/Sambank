@@ -70,7 +70,6 @@ let tk = "${_csrf.token}"
 	background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
 	background-position: left; /* 수평 : left,center,right  수직 : top, center, bottom */
   }
-  
 </style>
 
 
