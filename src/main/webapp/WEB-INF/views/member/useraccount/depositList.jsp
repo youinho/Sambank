@@ -98,16 +98,19 @@ main{
           </div>
           
          </div>
-		<div class="input-group">
-		
-			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
-			    <div class="dropdown-menu" id="ano-list">
-			    	<c:forEach items="${list }" var="vo">
-			    		<a class='dropdown-item account-item' id="check_ano" href='#'><c:out value="${vo.ano}"></c:out> </a>
-		    		</c:forEach>
-			    </div>
+		<div class="mb-3">
+			<div class="label d-flex justify-content-between">
+			<select name="account" id="account"  class="form-control" placeholder="입금 금액">
+   				<option value="계좌선택" hidden>계좌선택</option>	
+    			  <c:forEach items="${list }" var="vo">
+
+      				<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
+     			 </c:forEach>
+    		 </select>
+ 		</div>
+ 		
   		    <div class="input-group" style="width:100%">
-			    <p class="input-group-text" style="width:45%"><strong>선택 계좌</strong> </p>
+			    <p class="input-group-text" style="width:20%"><strong>선택 계좌</strong> </p>
 			  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" aria-invalid="false">
 			  </div>
 			<div class="input-group" style="width:100%">

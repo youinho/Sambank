@@ -140,6 +140,7 @@ main{
      <select name="account" id="account"  class="form-control" placeholder="입금 금액">
    		<option value="계좌선택" hidden>계좌선택</option>	
       <c:forEach items="${list }" var="vo">
+
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
       </c:forEach>
      </select>

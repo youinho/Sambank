@@ -54,4 +54,26 @@
 	</update>
 
 
+
+	<!-- 카드 신청 -->
+	<insert id="request_card">
+		insert into cardtbl(card_no, password, ano, c_type,  security_key, limit, limit_month, request, branch)
+		values(#{card_no}, #{password}, #{ano}, #{c_type},  #{security_key}, #{limit}, #{limit_month}, 1, #{branch} )
+	</insert>
+
+	<!-- 카드 신청 현황 -->
+	<select id="select_card_requested" resultType="com.spring.domain.CardVO">
+		<![CDATA[
+			select * from (select cardtbl.*, rownum rn from cardtbl
+			where request=1 
+			order by createdate asc) a
+	        where a.rn < 50
+        ]]>
+	</select>
+
+	<update id="set_request">
+		update cardtbl set request=0
+		where card_no=#{card_no}
+	</update>
+
 </mapper>

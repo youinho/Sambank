@@ -25,7 +25,7 @@ footer{
 div[id^='idCard']{
 	z-index:2147483647;
 	position:fixed;
-	right:50px;
+	right:-1000px;
 	bottom:50px;
 	max-width:450px;
 	width:450px;
@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                          <a href="">웹접근성안내</a>&nbsp;&nbsp;|&nbsp;
                          <a href="">사이트맵</a>
                      </p>
-                     <p class="copyright">본사 위치 : 서울특별시 노원구 동일로 1082 KT대우직업능력개발원 (주)SB카드</p>
+                     <p class="copyright">본사 위치 : 서울특별시 노원구 동일로 1082 KT대우직업능력개발원 (주)SB은행</p>
                      <a href="" >담당자 이메일 : admin@sambank.net</a>
                      <select id="select_idCard">
                          <option value="0">**조 원 소 개**</option>
@@ -138,7 +138,7 @@ $(function(){
 			$("#card_img").attr("src", img);
 			$("#card_name").html(name);
 			$("#card_work").html(work);
-			
+			$("#idCard").css("right", "50px")
 			$("#idCard").toast('show');
 			console.log("ggggg");
 		}
@@ -147,6 +147,7 @@ $(function(){
 	})
 	$(".close").click(function(){
 		$("#idCard").toast('hide');
+		$("#idCard").css("right", "-1000px");
 	})
 })
 </script>

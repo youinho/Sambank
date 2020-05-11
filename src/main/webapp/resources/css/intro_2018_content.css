@@ -23,6 +23,7 @@
 .main-con1 ul.menu1 {background:#007d00;}
 .text {background:#666633;}
 .main-con1 ul.menu2 {background:#ffa428;}
+.main-con1 ul.menu2 a {color: #fff;}
 /* .main-con1 ul.menu2 {background:#d8d5cb;} */
 .main-con1 ul.menu1 li a {color:#ffffff;font-size:17px;font-weight:normal;padding:0 20px;letter-spacing:-1px;}
 .main-con1 ul.menu1 + ul li + li {position:relative;margin:0 0 0 1px;}

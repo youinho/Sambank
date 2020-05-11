@@ -84,8 +84,8 @@ $(function(){
 		
 	})
 	
-	$("#ano-list").on("click",".account-item" ,function(){
-		
+	$("#ano-list").on("click",".account-item" ,function(e){
+		e.preventDefault();
 		
 		var ano = $(this).text();
 		

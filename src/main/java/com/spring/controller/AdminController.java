@@ -1132,6 +1132,30 @@ public class AdminController {
 	}
 	
 	//card
+	
+	//카드신청현황 페이지
+	
+	@GetMapping("/card/requested")
+	public String card_requested_get(Model model, HttpServletRequest req) {
+		logging(req);
+		
+		model.addAttribute("list", service.select_card_requested());
+		
+		
+		return "/admin/card/requested";
+	}
+	@ResponseBody
+	@PostMapping("/card/set_request")
+	public ResponseEntity<String> set_card_requested(String card_no){
+		
+		if(service.set_card_request(card_no)) {
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("failed", HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
 	//카드 등록 페이지
 	@GetMapping("/card/register")
 	public void register_card_get(Model model, HttpServletRequest req) {
@@ -1198,7 +1222,7 @@ public class AdminController {
 	
 	//카드 목록 불러오기 (ano)
 	@ResponseBody
-	@PostMapping("card/get_cardList")
+	@PostMapping("/card/get_cardList")
 	public ResponseEntity<List<CardVO>> get_cardList(String ano, HttpServletRequest req){
 		logging(req);
 		List<CardVO> list = service.get_cardList_by_ano(ano);

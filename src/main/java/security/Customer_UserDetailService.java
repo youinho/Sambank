@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.spring.mapper.CustomerMapper;
 import com.spring.service.CustomerService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 public class Customer_UserDetailService implements UserDetailsService {
 
 	@Autowired
-	private CustomerService customerService;
+	private CustomerMapper customerMapper;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Customer_UserDetails user = customerService.security_get_customer(username);
+		Customer_UserDetails user = customerMapper.security_get_customer(username);
 		
 		if(user==null) {
 			throw new UsernameNotFoundException(username);

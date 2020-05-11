@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -63,6 +64,8 @@ public class HomeController {
 	@Autowired
 	private AdminService adminService;
 	
+	private HashMap<String, String> umbrella_center = new HashMap<String, String>();
+	private HashMap<String, String> umbrella_level = new HashMap<String, String>();
 	
 	@GetMapping("/")
 	public String home(Model model, HttpServletRequest req, HttpSession session) {
@@ -282,94 +285,39 @@ public class HomeController {
 	}
 	
 	@PostMapping("/umbrella/save_center")
-	public void umbrella_save_center(String center_lat, String center_lng, String user_uuid) {
+	@ResponseBody
+	public ResponseEntity<String> umbrella_save_center(String center_lat, String center_lng, String user_uuid) {
+		umbrella_center.put(user_uuid, center_lat+" "+center_lng);
 		
-		File file = new File("/home/ec2-user/umbrella/"+user_uuid+"center.txt");
-		FileWriter writer = null;
-		
-		try {
-			writer = new FileWriter(file, false);
-			writer.write(center_lat+" "+center_lng);
-			writer.flush();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(writer != null) {
-					writer.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		System.out.println("saveCenter_done");
+		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
 	
 	@PostMapping("/umbrella/get_center")
 	@ResponseBody
-	public String umbrella_get_center(String user_uuid) {
-		String latlng = "";
-		File file = new File("/home/ec2-user/umbrella/"+user_uuid+"center.txt");
-		try(FileReader filereader = new FileReader(file);
-			BufferedReader br = new BufferedReader(filereader)
-			) {
-			latlng = br.readLine();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public ResponseEntity<String> umbrella_get_center(String user_uuid) {
+		String latlng = umbrella_center.get(user_uuid);
 		
-
-		System.out.println("getCenter_done"+latlng);
-		return latlng;
+		umbrella_center.remove(user_uuid);
+		return new ResponseEntity<String>(latlng, HttpStatus.OK);
 	}
 
-	
+	@ResponseBody
 	@PostMapping("/umbrella/save_level")
-	public void umbrella_save_level(String level, String user_uuid) {
+	public ResponseEntity<String> umbrella_save_level(String level, String user_uuid) {
 		
-		File file = new File("/home/ec2-user/umbrella/"+user_uuid+"level.txt");
-		FileWriter writer = null;
+		umbrella_level.put(user_uuid, level);
 		
-		try {
-			writer = new FileWriter(file, false);
-			writer.write(level);
-			writer.flush();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(writer != null) {
-					writer.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		
+		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
 	
 	@PostMapping("/umbrella/get_level")
 	@ResponseBody
-	public String umbrella_get_level(String user_uuid) {
-		String level = "";
-		File file = new File("/home/ec2-user/umbrella/"+user_uuid+"level.txt");
-		try(FileReader filereader = new FileReader(file);
-			BufferedReader br = new BufferedReader(filereader)
-			) {
-			level = br.readLine();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public ResponseEntity<String> umbrella_get_level(String user_uuid) {
+		String level = umbrella_level.get(user_uuid);
+		umbrella_level.remove(user_uuid);
 		
-		return level;
+		
+		return new ResponseEntity<String>(level, HttpStatus.OK);
 	}
 	
 
