@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,6 +30,7 @@ import com.spring.domain.CustomerVO;
 import com.spring.domain.Customer_delete_requestVO;
 import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historySumVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.PageVO;
 import com.spring.domain.ProductVO;
@@ -42,6 +44,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/member/useraccount/*")
 public class UserAccountController {
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserService usc;
@@ -59,9 +64,21 @@ public class UserAccountController {
 		log.info("계좌확인중");
 		
 		DepositVO vo = admin_service.get_deposit(ano);
-		log.info(vo+"");
-		log.info("선택된 계좌번호 :"+vo.getAno());
+//		log.info(vo+"");
+//		log.info("선택된 계좌번호 :"+vo.getAno());
 		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("/get_depositHistorySum")
+	public ResponseEntity<Deposit_historySumVO> get_depositHistorySum(String ano, HttpServletRequest req){
+		log.info("입출금 내역");
+		
+		Deposit_historySumVO vo = account_service.sum_deposit_withdrawal(ano);
+		log.info("입출금 내역"+vo+"");
+//		log.info("선택된 계좌번호 :"+vo.getAno());
+		return new ResponseEntity<Deposit_historySumVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
 		
 	}
 	

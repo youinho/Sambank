@@ -146,5 +146,10 @@
 		select sum(balance) from deposittbl where cno=#{cno}
 	</select>
 	
+	<!-- 입출금액의 합 -->
+	<select id="sum_deposit_withdrawal" resultType="com.spring.domain.Deposit_historySumVO">
+		select sum(deposit), sum(withdrawal) from deposit_history where ano=#{ano}
+	</select>
+	
 	
 </mapper>

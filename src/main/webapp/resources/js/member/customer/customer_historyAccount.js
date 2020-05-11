@@ -1,9 +1,5 @@
 $(function(){
 	
-	
-	
-	
-	
 	$("#historyBtn").click(function(e){
 		e.preventDefault();
 		if($("input[name='ano']").val()==""){
@@ -21,8 +17,6 @@ $(function(){
 		console.log("버튼눌림");
 
 		
-		
-		
 		$("#historyList").html("");
 		$.ajax({
 			url: "/member/useraccount/depositList/customer_get_history",
@@ -31,7 +25,6 @@ $(function(){
             {   
 				xhr.setRequestHeader(hn, tk);
             },
-			
 			
 			data : {
 				ano : $("input[name='ano']").val(),

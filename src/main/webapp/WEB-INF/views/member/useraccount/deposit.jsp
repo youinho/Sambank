@@ -370,5 +370,5 @@ aside {
 </html>
 
 <%@include file="../../includes/footer_Main.jsp" %>
-<script src="/resources/js/member/customer/customer_anolist.js"></script>
+<script src="/resources/js/member/customer/customer_anolist_deposit.js"></script>
 <script src="/resources/js/member/customer/customer_transfer.js"></script>

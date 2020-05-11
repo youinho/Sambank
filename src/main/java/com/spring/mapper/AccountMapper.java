@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.spring.domain.Customer_delete_requestVO;
 import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historySumVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
 
@@ -35,6 +36,8 @@ public interface AccountMapper {
 	public int create_customer_D_request(Customer_delete_requestVO vo);
 	public DepositVO check_ano(String ano);
 	
+	public Deposit_historySumVO sum_deposit_withdrawal(String ano);	//입금액 합
+//	public long sum_withdrawal(String ano);	//출금액 합
 	public int deposit_hist(Deposit_historyVO vo);
 	public int withdraw_hist(Deposit_historyVO vo);
 	public int updateBalance_after(Deposit_historyVO vo);

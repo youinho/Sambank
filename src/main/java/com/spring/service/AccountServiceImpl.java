@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.domain.Customer_delete_requestVO;
 import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
+import com.spring.domain.Deposit_historySumVO;
 import com.spring.mapper.AccountMapper;
 
 @Service
@@ -57,6 +58,14 @@ public class AccountServiceImpl implements AccountService {
 	public boolean create_customer_D_request(Customer_delete_requestVO vo) {
 		return mapper.create_customer_D_request(vo)==1;
 	}
+
+	@Override
+	public Deposit_historySumVO sum_deposit_withdrawal(String ano) {
+		// TODO Auto-generated method stub
+		return mapper.sum_deposit_withdrawal(ano);
+	}
+
+	
 	
 	
 }
