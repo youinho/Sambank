@@ -22,13 +22,16 @@ footer{
 .footer-inner.set-pc {
     text-align: center;
 }
+p.quick a {
+	color: black;
+}
 div[id^='idCard']{
 	z-index:2147483647;
 	position:fixed;
 	right:-1000px;
 	bottom:50px;
-	max-width:450px;
-	width:450px;
+	max-width:480px;
+	width:480px;
 	height:220px;
 }
 /* html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
@@ -84,12 +87,14 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                      </p>
                      <p class="copyright">본사 위치 : 서울특별시 노원구 동일로 1082 KT대우직업능력개발원 (주)SB은행</p>
                      <a href="" >담당자 이메일 : admin@sambank.net</a>
-                     <select id="select_idCard">
+                     <br /><br />
+                     
+                     <select id="select_idCard" style=" margin-left: 70%;">
                          <option value="0">**조 원 소 개**</option>
                          <option value="Y">조장 유 인 호</option>
                          <option value="K">조원 김 동 혁</option>
                          <option value="L">조원 이 다 형</option>
-                         <option value="P">조원 박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
+                         <option value="P">조원 박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
                      </select>
                  </div> <!-- info END -->
                  <br/>
@@ -118,9 +123,9 @@ $(function(){
 				name = "<small>조원</small> <strong style='font-size:1.2em'>김 동 혁</strong>"
 				work = "<strong>담당업무</strong><br><br>관리자 페이지 <br>고객 페이지(게시판 및 문의)<br>보안(SpringSecurity, 로그인 및 가입 등)<br> AWS 웹서버 구현<br>"
 			}else if(id==="Y"){
-				img = "/resources/img/umb.gif";
+				img = "/resources/img/you.jpg";
 				name = "<small>조장</small> <strong style='font-size:1.2em'>유 인 호</strong>"
-				work = "<strong>담당업무</strong><br><br>유인호-담당업무"
+				work = "<strong>담당업무</strong><br><br>프로젝트 기획 및 설계<br>GitHub 관리<br>사용자 화면 구현<br>PPT제작 및 발표"
 			}else if(id==="P"){
 				img = "/resources/img/umb.gif";
 				name = "<small>조원</small> <strong style='font-size:1.2em'>박   훈</strong>"
