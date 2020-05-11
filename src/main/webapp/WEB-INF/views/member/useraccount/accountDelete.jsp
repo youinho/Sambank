@@ -64,70 +64,7 @@ aside {
 <title>SamBank 개인뱅킹-계좌조회 </title>
 </head>
 <body>
-	<div id="title_imageo" style="margin-left: 3%">  
-	  <strong><img src="/resources/SB_files/title logo.png" alt="로고 이미지"></strong>
-	  <a class="navbar-brand" src="/resources/SB_files/title logo.png" href="#"></a>
-	</div>
 	
-	<br />
-	
-	
-	
-    <div class="tag_var">
-    <!--  -->
-      <nav class="navbar navbar-expand-lg navbar-light"style="background-color: #666633;">
-        <div class="collapse navbar-collapse" id="navbarnav">
-      		<!-- Example split danger button -->
-				<div class="btn-group">
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">공지사항</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">보안센터</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">자료실</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">새소식</a></button>
-				<button type="button" class="btn btn" role="button" style="margin-left: 15px;" ><a href="">이벤트</a></button>
-				  <!-- 2 -->
-				  <div class="btn-group" style="margin-left: 25px;">
-					  <button type="button" class="btn btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    문의 사항
-					  </button>
-					  <div class="dropdown-menu">
-					    <a class="dropdown-item" href="#">문의사항</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">문의사항 작성</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">문의사항 취소</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">1:1 비공개 문의사항</a>
-					  </div>
-					</div>
-				  <!-- 3 -->
-				  <div class="btn-group" style="margin-left: 25px;">
-					  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    카드 관련
-					  </button>
-					  <div class="dropdown-menu">
-					    <a class="dropdown-item" href="#">카드 신청</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">카드 취소</a>
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href="#">카드 결과 확인</a>
-					  </div>
-					</div>
-
-
-				</div>
-     	 </div>
-      
-      
-      
-      
-
-      </nav>
-      <!--nav영역 종료-->
-     </div>
-     
-     
-     
-     
      
      
      <aside>
@@ -219,9 +156,9 @@ aside {
   <tbody>
   	 <tr>
     <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
-    <td style="vertical-align: middle; text-align: center;" colspan="5">
-     <select name="account" id="account"  class="form-control" >
-  		<option value="계좌선택">계좌선택</option>
+    <td style="vertical-align: middle; text-align: center;" colspan="10">
+     <select name="account" id="account"  class="form-control" placeholder="입금 금액">
+   		<option value="계좌선택" hidden>계좌선택</option>	
       <c:forEach items="${list }" var="vo">
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
       </c:forEach>
@@ -270,7 +207,7 @@ aside {
     
     <tr>
       <th colspan="1" style="vertical-align: middle; text-align: center; ">비밀번호 입력</th>
-      <td colspan="4"><div class="input-group" style="width:100%">
+      <td colspan="10"><div class="input-group" style="width:39%">
 			  <input type="password" class="form-control valid" name="password" id="password" readonly="" aria-invalid="false">
 			    <button class="btn btn-outline-secondary" type="button" id="passwordBtn">
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
