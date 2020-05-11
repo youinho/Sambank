@@ -138,7 +138,7 @@ main{
 
     <td style="vertical-align: middle; text-align: center;" colspan="10">
      <select name="account" id="account"  class="form-control" placeholder="입금 금액">
-   		<option value="계좌선택" hidden>계좌선택</option>	
+   		<option value="계좌선택" hidden>계좌 선택</option>	
       <c:forEach items="${list }" var="vo">
 
       	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
@@ -202,9 +202,11 @@ main{
       
    <tr>
     <td colspan="10">
+    
     <input type="submit" class="btn btn-primary" id="submitBtn" value="신청">
    	<sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
+    
     </td>
    </tr>
     </tbody>

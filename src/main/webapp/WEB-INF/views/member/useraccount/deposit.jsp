@@ -115,7 +115,7 @@ main{
 
 		<div class="mb-3">
 			<div class="label d-flex justify-content-between">
-			<select name="account" id="account"  class="form-control" placeholder="입금 금액">
+			<select name="account" id="account"  class="form-control" placeholder="계좌선택" style="margin: 0%">
    				<option value="계좌선택" hidden>계좌선택</option>	
     			  <c:forEach items="${list }" var="vo">
 
@@ -123,17 +123,19 @@ main{
      			 </c:forEach>
     		 </select>
  		</div>
- 		<div class="label d-flex justify-content-between">
-			    	<p class="input-group-text" style="width:20%"><strong>선택 계좌</strong> </p>
-			    	  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" >
-			   	    <p class="input-group-text" style="width:20%"><strong>잔액</strong> </p>  
-					 <input type="text" class="form-control valid" name="balance_rest" id="balance_rest"  readonly>
-
+ 		<div class="d-flex mt-3">
+ 			<div class="d-flex justify-content-between col-6" style="width:100%">
+				<div class="input-group-text" style="width:30%"><strong>선택 계좌</strong> </div>
+			    	<input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" >
+			</div>
+			<div class="d-flex justify-content-between col-6"  style="width:100%;">
+			   	<div class="input-group-text justify-content-center" style="width:30%;"><strong>잔액</strong></div>
+					<input type="text" class="form-control valid" name="balance_rest" id="balance_rest"  readonly style="text-align: right;">
+			</div>
+		</div>
 					  <input type="hidden"  class="form-control" id="balance" name="balance" >		
-      				</div>
 			</div>
         </div>
-     </div>
 			    		
 		
 				

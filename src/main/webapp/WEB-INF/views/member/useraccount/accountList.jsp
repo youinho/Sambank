@@ -166,8 +166,6 @@ main{
         </div>
 		<hr class="mb-4">
       
-        <input type="hidden" name="_csrf" value="">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">문의??</button>
       </form>
     </div>
     <div class="bottom">

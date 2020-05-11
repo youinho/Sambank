@@ -118,10 +118,10 @@ main{
    </tr>
    
    <tr>
-    <th style="vertical-align: middle; text-align: center;" >주소</th>
+    <th style="vertical-align: middle; text-align:center;" >주소</th>
     <td colspan="7"><div class="mb-3">
          <div class="label">
-          <label for="address"></label><button class="btn btn-outline-primary btn-sm" id="search_juso">주소 검색</button>
+          <label for="address"></label><button class="btn btn-outline-primary btn-sm pull-left mb-1" id="search_juso">주소 검색</button>
           <small name="address">
             
           </small>
@@ -179,12 +179,14 @@ main{
    
    <tr>
     <td colspan="10">
+   
     <input type="submit" class="btn btn-primary" id="submitID" value="신청">
     <sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
-  
+  	
     </td>
    </tr>
+   
     </tbody>
    
   </table>

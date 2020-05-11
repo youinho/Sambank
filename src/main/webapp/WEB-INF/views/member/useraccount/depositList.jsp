@@ -109,11 +109,11 @@ main{
     		 </select>
  		</div>
  		
-  		    <div class="input-group" style="width:100%">
+  		    <div class="input-group col-12 mt-3" style="width:100%">
 			    <p class="input-group-text" style="width:20%"><strong>선택 계좌</strong> </p>
 			  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" aria-invalid="false">
 			  </div>
-			<div class="input-group" style="width:100%">
+			<div class="input-group mt-3" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:45%">
 			    <p class="input-group-text" style="width:40%"><strong>잔액</strong> </p>
 			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false">
@@ -166,21 +166,21 @@ main{
         </div>
 		<hr class="mb-3">
 		<div class="input-group" style="width:100%">
-			  <div class="input-group-prepend col-4" style="width:30%">
+			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>입금</strong> </p>
 			  <input type="text" class="form-control valid" name="balance" id="balance" readonly="" aria-invalid="false" placeholder="총 입금금액">
 			   
 			  </div>
-			  <div class="input-group-prepend col-4" style="width:30%">
+			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>출금</strong> </p>
 			  <input type="text" class="form-control valid" name="balance" id="balance" readonly="" aria-invalid="false" placeholder="총 출금금액">
 			   
 			  </div>
-			  <div class="input-group-prepend col-4" style="width:30%">
+			 <!--  <div class="input-group-prepend col-4" style="width:30%">
   			    <p class="input-group-text" style="width:40%"><strong>이체</strong> </p>
 			  <input type="text" class="form-control valid" name="maxBalance" id="maxBalance" readonly="" placeholder="총 이체건수">
 			  
-			  </div>
+			  </div> -->
 			  <div class="input-group-append">
 			  </div>
 			</div>     
