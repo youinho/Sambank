@@ -654,9 +654,6 @@ alter table cardtbl add(branch nvarchar2(100));
 update cardtbl set request=0;
 commit;
 
-select * from (select cardtbl.*, rownum rn from cardtbl
-		where request=1 
-		order by createdate asc) a
-        where a.rn < 50;
+select * from cardtbl order by createdate desc;
 
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
