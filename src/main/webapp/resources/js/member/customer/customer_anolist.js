@@ -1,12 +1,15 @@
 
 $(function(){
-	$("#ano-list").on("click",".account-item" ,function(){
+	$(document).ready(function(){
+		$('select[name=account]').click(function(e) {
+			e.preventDefault();
+			var ano = $(this).val();
 		
 //		$("input[name='ano']").val("");
 //		$("input[name='max_withdraw']").val("");
 //		$("input[name='balance']").val("");
 //		console.log("aaaaa");
-		var ano = $(this).text();
+		
 		
 		$.ajax({
 			url:"/member/useraccount/get_depositInfo",
@@ -32,7 +35,7 @@ $(function(){
 		
 		
 		
-		
+		})		
 		
 	})
 
