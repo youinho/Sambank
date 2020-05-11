@@ -22,27 +22,38 @@ footer{
 .footer-inner.set-pc {
     text-align: center;
 }
+div[id^='idCard']{
+	z-index:2147483647;
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	max-width:450px;
+	width:450px;
+	height:220px;
+}
 /* html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, strong, sub, sup, var,
 h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Dotum,AppleGothic,Tahoma,Helvetica,sans-serif;} */
     </style>
    </head>
-	<footer> 
-	<div class="toast d-inline-flex justify-content-start" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="idCard_Y" style="z-index:2147483647;position:fixed;right:50px;bottom:50px;width:400px;height:220px">         
-		  <div class="toast-header">
-		    <!-- <img src="" class="rounded mr-2" alt="..."> -->
-		    
-		    <img src='/resources/img/umb.gif' alt='profile_image' style='width:100px;height:100px;padding-right:10px;padding-left:5px'>
-		    
-		  </div>
-		  <div class="toast-body">
-		    Hello, world! This is a toast message.
-		  </div>
-		  <div style="height:100%">
-			  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-			      <span aria-hidden="true">&times;</span>
-			  </button>
-		  </div>
-		</div>
+	<footer>
+	<!-- 조원소개 카드 -->
+	<div class="toast d-inline-flex justify-content-start idCard" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false" data-delay="15000" id="idCard">
+	  <div class="toast-header d-flex flex-column justify-content-around" >
+	    <div style="margin:0" >
+	    	<img src='/resources/img/kimdom.jpg' alt='profile_image' style='width:130px;height:130px;padding-right:10px;padding-left:5px' id="card_img">
+	    </div>
+	    <div style="margin:0;padding:0" id="card_name"></div>
+	    
+	  </div>
+	  <div class="toast-body" id="card_work" style="width:360px">
+	    	  
+	  </div>
+	  <div style="height:100%">
+		  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+		      <span aria-hidden="true">&times;</span>
+		  </button>
+	  </div>
+	</div>
 	<div class="line" style="text-align: center;">
 			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
 			    <div class="col"></div>
@@ -72,18 +83,19 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
                          <a href="">사이트맵</a>
                      </p>
                      <p class="copyright">본사 위치 : 서울특별시 노원구 동일로 1082 KT대우직업능력개발원 (주)SB카드</p>
-                     <a href="" >담당자 이메일 : youinho@github.com</a>
+                     <a href="" >담당자 이메일 : admin@sambank.net</a>
+                     <select id="select_idCard">
+                         <option value="0">**조 원 소 개**</option>
+                         <option value="Y">조장 유 인 호</option>
+                         <option value="K">조원 김 동 혁</option>
+                         <option value="L">조원 이 다 형</option>
+                         <option value="P">조원 박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
+                     </select>
                  </div> <!-- info END -->
                  <br/>
                      <!-- onchange="if(this.value) location.href=(this.value);" -->
                   <!-- <div class="select_team" style="float:right; background-color: #acaeb9;" > -->
-                     <select id="select_idCard">
-                         <option value="0">조 원 소 개</option>
-                         <option value="Y">유 인 호 </option>
-                         <option value="K">김 동 혁</option>
-                         <option value="L">이 다 형</option>
-                         <option value="P">박&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;훈 </option>
-                     </select>
+                     
                   <!-- </div> --> 
               </div>
          </div> <!-- footer END -->
@@ -92,15 +104,49 @@ h1, h2, h3, h4, h5, h6 {font-family:'맑은 고딕', 'Malgun Gothic','돋움',Do
 <script>
 $(function(){
 	$("#select_idCard").change(function(){
-		if($(this).val()==="0"){
+		let id = $(this).val();
+		if(id==="0"){
 			$("#idCard").toast('hide');
 			return false;
 		}else{
-			$("#idCard_Y").toast('show');
+			$("#idCard").toast('hide');
+			let img = "";
+			let name = "";
+			let work = "";
+			if(id==="K"){
+				img = "/resources/img/kimdom.jpg";
+				name = "<small>조원</small> <strong style='font-size:1.2em'>김 동 혁</strong>"
+				work = "<strong>담당업무</strong><br><br>관리자 페이지 <br>고객 페이지(게시판 및 문의)<br>보안(SpringSecurity, 로그인 및 가입 등)<br> AWS 웹서버 구현<br>"
+			}else if(id==="Y"){
+				img = "/resources/img/umb.gif";
+				name = "<small>조장</small> <strong style='font-size:1.2em'>유 인 호</strong>"
+				work = "<strong>담당업무</strong><br><br>유인호-담당업무"
+			}else if(id==="P"){
+				img = "/resources/img/umb.gif";
+				name = "<small>조원</small> <strong style='font-size:1.2em'>박   훈</strong>"
+				work = "<strong>담당업무</strong><br><br>박 훈-담당업무"
+			}else if(id==="L"){
+				img = "/resources/img/umb.gif";
+				name = "<small>조원</small> <strong style='font-size:1.2em'>이 다 형</strong>"
+				work = "<strong>담당업무</strong><br><br>이다형-담당업무"
+			}
+			
+			
+			
+			
+			
+			$("#card_img").attr("src", img);
+			$("#card_name").html(name);
+			$("#card_work").html(work);
+			
+			$("#idCard").toast('show');
 			console.log("ggggg");
 		}
 		
 		
+	})
+	$(".close").click(function(){
+		$("#idCard").toast('hide');
 	})
 })
 </script>

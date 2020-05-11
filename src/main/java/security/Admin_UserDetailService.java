@@ -20,7 +20,7 @@ public class Admin_UserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Admin_UserDetails user = adminService.security_get_admin(username);
-		log.info("User Detail Service !");
+		
 		if(user==null) {
 			throw new UsernameNotFoundException(username);
 		}

@@ -32,7 +32,7 @@ public class UploadController {
 	public ResponseEntity<Resource> download(String fileName,@RequestHeader("user-Agent")String userAgent){
 		log.info("파일 다운로드 "+fileName);
 		fileName="1.txt";
-		Resource resource = new FileSystemResource("c:\\upload\\"+fileName);
+		Resource resource = new FileSystemResource("/home/ec2-user/upload/"+fileName);
 		
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);

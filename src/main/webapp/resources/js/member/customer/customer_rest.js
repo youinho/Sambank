@@ -7,7 +7,7 @@ $(function(){
 //		$("input[name='balance']").val("");
 //		console.log("aaaaa");
 		var ano = $(this).text();
-		
+		let form = $("#withdrawForm");
 		$.ajax({
 			url:"/member/useraccount/get_depositInfo",
 			type : "post",
@@ -26,6 +26,7 @@ $(function(){
 				$("input[name='max_withdraw']").val(vo.max_withdraw);
 				$("input[name='balance_rest']").val(viewRest(String(vo.balance)));
 				$("input[name='balance']").val(vo.balance);
+				
 			}
 		})
 		
@@ -78,9 +79,9 @@ $(function(){
 //		
 //		
 //	})
-//	
-//	
-//	
+	
+	
+	
 	
 
 	

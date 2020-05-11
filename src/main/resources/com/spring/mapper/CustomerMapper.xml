@@ -11,7 +11,7 @@
 	
 <!-- id로 고객정보 -->
 	<select id="select_by_id" resultType="com.spring.domain.CustomerVO">
-		select cno, name, eng_name, gender, birth, address, mobile, id, email, enabled from customertbl
+		select cno, name, eng_name, gender, birth, address, mobile, id, email, enabled, verified, sendcount from customertbl
 		where id=#{id}
 	</select>
 	
@@ -123,5 +123,34 @@
 			where unlockdate < sysdate
 		]]>
 	</select>
+
+
+	<update id="insert_verifyKey">
+		update customertbl set verifyKey=#{verifyKey}
+		where id=#{id}
+	</update>
+	
+	<update id="set_verified">
+		update customertbl set verified=1, verifyKey=''
+		where id=#{id} and verifyKey=#{verifyKey}
+	</update>
+
+	<update id="reset_sendCount">
+		update customertbl set sendcount=0
+		where sendcount>0
+	</update>
+	
+	<update id="update_sendCount">
+		update customertbl set sendcount=sendcount+1
+		where id=#{id}
+	</update>
+
+
+	<!-- 고객정보 삭제 -->
+	<delete id="delete_by_id">
+		delete from customertbl
+		where id=#{id}
+	</delete>
+	
 
 </mapper>

@@ -78,7 +78,7 @@ public interface AdminService {
 	public boolean check_deposit_password(DepositVO vo);
 	public boolean delete_deposit(DepositVO vo);
 	
-	
+	public boolean send_verify_mail(CustomerVO vo);
 	
 	
 	//notice

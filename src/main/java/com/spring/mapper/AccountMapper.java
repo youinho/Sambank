@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.spring.domain.Customer_delete_requestVO;
+import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
 import com.spring.domain.ProductVO;
@@ -23,7 +25,14 @@ public interface AccountMapper {
 	public String get_password(String ano);
 	public int delete(DepositVO vo);
 	public long get_balance(String ano);		//금액은 long으로 할것
+	public long cno_sumBalance(int cno); //cno로 전체 금액가져오기
 	public String get_cno(String id);	//id로 cno가져오기
+	public Customer_delete_requestVO ano_deposit_customer(String ano);
+	//계좌삭제페이지사용 ano로 depost,customer
+																				
+	public List<DepositVO> cno_deposit(int cno);
+	public int create_customer_request(Customer_requestVO vo);
+	public int create_customer_D_request(Customer_delete_requestVO vo);
 	public DepositVO check_ano(String ano);
 	
 	public int deposit_hist(Deposit_historyVO vo);

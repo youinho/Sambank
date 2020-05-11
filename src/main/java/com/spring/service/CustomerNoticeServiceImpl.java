@@ -88,9 +88,9 @@ public class CustomerNoticeServiceImpl implements CustomerNoticeService {
 		boolean modifyresult = noticeMapper.update(vo)==1;
 		
 		
+		noticeMapper.deleteAllFiles(vo.getNotice_bno());
 		if(vo.getAttachList() != null) {
 			if(modifyresult && vo.getAttachList().size() > 0) {
-				noticeMapper.deleteAllFiles(vo.getNotice_bno());
 				for(AttachFileDTO dto : vo.getAttachList()) {
 					dto.setNotice_bno(vo.getNotice_bno());
 					noticeMapper.insertFile(dto);

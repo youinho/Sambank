@@ -23,10 +23,10 @@ public class Customer_UserDetails implements UserDetails {
 	private Date updatedate;
 	private String authority;
 	private String confirm_password;
-	
-	
+	private String verifyKey;
+	private int verified;
 	private int failed_login_count;
-	
+	private int sendCount;
 	private int enabled;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,7 +56,7 @@ public class Customer_UserDetails implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 		
-		return true;
+		return verified==1;
 	}
 
 	@Override

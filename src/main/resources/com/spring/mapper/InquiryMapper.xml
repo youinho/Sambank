@@ -75,7 +75,7 @@
 	<update id="set_expired">
 		<![CDATA[
 			update customer_inquiry set expired=1
-			where expdate < sysdate
+			where expdate < sysdate and expired=0
 		]]>
 	</update>
 	

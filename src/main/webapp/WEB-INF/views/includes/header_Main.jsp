@@ -39,7 +39,8 @@ main{
 	border: 1px solid white;
 }
 aside {
-    width: 340px;
+    min-width:240px;
+    width: 20%;
     color: #ffff;
     /* padding: 10px; */
     /* margin: 10px; */
@@ -133,10 +134,10 @@ let tk = "${_csrf.token}"
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item active">
-					  <a class="nav-link" href="/register/step1">회원가입</a>
+					  <a class="nav-link" href="/register/agree">회원가입</a>
 					</li>
 					<li class="nav-item active">
-					  <a class="nav-link" href="/member/login_test">로그인</a>
+					  <a class="nav-link" href="/member/login">로그인</a>
 					</li>
 				</sec:authorize>
 				      </li>

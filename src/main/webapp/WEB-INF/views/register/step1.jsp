@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@include file="../includes/header_Main.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +10,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 <style>
-	#textarea1{
-		font-family: 'Noto Sans KR', sans-serif;
-		font-size:14px;
-	}
+#textarea1{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:14px;
+}
+main{
+/* <img src="/resources/SB_files/pull-1.png" style="position: fixed;bottom: 10px; right:10px"/> */
+background-image: url("/resources/SB_files/pull-1.png");
+background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
+background-position: bottom right; /* 수평 : left,center,right  수직 : top, center, bottom */
+}
 </style>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -19,17 +27,21 @@
   crossorigin="anonymous"></script>
 <script>
 $(function(){
-	let check=${check};
-	if(!check){
+	$("aside").remove();
+	let check="${check}";
+	if(check==="false"){
 		alert("약관에 동의를 해 주세요");
 		return;
 	}
+	
+	
+	
 })
 </script>
 </head>
 <body>
 <div class="container">
-<form action="step2" method="post">	
+<form action="register" method="post">	
 	<div class="form-group">
 	    <label for="textarea1" id="textarea1" style="font-size:18px;">회원가입약관</label>
 	    <textarea class="form-control" id="textarea1" rows="20">
@@ -166,6 +178,7 @@ $(function(){
 <input type="checkbox" name="agree" value="true"> 약관동의
 </label>
 <input type="submit" class="btn btn-primary btn-sm" value="다음단계">
+<sec:csrfInput/>
 </form>	
 </div>
 </body>

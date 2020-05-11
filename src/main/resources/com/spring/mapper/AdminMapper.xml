@@ -117,7 +117,6 @@
 	
 	
 	
-	
 	<update id="update_login_failure_count">
 		update admintbl set failed_login_count=failed_login_count+1
 		where id=#{id}
@@ -135,20 +134,23 @@
 		where id=#{id}
 	</update>
 	
-	
-	
-	
-	
 	<!-- 관리자 권한 불러오기 -->
 	<select id="get_group_authority" resultType="com.spring.domain.AdminVO">
 		select g.id, g.group_name, ga.authority from admin_groups g, admin_group_members gm, admin_group_authorities ga where gm.id = #{id} and g.id = ga.group_id and g.id = gm.group_id
 	</select>
-	
+
 	<select id="get_authority" resultType="com.spring.domain.AdminVO">
 		select id, authority from admin_authorities where id = #{id}
 	</select>
-	
+
 	<select id="security_get_admin" resultType="security.Admin_UserDetails">
 		select * from admintbl where id = #{id}
 	</select>
+	
+	
+	
+	
+	
+	
+	
 </mapper>

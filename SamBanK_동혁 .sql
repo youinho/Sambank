@@ -1,4 +1,5 @@
 
+
 -- 추가
 
 insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
@@ -303,8 +304,6 @@ select * from (select * from customer_inquiry
 where rownum<10;
 select substr(authority, 6) from admin_group_authorities;
 
-select * from logtbl order by log_no desc;
-
 select group_id from admin_group_members where id='sam';
 
 select * from 
@@ -534,7 +533,7 @@ create table locked_customer(
     id nvarchar2(20) not null references customertbl(id) on delete cascade,
     unlockdate date default sysdate+1
 );
-    
+select * from logtbl order by remote_addr desc;
 insert into locked_customer(id) values('sam');
 select * from locked_customer;
 (select * from admintbl where name like '%'||''||'%' and branch like '%'||''||'%' and id like '%'||''||'%') ad ;
@@ -609,4 +608,48 @@ select * from customer_inquiry where inquiry_no=25;
 select * from customer_inquiry
 		where expired=0 and answer_id is null
 		order by updatedate asc;
+        
+select * from logtbl order by log_no desc;
+select * from customertbl where id='rlaehdgur1';
+select * from logtbl order by log_no desc;
+delete from logtbl;
+commit;
+
+select * from notice_attach order by notice_bno desc;
+
+delete from notice_attach where notice_bno=108;
+rollback;
+select * from logtbl order by log_no;
+delete from logtbl;
+commit;
+
+select * from logtbl order by log_no desc;
+
+select id, to_char(unlockdate, 'YYYY-MM-DD HH24:MI') from locked_customer;
+
+
+select * from producttbl;
+
+alter table customertbl add(verifykey nvarchar2(1000));
+alter table customertbl add(verified number(1));
+alter table customertbl modify(verified number(1) default 0);
+alter table customertbl add(sendcount number(10) default 0);
+
+commit;
+update customertbl set verified=1;
+select * from customertbl order by cno desc;
+
+select * from customer_inquiry where expdate<sysdate;
+
+
+select * from customertbl where id='rlaehdgur115';
+select * from locked_customer;
+
+select * from cardtbl;
+select * from admin_attach;
+delete from admin_attach;
+commit;
+delete from notice_attach;
+commit;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

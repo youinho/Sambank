@@ -113,6 +113,10 @@ $(function(){
 	}	
 	
 	
+	$("#product").change(function() {
+		$("input[name='ano']").val("");
+		
+	})
 	
 })
 

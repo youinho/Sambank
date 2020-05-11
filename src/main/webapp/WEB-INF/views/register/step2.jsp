@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@include file="../includes/header_Main.jsp" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <!-- resources 앞에 / 를 붙일때는 context path가 없는 경우일 때 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -12,7 +14,7 @@
 <script src="/resources/js/member/customer/member_registerCustomer_validate.js"></script>
 <script>
 	$(function(){
-		
+		$("aside").remove();
 		$("input[value='남']").prop("checked", true);
 	
 		
@@ -68,7 +70,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </head>
 <body  style="background-color:#F5F5F5;">
 <div class="container" style="margin-top:40px">
-<form id="register_customer" method="post" action="step3">	
+<form id="register_customer" method="post" action="register2">	
 	<div class="form-group row justify-content-center">
 		<label for="userid" class="col-sm-2 col-form-label">아이디</label>
 		<div class="col-sm-6">			
@@ -151,6 +153,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	    <button type="reset" class="btn btn-secondary">취소</button>		
 	</div>	
 	<input type="hidden" name="gender" value="남" />	
+	<sec:csrfInput/>
 </form>
 </div>
 </body>

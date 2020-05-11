@@ -139,23 +139,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -211,53 +211,61 @@ aside {
       <h4 class="mb-3 title">계좌	삭제 신청</h4>
       	<hr class="mb-4">
       
-      <form class="needs-validation" novalidate="novalidate" method="post" id="register_customer">
+      <form action="" class="needs-validation" novalidate="novalidate" method="post" id="accountDelete">
       
   
    <table class="table table-bordered">
   
   <tbody>
+  	 <tr>
+    <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
+    <td style="vertical-align: middle; text-align: center;" colspan="5">
+     <select name="account" id="account"  class="form-control" >
+  		<option value="계좌선택">계좌선택</option>
+      <c:forEach items="${list }" var="vo">
+      	<option value="${vo.ano }"><c:out value="${vo.ano }"></c:out></option>
+      </c:forEach>
+     </select>
+    </td> 
+     
     <tr>
       <th colspan="1" style="width: 10%; vertical-align: middle; text-align: center; ">성명</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="name" placeholder="예) 홍길동"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="name" name="name" readonly></td>
       <th colspan="1" style="width: 10%; vertical-align: middle; text-align: center; ">생년월일</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" name="birth" placeholder="예) 900101"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="birth" name="birth" readonly></td>
     </tr>
    
    
    
          
-   <tr>
-    <th colspan="1" style="vertical-align: middle; text-align: center;">계좌 종류</th>
-    <td colspan="2" style="vertical-align: middle; text-align: center;">
-     <select name="account" class="form-control">
-      <option value="1">예금계좌</option>
-      <option value="2">적금계좌</option>
-      <option value="3">대출계좌</option>
-     </select>
-    </td>  
+  
    
 
    
     <th colspan="2" style="vertical-align: middle; text-align: center;">상품</th>
-    <td colspan="5" style="vertical-align: middle; text-align: center;">
-    <input type="checkbox"  name="product1" value="SamBanK-부자">SamBanK-부자 &nbsp;
-    <input type="checkbox"  name="product2" value="SamBanK-갑부">SamBanK-갑부 &nbsp;
-    <input type="checkbox"  name="product3" value="SamBanK-금돼지">SamBanK-금돼지 &nbsp;
-    </td>  
+      <td colspan="3" style="vertical-align: middle; text-align: center;">
+      <input type="text" class="form-control" id="type_text" name="type_text" readonly>
+    	<input type="hidden" id="type" name="type">
+    	</td>
+    <td colspan="3" style="vertical-align: middle; text-align: center;">
+	    <input type="text" class="form-control" name="p_name" readonly>
+	    <input type="hidden" id="product" name="product">
+     </td>  
    </tr>
    
    <tr>
     <th colspan="1" style="vertical-align: middle; text-align: center;" >계좌번호</th>
-    <td colspan="9"><input type="account-number" class="form-control" name="" placeholder="예) 계좌번호"></td>  
+    <td colspan="9"><input type="account-number" class="form-control" id="ano" name="ano"readonly></td>  
    </tr>
       
     <tr>
-      <th colspan="1" style="vertical-align: middle; text-align: center; ">계좌정보</th>
-      <td colspan="4"><input type="text" class="form-control" name="name" placeholder="최근 거래일"></td>
+      <th colspan="1" style="vertical-align: middle; text-align: center; ">생성날짜</th>
+      <td colspan="4"><input type="text" class="form-control" id="createDate_text" name="createDate_text" readonly></td>
+    	
       <th colspan="1" style="vertical-align: middle; text-align: center; ">잔여예금</th>
-      <td colspan="4"><input type="text" class="form-control" name="birth" placeholder=""></td>
-    </tr>
+      <td colspan="4"><input type="text" class="form-control" name="balance_text" readonly></td>
+  					  <input type="hidden" class="form-control" name="balance" readonly>
+	  </tr>	
     
     
     <tr>
@@ -271,22 +279,13 @@ aside {
 			    </button>
 			  </div>
 			  </td>
-      <th colspan="1" style="vertical-align: middle; text-align: center; ">비밀번호 확인</th>
-      <td colspan="4"><div class="input-group" style="width:100%">
-				  <input type="password" class="form-control valid" name="password" id="password" readonly="" aria-invalid="false">
-			    <button class="btn btn-outline-secondary" type="button" id="passwordBtn">
-			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"></path>
-					</svg>
-			    </button>
-			  </div>
-			  </td>
     </tr>
     
       
    <tr>
     <td colspan="10">
-    <input type="submit" class="btn btn-primary" value="신청">
+    <input type="submit" class="btn btn-primary" id="submitBtn" value="신청">
+   	<sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
     </td>
    </tr>
@@ -306,24 +305,10 @@ aside {
 </body>
 </html>
 <%@include file="../../includes/footer_Main.jsp" %>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer.js"></script>
+<script src="/resources/js/member/customer/customer_delete_request.js"></script>
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
  -->
  <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({ format: 'L'});
-        $('#datetimepicker2').datetimepicker({
-            format: 'L',
-            useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
-        
-    });
+    
     
 </script>

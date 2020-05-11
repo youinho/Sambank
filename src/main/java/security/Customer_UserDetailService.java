@@ -18,7 +18,7 @@ public class Customer_UserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Customer_UserDetails user = customerService.security_get_customer(username);
-		log.info("User Detail Service !");
+		
 		if(user==null) {
 			throw new UsernameNotFoundException(username);
 		}

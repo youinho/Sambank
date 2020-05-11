@@ -218,8 +218,8 @@ public class UserController {
 			return new ResponseEntity<Resource>(HttpStatus.BAD_REQUEST);
 		}
 		//log.info("data :"+data);
-		String fileName = data.getUploadPath()+"\\"+data.getUuid()+"_"+data.getFileName();
-		Resource resource = new FileSystemResource("c:\\upload_customer\\"+fileName);
+		String fileName = data.getUploadPath()+"/"+data.getUuid()+"_"+data.getFileName();
+		Resource resource = new FileSystemResource("/home/ec2-user/upload_customer/"+fileName);
 		if(!resource.exists()) {
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
 		}
@@ -285,20 +285,20 @@ public class UserController {
 	
 	
 	
-	@GetMapping("/no")
-	public String Notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req ) {
-		
-		
-		model.addAttribute("list", usc.listmap(cri));
-		model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
-		return "/user/Notice/Notice";
-	}
-	
-	@GetMapping("/N-1")
-	public String NEW() {
-		log.info("양식 게시판");	
-		return "N-test1";
-	}
+//	@GetMapping("/no")
+//	public String Notice(@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req ) {
+//		
+//		
+//		model.addAttribute("list", usc.listmap(cri));
+//		model.addAttribute("pageVO",new PageVO(cri, usc.totalRows(cri)));
+//		return "/user/Notice/Notice";
+//	}
+//	
+//	@GetMapping("/N-1")
+//	public String NEW() {
+//		log.info("양식 게시판");	
+//		return "N-test1";
+//	}
 //	@GetMapping("/U-1")
 //	public String User_Set() {
 //		log.info("문의사항 게시판");	

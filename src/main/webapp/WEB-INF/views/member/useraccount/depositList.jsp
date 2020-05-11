@@ -232,12 +232,12 @@ aside {
 			<div class="input-group" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:45%">
 			    <p class="input-group-text" style="width:40%"><strong>잔액</strong> </p>
-			  <input type="text" class="form-control valid" name="balance" id="balance" readonly="ano" aria-invalid="false">
+			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:45%">
   			    <p class="input-group-text" style="width:40%"><strong>출금가능금액</strong> </p>
-			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly="ano" aria-invalid="false">
+			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly aria-invalid="false">
 			  
 			  </div>
 			  <div class="input-group-append">
@@ -329,7 +329,7 @@ aside {
 </div></main>
 
 
-<input type="hidden" name="ano" id="ano" value="${vo.ano}">		
+ <input type="hidden" name="ano" id="ano" value="${vo.ano}">		
 		
         
 <script>
@@ -350,4 +350,3 @@ $(function(){
 <%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/member/customer/customer_anolist.js"></script>
 <script src="/resources/js/member/customer/customer_historyAccount.js"></script>
-<script src="/resources/js/user/account/user_modifyAccount.js"></script>

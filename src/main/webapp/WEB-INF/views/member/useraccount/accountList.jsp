@@ -133,23 +133,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -210,29 +210,37 @@ aside {
        	 <div class="label d-flex justify-content-between">
        	  <div class="col-12" style="margin-right: auto; position: relative; font-weight: bold; font-size: 20px;">
 	          <label for="balance">자산</label>
-	          <label for="total-balance" style="float: right; color:#336633;">가지고 있는 총 금액 원</label>
+	          <label for="total-balance" style="float: right; color:#336633;"><fmt:formatNumber value="${sumBalance }" type="currency"/> </label>
           </div>
           
          </div>
          
-	<hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
+	
+		<hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
 		<div class="mb-3">
+		
 		<div class="label d-flex justify-content-between">
        	  <div class="col-12" style="width: 100%; background-color:#FBFBFB; font-weight: bold;">
 	          <label for="deposit">입출금</label>
           </div>
         </div>
+        <c:forEach items="${list }" var="vo">
+        <c:set var="type" value="${vo.type }"/>
+		<c:if test="${type == 1 }">
         <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
-	          <label for="balance">xx 통장</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+	          <label for="balance">입출금</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
-	          <label for="balance">통장 번호</label>
-	          <label for="total-balance" style="float: right;">통장상품명</label>
+	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>
+	          <label for="total-balance" style="float: right;"><c:out value="${vo.p_name }"></c:out></label>
         	</div>
+        	</c:if>
+        	</c:forEach>
         </div>
+        
 		<hr class="mb-4">
-		↑이런식으로 리스트
+		
 		<hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
 		<div class="mb-3">
 		<div class="label d-flex justify-content-between">
@@ -240,35 +248,45 @@ aside {
 	          <label for="deposit">적금</label>
           </div>
         </div>
-        <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
-	          <label for="balance">xx 통장</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+        <c:forEach items="${list }" var="vo">
+        <c:set var="type" value="${vo.type }"/>
+		<c:if test="${type == 2 }">
+       <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
+	          <label for="balance">적금</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
-	          <label for="balance">통장 번호</label>
-	          <label for="total-balance" style="float: right;">통장상품명</label>
+	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>
+	          <label for="total-balance" style="float: right;"><c:out value="${vo.p_name}"></c:out></label>
         	</div>
+        	</c:if>
+        	</c:forEach>
         </div>
 		<hr class="mb-4">
-        ↑이것도 이런식으로 리스트
+       
         <hr class="mb-0" style="border: 0; height: 3px; background: #E5E5E5;">
 		<div class="mb-3">
 		<div class="label d-flex justify-content-between">
        	  <div class="col-12" style="width: 100%; background-color:#FBFBFB; font-weight: bold;">
-	          <label for="deposit">대출?</label>
+	          <label for="deposit">대출</label>
           </div>
         </div>
+        <c:forEach items="${list }" var="vo">
+        <c:set var="type" value="${vo.type }"/>
+		<c:if test="${type == 3 }">
         <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
-	          <label for="balance">xx 통장</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;">통장 잔액 원</label>
+	          <label for="balance">대출</label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
-	          <label for="balance">통장 번호</label>
-	          <label for="total-balance" style="float: right;">통장상품명</label>
+	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>
+	          <label for="total-balance" style="float: right;"><c:out value="${vo.p_name}"></c:out></label>
         	</div>
+        	</c:if>
+        	</c:forEach>
         </div>
 		<hr class="mb-4">
-        ↑이것도 이런식으로 리스트
+      
         <input type="hidden" name="_csrf" value="">
         <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">문의??</button>
       </form>
@@ -278,7 +296,12 @@ aside {
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script> -->
 </div></main>
 
+<script>
+function viewRest(restNumber) {
+	return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+}
 
+</script>
 		
 		
         

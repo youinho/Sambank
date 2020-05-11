@@ -104,7 +104,7 @@ $(function(){
 		let date = new Date();
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 
-		alert("오늘 버튼을 누르셨습니다.");
+//		alert("오늘 버튼을 누르셨습니다.");
 	})
 	
 	$("#week").button().on("click", function() {
@@ -112,7 +112,7 @@ $(function(){
 		date.setDate(date.getDate()-6);
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 		
-		alert("이번주 버튼을 누르셨습니다.");
+//		alert("이번주 버튼을 누르셨습니다.");
 	})
 	
 	$("#1-month").button().on("click", function() {
@@ -121,7 +121,7 @@ $(function(){
 		date.setDate(date.getDate()+1);
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 
-		alert("한달전 버튼을 누르셨습니다.");
+//		alert("한달전 버튼을 누르셨습니다.");
 	})
 	
 	$("#3-month").button().on("click", function() {
@@ -130,7 +130,7 @@ $(function(){
 		date.setDate(date.getDate()+1);
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 
-		alert("세달전 버튼을 누르셨습니다.");
+//		alert("세달전 버튼을 누르셨습니다.");
 	})
 	
 	$("#6-month").button().on("click", function() {
@@ -139,7 +139,7 @@ $(function(){
 		date.setDate(date.getDate()+1);
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 
-		alert("육개월전 버튼을 누르셨습니다.");
+//		alert("육개월전 버튼을 누르셨습니다.");
 	})
 	
 	$("#12-month").button().on("click", function() {
@@ -148,7 +148,7 @@ $(function(){
 		date.setDate(date.getDate()+1);
 		$("input[name='start_date']").val(date.toISOString().slice(0, 10));
 
-		alert("1년전 버튼을 누르셨습니다.");
+//		alert("1년전 버튼을 누르셨습니다.");
 	})
 	
 	

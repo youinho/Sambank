@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 $(function(){
-	$("#withdraw").addClass("active");
+	$("#deposit").addClass("active");
 })
 function alert_success(){
 	let success = "${success}";
@@ -151,23 +151,23 @@ aside {
      	</li>
      	<div class="aside_content">
      	 	<li>     	
-	     	<a href="/deposit">계좌이체</a>
+	     	<a href="deposit">계좌이체</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>
-	     	<a href="/depositList">입출금내역</a>
+	     	<a href="depositList">입출금내역</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>      	
-	     	<a href="/accountList">계좌조회</a>
+	     	<a href="accountList">계좌조회</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountCreate">계좌신청</a>
+	     	<a href="accountCreate">계좌신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
 	     	<li>     	
-	     	<a href="/accountDelete">계좌삭제신청</a>
+	     	<a href="accountDelete">계좌삭제신청</a>
 	     	<div class="dropdown-divider"></div>
 	     	</li>
      	</div>
@@ -214,7 +214,7 @@ aside {
 	
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
-<script src="/resources/js/user/account/user_registerCustomer_validate.js"></script>
+
 <script>
 
 </script>
@@ -222,7 +222,7 @@ aside {
 	<div class="col-md-9 order-md-1">
       <h4 class="mb-3 title">계좌	 이체</h4>
 	<hr class="mb-4">
-      <form action="" class="needs-validation" novalidate="novalidate" method="post" id="withdrawForm">
+      <form action="" class="needs-validation" novalidate="novalidate" method="post" id="depositForm" >
       
         <div class="mb-3">
        	 <div class="label d-flex justify-content-between">
@@ -235,13 +235,15 @@ aside {
 			<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="total" name="total" style="width:100%">보유 계좌</button>
 			    <div class="dropdown-menu" id="ano-list">
 			    	<c:forEach items="${list }" var="vo">
-			    		<a class='dropdown-item account-item'  href='#'><c:out value="${vo.ano}"></c:out> </a>
+			    		<a class='dropdown-item account-item' style="width:100%" href='#'><c:out value="${vo.ano}"></c:out> </a>
 		    		</c:forEach>
 			    </div>
+			    	<p class="input-group-text" style="width:20%"><strong>선택 계좌</strong> </p>
 			    	  <input type="text" class="form-control valid" name="ano" id="ano" readonly="ano" >
-			    	  	    
-					 <input type="text" class="form-control valid" name="remain" id="remain"  readonly>
-					 <button class="btn btn-outline-secondary" type="button" id="check_ano" style="width:10%">계좌잔액 확인</button>
+			   	    <p class="input-group-text" style="width:20%"><strong>잔액</strong> </p>  
+					 <input type="text" class="form-control valid" name="balance_rest" id="balance_rest"  readonly>
+					  <input type="hidden"  class="form-control" id="balance" name="balance" >		
+      
 			</div>
         </div>
       
@@ -269,8 +271,8 @@ aside {
             
           </small>
           </div>
-          <input type="text" class="form-control" name="from_ano" id="from_ano" placeholder="입금계좌번호(숫자만 입력)" required>
-        </div>
+	          <input type="text" class="form-control" name="from_ano" id="from_ano" placeholder="입금계좌번호(숫자만 입력)" required>
+          </div>
 		
         
         
@@ -320,6 +322,7 @@ aside {
 					</svg>
 			    </button>
 			  </div>
+<!--			  
 			  <div class="input-group-prepend col-6" style="width:35%">
   			    <p class="input-group-text" style="width:30%"><strong>비밀번호 확인</strong> </p>
 			  <input type="password" class="form-control valid" name="confirm_password" id="confirm_password" readonly=""required>
@@ -328,13 +331,14 @@ aside {
 					  <path stroke="#000" d="M1.5 2a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V2zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5V7zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5V7zm-10 5a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5H7a.5.5 0 01-.5-.5v-2zm5 0a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 01-.5-.5v-2z"></path>
 					</svg>
 			    </button>
-			   
+		   
 			  </div>
-			  <div class="input-group-prepend col-6" style="width:20%">
+-->	<!--  			<div class="input-group-prepend col-6" style="width:20%">
 			 	 <button class="btn btn-secondary" type="button"  id="changePwdBtn">
 			    	비밀번호 확인
 			    </button>
 			    </div>
+-->
 			  <div class="input-group-append">
 			  </div>
 			</div>        
@@ -343,9 +347,9 @@ aside {
         
         <hr class="mb-4">
         
-
-     
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
+     	<div class="mb-3">
+        	<button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">이체</button>
+     	</div>
      	<sec:csrfInput/>
       </form>
     </div>
@@ -354,14 +358,13 @@ aside {
 <!-- <script src="/resources/js/admin/customer/admin_registerCustomer.js"></script> -->
 </div></main>
 
+
 		
-		  <input type="hidden"  class="form-control" id="hidden_balance" name="hidden_balance" >		
-       
+		 
  
 </body>
 </html>
-<script>
-</script>
+
 <%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/member/customer/customer_anolist.js"></script>
 <script src="/resources/js/member/customer/customer_transfer.js"></script>
