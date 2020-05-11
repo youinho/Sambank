@@ -57,6 +57,9 @@ aside {
 .asideHeader{
 	margin-top: 40px;
 }
+.asideHeader a{
+	color: #fff;
+}
 .aside_content{
 	margin-top:30px;
 	margin-left: 50px;
