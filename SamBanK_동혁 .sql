@@ -1,4 +1,5 @@
 
+
 -- 추가
 
 insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
@@ -650,4 +651,5 @@ delete from admin_attach;
 commit;
 delete from notice_attach;
 commit;
+
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
