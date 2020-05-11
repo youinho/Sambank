@@ -303,6 +303,8 @@ select * from (select * from customer_inquiry
 where rownum<10;
 select substr(authority, 6) from admin_group_authorities;
 
+select * from logtbl order by log_no desc;
+
 select group_id from admin_group_members where id='sam';
 
 select * from 
