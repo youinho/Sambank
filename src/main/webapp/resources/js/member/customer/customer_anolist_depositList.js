@@ -26,9 +26,9 @@ $(function(){
 					var vo = JSON.parse(result);
 	//				$("input[name='p_name']").val(vo.p_name);
 					$("input[name='ano']").val(vo.ano);
-					$("input[name='max_withdraw']").val(vo.max_withdraw);
-					$("input[name='balance_rest']").val(viewRest(String(vo.balance)));
-					$("input[name='balance']").val(vo.balance);
+					$("input[name='max_withdraw']").val(viewRest(String(vo.max_withdraw))+"원");
+					$("input[name='balance_rest']").val(viewRest(String(vo.balance))+"원");
+					$("input[name='balance']").val(viewRest(String(vo.balance))+"원");
 					},
 				error : function(result){
 //					alert("계좌 정보를 불러올수없습니다.");
@@ -49,16 +49,28 @@ $(function(){
 					},
 					dataType : "text",
 					success : function(result){
+<<<<<<< HEAD
 						var vo = JSON.parse(result);	
 						console.log(vo.sum_deposit);
 						$("input[name='sum_deposit']").val(vo.sum_deposit);
 						$("input[name='sum_withdrawal']").val(vo.sum_withdrawal);
+=======
+						var vo = JSON.parse(result);			
+						$("input[name='sum_deposit']").val(viewRest(String(vo.sum_deposit))+"원");
+						$("input[name='sum_withdrawal']").val(viewRest(String(vo.sum_withdrawal))+"원");
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 						
 					},
 					error : function(result){
+<<<<<<< HEAD
 						alert("입출금 내역이 없습니다.");
 						$("input[name='sum_deposit']").val(0);
 						$("input[name='sum_withdrawal']").val(0);
+=======
+//						alert("입출금 내역이 없습니다.");
+						$("input[name='sum_deposit']").val(0+"원");
+						$("input[name='sum_withdrawal']").val(0+"원");
+>>>>>>> branch 'master' of https://github.com/youinho/Sambank.git
 						
 						get_depositHistorySum = false;
 					}

@@ -35,8 +35,8 @@ $(function(){
 					$("input[name='ano']").val(vo.ano);
 					$("input[name='createDate_text").val(dateformat(vo.createDate));
 					$("input[name='createDate']").val(vo.createDate);
-					$("input[name='balance_text']").val(viewRest(String(vo.balance)));
-					$("input[name='balance']").val(vo.balance);
+					$("input[name='balance_text']").val(viewRest(String(vo.balance))+"원");
+					$("input[name='balance']").val(viewRest(String(vo.balance))+"원");
 				}
 			})
 			

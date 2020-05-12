@@ -181,7 +181,7 @@ main{
       <td colspan="4"><input type="text" class="form-control" id="createDate_text" name="createDate_text" readonly></td>
     	
       <th colspan="1" style="vertical-align: middle; text-align: center; ">잔여예금</th>
-      <td colspan="4"><input type="text" class="form-control" name="balance_text" readonly></td>
+      <td colspan="4"><input type="text" class="form-control" name="balance_text" readonly placeholder="원" style="text-align: right;"></td>
   					  <input type="hidden" class="form-control" name="balance" readonly>
 	  </tr>	
     
