@@ -89,7 +89,7 @@ main{
        	 <div class="label d-flex justify-content-between">
        	  <div class="col-12" style="margin-right: auto; position: relative; font-weight: bold; font-size: 20px;">
 	          <label for="balance">자산</label>
-	          <label for="total-balance" style="float: right; color:#336633;"><fmt:formatNumber value="${sumBalance }" type="currency"/> </label>
+	          <label for="total-balance" style="float: right; color:#336633;"><fmt:formatNumber value="${sumBalance }" type="number"/>원 </label>
           </div>
           
          </div>
@@ -108,7 +108,7 @@ main{
 		<c:if test="${type == 1 }">
         <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
 	          <label for="balance">입출금</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="number"/>원</label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
 	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>
@@ -132,7 +132,7 @@ main{
 		<c:if test="${type == 2 }">
        <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
 	          <label for="balance">적금</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="number"/>원</label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
 	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>
@@ -155,7 +155,7 @@ main{
 		<c:if test="${type == 3 }">
         <div class="col-12 mt-3" style="margin-right: auto; position: relative; font-weight: bold;">
 	          <label for="balance">대출</label>
-	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="currency"/></label>
+	          <label for="total-balance" style="font-weight: bold; float: right;"><fmt:formatNumber value="${vo.balance }" type="number"/>원</label>
           </div>
         <div class="col-12" style="margin-right: auto; position: relative;">
 	          <label for="balance"><c:out value="${vo.ano }"></c:out></label>

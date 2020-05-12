@@ -116,12 +116,12 @@ main{
 			<div class="input-group mt-3" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:45%">
 			    <p class="input-group-text" style="width:40%"><strong>잔액</strong> </p>
-			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false">
+			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false" placeholder="원" style="text-align: right;">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:45%">
   			    <p class="input-group-text" style="width:40%"><strong>출금가능금액</strong> </p>
-			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly aria-invalid="false">
+			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly aria-invalid="false" placeholder="원" style="text-align: right;">
 			  
 			  </div>
 			  <div class="input-group-append">
@@ -168,12 +168,12 @@ main{
 		<div class="input-group" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>입금</strong> </p>
-			  <input type="text" class="form-control valid" name="sum_withdrawal" id="sum_withdrawal" readonly="" aria-invalid="false" placeholder="총 입금금액">
+			  <input type="text" class="form-control valid" name="sum_withdrawal" id="sum_withdrawal" readonly="" aria-invalid="false" placeholder="총 입금금액" style="text-align: right;">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>출금</strong> </p>
-			  <input type="text" class="form-control valid" name="sum_deposit" id="sum_deposit" readonly="" aria-invalid="false" placeholder="총 출금금액">
+			  <input type="text" class="form-control valid" name="sum_deposit" id="sum_deposit" readonly="" aria-invalid="false" placeholder="총 출금금액" style="text-align: right;">
 			   
 			  </div>
 			 <!--  <div class="input-group-prepend col-4" style="width:30%">
