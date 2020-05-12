@@ -3,7 +3,22 @@
 <%@include file="../../includes/account_header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
-
+function alert_success(){
+	let success = "${success}";
+	
+	if(success ==="" || history.state){
+		return;
+	}
+	
+	
+	if(success != "" && success != null){
+		if(success=="true"){
+			alert("계좌가 삭제 되었습니다.");
+		}else if(success=="false"){
+			alert("계좌 삭제에 실패했습니다.");
+		}
+	}
+}
 </script>
 <!DOCTYPE html>
 <html>
@@ -181,7 +196,7 @@ main{
       <td colspan="4"><input type="text" class="form-control" id="createDate_text" name="createDate_text" readonly></td>
     	
       <th colspan="1" style="vertical-align: middle; text-align: center; ">잔여예금</th>
-      <td colspan="4"><input type="text" class="form-control" name="balance_text" readonly></td>
+      <td colspan="4"><input type="text" class="form-control" name="balance_text" readonly placeholder="원" style="text-align: right;"></td>
   					  <input type="hidden" class="form-control" name="balance" readonly>
 	  </tr>	
     

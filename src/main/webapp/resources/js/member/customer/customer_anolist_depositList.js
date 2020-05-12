@@ -26,8 +26,8 @@ $(function(){
 					var vo = JSON.parse(result);
 	//				$("input[name='p_name']").val(vo.p_name);
 					$("input[name='ano']").val(vo.ano);
-					$("input[name='max_withdraw']").val(vo.max_withdraw);
-					$("input[name='balance_rest']").val(viewRest(String(vo.balance)));
+					$("input[name='max_withdraw']").val(viewRest(String(vo.max_withdraw))+"원");
+					$("input[name='balance_rest']").val(viewRest(String(vo.balance))+"원");
 					$("input[name='balance']").val(vo.balance);
 					},
 				error : function(result){
@@ -49,15 +49,19 @@ $(function(){
 					},
 					dataType : "text",
 					success : function(result){
+
 						var vo = JSON.parse(result);			
-						$("input[name='sum_deposit']").val(vo.sum_deposit);
-						$("input[name='sum_withdrawal']").val(vo.sum_withdrawal);
+						$("input[name='sum_deposit']").val(viewRest(String(vo.sum_deposit))+"원");
+						$("input[name='sum_withdrawal']").val(viewRest(String(vo.sum_withdrawal))+"원");
+
 						
 					},
 					error : function(result){
+
 //						alert("입출금 내역이 없습니다.");
-						$("input[name='sum_deposit']").val(0);
-						$("input[name='sum_withdrawal']").val(0);
+						$("input[name='sum_deposit']").val(0+"원");
+						$("input[name='sum_withdrawal']").val(0+"원");
+
 						
 						get_depositHistorySum = false;
 					}
@@ -66,7 +70,7 @@ $(function(){
 						return true;
 					else
 						return false;
-	
+				
 			})		
 		
 	})

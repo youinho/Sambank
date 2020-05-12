@@ -65,6 +65,13 @@ public class AccountServiceImpl implements AccountService {
 		return mapper.sum_deposit_withdrawal(ano);
 	}
 
+	@Override
+	public boolean delete_account(String ano) {
+		// TODO Auto-generated method stub
+		return mapper.delete_account(ano)==1;
+	}
+
+	
 	
 	
 	

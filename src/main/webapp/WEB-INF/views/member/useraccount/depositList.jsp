@@ -116,12 +116,12 @@ main{
 			<div class="input-group mt-3" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:45%">
 			    <p class="input-group-text" style="width:40%"><strong>잔액</strong> </p>
-			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false">
+			  <input type="text" class="form-control valid" name="balance" id="balance" readonly aria-invalid="false" placeholder="원" style="text-align: right;">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:45%">
   			    <p class="input-group-text" style="width:40%"><strong>출금가능금액</strong> </p>
-			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly aria-invalid="false">
+			  <input type="text" class="form-control valid" name="max_withdraw" id="max_withdraw" readonly aria-invalid="false" placeholder="원" style="text-align: right;">
 			  
 			  </div>
 			  <div class="input-group-append">
@@ -168,12 +168,12 @@ main{
 		<div class="input-group" style="width:100%">
 			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>입금</strong> </p>
-			  <input type="text" class="form-control valid" name="sum_withdrawal" id="sum_withdrawal" readonly="" aria-invalid="false" placeholder="총 입금금액">
+			  <input type="text" class="form-control valid" name="sum_withdrawal" id="sum_withdrawal" readonly="" aria-invalid="false" placeholder="총 입금금액" style="text-align: right;">
 			   
 			  </div>
 			  <div class="input-group-prepend col-6" style="width:30%">
 			    <p class="input-group-text" style="width:40%"><strong>출금</strong> </p>
-			  <input type="text" class="form-control valid" name="sum_deposit" id="sum_deposit" readonly="" aria-invalid="false" placeholder="총 출금금액">
+			  <input type="text" class="form-control valid" name="sum_deposit" id="sum_deposit" readonly="" aria-invalid="false" placeholder="총 출금금액" style="text-align: right;">
 			   
 			  </div>
 			 <!--  <div class="input-group-prepend col-4" style="width:30%">
@@ -190,8 +190,8 @@ main{
 		    <thead>
 		        <tr>
 		            <th scope="col" style='width: 20%'>년 월 일 시간</th>
-		            <th scope="col" style='width: 20%'>찾으신 금액</th>
-		            <th scope="col" style='width: 20%'>맡기신 금액</th>
+		            <th scope="col" style='width: 20%'>입금액</th>
+		            <th scope="col" style='width: 20%'>출금액</th>
 		            <th scope="col" style='width: 20%'>남 은 금 액</th>
 		            <th scope="col" style='width: 20%'>거래내용</th>
 		        </tr>									
@@ -203,8 +203,9 @@ main{
 			</table>
         <hr class="mb-4">
         
-        <input type="hidden" name="_csrf" value="">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">더보기+</button>
+        
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="listAllBtn">더보기+</button>
+      	<sec:csrfInput/>
       </form>
     </div>
     <div class="bottom">

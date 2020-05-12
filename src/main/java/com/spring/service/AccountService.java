@@ -26,5 +26,5 @@ public interface AccountService {
 
 	public Deposit_historySumVO sum_deposit_withdrawal(String ano);
 	
-
+	public boolean delete_account(String ano);
 }

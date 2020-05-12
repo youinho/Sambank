@@ -130,7 +130,7 @@ main{
 			</div>
 			<div class="d-flex justify-content-between col-6"  style="width:100%;">
 			   	<div class="input-group-text justify-content-center" style="width:30%;"><strong>잔액</strong></div>
-					<input type="text" class="form-control valid" name="balance_rest" id="balance_rest"  readonly style="text-align: right;">
+					<input type="text" class="form-control valid" name="balance_rest" id="balance_rest"  placeholder="원" readonly style="text-align: right;">
 			</div>
 		</div>
 					  <input type="hidden"  class="form-control" id="balance" name="balance" >		

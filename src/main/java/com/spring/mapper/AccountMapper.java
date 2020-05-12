@@ -25,6 +25,7 @@ public interface AccountMapper {
 	public int update_password(DepositVO vo);
 	public String get_password(String ano);
 	public int delete(DepositVO vo);
+	public int delete_account(String ano);
 	public long get_balance(String ano);		//금액은 long으로 할것
 	public long cno_sumBalance(int cno); //cno로 전체 금액가져오기
 	public String get_cno(String id);	//id로 cno가져오기
