@@ -32,6 +32,7 @@ $("aside").remove();
 
 <div class="container" style="margin-top: 50px;">
 <div class="col-md-12">
+	<c:if test="${requested==null }">
 	<div class="col-md-12">
 		<h3 class="page-header title">신규 카드 신청</h3>
 	</div>
@@ -149,6 +150,32 @@ $("aside").remove();
 		</table>
 		<sec:csrfInput/>
 	</form>
+	</c:if>
+	<c:if test="${requested!=null }">
+		<div class="col-md-12">
+			<h3 class="page-header title">카드 신청 현황</h3>
+		</div>
+		<table class="table table-striped table-bordered table-hover table-sm">
+			<thead>
+			    <tr>
+			        <th>계좌번호</th>
+					<th>카드 상품</th>
+					<th>신청일</th>
+					<th>담당 지점</th>
+                </tr>									
+            </thead>
+			<tbody>
+			<c:forEach items="${requested }" var="req">
+			<tr>
+				<td class="align-middle" data-no="${req.card_no }"><c:out value="${req.ano }"></c:out></td>
+				<td class="align-middle"><c:out value="${req.p_name }" ></c:out></td>
+				<td class="align-middle"><fmt:formatDate pattern="yyyy-MM-dd" value="${req.createdate }"/> </td>
+				<td class="align-middle"><c:out value="${req.branch }"></c:out></td>
+			</tr>		
+			</c:forEach>
+			</tbody>
+	    </table>
+	</c:if>
 </div>
 </div>
 		

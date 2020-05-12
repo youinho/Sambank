@@ -17,4 +17,6 @@ public class Deposit_historyVO {
 	private String from_name;
 	private String message;
 	private long amount;
+	
+	private int history_total;
 }

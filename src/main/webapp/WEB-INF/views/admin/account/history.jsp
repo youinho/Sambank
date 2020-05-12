@@ -123,8 +123,11 @@
 		    <tbody id="historyList">
 		    	
 		    </tbody>
-		
+			
 		</table>
+		<div style="display:none" id="moreDiv">
+			<button class="btn btn-primary btn-lg btn-block" type="button" id="moreBtn">더 보 기</button>
+		</div>
 </div>
 </div>
 		

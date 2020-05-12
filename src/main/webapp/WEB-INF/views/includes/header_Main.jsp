@@ -208,9 +208,6 @@ let tk = "${_csrf.token}"
 						  <div class="dropdown-menu">
 						    <a class="dropdown-item" href="/member/card/request">카드 신청</a>
 						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="/member/card/request">카드 취소</a>
-						    <div class="dropdown-divider"></div>
-						    <a class="dropdown-item" href="/member/card/request">카드 결과 확인</a>
 						  </div>
 						</div>
 

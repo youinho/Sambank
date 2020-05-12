@@ -213,6 +213,7 @@ $(function(){
 	let param_count = "${failed_login_count }";
 	let param_count_total = "${failed_login_count_total }";
 	let cap_token = "";
+	
 	if(param_logout==="true" || param_id==="not_found" || (param_error==="failed"&&param_count!="") || param_enabled==="false"){
 		$("#error_card").css("display","inline-block");
 		$("#error_card").toast("show");

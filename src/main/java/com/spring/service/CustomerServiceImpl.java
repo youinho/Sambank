@@ -220,6 +220,12 @@ public class CustomerServiceImpl implements CustomerService {
 		return cardMapper.request_card(vo)==1;
 	}
 
+	@Override
+	public List<CardVO> requested_count(String cno) {
+
+		return cardMapper.requested_count(cno);
+	}
+
 	
 
 	

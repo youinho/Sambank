@@ -13,6 +13,45 @@ main{
 	background-repeat: no-repeat; /* repeat(기본값),no-repeat,repeat-x,repeat-y */
 	background-position: right; /* 수평 : left,center,right  수직 : top, center, bottom */
 }
+.bno_td{
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+overflow:hidden;
+width:20px;
+
+}
+.type_td{
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+overflow:hidden;
+width:60px;
+
+}
+.content_td{
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+overflow:hidden;
+width:420px
+}
+.writer_td{
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+overflow:hidden;
+width:80px;
+
+}
+.date_td{
+text-overflow:ellipsis;
+white-space:nowrap;
+word-wrap:normal;
+overflow:hidden;
+width:120px;
+
+}
 </style>
 
 </head>
@@ -85,22 +124,22 @@ main{
                             <table class="table table-striped table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <th style="width:8%">no</th>
-                                        <th style="width:12%">분류</th>
-                                        <th>제 목</th>
-                                        <th style="width:15%">작성자</th>
-                                        <th style="width:20%">수정일</th>
+                                        <th style="width:20px">no</th>
+                                        <th style="width:60px">분류</th>
+                                        <th >제 목</th>
+                                        <th style="width:80px">작성자</th>
+                                        <th style="width:120px">수정일</th>
                                     </tr>									
                                 </thead>
 								<tbody>
 								<c:forEach items="${list }" var="vo">
 									<tr>
-                                        <td class="bno"><c:out value="${vo.notice_bno }"></c:out></td>
-                                        <td class="type notice_type_td"><a href="${vo.notice_type=='공지사항'?'A':'' }${vo.notice_type=='새소식'?'N':'' }${vo.notice_type=='이벤트'?'E':'' }${vo.notice_type=='자료실'?'F':'' }"><c:out value="${vo.notice_type}"></c:out></a></td>
-                                        <td><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></td>
+                                        <td class="bno"><div class="bno_td"><c:out value="${vo.notice_bno }"></c:out></div></td>
+                                        <td class="type notice_type_td"><div class="type_td"><a href="${vo.notice_type=='공지사항'?'A':'' }${vo.notice_type=='새소식'?'N':'' }${vo.notice_type=='이벤트'?'E':'' }${vo.notice_type=='자료실'?'F':'' }"><c:out value="${vo.notice_type}"></c:out></a></div></td>
+                                        <td><div class="content_td"><a href="${vo.notice_bno}" class="move"><c:out value="${vo.title }" ></c:out> </a></div></td>
                                         
-                                        <td><c:out value="${vo.writer }"></c:out></td>
-                                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updatedate }"/> </td>
+                                        <td><div class="writer_td"><c:out value="${vo.writer }"></c:out></div></td>
+                                        <td><div class="date_td"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${vo.updatedate }"/></div> </td>
                                     </tr>		
 								</c:forEach>
 									

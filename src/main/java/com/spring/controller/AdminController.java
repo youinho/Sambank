@@ -476,7 +476,7 @@ public class AdminController {
 	//계좌 내역 정보
 	@ResponseBody
 	@PostMapping("/account/get_history")
-	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, HttpServletRequest req){
+	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, int list_count, HttpServletRequest req){
 		logging(req);
 		//log.info("get_history 요청 ano : "+ano);
 		//log.info("get_history 요청 sDates : "+start_date);
@@ -497,12 +497,16 @@ public class AdminController {
 			e.printStackTrace();
 			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
 		}
+		
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
-		list = service.get_history(ano, start, end2);
+		list = service.get_history_limit(ano, start, end2, list_count);
+		list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
 		//log.info("history : "+list);
 		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
 	}
+	
+	
 	
 	// 계좌 중복 체크?
 	@ResponseBody

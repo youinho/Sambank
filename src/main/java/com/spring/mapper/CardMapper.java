@@ -21,4 +21,6 @@ public interface CardMapper {
 	public int request_card(CardVO vo);
 	public List<CardVO> select_card_requested();
 	public int set_request(String card_no);
+	
+	public List<CardVO> requested_count(String cno);
 }
