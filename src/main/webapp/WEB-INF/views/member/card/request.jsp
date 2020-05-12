@@ -162,6 +162,7 @@ $("aside").remove();
 					<th>카드 상품</th>
 					<th>신청일</th>
 					<th>담당 지점</th>
+					<th>현재 상태</th>
                 </tr>									
             </thead>
 			<tbody>
@@ -171,6 +172,7 @@ $("aside").remove();
 				<td class="align-middle"><c:out value="${req.p_name }" ></c:out></td>
 				<td class="align-middle"><fmt:formatDate pattern="yyyy-MM-dd" value="${req.createdate }"/> </td>
 				<td class="align-middle"><c:out value="${req.branch }"></c:out></td>
+				<td class="align-middle"><c:out value="${req.request=='1'?'처리중':'수령가능' }"></c:out></td>
 			</tr>		
 			</c:forEach>
 			</tbody>

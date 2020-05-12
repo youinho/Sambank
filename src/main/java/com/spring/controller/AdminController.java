@@ -526,7 +526,9 @@ public class AdminController {
 	@PostMapping("/account/deposit")
 	public String deposit(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 입금");
+		vo.setMessage("입금");
+		vo.setFrom_name("");
+		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(service.deposit(vo)) {
 			rttr.addFlashAttribute("success", "true");
@@ -542,7 +544,9 @@ public class AdminController {
 	@PostMapping("/account/withdraw")
 	public String withdraw(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 출금");
+		vo.setMessage("출금");
+		vo.setFrom_name("");
+		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(service.withdraw(vo)) {
 			rttr.addFlashAttribute("success", "true");
