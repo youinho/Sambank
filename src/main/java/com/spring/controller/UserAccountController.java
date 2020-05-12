@@ -164,8 +164,8 @@ public class UserAccountController {
 	@PostMapping("/depositList/customer_get_history")
 	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, HttpServletRequest req){
 		log.info("get_history 요청 ano : "+ano);
-		//log.info("get_history 요청 sDates : "+start_date);
-		//log.info("get_history 요청 eDates : "+end_date);
+		log.info("get_history 요청 sDates : "+start_date);
+		log.info("get_history 요청 eDates : "+end_date);
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		log.info("계좌 내역 정보 완료");
 		Calendar cal = Calendar.getInstance();
@@ -243,7 +243,7 @@ public class UserAccountController {
 //		else {
 //			
 //		}
-		return "redirect:/member/useraccount/accountCreate";
+		return "redirect:/member/useraccount/accountDelete";
 	}
 	@ResponseBody
 	@PostMapping("/get_deposit_customerInfo")
@@ -271,6 +271,15 @@ public class UserAccountController {
 //		return "useraccount/accountList";
 	}
 
+	@PostMapping("/depositListAll")
+	public String depositListAll(String ano, String start_date, String end_date, Model modelMap,HttpServletRequest req) {
+		
+		log.info("계좌 전체 보기"+ano+""+start_date);
+		modelMap.addAttribute("ano",ano);
+		modelMap.addAttribute("start_date",start_date);
+		modelMap.addAttribute("end_date",end_date);
+		return "/member/useraccount/depositListAll";
+	}
 	//계좌 상품 불러오기
 	@ResponseBody
 	@PostMapping("/getProduct")
@@ -282,6 +291,7 @@ public class UserAccountController {
 		}
 		return new ResponseEntity<List<ProductVO>>(list, HttpStatus.OK);
 	}
+	
 	
 //주소 검색 팝업
 	@GetMapping("/jusopopup")

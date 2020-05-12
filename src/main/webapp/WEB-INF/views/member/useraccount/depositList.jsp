@@ -203,8 +203,9 @@ main{
 			</table>
         <hr class="mb-4">
         
-        <input type="hidden" name="_csrf" value="">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">더보기+</button>
+        
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="listAllBtn">더보기+</button>
+      	<sec:csrfInput/>
       </form>
     </div>
     <div class="bottom">

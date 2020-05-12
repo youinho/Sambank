@@ -49,13 +49,14 @@ $(function(){
 					},
 					dataType : "text",
 					success : function(result){
-						var vo = JSON.parse(result);			
+						var vo = JSON.parse(result);	
+						console.log(vo.sum_deposit);
 						$("input[name='sum_deposit']").val(vo.sum_deposit);
 						$("input[name='sum_withdrawal']").val(vo.sum_withdrawal);
 						
 					},
 					error : function(result){
-//						alert("입출금 내역이 없습니다.");
+						alert("입출금 내역이 없습니다.");
 						$("input[name='sum_deposit']").val(0);
 						$("input[name='sum_withdrawal']").val(0);
 						
