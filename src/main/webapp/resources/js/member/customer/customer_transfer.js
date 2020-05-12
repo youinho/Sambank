@@ -84,9 +84,9 @@ $(function (){
 				if(result=="true")
 					alert("계좌가 확인되었습니다.");
 				else{
-					alert("보낼 계좌가 존재하지 않습니다.");
+					alert("보낼 계좌가 존재하지 않습니다1.");
 					$("input[name='from_ano']").val("");
-					return false;
+					
 					ajax_ano_result = false;
 				}
 					
@@ -94,15 +94,16 @@ $(function (){
 			error : function(result){
 				alert("보낼 계좌가 존재하지 않습니다.");
 				$("input[name='from_ano']").val("");
-				return false;
+				
 				ajax_ano_result = false;
 			}
 		})
-		if(ajax_password_result&&ajax_ano_result)
-			return true;
+		if(ajax_password_result&&ajax_ano_result){
+				$("#depositForm").submit();
+		}
 		else
 			return false;
-		$("#depositForm").submit();
+	
 			
 	})
 	

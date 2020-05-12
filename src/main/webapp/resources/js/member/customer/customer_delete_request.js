@@ -35,8 +35,8 @@ $(function(){
 					$("input[name='ano']").val(vo.ano);
 					$("input[name='createDate_text").val(dateformat(vo.createDate));
 					$("input[name='createDate']").val(vo.createDate);
-					$("input[name='balance_text']").val(viewRest(String(vo.balance))+"원");
-					$("input[name='balance']").val(viewRest(String(vo.balance))+"원");
+					$("input[name='balance_text']").val(viewRest(String(vo.balance)));
+					$("input[name='balance']").val(vo.balance);
 				}
 			})
 			
@@ -52,7 +52,10 @@ $(function(){
 			$("input[name='ano']").focus();
 			return false;
 		}
-		
+		if($("input[name='balance']").val()!=0){
+			alert("계좌에 잔액이 있습니다.");
+			return false;
+		}
 		var ajax_password_result = true;
 		$.ajax({
 			url: "/member/useraccount/check_password",
@@ -115,7 +118,7 @@ function typeTrans(type){
 	}
 }
 function viewRest(restNumber) {
-	return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
 }
 
 function dateformat(changeDate){

@@ -28,7 +28,7 @@ $(function(){
 					$("input[name='ano']").val(vo.ano);
 					$("input[name='max_withdraw']").val(viewRest(String(vo.max_withdraw))+"원");
 					$("input[name='balance_rest']").val(viewRest(String(vo.balance))+"원");
-					$("input[name='balance']").val(viewRest(String(vo.balance))+"원");
+					$("input[name='balance']").val(vo.balance);
 					},
 				error : function(result){
 //					alert("계좌 정보를 불러올수없습니다.");
@@ -70,7 +70,7 @@ $(function(){
 						return true;
 					else
 						return false;
-	
+				
 			})		
 		
 	})

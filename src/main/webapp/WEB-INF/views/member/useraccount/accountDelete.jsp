@@ -3,7 +3,22 @@
 <%@include file="../../includes/account_header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
-
+function alert_success(){
+	let success = "${success}";
+	
+	if(success ==="" || history.state){
+		return;
+	}
+	
+	
+	if(success != "" && success != null){
+		if(success=="true"){
+			alert("계좌가 삭제 되었습니다.");
+		}else if(success=="false"){
+			alert("계좌 삭제에 실패했습니다.");
+		}
+	}
+}
 </script>
 <!DOCTYPE html>
 <html>

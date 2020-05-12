@@ -51,7 +51,7 @@ $(function(){
 						else
 							text=list[i].from_name;
 					}else{
-						text=list[i].from_message;
+						text=list[i].message;
 					}
 					
 					str += "<tr>";

@@ -28,7 +28,7 @@ $(function(){
 				
 				let str = "";
 				for(let i = 0; i < list.length; i++){
-					if(i>100){
+					if(i>25){
 						break;
 					}
 					let date = new Date(list[i].depositdate);

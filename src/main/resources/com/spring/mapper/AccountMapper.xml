@@ -108,14 +108,14 @@
 	
 	<!-- 계좌 입금 -->	
 	<insert id="deposit_hist">
-		insert into deposit_history(hno, from_ano, ano, name, deposit, balance, depositdate)
-		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})+#{amount}, sysdate)
+		insert into deposit_history(hno, from_ano, ano, name, deposit, balance, depositdate, from_name, message)
+		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})+#{amount}, sysdate, #{from_name}, #{message})
 	</insert>
 	
 	<!-- 계좌 출금 -->	
 	<insert id="withdraw_hist">
-		insert into deposit_history(hno, from_ano, ano, name, withdrawal, balance, depositdate)
-		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})-#{amount}, sysdate)
+		insert into deposit_history(hno, from_ano, ano, name, withdrawal, balance, depositdate, from_name, message)
+		values(seq_deposit_history.nextVal, #{from_ano}, #{ano}, #{name}, #{amount}, (select balance from deposittbl where ano=#{ano})-#{amount}, sysdate, #{from_name}, #{message})
 	</insert>
 	
 	

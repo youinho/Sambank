@@ -94,8 +94,8 @@ main{
 		    <thead>
 		        <tr>
 		            <th scope="col" style='width: 20%'>년 월 일 시간</th>
-		            <th scope="col" style='width: 20%'>찾으신 금액</th>
-		            <th scope="col" style='width: 20%'>맡기신 금액</th>
+		            <th scope="col" style='width: 20%'>입금액</th>
+		            <th scope="col" style='width: 20%'>출금액</th>
 		            <th scope="col" style='width: 20%'>남 은 금 액</th>
 		            <th scope="col" style='width: 20%'>거래내용</th>
 		        </tr>									

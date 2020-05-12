@@ -120,7 +120,9 @@ public class UserAccountController {
 		
 		log.info("이체 진행중 "+ vo);
 		String name=admin_service.check_ano(vo.getAno()).getName();
+		String from_name=admin_service.check_ano(vo.getFrom_ano()).getName();
 		vo.setName(name);
+		vo.setFrom_name(from_name);
 		if(admin_service.withdraw(vo)) {
 			
 			rttr.addFlashAttribute("success", "true");
@@ -192,8 +194,12 @@ public class UserAccountController {
 	}
 	
 	@GetMapping("/accountCreate")
-	public void accountCreate() {
+	public void accountCreate(Model modelMap,HttpServletRequest req) {
 		log.info("계좌신청");	
+		String id = req.getRemoteUser();
+		int cno=Integer.parseInt(account_service.getCno(id));
+		CustomerVO vo=admin_service.select_by_cno(cno);
+		modelMap.addAttribute("vo",vo);
 //		return "useraccount/accountCreate";
 	}
 	
@@ -225,24 +231,27 @@ public class UserAccountController {
 		List<Acc_info> list = admin_service.select_acc_info(cno);
 		modelMap.addAttribute("list",list);
 		log.info("계좌삭제신청");	
+		
 		return "/member/useraccount/accountDelete";
 	}
 	
 	@PostMapping("/accountDelete")
-	public String insertCreateDRequest(Customer_delete_requestVO vo, RedirectAttributes rttr,HttpServletRequest req){
+	public String insertCreateDRequest(String ano, RedirectAttributes rttr,HttpServletRequest req){
 		String id = req.getRemoteUser();
-		vo.setId(id);
-		log.info("vo"+vo);
-		log.info("입력중"+vo.getName());
-		log.info("type"+vo.getType());
-	
-		account_service.create_customer_D_request(vo);
-//		if(account_service.create_customer_request(vo)) {
-//			
-//		}
-//		else {
-//			
-//		}
+//		vo.setId(id);
+//		log.info("vo"+vo);
+//		log.info("입력중"+vo.getName());
+//		log.info("type"+vo.getType());
+//		account_service.delete_account(ano);
+//		account_service.create_customer_D_request(vo);
+		if(account_service.delete_account(ano)) {
+			rttr.addFlashAttribute("success", "true");
+			
+		}
+		else {
+			rttr.addFlashAttribute("success", "false");
+			
+		}
 		return "redirect:/member/useraccount/accountDelete";
 	}
 	@ResponseBody

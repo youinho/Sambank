@@ -204,7 +204,6 @@ main{
 </html>
 <%@include file="../../includes/footer_Main.jsp" %>
 <script src="/resources/js/member/customer/customer_request.js"></script>
-<script src="/resources/js/admin/customer/admin_registerCustomer.js"></script>
  
  <script type="text/javascript">
     $(function () {
