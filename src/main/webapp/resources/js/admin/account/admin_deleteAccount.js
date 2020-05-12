@@ -61,7 +61,7 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				alert("비밀번호가 확인되었습니다."+result);
+				alert("비밀번호가 확인되었습니다.");
 				if($("input[name='balance']").val()==0){
 					if(total_cards===0){
 						$("#submitBtn").removeAttr("disabled");
