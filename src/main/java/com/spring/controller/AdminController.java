@@ -501,9 +501,14 @@ public class AdminController {
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
 		list = service.get_history_limit(ano, start, end2, list_count);
-		list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
+		if(list.size()>0) {
+			list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
+		}
 		//log.info("history : "+list);
-		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		
 	}
 	
 	

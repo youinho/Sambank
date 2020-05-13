@@ -168,7 +168,7 @@ function alert_reg(){
         <hr class="mb-4">
         
         <sec:csrfInput/>
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">고객 정보 등록</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submitBtn">고객 정보 등록</button>
       </form>
     </div>
     <div class="bottom">
