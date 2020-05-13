@@ -165,6 +165,9 @@ color: #fff;
 						<div class="form-group">
 							<input type="submit" value="로그인" class="btn float-right login_btn" id="loginBtn">
 						</div>
+						<div class="form-group">
+							<input type="button" value="테스트용 아이디" class="btn float-right btn-primary" id="testIdBtn" style="background-color:#cccccc;width:145px" >
+						</div>
 						<input type="hidden" id="Captcha_res" name="Captcha_res" value="${capcha_res }"/>
 					</form:form>
 				</sec:authorize>
@@ -277,6 +280,20 @@ $(function(){
 	  	 cap_token=token;
 	    });
 	});
+	
+	
+	$("#testIdBtn").click(function(e){
+		e.preventDefault();
+		
+		$(".toast-body").html("<p><small style='color:black'><c:out value='아이디 : test1 비밀번호 : qwe123!@#'></c:out><br></small></p>");
+		$("#error_card").css("display","inline-block");
+		$("#error_card").toast("show");
+		return false;
+		
+		
+	})
+	
+	
 })
 
 </script>

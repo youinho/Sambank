@@ -3,7 +3,22 @@
 <%@include file="../../includes/account_header_Main.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
-
+function alert_success(){
+	let success = "${success}";
+	
+	if(success ==="" || history.state){
+		return;
+	}
+	
+	
+	if(success != "" && success != null){
+		if(success=="true"){
+			alert("계좌가 신청 되었습니다.");
+		}else if(success=="false"){
+			alert("계좌 신청에 실패했습니다.");
+		}
+	}
+}
 </script>
 <!DOCTYPE html>
 <html>
@@ -86,47 +101,42 @@ main{
 <script>
 
 </script>
-
+	
 	<div class="col-md-10 order-md-1">
       <h4 class="mb-3 title">계좌	 신청</h4>
       	<hr class="mb-4">
       
       <form class="needs-validation" novalidate="novalidate" method="post" id="customer_request">
       
-  
    <table class="table table-bordered">
   
   <tbody>
     <tr>
       <th style="width: 10%; vertical-align: middle; text-align: center; ">성명</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="name" name="name" placeholder="예) 홍길동"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="name" name="name" value="${vo.name}" readonly></td>
       <th style="width: 10%; vertical-align: middle; text-align: center; ">생년월일</th>
-      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="birth" name="birth" placeholder="예) 900101"></td>
+      <td colspan="4" style="width: 20%"><input type="text" class="form-control" id="birth" name="birth" value="${vo.birth}" readonly></td>
     </tr>
     
    
    <tr>
     <th style="vertical-align: middle; text-align: center;" >영어이름</th>
-    <td colspan="4"><input type="text" class="form-control" id="eng_name" name="eng_name" placeholder="예) Hong Gil Dong"></td>  
+    <td colspan="4"><input type="text" class="form-control" id="eng_name" name="eng_name" value="${vo.eng_name}" readonly></td>  
     <th style="vertical-align: middle; text-align: center;" >전화번호</th>
-    <td colspan="4"><input type="text" class="form-control" id="mobile" name="mobile" placeholder="예) 010-0000-0000"></td>  
+    <td colspan="4"><input type="text" class="form-control" id="mobile" name="mobile" value="${vo.mobile}" readonly></td>  
    </tr>
    
    <tr>
     <th style="vertical-align: middle; text-align: center;" >이메일</th>
-    <td colspan="7"><input type="email" class="form-control" id="email" name="email" placeholder="예) sambank@sambank.com"></td>  
+    <td colspan="7"><input type="email" class="form-control" id="email" name="email" value="${vo.email}" readonly></td>  
    </tr>
    
    <tr>
     <th style="vertical-align: middle; text-align:center;" >주소</th>
     <td colspan="7"><div class="mb-3">
          <div class="label">
-          <label for="address"></label><button class="btn btn-outline-primary btn-sm pull-left mb-1" id="search_juso">주소 검색</button>
-          <small name="address">
-            
-          </small>
          </div>
-         <input type="text" class="form-control" name="address" id="address" placeholder="예) 서울시 노원구 공릉동 444-2" readonly="">
+         <input type="text" class="form-control" name="address" id="address" value="${vo.address}"  readonly="">
         </div></td>  
    </tr>
    
@@ -134,6 +144,7 @@ main{
     <th style="vertical-align: middle; text-align: center;">계좌 종류</th>
     <td style="vertical-align: middle; text-align: center;" colspan="1">
      <select name="account" id="account" class="form-control" >
+     	<option value="계좌종류선택" hidden>계좌 종류 선택</option>
       <option value="1">예금계좌</option>
       <option value="2">적금계좌</option>
       <option value="3">대출계좌</option>
@@ -163,14 +174,9 @@ main{
    <tr>
     <th style="vertical-align: middle; text-align: center;">방문희망일시</th>
     <td colspan="7" >
-    <div class='x' style="width:30%; vertical-align: middle;">
+    <div class='x' style="width:50%; vertical-align: middle;">
     <div class="form-group">
-        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" id="visitdate" data-target="#datetimepicker1" value="05/05/2020">
-            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div>
-        </div>
+        <input type="date"  class="form-control" name="visitDate" id="visitdate" style="width:100%">
     </div>
 	</div> 
 	</td>
@@ -180,7 +186,7 @@ main{
    <tr>
     <td colspan="10">
    
-    <input type="submit" class="btn btn-primary" id="submitID" value="신청">
+    <input type="submit" class="btn btn-primary" id="submitBtn" value="신청">
     <sec:csrfInput/>
     <input type="reset" class="btn btn-danger" value="취소">
   	
@@ -207,18 +213,9 @@ main{
  
  <script type="text/javascript">
     $(function () {
-        $('#datetimepicker1').datetimepicker({ format: 'L'});
-        $('#datetimepicker2').datetimepicker({
-            format: 'L',
-            useCurrent: false
-        });
-        $("#datetimepicker1").on("change.datetimepicker", function (e) {
-            $('#datetimepicker2').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker2").on("change.datetimepicker", function (e) {
-            $('#datetimepicker1').datetimepicker('maxDate', e.date);
-        });
+    	let date = new Date();
+    	$("input[name='visitDate']").val(date.toISOString().slice(0, 10));
         
-    });
+    })
     
 </script>

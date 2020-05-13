@@ -4,13 +4,14 @@ $(function(){
 //	$("input[name='eng_name']").change(function(){
 //		$(this).val($(this).val().toUpperCase());
 //	})
-	
+	alert_success();
+	history.replaceState({}, null, null);
 	
 	$(document).ready(function(){
-		$('select[name=account]').click(function(e) {
+		$('select[name=account]').change(function(e) {
 			e.preventDefault();
 			var ano = $(this).val();
-		
+			$("input[name='password']").val("");
 //			console.log(ano);
 			$.ajax({
 				url:"/member/useraccount/get_deposit_customerInfo",

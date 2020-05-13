@@ -2,6 +2,8 @@ package com.spring.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 @Data
 public class Customer_requestVO {
@@ -16,6 +18,7 @@ public class Customer_requestVO {
 	private int type;
 	private int product;
 	private String visitAddress;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date visitDate;					//회원가입 날짜
 
 	private String confirm_password;

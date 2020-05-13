@@ -675,13 +675,18 @@ alter table deposit_history modify(ano nvarchar2(20) references deposittbl(ano) 
 commit;
 
 
-
-            select a.* ,  rownum rn from (
+select * from 
+            (select a.*, rownum rn  from (
 			select * from deposit_history where ano='20254314156223'
-			order by depositdate desc) a where rn < 20*1;
-select a.*, rownum rn from 
+			order by depositdate desc) a where rownum < 10*3) b where b.rn>20;
+            
+            
+            
+            
+select a.*, rownum from 
 			(select * from deposit_history where ano='20254314156223'
 			order by depositdate desc) a
-			where rn<#{list_count}*20;
+			where rn<1*20;
 
+select * from locked_customer;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

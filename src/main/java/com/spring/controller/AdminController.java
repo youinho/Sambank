@@ -501,11 +501,16 @@ public class AdminController {
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
 		list = service.get_history_limit(ano, start, end2, list_count);
-		list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
+		if(list.size()>0) {
+			list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
+		}
 		//log.info("history : "+list);
-		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		
 	}
-	
+		
 	
 	
 	// 계좌 중복 체크?
@@ -528,12 +533,16 @@ public class AdminController {
 		logging(req);
 		vo.setMessage("입금");
 		vo.setFrom_name("");
-		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
+		vo.setName(service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
-		if(service.deposit(vo)) {
-			rttr.addFlashAttribute("success", "true");
-			rttr.addFlashAttribute("ano", vo.getAno());
-			rttr.addFlashAttribute("amount", vo.getAmount());
+		if(vo.getAmount()>0) {
+			if(service.deposit(vo)) {
+				rttr.addFlashAttribute("success", "true");
+				rttr.addFlashAttribute("ano", vo.getAno());
+				rttr.addFlashAttribute("amount", vo.getAmount());
+			}else {
+				rttr.addFlashAttribute("success", "false");
+			}
 		}else {
 			rttr.addFlashAttribute("success", "false");
 		}
@@ -546,16 +555,20 @@ public class AdminController {
 		logging(req);
 		vo.setMessage("출금");
 		vo.setFrom_name("");
-		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
+		vo.setName(service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
-		if(service.withdraw(vo)) {
-			rttr.addFlashAttribute("success", "true");
-			rttr.addFlashAttribute("ano", vo.getAno());
-			rttr.addFlashAttribute("amount", vo.getAmount());
-			//log.info("출금 성공");
+		if(vo.getAmount()>0) {
+			if(service.withdraw(vo)) {
+				rttr.addFlashAttribute("success", "true");
+				rttr.addFlashAttribute("ano", vo.getAno());
+				rttr.addFlashAttribute("amount", vo.getAmount());
+				//log.info("출금 성공");
+			}else {
+				rttr.addFlashAttribute("success", "false");
+				//log.info("출금 실패");
+			}
 		}else {
 			rttr.addFlashAttribute("success", "false");
-			//log.info("출금 실패");
 		}
 		return "redirect:/admin/account/withdraw";
 	}

@@ -70,6 +70,19 @@ public class UserAccountController {
 		
 	}
 	
+//	@ResponseBody
+//	@PostMapping("/get_customerInfo")
+//	public ResponseEntity<DepositVO> get_customerInfo(String cno){
+//		ano=ano.trim();
+//		log.info("계좌확인중");
+//		
+//		DepositVO vo = admin_service.get_deposit(ano);
+////		log.info(vo+"");
+////		log.info("선택된 계좌번호 :"+vo.getAno());
+//		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+//		
+//	}
+	
 	@ResponseBody
 	@PostMapping("/get_depositHistorySum")
 	public ResponseEntity<Deposit_historySumVO> get_depositHistorySum(String ano, HttpServletRequest req){
@@ -212,19 +225,19 @@ public class UserAccountController {
 		log.info("type"+vo.getType());
 		log.info("product"+vo.getProduct());
 		log.info("방문일자 "+vo.getVisitDate());
-		account_service.create_customer_request(vo);
-//		if(account_service.create_customer_request(vo)) {
-//			
-//		}
-//		else {
-//			
-//		}
+		
+		if(account_service.create_customer_request(vo)) {
+			rttr.addFlashAttribute("success", "true");
+		}
+		else {
+			rttr.addFlashAttribute("success", "false");
+		}
 		return "redirect:/member/useraccount/accountCreate";
 	}
 
 	//계좌삭제 신청
 	@GetMapping("/accountDelete")
-	public String accountDelete(Model modelMap,HttpServletRequest req) {
+	public void accountDelete(Model modelMap,HttpServletRequest req) {
 		String id = req.getRemoteUser();
 		int cno=Integer.parseInt(account_service.getCno(id));
 		CustomerVO vo=admin_service.select_by_cno(cno);
@@ -232,7 +245,7 @@ public class UserAccountController {
 		modelMap.addAttribute("list",list);
 		log.info("계좌삭제신청");	
 		
-		return "/member/useraccount/accountDelete";
+//		return "/member/useraccount/accountDelete";
 	}
 	
 	@PostMapping("/accountDelete")

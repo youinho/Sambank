@@ -23,6 +23,7 @@
         
     <!-- 시큐리티 예외사항 -->
     <sec:http pattern="/admin/popup/jusopopup" security="none" />
+    <sec:http pattern="/member/useraccount/jusopopup" security="none" />
     
     <!-- 검사 URL -->
     <http auto-config='true'  use-expressions="true" authentication-manager-ref="customer_auth" pattern="/">
