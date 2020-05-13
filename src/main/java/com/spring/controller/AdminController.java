@@ -537,16 +537,20 @@ public class AdminController {
 	@PostMapping("/account/deposit")
 	public String deposit(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setMessage("입금");
+		vo.setMessage("창구");
 		vo.setFrom_name("");
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch());
+		vo.setName("삼뱅크"+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(vo.getAmount()>0) {
-			if(service.deposit(vo)) {
-				rttr.addFlashAttribute("success", "true");
-				rttr.addFlashAttribute("ano", vo.getAno());
-				rttr.addFlashAttribute("amount", vo.getAmount());
-			}else {
+			try {
+				if(service.deposit(vo)) {
+					rttr.addFlashAttribute("success", "true");
+					rttr.addFlashAttribute("ano", vo.getAno());
+					rttr.addFlashAttribute("amount", vo.getAmount());
+				}else {
+					rttr.addFlashAttribute("success", "false");
+				}
+			} catch (Exception e) {
 				rttr.addFlashAttribute("success", "false");
 			}
 		}else {
@@ -559,19 +563,23 @@ public class AdminController {
 	@PostMapping("/account/withdraw")
 	public String withdraw(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setMessage("출금");
+		vo.setMessage("창구");
 		vo.setFrom_name("");
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch());
+		vo.setName("삼뱅크"+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(vo.getAmount()>0) {
-			if(service.withdraw(vo)) {
-				rttr.addFlashAttribute("success", "true");
-				rttr.addFlashAttribute("ano", vo.getAno());
-				rttr.addFlashAttribute("amount", vo.getAmount());
-				//log.info("출금 성공");
-			}else {
+			try {
+				if(service.withdraw(vo)) {
+					rttr.addFlashAttribute("success", "true");
+					rttr.addFlashAttribute("ano", vo.getAno());
+					rttr.addFlashAttribute("amount", vo.getAmount());
+					//log.info("출금 성공");
+				}else {
+					rttr.addFlashAttribute("success", "false");
+					//log.info("출금 실패");
+				}
+			} catch (Exception e) {
 				rttr.addFlashAttribute("success", "false");
-				//log.info("출금 실패");
 			}
 		}else {
 			rttr.addFlashAttribute("success", "false");

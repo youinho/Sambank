@@ -19,8 +19,19 @@ $(function(){
 	
 	$("#submitBtn").click(function(e){
 		e.preventDefault();
+		if($("input[name='ano']").val()===""){
+			alert("계좌번호를 입력해 주세요.")
+			$("input[name='ano']").val();
+			return false;
+		}
+		if($("input[name='amount']").val()<=0||isNaN($("input[name='amount']").val())){
+			alert("올바른 입금액을 입력해 주세요.");
+			$("input[name='amount']").focut();
+			return false;
+		}
 		
 		
+		$("#depositForm").submit();
 		
 	})
 	
@@ -55,9 +66,11 @@ $(function(){
 				var vo = JSON.parse(result);
 				$("input[name='cno']").val(vo.cno);
 				$("input[name='name']").val(vo.name);
+				$("#submitBtn").removeAttr("disabled");
 			},
 			error: function(result){
 				alert("계좌와 일치하는 정보가 없습니다.");
+				$("#submitBtn").prop("disabled", true);
 			}
 			
 			
@@ -69,13 +82,16 @@ $(function(){
 		
 	})
 	
+	$("input[name='ano']").change(function(){
+		$("#submitBtn").prop("disabled", true);
+	})
 	
 	
 	
 	$("#ano-list").on("click",".account-item" ,function(){
 		
 		
-		
+		$("#submitBtn").prop("disabled", true);
 		$("input[name='amount']").val("");
 		$("input[name='amount']").val("")
 		$("input[name='amount_korean']").val("")

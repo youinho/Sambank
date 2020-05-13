@@ -42,10 +42,16 @@ $(function(){
 				$("input[name='name']").val(vo.name);				
 				$("input[name='remain']").val(vo.balance);
 				$("input[name='remain_korean']").val(viewKorean(String(vo.balance)));
+				if(vo.balance>0){
+					$("#submitBtn").removeAttr("disabled");
+				}else{
+					$("#submitBtn").prop("disabled", true);
+				}
 				
 			},
 			error: function(result){
 				alert("계좌와 일치하는 정보가 없습니다.");
+				$("#submitBtn").prop("disabled", true);
 			}
 			
 			
@@ -58,10 +64,12 @@ $(function(){
 	})
 	
 	
-	
+	$("input[name='ano']").change(function(){
+		$("#submitBtn").prop("disabled", true);
+	})
 	
 	$("#ano-list").on("click",".account-item" ,function(){
-		
+		$("#submitBtn").prop("disabled", true);
 		
 		
 		$("input[name='amount']").val("");
@@ -114,6 +122,13 @@ $(function(){
 			alert("출금액을 다시 확인해주세요.")
 			return false;
 		}
+		
+		if($("input[name='amount']").val()<=0||isNaN($("input[name='amount']").val())){
+			alert("올바른 출금액을 입력해 주세요.");
+			$("input[name='amount']").focut();
+			return false;
+		}
+		
 		$("#withdrawForm").submit();
 	})
 	
