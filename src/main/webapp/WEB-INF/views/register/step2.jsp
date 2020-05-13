@@ -134,19 +134,19 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<input type="radio" id="female" name="gender-radio" value="여" class="form-check-input gender-radio" />여	<!-- ${vo.gender=='여'?'checked':""} -->			
 			</div>
 			<small  name="gender" class="text-info"></small>
-		</div>
+		</div> 
 	</div>		
 	<div class="form-group row justify-content-center">
 		<label for = "phone" class="col-sm-2 col-form-label">휴대폰번호</label>
 		<div class="col-sm-6">	
-			<input type="mobile" name="mobile" id="mobile" class="form-control" placeholder="010xxxxxxxx" value="${vo.mobile }"/>	
+			<input type="mobile" name="mobile" id="mobile" class="form-control" placeholder="01012345678" value="${vo.mobile }"/>	
 			<small  name="mobile" class="text-info"></small>		
 		</div>	
 	</div>
 	<div class="form-group row justify-content-center">
 		<label for = "birth" class="col-sm-2 col-form-label">생년월일</label>
 		<div class="col-sm-6">	
-			<input type="birth" name="birth" id="birth" class="form-control" placeholder="000000" value="${vo.birth}"/>	
+			<input type="birth" name="birth" id="birth" class="form-control" placeholder="19900101" value="${vo.birth}"/>	
 			<small name="birth" class="text-info"></small>		
 		</div>	
 	</div>

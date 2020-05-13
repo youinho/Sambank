@@ -222,9 +222,10 @@ public class HomeController {
 		if(vo==null) {
 			return new ResponseEntity<String>("not_found", HttpStatus.OK);
 		}
-		if(!passwordEncoder.matches(password, customerService.get_password(vo.getId()))) {
+		if(!passwordEncoder.matches(password, customerService.get_password(vo.getId()))||vo.getVerified()==1) {
 			return new ResponseEntity<String>("failed", HttpStatus.OK);
 		}
+
 		if(vo.getSendCount()>10) {
 			return new ResponseEntity<String>("muchsend", HttpStatus.OK);
 		}

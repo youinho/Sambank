@@ -14,6 +14,12 @@ public class ErrorPageController {
 	
 	
 	// error
+	@RequestMapping("/400")
+	public String error_400() {
+		log.info("400 요청");
+		return "/errorpage/400";
+	}
+	
 	@RequestMapping("/404")
 	public String error_404() {
 		log.info("404 요청");
