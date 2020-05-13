@@ -40,6 +40,8 @@ $(function(){
 				}
 				
 				let str = "";
+				let sum_withdrawal=0;
+				let sum_deposit=0;
 				for(let i = 0; i < list.length; i++){
 					if(i>5){
 						break;
@@ -56,13 +58,18 @@ $(function(){
 					
 					str += "<tr>";
 					str += "<td>"+date.toISOString().slice(0, 10)+" "+date.toTimeString().slice(0, 8)+"</td>";					
-					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
+					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+text+"</td>";
 					str += "</tr>";
 					
+					sum_withdrawal+=list[i].withdrawal;
+					sum_deposit+=list[i].deposit;
 				}
+
+				$("input[name='sum_deposit']").val(sum_deposit+"원");
+				$("input[name='sum_withdrawal']").val(sum_withdrawal+"원");
 				$("#historyList").html(str);
 
 				

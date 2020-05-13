@@ -14,8 +14,8 @@
 	</insert>
 	
 	<insert id="create_customer_request">
-		insert into customer_request(cr_no, name, eng_name, birth, address, mobile, id, email, type, product, visitAddress)
-		values(seq_customer_request.nextVal, #{name}, #{eng_name}, #{birth}, #{address}, #{mobile}, #{id}, #{email}, #{type}, #{product}, #{visitAddress})
+		insert into customer_request(cr_no, name, eng_name, birth, address, mobile, id, email, type, product, visitAddress, visitDate)
+		values(seq_customer_request.nextVal, #{name}, #{eng_name}, #{birth}, #{address}, #{mobile}, #{id}, #{email}, #{type}, #{product}, #{visitAddress}, #{visitDate})
 	</insert>
 	
 	<insert id="create_customer_D_request">
@@ -90,6 +90,12 @@
 	
 	</delete>
 	
+	<!-- 계좌 삭제 --> 			<!-- 카드확인 추가해야함 -->
+	<delete id="delete_account">
+		delete from deposittbl
+		where ano=#{ano}
+	
+	</delete>
 	<!-- 계좌 잔액 -->
 	<select id="get_balance" resultType="long">
 		select balance from deposittbl

@@ -13,6 +13,11 @@ $(function (){
 			return false;
 		}
 		
+		if($("input[name='ano']").val() == $("input[name='from_ano']").val()){
+			alert("계좌가 동일합니다.")
+			return false;
+		}
+		
 		if((parseInt($("input[name='balance']").val())-parseInt($("input[name='amount']").val()))<0){
 			alert("출금액을 다시 확인해주세요.");
 			return false;
@@ -207,7 +212,7 @@ $("#M1").button().on("click", function() {
 })
 
 $("#MAll").button().on("click", function() {
-	$("input[name='amount']").val($("input[name='hidden_balance']").val());
+	$("input[name='amount']").val($("input[name='balance']").val());
 
 	alert("전액");
 })
