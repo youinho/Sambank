@@ -48,7 +48,7 @@
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num3" name="num3" ></td>
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num4" name="num4" ></td>
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num5" name="num5" ></td>
-							<td colspan="1" rowspan="2" style="width: 14%"><input type="button" class="form-control" id="numC" name="numC" value="<-"></td>
+							<td colspan="1"  style="width: 14%"><input type="button" class="form-control" id="numB" name="numB" value="<-"></td>
 						</tr>
 						<tr>
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num6" name="num6" ></td>
@@ -57,7 +57,7 @@
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num9" name="num9" ></td>
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num10" name="num10" ></td>
 							<td colspan="1" style="width: 14%"><input type="button" class="form-control" id="num11" name="num11" ></td>
-	               			
+	               				<td colspan="1"style="width: 14%""><input type="button" class="form-control" id="numC" name="numC" value="C"></td>
 	               		</tr>
 	               		</table>
 	      	         
@@ -143,7 +143,7 @@ function sameNum(ranNum,i){
 	 $("#numB").on('click',function() {
 //		 var pass=$("input[name='password']").val();
 //		 console.log(arrNum[i]);
-		 $("input[name='password']").val($("input[name='password']").val().subString(0,$("input[name='password']").val().length()-1));
+		 $("input[name='password']").val($("input[name='password']").val().substring(0,$("input[name='password']").val().length-1));
 //		 console.log($("input[name='password']").val());
         });
 
