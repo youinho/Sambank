@@ -1,7 +1,7 @@
--- 추가
+-- 추�?
 
 insert into customertbl(cno, name, eng_name, gender, birth, reg_no, address, mobile, id, password, email) 
-		values(seq_customer.nextVal, '김동혁', 'KIM DONG HYEOK', '남', '19911217', '1234567', '서울시 노원구', '01065889752', 'rlaehdgur1', 'qwe123!@#', 'ucceoum@naver.com');
+		values(seq_customer.nextVal, '�??��?��', 'KIM DONG HYEOK', '?��', '19911217', '1234567', '?��?��?�� ?��?���?', '01065889752', 'rlaehdgur1', 'qwe123!@#', 'ucceoum@naver.com');
 commit;
 
 insert into deposittbl(cno, ano, type, product, password, balance, day_withdraw, max_withdraw, branch)
@@ -9,26 +9,26 @@ values(590785, '13503449752595', 1, 101, '1234', 10000, 5000, 50000, '01');
 
 
 insert into producttbl(product, p_name, interest_rates, limit)
-values(101, 'SAMBANK 부자통장', 0.1, 0);
+values(101, 'SAMBANK �??��?��?��', 0.1, 0);
 
 insert into producttbl(product, p_name, interest_rates, limit)
-values(102, 'SAMBANK 갑부통장', 0.15, 0);
+values(102, 'SAMBANK 갑�??��?��', 0.15, 0);
 
 insert into producttbl(product, p_name, interest_rates, limit)
-values(103, 'SAMBANK 금돼지통장', 0.2, 0);
+values(103, 'SAMBANK 금돼�??��?��', 0.2, 0);
 
-
-
-insert into producttbl(product, p_name, interest_rates, limit)
-values(201, 'SAMBANK 부자적금', 2, 50000000);
-insert into producttbl(product, p_name, interest_rates, limit)
-values(202, 'SAMBANK 갑부적금', 2, 100000000);
 
 
 insert into producttbl(product, p_name, interest_rates, limit)
-values(301, 'SAMBANK 부자대출', 24, 5000000);
+values(201, 'SAMBANK �??��?���?', 2, 50000000);
 insert into producttbl(product, p_name, interest_rates, limit)
-values(302, 'SAMBANK 갑부대출', 12, 55000000);
+values(202, 'SAMBANK 갑�??���?', 2, 100000000);
+
+
+insert into producttbl(product, p_name, interest_rates, limit)
+values(301, 'SAMBANK �??��??�?', 24, 5000000);
+insert into producttbl(product, p_name, interest_rates, limit)
+values(302, 'SAMBANK 갑�???�?', 12, 55000000);
 commit;
 
 select * from deposittbl;
@@ -88,11 +88,11 @@ select * from admintbl;
 update admintbl set enabled=1 where admin_no=21;
     commit;
 delete from admin_group_authorities;
-insert into admin_groups values(10, '관리자Level 10');
-insert into admin_groups values(7, '관리자Level 7');
-insert into admin_groups values(5, '관리자Level 5');
-insert into admin_groups values(3, '관리자Level 3');
-insert into admin_groups values(1, '관리자Level 1');
+insert into admin_groups values(10, '�?리자Level 10');
+insert into admin_groups values(7, '�?리자Level 7');
+insert into admin_groups values(5, '�?리자Level 5');
+insert into admin_groups values(3, '�?리자Level 3');
+insert into admin_groups values(1, '�?리자Level 1');
 insert into admin_group_authorities values(10, 'ROLE_10');
 insert into admin_group_authorities values(7, 'ROLE_7');
 insert into admin_group_authorities values(5, 'ROLE_5');
@@ -116,16 +116,16 @@ create table adminTBL(
     enabled number(10) not null);
     (select password from deposittbl where cno='590801');
 delete from admintbl2 where id='tester';
-insert into admintbl values('sam','bank', '1' ,'ROLE_10',  'dh', '사장', '본사', '01065889752', 1);
-insert into admintbl values('sam1','bank', '2' ,'ROLE_5',  'dh', '사장', '본사', '01065889752', 1);
-insert into admintbl values('sam2','bank', '3' ,'ROLE_1',  'dh', '사장', '본사', '01065889752', 1);
-insert into admintbl values('sam1', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 1);
-insert into admintbl values('sam2', 'ROLE_1', 'bank', 'dh', '사원', '본사', '01065889752', 0);
-insert into admintbl values('tester', 'ROLE_10', (select password from deposittbl where ano='10335034467857'), 'dh', '사장', '본사', '01065889752', 1);
+insert into admintbl values('sam','bank', '1' ,'ROLE_10',  'dh', '?��?��', '본사', '01065889752', 1);
+insert into admintbl values('sam1','bank', '2' ,'ROLE_5',  'dh', '?��?��', '본사', '01065889752', 1);
+insert into admintbl values('sam2','bank', '3' ,'ROLE_1',  'dh', '?��?��', '본사', '01065889752', 1);
+insert into admintbl values('sam1', 'ROLE_1', 'bank', 'dh', '?��?��', '본사', '01065889752', 1);
+insert into admintbl values('sam2', 'ROLE_1', 'bank', 'dh', '?��?��', '본사', '01065889752', 0);
+insert into admintbl values('tester', 'ROLE_10', (select password from deposittbl where ano='10335034467857'), 'dh', '?��?��', '본사', '01065889752', 1);
 commit;
 
 select * from admintbl2;
-select * from customertbl where name='김동혁';
+select * from customertbl where name='�??��?��';
 select * from deposittbl;
 select password from deposittbl where ano='10335034467868';
 update admintbl set password=(select password from deposittbl where ano='10335034467868') where id='sam';
@@ -145,7 +145,7 @@ select * from admin_group_authorities;
 commit;
 
 select * from deposit_history;
-select * from customertbl where name='김동혁';
+select * from customertbl where name='�??��?��';
 
 select customertbl.name, deposittbl.ano from customertbl
 		left join deposittbl
@@ -167,7 +167,7 @@ select d.ano, d.p_name, d.day_withdraw, d.max_withdraw, d.balance, h.depositdate
 select * from deposit_history;
 select * from deposittbl;
 delete from deposit_history;
-insert into deposit_history values(seq_deposit_history.nextVal, 10335034467868, '사장', 50000, 0, (select balance from deposittbl where ano=10335034467868)+50000, sysdate);
+insert into deposit_history values(seq_deposit_history.nextVal, 10335034467868, '?��?��', 50000, 0, (select balance from deposittbl where ano=10335034467868)+50000, sysdate);
 update deposittbl set balance=balance+50000 where ano=10335034467868;
 update deposittbl set balance=0 where ano=10335034467868;
 commit;
@@ -176,7 +176,7 @@ delete from deposit_history;
 delete from deposittbl;
 select * from deposittbl;
 select * from customertbl where length(password) < 20;       
-delete from customertbl where length(password) < 20 and name!='김동혁';
+delete from customertbl where length(password) < 20 and name!='�??��?��';
         
 select * from admin_board order by admin_bno asc;        
         
@@ -192,7 +192,7 @@ update admintbl2 set password=replace(password, '{bcrypt}','');
 select id, concat('{bcrypt}', password), enabled from admintbl2 where id = 'sam';
 
 
-insert into admin_groups values('10', '사장');
+insert into admin_groups values('10', '?��?��');
 insert into admin_group_authorities values('10', 'ROLE_10');
 
 
@@ -239,8 +239,8 @@ create table card_product(
     service10 char(1) default 0
 );
 insert into card_product(product, p_name) values(101, 'SAMBANK 골드카드');
-insert into card_product(product, p_name) values(102, 'SAMBANK 실버카드');
-insert into card_product(product, p_name) values(103, 'SAMBANK 브론즈카드');
+insert into card_product(product, p_name) values(102, 'SAMBANK ?��버카?��');
+insert into card_product(product, p_name) values(103, 'SAMBANK 브론즈카?��');
 alter table cardtbl modify(exp_date nvarchar2(10) default to_char(add_months(sysdate,60) ,'YYYYMM'));
 select * from cardtbl;
 alter table cardtbl add(limit_month number(10) not null);
@@ -256,7 +256,7 @@ select * from cardtbl;
 delete from cardtbl;
 insert into cardtbl(card_no, password, ano, c_type,  security_key, limit, limit_month)   values(1018805244807484, '1234', '10335034467868', 101,  235, 50, 540 );
 select * from admintbl;
-update admintbl set name='김동혁' where id='sam';
+update admintbl set name='�??��?��' where id='sam';
 select * from admintbl;
 select * from admin_group_members;
 select * from cardtbl;
@@ -272,10 +272,10 @@ create table card_condition(
     condition char(1) not null primary key,
     condition_name nvarchar2(20) not null
     );
-insert into card_condition values(0, '미승인');
-insert into card_condition values(1, '승인');
+insert into card_condition values(0, '미승?��');
+insert into card_condition values(1, '?��?��');
 insert into card_condition values(2, '분실');
-insert into card_condition values(3, '도난');
+insert into card_condition values(3, '?��?��');
 select * from card_condition;
 commit;
 select * from cardtbl;
@@ -284,7 +284,7 @@ select card_no from cardtbl
 		where ano=10135034467899
 		order by createdate desc;
 select * from admin_groups;
-update admin_groups set group_name='관리자Level 10' where id=10;
+update admin_groups set group_name='�?리자Level 10' where id=10;
 select * from admin_group_members;
 select * from admin_group_authorities;
 
@@ -331,7 +331,7 @@ select * from admintbl;
 select * from admin_group_members;
 
 select seq_admin.nextVal from dual;
-select * from customertbl where name='김동혁';
+select * from customertbl where name='�??��?��';
 
 alter table customertbl add(authority nvarchar2(10) default 'ROLE_USER');
 alter table customertbl add(enabled number(1) default 1);
@@ -340,15 +340,15 @@ alter table customertbl modify(authority nvarchar2(10) not null);
 commit;
 update customertbl set authority='ROLE_USER';
 update customertbl set enabled=1;
-select * from customertbl where name='김동혁';
+select * from customertbl where name='�??��?��';
 alter table admin_board add(content2 clob);
 update admin_board set content2 = content;
 commit;
 alter table admin_board rename column content to content3;
 alter table admin_board rename column content2 to content;
 commit;
-alter table admin_board modify(content3 nvarchar2(2000) default '임시');
-alter table admin_board modify(content3 nvarchar2(2500) default '임시');
+alter table admin_board modify(content3 nvarchar2(2000) default '?��?��');
+alter table admin_board modify(content3 nvarchar2(2500) default '?��?��');
 select * from admin_board;
 alter table admin_board modify(content clob default 'NULL');
 select * from deposit_history;
@@ -356,7 +356,7 @@ select * from admin_board;
 commit;
 delete from admin_board where admin_bno!=4 and admin_bno!=5 and admin_bno!=6;
 select * from admin_attach;
-update admin_board set content='임시' where admin_bno=21;
+update admin_board set content='?��?��' where admin_bno=21;
 select * from admin_board;
 commit;
 
@@ -392,7 +392,7 @@ alter table notice_board add(type nvarchar2(30) not null);
 alter table notice_board modify(content clob);
 alter table notice_board rename column content2 to content;
 alter table notice_board drop column content3;
-alter table notice_board modify(type nvarchar2(20) default '공지사항');
+alter table notice_board modify(type nvarchar2(20) default '공�??��?��');
 select * from notice_board;
 select * from notice_attach;
 
@@ -429,12 +429,12 @@ create table customer_inquiry_reply(
 select * from customer_board;
 delete from customer_inquiry;
 -- drop table customer_inquiry;
-insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '김동혁', '테스트 문의글 제목입니다.', '테스트 문의글 내용 입니다.');
+insert into customer_inquiry(inquiry_no, customer_id, customer_name, title, content) values(seq_inquiry.nextVal, 'rlaehdgur1', '�??��?��', '?��?��?�� 문의�? ?��목입?��?��.', '?��?��?�� 문의�? ?��?�� ?��?��?��.');
 commit;
 
 select * from customer_inquiry;
 select * from customer_inquiry_reply;
-update customer_inquiry set answer_id='sam', answer_branch='본사', answer_rank='사장', answer_name='김동혁' where inquiry_no=4;
+update customer_inquiry set answer_id='sam', answer_branch='본사', answer_rank='?��?��', answer_name='�??��?��' where inquiry_no=4;
 create sequence seq_inquiry_reply;
 -- drop sequence inquiry_reply_no;
 select * from admintbl;
@@ -465,14 +465,14 @@ select * from admintbl;
 alter table admintbl add(profile_image blob);
 CREATE OR REPLACE DIRECTORY load_DIR AS 'D:/oracle/product/1014/dm/load';
 commit;
-update admintbl set profile_image=(select profile_image from admintbl where name='호호호');
+update admintbl set profile_image=(select profile_image from admintbl where name='?��?��?��');
 select profile_image from admintbl
 where id='sam';
 create table default_profile_image(
     profile_image blob
     );
-    select profile_image from admintbl where name='호호호';
-insert into default_profile_image select profile_image from admintbl where name='호호호';
+    select profile_image from admintbl where name='?��?��?��';
+insert into default_profile_image select profile_image from admintbl where name='?��?��?��';
 commit;
 select * from admintbl;
 select * from customertbl;
@@ -511,7 +511,7 @@ select id, password, profile_image, profile_image_type from admintbl;
 delete from admintbl where id = 'sam2';
 delete from admin_group_members where id = 'sam2';
 
-select * from customertbl where name='최규리';
+select * from customertbl where name='최규�?';
 select * from deposit_history;
 select * from customertbl;
 
@@ -546,7 +546,7 @@ select * from deposittbl where ano=10135034475205;
 
 select * from deposittbl;
 
-select * from customertbl where name='김동혁';
+select * from customertbl where name='�??��?��';
 update customertbl set enabled=0 where id='rlaehdgur1';
 commit;
 
@@ -682,7 +682,6 @@ commit;
 select a.*, rownum rn from 
 			(select * from deposit_history where ano='20254314156223'
 			order by depositdate desc) a
-			where rn<#{list_count}*20
-
+			where rn<#{list_count}*20;
 
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>
