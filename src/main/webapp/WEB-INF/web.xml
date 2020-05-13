@@ -59,7 +59,10 @@
 	</filter-mapping>
 	
 <!-- 에러페이지 -->
-
+	<error-page>
+	    <error-code>400</error-code>
+	    <location>/errorpage/400</location>
+	</error-page>
 	<error-page>
 	    <error-code>403</error-code>
 	    <location>/errorpage/403</location>

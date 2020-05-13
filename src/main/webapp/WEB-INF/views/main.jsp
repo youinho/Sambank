@@ -8,6 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<noscript> 
+	<meta http-equiv="Refresh" content="0; URL=/admin/noscript"> 
+</noscript>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <title>Sam Bank</title>
@@ -456,7 +459,7 @@ function alert_reg(){
 	}
 	
 	if(registered === "success"){
-		alert("${name}"+" 고객님의 이메일(${email})로 인증코드를 보내드렸습니다.<br>이메일을 인증하시면 로그인이 활성화됩니다.");
+		alert("${name}"+" 고객님의 이메일(${email})로 인증코드를 보내드렸습니다. 이메일을 인증하시면 로그인이 활성화됩니다.");
 	}else if(registered === "failed"){
 		alert("등록에 실패했습니다.");
 	}else if(registered === "verified"){

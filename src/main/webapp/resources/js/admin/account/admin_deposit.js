@@ -15,6 +15,19 @@ $(function(){
 		
 	})
 	
+	
+	
+	$("#submitBtn").click(function(e){
+		e.preventDefault();
+		
+		
+		
+	})
+	
+	
+	
+	
+	
 	$("#check_ano").click(function(e){
 		e.preventDefault();
 		
