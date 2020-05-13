@@ -185,7 +185,7 @@ color: #fff;
 	</div>
 </div>
 
-<div class="toast col-3 btn btn-outline-warning fixed-top position-fixed" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="error_card" style="z-index:2147483647;background-color:#ffffff;margin:auto;white-space:normal;display:none">
+<div class="toast col-md-3 btn btn-outline-warning fixed-top position-fixed" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="true" data-delay="5000" id="error_card" style="z-index:2147483647;background-color:#ffffff;margin:auto;white-space:normal;display:none">
   <div class="toast-header">
   	<p style="font-size:1.2em;color:#000000"><strong>알림</strong></p>    
   </div>

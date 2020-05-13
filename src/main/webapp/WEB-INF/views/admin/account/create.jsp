@@ -6,7 +6,7 @@
 <script>
 
 $(function(){
-	$("#creACC").addClass("active");
+	$("#creACC").closest("li").addClass("active");
 })
 function alert_created(){
 	let created = "${created}";

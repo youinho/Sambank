@@ -25,9 +25,11 @@
 		font-size:14px;
 		padding-left:25px;
 	}
+	.title{
+		padding-top:20px;
+	}
 	.nav-link:hover{
 		background-color: #e0ffff;
-		color:black;
 	}
 	.bottom{
 		padding-bottom : 100px;
@@ -42,19 +44,7 @@
 	
 	
 	}
-	.active{
-		color: #fff;
-		background-color:#007bff;
-	}
-	.active > a{
-		color: #fff;
-	}
-	.nav-item *{
-		border-radius: .25rem;
-	}
-	button{
-		white-space: nowrap;
-	}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -168,51 +158,67 @@ $(function(){
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 shadow" style="z-index:500000;background-color:#f8f9fa">
-  <a class="navbar-brand" href="/admin/notice" style="margin-left:15px">Sambank</a>
-  
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        
-      </li>
-    </ul>
-    <div class="form-inline my-2 my-lg-0">
-    	<a href="#" class="btn btn-outline-primary" style="padding:0;margin:0" id="profile_image">
+    <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow" style="height:50px">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin/notice">SamBank Admin Page</a>
+  <ul class="navbar-nav px-3 mr-auto">
+  	<li></li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li class="nav-item text-nowrap">
+	  	<a href="#" class="btn btn-outline-primary" style="padding:0;margin:0" id="profile_image">
 	  		<img src='/admin/get_profile_image' alt='프로필사진' style='width=48px;height:48px;margin:0;padding:0'>
 	  	</a>
-	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-	  	<div style="margin:auto">
-	  		
-		  	<span class="navbar-text" id="admin_branch" style="margin-left:30px">
-		  		<strong><c:out value="${branch }"></c:out></strong>
-		    </span>
-		    <span class="navbar-text" id="admin_rank" style="margin-left:30px">
-	  			<strong><c:out value="${rank }"></c:out></strong>
-		    </span>
-		    
-		    <span class="navbar-text" id="admin_name" style="margin-left:30px">
-	  			<strong><c:out value="${name }"></c:out></strong>
-		    </span>
-		</div>
-		</div>
-		<sec:authorize access="isAuthenticated()">
-	    	<form:form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/admin/logout" method="POST" style="margin-left:30px">
-	      		<input class="nav-link btn btn-outline-secondary btn-sm" type="submit" value="로그아웃">
-	      	</form:form>
-   		</sec:authorize>
-   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="margin-left:30px">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-    </div>
-    
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li class="nav-item text-nowrap">
+	  	<span class="navbar-text" id="admin_branch">
+	  	<strong><c:out value="${branch }"></c:out></strong>
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li>
+  		<span class="navbar-text" id="admin_rank">
+  		<strong><c:out value="${rank }"></c:out></strong>
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	<li>
+  		<span class="navbar-text" id="admin_name">
+  		<strong><c:out value="${name }"></c:out></strong>
+	    </span>
+  	</li>
+  </ul>
+  <ul class="navbar-nav px-3">
+  	
+    <li class="nav-item text-nowrap">
+    <sec:authorize access="isAuthenticated()">
+    	
+    	<form:form action="${pageContext.request.contextPath}/admin/logout" method="POST">
+      		<input class="nav-link btn btn-outline-secondary btn-sm" type="submit" value="로그아웃">
+      	</form:form>
+    </sec:authorize>
+    </li>
+  </ul>
+  
 </nav>
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="">
-      <div class="sidebar-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column nav-pills">
+          <li style="height:50px">
+          </li>
+          <li >
+            <!-- <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              Orders
+            </a> -->
+            <!-- 사내공지 -->
+            <div>
             <a  href="/admin/notice" class="nav-link" id="inner-notice">
 	            <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v8a1 1 0 001 1h2.5a2 2 0 011.6.8L8 14.333 9.9 11.8a2 2 0 011.6-.8H14a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
@@ -220,76 +226,87 @@ $(function(){
 				</svg> 
 				사내공지
 			</a>
-			
+			</div>
           </li>
-          <li class="nav-item">
-            <a href="/admin/customer/register" class="nav-link">
+          <li >
+           <a href="/admin/customer/register" class="nav-link">
              <svg  width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
-				</svg> 고객 관리
-			</a>
-			<ul class="nav nav-second-level">
-               <li>
-               	
-                   <a href="/admin/customer/register" class="nav-link child" id="regCS">고객 정보 등록</a>
-               </li>
-               <li>
-                   <a href="/admin/customer/modify" class="nav-link child" id="modCS">고객 정보 수정</a>
-               </li>
-               <li>
-                   <a href="/admin/customer/delete" class="nav-link child" id="delCS">고객 정보 삭제</a>
-               </li>
-            </ul>
+				</svg> 고객 관리<span class="fa arrow">
+							</span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                	
+                                    <a href="/admin/customer/register" class="nav-link child" id="regCS">고객 정보 등록</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/customer/modify" class="nav-link child" id="modCS">고객 정보 수정</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/customer/delete" class="nav-link child" id="delCS">고객 정보 삭제</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
           </li>
           <li class="nav-item">
             <a href="/admin/account/create" class="nav-link">
-            <svg class="bi bi-card-text" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-			  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
-			  <path fill-rule="evenodd" d="M3 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM3 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 013 8zm0 2.5a.5.5 0 01.5-.5h6a.5.5 0 010 1h-6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
-			</svg>
+                            <svg class="bi bi-card-text" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clip-rule="evenodd"/>
+							  <path fill-rule="evenodd" d="M3 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM3 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 013 8zm0 2.5a.5.5 0 01.5-.5h6a.5.5 0 010 1h-6a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+							</svg>
+                            
+                             계좌 관리<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/account/create" class="nav-link child" id="creACC">신규 계좌 개설</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/history" class="nav-link child" id="histACC">거래 내역 조회</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/modify" class="nav-link child" id="modACC">계좌 정보 수정</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/deposit" class="nav-link child" id="deposit">계좌 입금 　　</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/account/withdraw" class="nav-link child" id="withdraw">계좌 출금 　　</a>
+                                </li>
+                            </ul> 
+                            <!-- /.nav-second-level -->
             
-             	 계좌 관리<span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-                <li>
-                    <a href="/admin/account/create" class="nav-link child" id="creACC">신규 계좌 개설</a>
-                </li>
-                <li>
-                    <a href="/admin/account/history" class="nav-link child" id="histACC">거래 내역 조회</a>
-                </li>
-                <li>
-                    <a href="/admin/account/modify" class="nav-link child" id="modACC">계좌 정보 수정</a>
-                </li>
-                <li>
-                    <a href="/admin/account/delete" class="nav-link child" id="delACC">계좌 정보 삭제</a>
-                </li>
-                <li>
-                    <a href="/admin/account/deposit" class="nav-link child" id="deposit">계좌 입금 　　</a>
-                </li>
-                <li>
-                    <a href="/admin/account/withdraw" class="nav-link child" id="withdraw">계좌 출금 　　</a>
-                </li>
-            </ul> 
+            
+            
+            
           </li>
-          <li class="nav-item">
+           <li class="nav-item">
             <a href="/admin/card/register" class="nav-link">
-              <svg class="bi bi-credit-card" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				  <path fill-rule="evenodd" d="M14 3H2a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1zM2 2a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
-				  <rect width="3" height="3" x="2" y="9" rx="1"/>
-				  <path d="M1 5h14v2H1z"/>
-				</svg>
-              
-              		 카드 관리<span class="fa arrow"></span></a>
-              <ul class="nav nav-second-level">
-                  <li>
-                      <a href="/admin/card/register" class="nav-link child" id="regCard">카드 발급 　　</a>
-                  </li>
-                  <li>
-                      <a href="/admin/card/modify" class="nav-link child" id="modCard">카드 정보 수정</a>
-                  </li>
-                  <li>
-                      <a href="/admin/card/requested" class="nav-link child" id="reqCard">카드 신청 현황</a>
-                  </li>
-              </ul>
+                            <svg class="bi bi-credit-card" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							  <path fill-rule="evenodd" d="M14 3H2a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1zM2 2a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
+							  <rect width="3" height="3" x="2" y="9" rx="1"/>
+							  <path d="M1 5h14v2H1z"/>
+							</svg>
+                            
+                             카드 관리<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admin/card/register" class="nav-link child" id="regCard">카드 발급 　　</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/card/modify" class="nav-link child" id="modCard">카드 정보 수정</a>
+                                </li>
+                                <li>
+                                    <a href="/admin/card/requested" class="nav-link child" id="reqCard">카드 신청 현황</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+            
+            
+            
+            
           </li>
           <sec:authorize access="hasAnyRole('ROLE_5,ROLE_7,ROLE_10')">
           <li class="nav-item">
@@ -299,11 +316,20 @@ $(function(){
 							  <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 100 4.492 2.246 2.246 0 000-4.492zM4.754 8a3.246 3.246 0 116.492 0 3.246 3.246 0 01-6.492 0z" clip-rule="evenodd"/>
 							</svg>
                             
-                             관리자 관리<span class="fa arrow"></span>
-            </a>
+                             관리자 관리<span class="fa arrow"></span></a>
+            
+            
+            
+            
           </li>
           </sec:authorize>
-          <li class="nav-item">
+          <li >
+            <!-- <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              Orders
+            </a> -->
+            <!-- 고객공지 -->
+            <div>
             <a  href="/admin/customer_notice" class="nav-link" id="customer_notice">
 	            <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 					<path fill-rule="evenodd" d="M14 1H2a1 1 0 00-1 1v8a1 1 0 001 1h2.5a2 2 0 011.6.8L8 14.333 9.9 11.8a2 2 0 011.6-.8H14a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v8a2 2 0 002 2h2.5a1 1 0 01.8.4l1.9 2.533a1 1 0 001.6 0l1.9-2.533a1 1 0 01.8-.4H14a2 2 0 002-2V2a2 2 0 00-2-2H2z" clip-rule="evenodd"/>
@@ -311,8 +337,16 @@ $(function(){
 				</svg> 
 				고객공지
 			</a>
+			</div>
           </li>
-          <li class="nav-item">
+          
+          <li >
+            <!-- <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+              Orders
+            </a> -->
+            <!-- 고객공지 -->
+            <div>
             <a  href="/admin/inquiry" class="nav-link" id="inquiry_list">
 	            <svg class="bi bi-question-diamond" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 010-2.098L6.95.435zm1.4.7a.495.495 0 00-.7 0L1.134 7.65a.495.495 0 000 .7l6.516 6.516a.495.495 0 00.7 0l6.516-6.516a.495.495 0 000-.7L8.35 1.134z" clip-rule="evenodd"/>
@@ -320,10 +354,14 @@ $(function(){
 				</svg>
 				고객 문의
 			</a>
+			</div>
           </li>
         </ul>
-
       </div>
+      <div class="custom-file">
+		<input type="file" class="custom-file-input" id="uploadFile_header" name="uploadFile_header">
+		
+	</div>
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
