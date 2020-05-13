@@ -656,4 +656,38 @@ commit;
 
 select * from cardtbl order by createdate desc;
 
+
+
+
+
+select a_c.card_no, a_c.ano, a_c.c_type, a_c.createdate, a_p.p_name from cardtbl a_c
+join deposittbl a_d
+on a_c.ano = a_d.ano
+join card_product a_p
+on a_c.c_type = a_p.product
+where a_d.cno=42 and a_c.request=1;
+
+select * from deposit_history where ano=#{ano} and depositdate between #{start_date} and #{end_date}
+		order by depositdate desc;
+
+alter table deposit_history drop constraint fk_deposit_history;
+alter table deposit_history modify(ano nvarchar2(20) references deposittbl(ano) on delete cascade);
+commit;
+
+
+select * from 
+            (select a.*, rownum rn  from (
+			select * from deposit_history where ano='20254314156223'
+			order by depositdate desc) a where rownum < 10*3) b where b.rn>20;
+            
+            
+            
+            
+select a.*, rownum from 
+			(select * from deposit_history where ano='20254314156223'
+			order by depositdate desc) a
+			where rn<1*20;
+
+
+select * from locked_customer;
 -- <Connector SSLEnabled="true" keystoreFile="d:/SamBank.keystorsee" keystorePass="123456" port="8443" scheme="https" secure="true" sslProtocol="TLS" sslEnabledProtocols="TLSv1.2,TLSv1.1,TLSv1,SSLv2Hello"/>

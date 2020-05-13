@@ -127,13 +127,13 @@ $(function(){
 				name = "<small>조장</small> <strong style='font-size:1.2em'>유 인 호</strong>"
 				work = "<strong>담당업무</strong><br><br>프로젝트 기획 및 설계<br>GitHub 관리<br>사용자 화면 구현<br>PPT제작 및 발표"
 			}else if(id==="P"){
-				img = "/resources/img/umb.gif";
+				img = "/resources/img/Park.jpg";
 				name = "<small>조원</small> <strong style='font-size:1.2em'>박   훈</strong>"
-				work = "<strong>담당업무</strong><br><br>박 훈-담당업무"
+				work = "<strong>담당업무</strong><br><br>DataBase 설계 및 구현<br>Tocplus 사용자 구현<br>AWS연동<br>사용자 화면구현"
 			}else if(id==="L"){
-				img = "/resources/img/umb.gif";
+				img = "/resources/img/Lee.jpg";
 				name = "<small>조원</small> <strong style='font-size:1.2em'>이 다 형</strong>"
-				work = "<strong>담당업무</strong><br><br>이다형-담당업무"
+				work = "<strong>담당업무</strong><br><br>프로젝트 기획<br>사용자 페이지<br>보안모듈 제작"
 			}
 			
 			
@@ -145,7 +145,6 @@ $(function(){
 			$("#card_work").html(work);
 			$("#idCard").css("right", "50px")
 			$("#idCard").toast('show');
-			console.log("ggggg");
 		}
 		
 		

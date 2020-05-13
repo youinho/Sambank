@@ -76,4 +76,15 @@
 		where card_no=#{card_no}
 	</update>
 
+	<select id="requested_count" resultType="com.spring.domain.CardVO">
+		select a_c.request, a_c.branch, a_c.card_no, a_c.ano, a_c.c_type, a_c.createdate, a_p.p_name from cardtbl a_c
+		join deposittbl a_d
+		on a_c.ano = a_d.ano
+		join card_product a_p
+		on a_c.c_type = a_p.product
+		where a_d.cno=#{cno} and a_c.condition=0
+		order by createdate desc
+	</select>
+
+
 </mapper>

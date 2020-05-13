@@ -114,7 +114,8 @@ public interface AdminService {
 	public boolean withdraw(Deposit_historyVO vo);
 	
 	public List<Deposit_historyVO> get_history(String ano, Date start_date, Date end_date);
-	
+	public List<Deposit_historyVO> get_history_limit(String ano, Date start_date, Date end_date, int list_count);
+	public int get_history_total(String ano, Date start_date, Date end_date);
 	
 	//card
 	public List<Card_productVO> get_card_product();

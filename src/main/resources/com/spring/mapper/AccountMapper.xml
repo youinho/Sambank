@@ -142,6 +142,22 @@
 		order by depositdate desc
 	</select>
 	
+	
+	<select id="get_history_limit" resultType="com.spring.domain.Deposit_historyVO">
+		<![CDATA[
+		select * from 
+			(select a.*, rownum rn from 
+			(select * from deposit_history where ano=#{ano} and depositdate between #{start_date} and #{end_date}
+			order by depositdate desc) a
+			where rownum <= #{list_count}*10) b
+		where b.rn > (#{list_count}-1)*10
+		]]>
+	</select>
+	
+	
+	
+	
+	
 	<!-- id로 cno가져오기 -->
 	<select id="get_cno" resultType="String">
 		select cno from customerTBL where id=#{id}
@@ -157,5 +173,10 @@
 		select sum(deposit) sum_deposit, sum(withdrawal) sum_withdrawal from deposit_history where ano=#{ano}
 	</select>
 	
+	
+	<select id="get_history_total" resultType="int">
+		select count(*) from deposit_history where ano=#{ano} and depositdate between #{start_date} and #{end_date}
+		order by depositdate desc
+	</select>
 	
 </mapper>

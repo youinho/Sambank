@@ -476,7 +476,7 @@ public class AdminController {
 	//계좌 내역 정보
 	@ResponseBody
 	@PostMapping("/account/get_history")
-	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, HttpServletRequest req){
+	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, int list_count, HttpServletRequest req){
 		logging(req);
 		//log.info("get_history 요청 ano : "+ano);
 		//log.info("get_history 요청 sDates : "+start_date);
@@ -497,12 +497,21 @@ public class AdminController {
 			e.printStackTrace();
 			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
 		}
+		
 		//log.info("get_history 요청 sDate : "+start);
 		//log.info("get_history 요청 eDate : "+end2);
-		list = service.get_history(ano, start, end2);
+		list = service.get_history_limit(ano, start, end2, list_count);
+		if(list.size()>0) {
+			list.get(0).setHistory_total(service.get_history_total(ano, start, end2));
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.BAD_REQUEST);
+		}
 		//log.info("history : "+list);
-		return new ResponseEntity<List<Deposit_historyVO>>(list, HttpStatus.OK);
+		
 	}
+	
+	
 	
 	// 계좌 중복 체크?
 	@ResponseBody
@@ -522,7 +531,9 @@ public class AdminController {
 	@PostMapping("/account/deposit")
 	public String deposit(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 입금");
+		vo.setMessage("입금");
+		vo.setFrom_name("");
+		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(service.deposit(vo)) {
 			rttr.addFlashAttribute("success", "true");
@@ -538,7 +549,9 @@ public class AdminController {
 	@PostMapping("/account/withdraw")
 	public String withdraw(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		vo.setName(service.selectOne(req.getRemoteUser()).getBranch()+" 출금");
+		vo.setMessage("출금");
+		vo.setFrom_name("");
+		vo.setName("삼뱅크 "+service.selectOne(req.getRemoteUser()).getBranch());
 		vo.setFrom_ano("");
 		if(service.withdraw(vo)) {
 			rttr.addFlashAttribute("success", "true");

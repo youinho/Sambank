@@ -44,18 +44,21 @@
 		$("#submitBtn").click(function(e){
 			e.preventDefault();
 			if(sended==="false"){
+				
+				$("#submitBtn").prop("disabled",true);
 				sended = "true";
-				$("#register_customer").submit();
+				$("#register_customer").submit();				
 			}else{
-				alert("이미 처리된 요청입니다.");
+				alert("이미 처리된 요청입니다");
 			}
 				
-			
-			
 		})		
-		
-		
-		
+		$("#register_customer").on("change","input",function(){
+			console.log("change!")
+			sended = "false";
+			$("#submitBtn").removeAttr("disabled");
+			
+		})
 		
 		
 		

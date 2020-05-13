@@ -21,4 +21,5 @@ public class CardVO {
 	private String p_name;
 	private String product;
 	private String branch;
+	private String request;
 }

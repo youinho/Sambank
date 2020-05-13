@@ -594,5 +594,19 @@ public class AdminServiceImpl implements AdminService {
 
 		return cardMapper.set_request(card_no)==1;
 	}
+
+
+	@Override
+	public int get_history_total(String ano, Date start_date, Date end_date) {
+
+		return accountMapper.get_history_total(ano, start_date, end_date);
+	}
+
+
+	@Override
+	public List<Deposit_historyVO> get_history_limit(String ano, Date start_date, Date end_date, int list_count) {
+
+		return accountMapper.get_history_limit(ano, start_date, end_date, list_count);
+	}
 	
 }

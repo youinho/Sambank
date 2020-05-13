@@ -32,7 +32,7 @@
 	                  <label for="password"><strong>PASSWORD</strong></label>
 	                  <input type="password" class="form-control" name="password" id="password">
 	                </div>
-	                <input type="button" class="btn btn-primary btn-block" value="로그인"/>
+	                <input type="button" class="btn btn-primary btn-block" value="확인"/>
 	            </fieldset>
 	        
 	    </div>

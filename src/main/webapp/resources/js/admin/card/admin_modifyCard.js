@@ -60,7 +60,7 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				alert("비밀번호가 변경되었습니다."+result);
+				alert("비밀번호가 변경되었습니다.");
 				$("input[name='password']").val("");
 				$("input[name='confirm_password']").val("");
 				

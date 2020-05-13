@@ -372,7 +372,9 @@ public class UserController {
 	public String card_request_get(Model model, HttpServletRequest req) {
 		String id = req.getRemoteUser();
 		
-		 
+		List<CardVO> requested_list = customerService.requested_count(service.select_by_id(id).getCno()+"");
+		if(requested_list.size()>0)
+			model.addAttribute("requested", requested_list);
 		model.addAttribute("list", service.get_card_product());
 		
 		return "/member/card/request";
@@ -400,7 +402,6 @@ public class UserController {
 			
 			return new ResponseEntity<String>("false", HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 	
 	

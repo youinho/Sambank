@@ -23,7 +23,7 @@
 <style>
 	.child{
 		font-size:14px;
-		padding-left:30px;
+		padding-left:25px;
 	}
 	.title{
 		padding-top:20px;
@@ -40,6 +40,11 @@
 	#uploadFile_header{
 		display : none;
 	}
+	div#page-wrapper{
+	
+	
+	}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

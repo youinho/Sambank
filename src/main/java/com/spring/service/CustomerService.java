@@ -42,6 +42,6 @@ public interface CustomerService {
 	
 	public boolean request_card(CardVO vo);
 	
-	
+	public List<CardVO> requested_count(String cno);
 	
 }

@@ -44,4 +44,6 @@ public interface AccountMapper {
 	public int updateBalance_after(Deposit_historyVO vo);
 	
 	public List<Deposit_historyVO> get_history(@Param("ano") String ano,@Param("start_date") Date start_date,@Param("end_date") Date end_date);
+	public List<Deposit_historyVO> get_history_limit(@Param("ano") String ano,@Param("start_date") Date start_date,@Param("end_date") Date end_date,@Param("list_count") int list_count);
+	public int get_history_total(@Param("ano") String ano,@Param("start_date") Date start_date,@Param("end_date") Date end_date);
 }
