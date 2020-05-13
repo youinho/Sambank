@@ -401,12 +401,14 @@ public class AdminController {
 	@ResponseBody
 	public ResponseEntity<String> admin_update_password(AdminVO vo, HttpServletRequest req){
 		logging(req);
-		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
-			if(vo.getPassword().equals(vo.getConfirm_password())) {
-				if(vo.getId()!=null) {
-					vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-					if(service.admin_update_password(vo)) {
-						return new ResponseEntity<String>("success", HttpStatus.OK);						
+		if(Integer.parseInt(service.get_group_authority(req.getRemoteUser()).getId())>Integer.parseInt(service.get_group_authority(vo.getId()).getId())) {
+			if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
+				if(vo.getPassword().equals(vo.getConfirm_password())) {
+					if(vo.getId()!=null) {
+						vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+						if(service.admin_update_password(vo)) {
+							return new ResponseEntity<String>("success", HttpStatus.OK);						
+						}
 					}
 				}
 			}
@@ -418,14 +420,18 @@ public class AdminController {
 	@PostMapping("/registerAdmin")
 	public String insert_admin(AdminVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		logging(req);
-		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
-			if(vo.getPassword().equals(vo.getConfirm_password())) {
-				if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
-					vo.setPassword(passwordEncoder.encode(vo.getPassword()));
-					if(service.admin_insert(vo)) {
-						rttr.addFlashAttribute("registered", "true");
-						rttr.addFlashAttribute("name", vo.getName());
-						return "redirect:/admin/manage";
+		Integer.parseInt(service.get_group_authority(req.getRemoteUser()).getId());
+		Integer.parseInt(vo.getGroup_id());
+		if(Integer.parseInt(service.get_group_authority(req.getRemoteUser()).getId())>Integer.parseInt(vo.getGroup_id())) {
+			if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
+				if(vo.getPassword().equals(vo.getConfirm_password())) {
+					if(vo.getId()!=null && vo.getBranch()!=null && vo.getRank()!= null && vo.getMobile()!=null && !vo.getGroup_id().equals("-1") && vo.getName()!=null && vo.getEnabled()!=-1) {
+						vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+						if(service.admin_insert(vo)) {
+							rttr.addFlashAttribute("registered", "true");
+							rttr.addFlashAttribute("name", vo.getName());
+							return "redirect:/admin/manage";
+						}
 					}
 				}
 			}

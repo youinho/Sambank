@@ -1,7 +1,11 @@
+
 $(function(){
+	
+	
+	
 	$("#manageForm").validate({
 		errorPlacement:function(error,element){ 
-			
+				
 			},
 		rules:{
 			id:{
@@ -32,31 +36,31 @@ $(function(){
 		},
 		messages:{
 			id:{
-				required:"",
-				validId:""
+				required:"아이디를 입력해 주세요.",
+				validId:"올바른 아이디를 입력해 주세요."
 			},
 			name:{
-				required:"",
-				validName:""
+				required:"이름을 입력해 주세요.",
+				validName:"올바른 이름을 입력해 주세요."
 			},
 			branch:{
-				required:""
+				required:"지점을 입력해 주세요."
 			},
 			rank:{
-				required:""
+				required:"직급을 입력해 주세요"
 			},
 			group_id:{
-				required:""
+				required:"권한을 선택해 주세요."
 			},
 			enabled:{
-				required:"",
-				validEnabled:""
+				required:"로그인 승인 여부를 선택해 주세요.",
+				validEnabled:"로그인 승인 여부를 선택해 주세요."
 			},
 			mobile:{
-				required:true,
-				mobile:true
+				required:"전화번호를 입력해 주세요.",
+				mobile:"올바른 전화번호를 입력해 주세요."
 			}
-		},
+		}
 		
 	});	
 });
@@ -81,3 +85,5 @@ $.validator.addMethod("validEnabled", function(value) {
 	var regEnabled = /^[0,1]{1}$/;
 	return regEnabled.test(value);
 }, "");
+
+
