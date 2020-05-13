@@ -38,7 +38,7 @@ $(function(){
 						else
 							text=list[i].from_name;
 					}else{
-						text=list[i].from_message;
+						text=list[i].message;
 					}
 					
 					str += "<tr>";
@@ -46,7 +46,7 @@ $(function(){
 					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
-					str += "<td>"+text+"</td>";
+					str += "<td>"+list[i].name+" "+list[i].message+"</td>";
 					str += "</tr>";
 					
 				}

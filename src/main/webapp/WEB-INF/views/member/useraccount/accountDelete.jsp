@@ -189,7 +189,10 @@ main{
    
    <tr>
     <th colspan="1" style="vertical-align: middle; text-align: center;" >계좌번호</th>
-    <td colspan="9"><input type="account-number" class="form-control" id="ano" name="ano"readonly></td>  
+    <td colspan="4"><input type="account-number" class="form-control" id="ano" name="ano"readonly></td>  
+	<th colspan="1" style="vertical-align: middle; text-align: center;" >카드 보유 갯수</th>
+    <td colspan="4"><input type="account-number" class="form-control" id="cardCount_text" name="cardCount_text" placeholder="개" readonly style="text-align: right;"></td>  
+  					<input type="hidden" name="cardCount" id="cardCount">
    </tr>
       
     <tr>

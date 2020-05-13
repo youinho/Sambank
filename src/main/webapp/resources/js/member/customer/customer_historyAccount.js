@@ -15,7 +15,7 @@ $(function(){
 			return false;
 		}
 		console.log("버튼눌림");
-
+		
 		
 		$("#historyList").html("");
 		$.ajax({
@@ -61,7 +61,7 @@ $(function(){
 					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
 					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
-					str += "<td>"+text+"</td>";
+					str += "<td>"+list[i].name+" "+list[i].message+"</td>";
 					str += "</tr>";
 					
 					sum_withdrawal+=list[i].withdrawal;

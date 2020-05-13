@@ -23,4 +23,6 @@ public interface CardMapper {
 	public int set_request(String card_no);
 	
 	public List<CardVO> requested_count(String cno);
+	
+	public int ano_card_count(String ano);
 }

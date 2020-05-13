@@ -10,13 +10,15 @@ import com.spring.domain.Customer_requestVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historySumVO;
 import com.spring.mapper.AccountMapper;
+import com.spring.mapper.CardMapper;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountMapper mapper;
 	
-	
+	@Autowired
+	private CardMapper card_mapper;
 	@Override
 	public long balnce(String ano) {
 		// TODO Auto-generated method stub
@@ -69,6 +71,12 @@ public class AccountServiceImpl implements AccountService {
 	public boolean delete_account(String ano) {
 		// TODO Auto-generated method stub
 		return mapper.delete_account(ano)==1;
+	}
+
+	@Override
+	public int ano_card_count(String ano) {
+		// TODO Auto-generated method stub
+		return card_mapper.ano_card_count(ano);
 	}
 
 	

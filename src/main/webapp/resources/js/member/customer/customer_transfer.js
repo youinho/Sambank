@@ -17,7 +17,12 @@ $(function (){
 			alert("계좌가 동일합니다.")
 			return false;
 		}
-		
+		if((parseInt($("input[name='amount']").val()))<0){
+			console.log("?")
+			alert("출금액을 다시 확인해주세요.");
+			return false;
+		}
+			
 		if((parseInt($("input[name='balance']").val())-parseInt($("input[name='amount']").val()))<0){
 			alert("출금액을 다시 확인해주세요.");
 			return false;

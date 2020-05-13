@@ -12,6 +12,7 @@ $(function(){
 			e.preventDefault();
 			var ano = $(this).val();
 			$("input[name='password']").val("");
+			$("input[name='cardCount']").val("");
 //			console.log(ano);
 			$.ajax({
 				url:"/member/useraccount/get_deposit_customerInfo",
@@ -41,13 +42,38 @@ $(function(){
 				}
 			})
 			
+			$.ajax({
+				url:"/member/useraccount/card_count",
+				type : "post",
+				beforeSend : function(xhr)
+	            {   
+					xhr.setRequestHeader(hn, tk);
+	            },
+				data : {
+					ano : ano
+				},
+				dataType : "text",
+				success : function(result){
+					
+					var cardCount = JSON.parse(result);
+					console.log(cardCount);
+					$("input[name='cardCount_text']").val(cardCount+"개");
+					$("input[name='cardCount']").val(cardCount);
+//					if($("input[name='cardCount']").val(cardCount)=="")
+//						$("input[name='cardCount']").val(cardCount+"개");
+				}
+			})
 		})
 		
 	})
 	$("#submitBtn").click(function (e){
 //		e.preventDefault();
 		let from=$("#accountDelete");
-		
+		if($("input[name='cardCount']").val()!=0){
+			console.log($("input[name='cardCount']").val())
+			alert("카드가 있습니다.");
+			return false;
+		}
 		if($("input[name='ano']").val()==""){
 			console.log("계좌번호없음");
 			$("input[name='ano']").focus();

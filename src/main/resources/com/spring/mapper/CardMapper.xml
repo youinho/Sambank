@@ -85,6 +85,7 @@
 		where a_d.cno=#{cno} and a_c.condition=0
 		order by createdate desc
 	</select>
-
-
+	<select id="ano_card_count" resultType="int">
+		select count(ano) from cardtbl where ano=#{ano}
+	</select>
 </mapper>

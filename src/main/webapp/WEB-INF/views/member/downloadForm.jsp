@@ -12,7 +12,26 @@
 		<button>submit</button>
 	</form>
 </body>
+
+<script type="text/javascript">
+
+
+function ReadWeight() {
+    var filePath = "file:///C:/Temp";
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET",filePath,false);
+    xmlhttp.send(null);
+    var fileContent = xmlhttp.responseText; 
+
+    alert(fileContent);
+}
+
+ReadWeight();
+
+
+</script>
 </html>
+
 
 
 

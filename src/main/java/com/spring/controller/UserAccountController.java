@@ -57,6 +57,7 @@ public class UserAccountController {
 	@Autowired
 	private AccountService account_service;
 	
+	
 	@ResponseBody
 	@PostMapping("/get_depositInfo")
 	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
@@ -134,21 +135,23 @@ public class UserAccountController {
 		log.info("이체 진행중 "+ vo);
 		String name=admin_service.check_ano(vo.getAno()).getName();
 		String from_name=admin_service.check_ano(vo.getFrom_ano()).getName();
-		vo.setName(name);
+		vo.setName("인터넷");
 		vo.setFrom_name(from_name);
+		if(vo.getMessage()=="") 
+			vo.setMessage(vo.getFrom_name());
 		if(admin_service.withdraw(vo)) {
-			
 			rttr.addFlashAttribute("success", "true");
-			
 			rttr.addFlashAttribute("amount", vo.getAmount());
 			log.info("출금 성공");
 			Deposit_historyVO other_vo;
 			other_vo=vo;
 			other_vo.setAno(vo.getFrom_ano());
-			other_vo.setName(vo.getFrom_name());
+			other_vo.setName("인터넷");
 			String other_name=admin_service.check_ano(other_vo.getAno()).getName();
-			vo.setName(other_name);
-			rttr.addFlashAttribute("from_name", other_vo.getName());
+//			vo.setName(other_name);
+			rttr.addFlashAttribute("from_name", vo.getFrom_name());
+			if(vo.getMessage()=="") 
+				other_vo.setMessage(vo.getFrom_name());
 			if(admin_service.deposit(other_vo)) {
 				log.info("입금 성공");
 			}else {
@@ -346,6 +349,12 @@ public class UserAccountController {
 		return "/member/useraccount/passpopup";
 	}
 	
+	@ResponseBody
+	@PostMapping("card_count")
+	public ResponseEntity<Integer> card_count(String ano){
+		int cardCount=account_service.ano_card_count(ano);
+		return new ResponseEntity<Integer>(cardCount, cardCount<0?HttpStatus.BAD_REQUEST:HttpStatus.OK);
+	}
 	//계좌 비밀번호 확인
 	@ResponseBody
 	@PostMapping("/check_password")
