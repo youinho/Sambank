@@ -266,7 +266,7 @@ let tk = "${_csrf.token}"
 				<li><a href="/member/useraccount/depositList" class="q2">입출금내역</a></li>
 				<li><a href="/member/useraccount/accountList" >계좌 조회</a></li>
 				<li><a href="/member/useraccount/accountCreate" >계좌 신청</a></li>
-				<li><a href="/member/useraccount/accountDelete" >계좌 삭제 신청</a></li>
+				<li><a href="/member/useraccount/accountDelete" >계좌 삭제</a></li>
 			</ul>
 			<ul class="menu2">
 				<li><a href="/A">공지사항</a></li>

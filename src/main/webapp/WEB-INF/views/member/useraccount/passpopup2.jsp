@@ -34,7 +34,7 @@
 		<div id="login" class="col-xs-12">
 	        
 	            <fieldset>
-	                <legend style="text-align: center">Input Password</legend><br>
+	                <legend style="text-align: center">계좌 비밀번호</legend><br>
 	                <div class="form-group">
 	                  <label for="password"><strong>PASSWORD</strong></label>
 	                  <input type="password" class="form-control" name="password" id="password" readonly>

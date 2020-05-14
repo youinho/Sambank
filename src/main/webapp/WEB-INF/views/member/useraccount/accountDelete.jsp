@@ -140,7 +140,7 @@ main{
 </script>
 
 	<div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title">계좌	삭제 신청</h4>
+      <h4 class="mb-3 title">계좌 삭제</h4>
       	<hr class="mb-4">
       
       <form action="" class="needs-validation" novalidate="novalidate" method="post" id="accountDelete">

@@ -239,7 +239,7 @@ let tk = "${_csrf.token}"
 			<div class="dropdown-divider"></div>
 			<a href="accountCreate" data-title="계좌신청"><c:out value="계좌신청"></c:out> </a>
 			<div class="dropdown-divider"></div>
-			<a href="accountDelete" data-title="계좌삭제신청"><c:out value="계좌삭제신청"></c:out> </a>
+			<a href="accountDelete" data-title="계좌삭제"><c:out value="계좌삭제"></c:out> </a>
 			<div class="dropdown-divider"></div>
 	     	
 	     	
