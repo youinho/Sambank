@@ -176,12 +176,13 @@ main{
    
 
    
-    <th colspan="2" style="vertical-align: middle; text-align: center;">상품</th>
-      <td colspan="3" style="vertical-align: middle; text-align: center;">
+    <th colspan="1" style="vertical-align: middle; text-align: center;">상품</th>
+      <td colspan="4" style="vertical-align: middle; text-align: center;">
       <input type="text" class="form-control" id="type_text" name="type_text" readonly>
     	<input type="hidden" id="type" name="type">
     	</td>
-    <td colspan="3" style="vertical-align: middle; text-align: center;">
+    <th colspan="1" style="vertical-align: middle; text-align: center;">상품명</th>
+    <td colspan="4" style="vertical-align: middle; text-align: center;">
 	    <input type="text" class="form-control" name="p_name" readonly>
 	    <input type="hidden" id="product" name="product">
      </td>  
@@ -207,7 +208,7 @@ main{
     
     <tr>
       <th colspan="1" style="vertical-align: middle; text-align: center; ">비밀번호 입력</th>
-      <td colspan="10"><div class="input-group" style="width:39%">
+      <td colspan="10"><div class="input-group" style="width:38%">
 			  <input type="password" class="form-control valid" name="password" id="password" readonly="" aria-invalid="false">
 			    <button class="btn btn-outline-secondary" type="button" id="passwordBtn">
 			    	<svg class="bi bi-grid-3x3-gap" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

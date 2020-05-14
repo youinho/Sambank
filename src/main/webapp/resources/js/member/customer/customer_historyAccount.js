@@ -58,9 +58,9 @@ $(function(){
 					
 					str += "<tr>";
 					str += "<td>"+date.toISOString().slice(0, 10)+" "+date.toTimeString().slice(0, 8)+"</td>";					
-					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
-					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
-					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"</td>";
+					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원"+"</td>";
+					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원"+"</td>";
+					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원"+"</td>";
 					str += "<td>"+list[i].name+" "+list[i].message+"</td>";
 					str += "</tr>";
 					
@@ -68,8 +68,8 @@ $(function(){
 					sum_deposit+=list[i].deposit;
 				}
 
-				$("input[name='sum_deposit']").val(sum_deposit+"원");
-				$("input[name='sum_withdrawal']").val(sum_withdrawal+"원");
+				$("input[name='sum_deposit']").val(viewRest(String(sum_deposit))+" 원");
+				$("input[name='sum_withdrawal']").val(viewRest(String(sum_withdrawal))+" 원");
 				$("#historyList").html(str);
 
 				
@@ -240,4 +240,6 @@ $(function(){
  })
 		
 
-
+ 	function viewRest(restNumber) {
+		return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}

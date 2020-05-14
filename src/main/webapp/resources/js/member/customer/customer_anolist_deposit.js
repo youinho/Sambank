@@ -27,7 +27,7 @@ $(function(){
 //				$("input[name='p_name']").val(vo.p_name);
 				$("input[name='ano']").val(vo.ano);
 				$("input[name='max_withdraw']").val(vo.max_withdraw);
-				$("input[name='balance_rest']").val(viewRest(String(vo.balance))+"원");
+				$("input[name='balance_rest']").val(viewRest(String(vo.balance))+" 원");
 				$("input[name='balance']").val(vo.balance);
 			}
 		})

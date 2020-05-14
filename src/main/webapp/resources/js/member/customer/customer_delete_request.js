@@ -57,7 +57,7 @@ $(function(){
 					
 					var cardCount = JSON.parse(result);
 					console.log(cardCount);
-					$("input[name='cardCount_text']").val(cardCount+"개");
+					$("input[name='cardCount_text']").val(cardCount+" 개");
 					$("input[name='cardCount']").val(cardCount);
 //					if($("input[name='cardCount']").val(cardCount)=="")
 //						$("input[name='cardCount']").val(cardCount+"개");
@@ -145,7 +145,7 @@ function typeTrans(type){
 	}
 }
 function viewRest(restNumber) {
-	return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원";
+	return restNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원";
 }
 
 function dateformat(changeDate){

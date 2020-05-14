@@ -133,7 +133,7 @@ main{
    
    <tr>
     <th style="vertical-align: middle; text-align:center;" >주소</th>
-    <td colspan="7"><div class="mb-3">
+    <td colspan="7"><div class="mb-1">
          <div class="label">
          </div>
          <input type="text" class="form-control" name="address" id="address" value="${vo.address}"  readonly="">
@@ -173,12 +173,10 @@ main{
    
    <tr>
     <th style="vertical-align: middle; text-align: center;">방문희망일시</th>
-    <td colspan="7" >
-    <div class='x' style="width:50%; vertical-align: middle;">
-    <div class="form-group">
-        <input type="date"  class="form-control" name="visitDate" id="visitdate" style="width:100%">
-    </div>
-	</div> 
+    <td colspan="7">
+     <div class="form-group mb-1" style="width:39%;">
+        <input type="date"  class="form-control" name="visitDate" id="visitdate" >
+     </div>
 	</td>
    </tr>
    
