@@ -121,7 +121,7 @@ function alert_success(){
 			<td>
 				<div class="d-flex justify-content-end">
 					<div class="btn-group outline-primary" role="group">
-						<button class="btn btn-outline-primary" style="border-radius:0.25em;" type="submit" id="submitBtn">출금</button>
+						<button class="btn btn-outline-primary" style="border-radius:0.25em;" type="submit" id="submitBtn" disabled>출금</button>
 					</div>
 				</div>
 			</td>

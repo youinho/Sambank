@@ -52,7 +52,7 @@ $(function(){
 			},
 			dataType : "text",
 			success : function(result){
-				alert("비밀번호가 변경되었습니다."+result);
+				alert("비밀번호가 변경되었습니다.");
 				$("input[name='password']").val("");
 				$("input[name='confirm_password']").val("");
 				
@@ -82,15 +82,7 @@ $(function(){
 		e.preventDefault();
 		
 		
-		if($("input[name='id']").val()==="" || $("input[name='name']").val()===""){
-			return false;
-		}
-		if($("input[name='branch']").val()==="" || $("input[name='rank']").val()===""){
-			return false;
-		}
-		if($("select[name='group_id']").val()==="-1" || $("input[name='enabled']").val()==="-1"){
-			return false;
-		}
+		
 		let check = false;
 		$.ajax({
 			url:"/admin/check_adminId",
@@ -107,7 +99,7 @@ $(function(){
 				check=true;
 			},
 			error: function(){
-				alert("아이디가 이미 존재합니다.")
+				alert("다른 아이디를 입력해 주세요.")
 				check=false;
 			}
 		});
@@ -128,15 +120,7 @@ $(function(){
 		e.preventDefault();
 		
 		
-		if($("input[name='id']").val()==="" || $("input[name='name']").val()===""){
-			return false;
-		}
-		if($("input[name='branch']").val()==="" || $("input[name='rank']").val()===""){
-			return false;
-		}
-		if($("select[name='group_id']").val()==="-1" || $("input[name='enabled']").val()==="-1"){
-			return false;
-		}
+		
 		$("#manageForm").attr("action", "/admin/updateAdmin");
 		$("#manageForm").submit();
 	})
