@@ -51,13 +51,21 @@ $(function(){
 					}
 					let date = new Date(list[i].depositdate);
 					
+					var name = list[i].name;
+					var message = list[i].message;
+					if(name==null){
+						name="";
+					}
+					if(message==null){
+						message="";
+					}
 					
 					str += "<tr>";
 					str += "<td>"+date.toISOString().slice(0, 10)+" "+date.toTimeString().slice(0, 8)+"</td>";					
 					str += "<td>"+list[i].withdrawal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원</td>";
 					str += "<td>"+list[i].deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원</td>";
 					str += "<td>"+list[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+" 원</td>";
-					str += "<td>"+list[i].name+" "+list[i].message+"</td>";
+					str += "<td>"+name+" "+message+"</td>";
 					str += "</tr>";
 					
 				}
