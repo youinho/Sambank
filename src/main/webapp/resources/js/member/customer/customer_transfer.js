@@ -8,7 +8,7 @@ $(function (){
 		e.preventDefault();
 		let form = $("#depositForm");
 		console.log($("input[name='balance']").val());
-		if($("input[name='balance']").val() == ""){
+		if($("input[name='balance']").val() <= 0){
 			alert("잔액을 확인해 주세요.")
 			return false;
 		}
