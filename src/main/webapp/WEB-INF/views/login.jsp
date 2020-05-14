@@ -199,6 +199,9 @@ color: #fff;
 					<div class="d-flex justify-content-center">
 						<a href="/findpass">비밀번호 찾기</a>
 					</div>
+					<div class="d-flex justify-content-center">
+						<a href="/admin/login">관리자 페이지 이동(테스트용)</a>
+					</div>
 				</sec:authorize>
 		        
 			</div>

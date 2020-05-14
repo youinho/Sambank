@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.AttachFileDTO;
 import com.spring.domain.CardVO;
 import com.spring.domain.Criteria;
@@ -64,7 +65,7 @@ public class UserController {
 	
 	@GetMapping("/member/inquiry")
 	public String User_Q_notice(Model model, HttpServletRequest req) {
-		
+		logging(req);
 		model.addAttribute("list", inquiry_service.getList_by_customer(req.getRemoteUser()));
 		model.addAttribute("title", "1:1 문의");
 		
@@ -74,8 +75,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/member/inquiry/register")
-	public String User_inquiry_register(Model model) {
-		
+	public String User_inquiry_register(Model model, HttpServletRequest req) {
+		logging(req);
 		
 		model.addAttribute("title", "1:1 문의");
 		return "/member/inquiry/register";
@@ -83,6 +84,7 @@ public class UserController {
 	
 	@PostMapping("/member/inquiry/register")
 	public String User_inquiry_register_post(InquiryVO vo, HttpServletRequest req, RedirectAttributes rttr, Model model) {
+		logging(req);
 		vo.setCustomer_id(req.getRemoteUser());
 		vo.setCustomer_name(service.select_by_id(req.getRemoteUser()).getName());
 		model.addAttribute("title", "1:1 문의");
@@ -98,7 +100,7 @@ public class UserController {
 	
 	@GetMapping("/member/inquiry/{inquiry_no}")
 	public String inquiry_view(@PathVariable("inquiry_no") String inquiry_no, Model model, HttpServletRequest req) {
-		
+		logging(req);
 		try {
 			Integer.parseInt(inquiry_no);
 		}catch(Exception e){
@@ -122,6 +124,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/member/inquiry/inquiry_get_reply")
 	public ResponseEntity<List<Inquiry_replyVO>> get_inquiry_reply(String inquiry_no, HttpServletRequest req){
+		logging(req);
 		List<Inquiry_replyVO> list = null;
 		if(inquiry_service.getRow(inquiry_no).getCustomer_id().equals(req.getRemoteUser())) {
 			list  = inquiry_service.get_replyList(inquiry_no);			
@@ -133,6 +136,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/member/inquiry/set_inquiry_complete")
 	public ResponseEntity<String> set_inquiry_complete(InquiryVO vo, HttpServletRequest req){
+		logging(req);
 		vo.setCustomer_id(req.getRemoteUser());
 		if(inquiry_service.update_expdate(vo)) {
 			return new ResponseEntity<String>("success", HttpStatus.OK);
@@ -194,7 +198,7 @@ public class UserController {
 	//고객 공지 read페이지
 	@GetMapping("/customer_notice/read/{bno}")
 	public String customer_notice_view(@PathVariable("bno") int notice_bno,@ModelAttribute("cri") Criteria cri, Model model, HttpServletRequest req) {
-
+		logging(req);
 		//log.info("read 요청"+admin_bno);
 		try {
 			model.addAttribute("vo", cn_service.notice_getRow(notice_bno));
@@ -218,7 +222,7 @@ public class UserController {
 	@GetMapping("/customer_notice/downloadFile")
 	@ResponseBody
 	public ResponseEntity<Resource> customer_download(AttachFileDTO dto, @RequestHeader("user-Agent") String userAgent, HttpServletRequest req){
-		
+		logging(req);
 		//log.info("파일 다운로드"+dto);
 		//log.info("파일 user : "+req.getRemoteUser());
 		
@@ -257,7 +261,7 @@ public class UserController {
 	@PostMapping("/customer_notice/get_attachList")
 	@ResponseBody
 	public ResponseEntity<List<AttachFileDTO>> customer_getAttachList(String notice_bno, HttpServletRequest req){
-		
+		logging(req);
 		//log.info(admin_bno+" 첨부물 가져오기");
 		return new ResponseEntity<List<AttachFileDTO>>(cn_service.getAttachList(notice_bno), HttpStatus.OK);
 	}
@@ -370,6 +374,7 @@ public class UserController {
 	
 	@GetMapping("/member/card/request")
 	public String card_request_get(Model model, HttpServletRequest req) {
+		logging(req);
 		String id = req.getRemoteUser();
 		
 		List<CardVO> requested_list = customerService.requested_count(service.select_by_id(id).getCno()+"");
@@ -381,7 +386,8 @@ public class UserController {
 	}
 	@ResponseBody
 	@PostMapping("/member/card/request")
-	public ResponseEntity<String> card_request_post(CardVO vo, RedirectAttributes rttr) {
+	public ResponseEntity<String> card_request_post(CardVO vo, RedirectAttributes rttr, HttpServletRequest req) {
+		logging(req);
 		String card_no = "";
 		while(true) {
 			card_no = vo.getC_type() + "";
@@ -410,7 +416,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/member/card/getAccInfo")
 	public ResponseEntity<List<Acc_info>> get_accinfo( HttpServletRequest req){
-		
+		logging(req);
 		List<Acc_info> list = service.select_acc_info(service.select_by_id(req.getRemoteUser()).getCno());
 		if(list.isEmpty()) {
 			return new ResponseEntity<List<Acc_info>>(list, HttpStatus.BAD_REQUEST);
@@ -422,6 +428,7 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/member/card/get_cardList")
 	public ResponseEntity<List<CardVO>> get_cardList(String ano, HttpServletRequest req){
+		logging(req);
 		List<CardVO> list = service.get_cardList_by_ano(ano);
 		return new ResponseEntity<List<CardVO>>(list, HttpStatus.OK);
 	}
@@ -430,9 +437,38 @@ public class UserController {
 	@ResponseBody
 	@PostMapping("/member/card/get_depositInfo")
 	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
+		logging(req);
 		DepositVO vo = service.get_deposit(ano);
 		return new ResponseEntity<DepositVO>(vo, vo==null?HttpStatus.BAD_REQUEST:HttpStatus.OK);
 		
+	}
+	
+	
+	
+	private boolean logging(HttpServletRequest req) {
+		Admin_logVO vo = new Admin_logVO();
+		String parameter_names="";
+		vo.setId(req.getRemoteUser());
+		if(vo.getId()==null) {
+			vo.setId("Anonymous");
+		}
+		vo.setUri("["+req.getMethod()+"]"+req.getRequestURI());
+		vo.setLocal_name(req.getLocalName());
+		vo.setLocal_addr(req.getLocalAddr());
+		vo.setLocal_port(req.getLocalPort()+"");
+		vo.setRemote_addr(req.getRemoteAddr());
+		vo.setRemote_port(req.getRemotePort()+"");
+		if(req.getRequestedSessionId()!=null) {
+			vo.setAdmin_session(req.getRequestedSessionId());
+		}else {
+			vo.setAdmin_session("");
+		}
+		//log.info("log vo : "+vo);
+		if(req.getParameterNames().hasMoreElements()) {
+			parameter_names=req.getParameterMap().keySet().toString();
+		}
+		vo.setParameter_names(parameter_names);
+		return service.insertLog_customer(vo);
 	}
 	
 }

@@ -285,7 +285,7 @@ $(function(){
 	$("#testIdBtn").click(function(e){
 		e.preventDefault();
 		
-		$(".toast-body").html("<p><small style='color:black'><c:out value='아이디 : test1 비밀번호 : qwe123!@#'></c:out><br></small></p>");
+		$(".toast-body").html("<p><small style='color:black'><c:out value='아이디 : tester1 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester2 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester3 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester4 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester5 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester6 비밀번호 : qwe123!@#'></c:out><br><c:out value='아이디 : tester7 비밀번호 : qwe123!@#'></c:out><br></small></p>");
 		$("#error_card").css("display","inline-block");
 		$("#error_card").toast("show");
 		return false;

@@ -35,7 +35,7 @@ $(function(){
 <body>
 	
 	<div class="col-md-10 order-md-1">
-      <h4 class="mb-3 title"><a href="/admin/inquiry" style="color:black;">카드 신청 현황</a></h4>
+      <h4 class="mb-3 title"><a href="/admin/card/requested" style="color:black;">카드 신청 현황</a></h4>
       <div class="row">
                 <!-- /.col-lg-12 -->
             </div>

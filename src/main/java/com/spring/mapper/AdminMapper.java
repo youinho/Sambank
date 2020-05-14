@@ -39,7 +39,7 @@ public interface AdminMapper {
 	public int check_adminId(String id);
 	
 	public int insertLog(Admin_logVO vo);
-	
+	public int insertLog_customer(Admin_logVO vo);
 	public int saveImage(@Param("id") String id,@Param("profile_image") byte[] profile_image,@Param("profile_image_type") String profile_image_type);
 	
 	public Profile_imageVO get_profile_image(String id);

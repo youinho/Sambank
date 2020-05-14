@@ -50,7 +50,7 @@ public interface AdminService {
 	
 	
 	public boolean insertLog(Admin_logVO vo);
-	
+	public boolean insertLog_customer(Admin_logVO vo);
 	
 	
 	

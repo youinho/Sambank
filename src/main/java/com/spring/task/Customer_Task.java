@@ -31,7 +31,7 @@ public class Customer_Task {
 	
 	
 	//매 정각마다 문의사항 expired
-	@Scheduled(cron="0 0 * * * *")
+	@Scheduled(cron="0 * * * * *")
 	public void set_expired() {
 		inquiryService.set_expired();
 	}

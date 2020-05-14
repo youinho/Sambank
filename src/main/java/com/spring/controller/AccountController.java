@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.CustomerVO;
 import com.spring.domain.DepositVO;
 import com.spring.domain.Deposit_historyVO;
@@ -49,6 +50,7 @@ public class AccountController {
 	@ResponseBody
 	@PostMapping("/customer_get_depositInfo")
 	public ResponseEntity<DepositVO> get_depositInfo(String ano, HttpServletRequest req){
+		logging(req);
 		ano=ano.trim();
 		DepositVO vo = admin_service.get_deposit(ano);
 		
@@ -61,7 +63,7 @@ public class AccountController {
 	@ResponseBody
 	@PostMapping("/transfer/check_ano")
 	public ResponseEntity<DepositVO> check_ano(String ano, HttpServletRequest req){
-	
+		logging(req);
 		DepositVO vo = admin_service.check_ano(ano);
 		//log.info("check_ano vo : "+vo);
 		if(vo != null) {
@@ -73,6 +75,7 @@ public class AccountController {
 	
 	@GetMapping("/account")
 	public void account(ModelMap modelMap,HttpServletRequest req) {
+		logging(req);
 		log.info("account 요청");
 		String id = req.getRemoteUser();
 
@@ -93,6 +96,7 @@ public class AccountController {
 	@ResponseBody
 	@PostMapping("/account/customer_get_history")
 	public ResponseEntity<List<Deposit_historyVO>> get_history(String ano, String start_date, String end_date, HttpServletRequest req){
+		logging(req);
 		log.info("get_history 요청 ano : "+ano);
 		//log.info("get_history 요청 sDates : "+start_date);
 		//log.info("get_history 요청 eDates : "+end_date);
@@ -124,8 +128,8 @@ public class AccountController {
 	//계좌이체
 	@GetMapping("/transfer")
 	public void transfer_pre(ModelMap modelMap, HttpServletRequest req) {
+		logging(req);
 		String id = req.getRemoteUser();
-
 		int cno=Integer.parseInt(service.getCno(id));
 		CustomerVO vo=admin_service.select_by_cno(cno);
 		String name=vo.getName();
@@ -143,7 +147,7 @@ public class AccountController {
 	@PostMapping("/transfer")
 	public String transfer_action(Deposit_historyVO vo, RedirectAttributes rttr, HttpServletRequest req) {
 		log.info(vo+"");
-		
+		logging(req);
 		if(admin_service.withdraw(vo)) {
 			rttr.addFlashAttribute("success", "true");
 			rttr.addFlashAttribute("from_name", vo.getFrom_name());
@@ -169,7 +173,7 @@ public class AccountController {
 	//계좌확인
 	@GetMapping("/balance")
 	public void get_balance(ModelMap modelMap, HttpServletRequest req) {
-	
+		logging(req);
 		log.info("account 요청");
 		String id = req.getRemoteUser();
 
@@ -185,4 +189,30 @@ public class AccountController {
 	}
 
 	
+	
+	private boolean logging(HttpServletRequest req) {
+		Admin_logVO vo = new Admin_logVO();
+		String parameter_names="";
+		vo.setId(req.getRemoteUser());
+		if(vo.getId()==null) {
+			vo.setId("Anonymous");
+		}
+		vo.setUri("["+req.getMethod()+"]"+req.getRequestURI());
+		vo.setLocal_name(req.getLocalName());
+		vo.setLocal_addr(req.getLocalAddr());
+		vo.setLocal_port(req.getLocalPort()+"");
+		vo.setRemote_addr(req.getRemoteAddr());
+		vo.setRemote_port(req.getRemotePort()+"");
+		if(req.getRequestedSessionId()!=null) {
+			vo.setAdmin_session(req.getRequestedSessionId());
+		}else {
+			vo.setAdmin_session("");
+		}
+		//log.info("log vo : "+vo);
+		if(req.getParameterNames().hasMoreElements()) {
+			parameter_names=req.getParameterMap().keySet().toString();
+		}
+		vo.setParameter_names(parameter_names);
+		return admin_service.insertLog_customer(vo);
+	}
 }

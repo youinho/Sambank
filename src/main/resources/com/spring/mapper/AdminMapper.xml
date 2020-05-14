@@ -100,7 +100,10 @@
 		values(seq_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session}, #{parameter_names})
 	</insert>
 	
-	
+	<insert id="insertLog_customer">
+		insert into customer_logtbl(log_no, id, uri, local_name, local_addr, local_port, remote_addr, remote_port, customer_session, parameter_names)
+		values(seq_customer_log.nextVal, #{id}, #{uri}, #{local_name}, #{local_addr}, #{local_port}, #{remote_addr}, #{remote_port}, #{admin_session}, #{parameter_names})
+	</insert>
 	
 	<!-- 프로필사진 테스트 -->
 	<insert id="saveImage">

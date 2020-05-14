@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.Criteria;
 import com.spring.domain.CustomerVO;
 import com.spring.email.Email;
@@ -203,8 +204,8 @@ public class HomeController {
 	
 	@Transactional
 	@GetMapping("/verify_email")
-	public String verify_email(CustomerVO vo, RedirectAttributes rttr) {
-		
+	public String verify_email(CustomerVO vo, RedirectAttributes rttr, HttpServletRequest req) {
+		logging(req);
 		
 		if(customerService.set_verified(vo)) {
 			rttr.addFlashAttribute("registered", "verified");
@@ -216,8 +217,8 @@ public class HomeController {
 	
 	@ResponseBody
 	@PostMapping("/resend_verify")
-	public ResponseEntity<String> resend_verify(String id, String password){
-		
+	public ResponseEntity<String> resend_verify(String id, String password, HttpServletRequest req){
+		logging(req);
 		CustomerVO vo = adminService.select_by_id(id);
 		if(vo==null) {
 			return new ResponseEntity<String>("not_found", HttpStatus.OK);
@@ -238,15 +239,15 @@ public class HomeController {
 	
 	
 	@GetMapping("/findpass")
-	public String findpass_get() {
-		
+	public String findpass_get(HttpServletRequest req) {
+		logging(req);
 		return "/findpass";
 	}
 	
 	@ResponseBody
 	@PostMapping("/send_tmpPass")
-	public ResponseEntity<String> send_tmpPass_post(CustomerVO vo){
-		
+	public ResponseEntity<String> send_tmpPass_post(CustomerVO vo, HttpServletRequest req){
+		logging(req);
 		return new ResponseEntity<String>(customerService.send_tmpPassword(vo)?"Success":"failed", HttpStatus.OK);
 		
 	}
@@ -321,5 +322,29 @@ public class HomeController {
 		return new ResponseEntity<String>(level, HttpStatus.OK);
 	}
 	
-
+	private boolean logging(HttpServletRequest req) {
+		Admin_logVO vo = new Admin_logVO();
+		String parameter_names="";
+		vo.setId(req.getRemoteUser());
+		if(vo.getId()==null) {
+			vo.setId("Anonymous");
+		}
+		vo.setUri("["+req.getMethod()+"]"+req.getRequestURI());
+		vo.setLocal_name(req.getLocalName());
+		vo.setLocal_addr(req.getLocalAddr());
+		vo.setLocal_port(req.getLocalPort()+"");
+		vo.setRemote_addr(req.getRemoteAddr());
+		vo.setRemote_port(req.getRemotePort()+"");
+		if(req.getRequestedSessionId()!=null) {
+			vo.setAdmin_session(req.getRequestedSessionId());
+		}else {
+			vo.setAdmin_session("");
+		}
+		//log.info("log vo : "+vo);
+		if(req.getParameterNames().hasMoreElements()) {
+			parameter_names=req.getParameterMap().keySet().toString();
+		}
+		vo.setParameter_names(parameter_names);
+		return adminService.insertLog_customer(vo);
+	}
 }

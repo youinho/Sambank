@@ -77,7 +77,7 @@ let tk = "${_csrf.token}"
 
 
 </head>
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 	<div id="Main">
 		<div id="header" class="headerWrap" >
 		<!-- //////////////////////////////////////////////////////////////////////////////////// -->

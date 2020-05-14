@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.Acc_info;
 import com.spring.domain.AdminVO;
+import com.spring.domain.Admin_logVO;
 import com.spring.domain.CustomerVO;
 import com.spring.service.AdminService;
 import com.spring.service.SBValidator;
@@ -57,21 +58,21 @@ public class HomeController2 {
 	//주소 검색 팝업
 	@GetMapping("/popup/jusopopup")
 	public String juso_popup(HttpServletRequest req) {
-		
-		log.info("jusopopup 요청");
+		logging(req);
+//		log.info("jusopopup 요청");
 		return "/popup/jusopopup";
 	}
 	@PostMapping("/popup/jusopopup")
 	public String juso_popup_post(HttpServletRequest req) {
-		
-		log.info("jusopopup_post 요청");
+		logging(req);
+//		log.info("jusopopup_post 요청");
 		return "/popup/jusopopup";
 	}
 	
 	@GetMapping("/member/customer/modify")
 	public void member_customer_modify_get(Model model, HttpServletRequest req) {
-		log.info("memeber customer modify get");
-		
+//		log.info("memeber customer modify get");
+		logging(req);
 		model.addAttribute("vo", service.select_by_id(req.getRemoteUser()));
 	}
 	
@@ -80,7 +81,7 @@ public class HomeController2 {
 	@PostMapping("/member/customer_update_password")
 	@ResponseBody
 	public ResponseEntity<String> admin_update_password(CustomerVO vo, HttpServletRequest req){
-		
+		logging(req);
 		if(vali.check(SBValidator.REG_PWD, vo.getPassword())) {
 			if(vo.getPassword().equals(vo.getConfirm_password())) {
 				if(vo.getId()!=null) {
@@ -99,10 +100,10 @@ public class HomeController2 {
 	//고객 정보 수정
 	@PostMapping("/member/customer/modify")
 	public String update_customer(CustomerVO vo, RedirectAttributes rttr, HttpServletRequest req) {
-		
-		log.info("update_customer_post vo : "+vo);
+		logging(req);
+//		log.info("update_customer_post vo : "+vo);
 		CustomerVO ori_vo = service.select_by_id(req.getRemoteUser());
-		log.info("ori_vo : "+ori_vo);
+//		log.info("ori_vo : "+ori_vo);
 		vo.setName(ori_vo.getName());
 		vo.setEng_name(ori_vo.getEng_name());
 		vo.setGender(ori_vo.getGender());
@@ -124,16 +125,17 @@ public class HomeController2 {
 
 	@GetMapping("/member/customer/delete")
 	public void member_customer_delete_get(Model model, HttpServletRequest req) {
+		logging(req);
 		CustomerVO vo = service.select_by_id(req.getRemoteUser());
 		model.addAttribute("vo", vo);
-		log.info("member customer delete get");
+//		log.info("member customer delete get");
 	}
 	
 	
 	//고객 정보 삭제
 	@PostMapping("/member/customer/delete")
 	public String member_customer_delete_post(CustomerVO vo, HttpServletRequest req, RedirectAttributes rttr) {
-		
+		logging(req);
 		if(vo.getPassword().equals(vo.getConfirm_password())) {
 			if(service.check_customer_password(vo)) {
 				if(service.delete_customer(vo)) {
@@ -158,7 +160,8 @@ public class HomeController2 {
 	@ResponseBody
 	@PostMapping("/member/account/getAccInfo")
 	public ResponseEntity<List<Acc_info>> get_accinfo(HttpServletRequest req){
-		log.info("member account getAccInfo");
+//		log.info("member account getAccInfo");
+		logging(req);
 		List<Acc_info> list = service.select_acc_info(service.select_by_id(req.getRemoteUser()).getCno());
 		if(list.isEmpty()) {
 			return new ResponseEntity<List<Acc_info>>(list, HttpStatus.BAD_REQUEST);
@@ -170,5 +173,29 @@ public class HomeController2 {
 	
 	
 	
-	
+	private boolean logging(HttpServletRequest req) {
+		Admin_logVO vo = new Admin_logVO();
+		String parameter_names="";
+		vo.setId(req.getRemoteUser());
+		if(vo.getId()==null) {
+			vo.setId("Anonymous");
+		}
+		vo.setUri("["+req.getMethod()+"]"+req.getRequestURI());
+		vo.setLocal_name(req.getLocalName());
+		vo.setLocal_addr(req.getLocalAddr());
+		vo.setLocal_port(req.getLocalPort()+"");
+		vo.setRemote_addr(req.getRemoteAddr());
+		vo.setRemote_port(req.getRemotePort()+"");
+		if(req.getRequestedSessionId()!=null) {
+			vo.setAdmin_session(req.getRequestedSessionId());
+		}else {
+			vo.setAdmin_session("");
+		}
+		//log.info("log vo : "+vo);
+		if(req.getParameterNames().hasMoreElements()) {
+			parameter_names=req.getParameterMap().keySet().toString();
+		}
+		vo.setParameter_names(parameter_names);
+		return service.insertLog_customer(vo);
+	}
 }

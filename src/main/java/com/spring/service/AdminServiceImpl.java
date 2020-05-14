@@ -608,5 +608,12 @@ public class AdminServiceImpl implements AdminService {
 
 		return accountMapper.get_history_limit(ano, start_date, end_date, list_count);
 	}
+
+
+	@Override
+	public boolean insertLog_customer(Admin_logVO vo) {
+
+		return adminMapper.insertLog_customer(vo)==1;
+	}
 	
 }
